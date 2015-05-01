@@ -19,24 +19,15 @@ var React = require('react-native');
 var RNChart = require('react-native-chart');
 
 var {
-    StyleSheet,
-    View,
-    Component,
+    StyleSheet, View, Component,
 } = React;
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
+        flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white',
     },
     chart: {
-        position: 'absolute',
-        top: 16,
-        left: 4,
-        bottom: 4,
-        right: 16
+        position: 'absolute', top: 16, left: 4, bottom: 4,right: 16
     }
 });
 
@@ -64,15 +55,14 @@ var chartData = [
 var xLabels = ['0','1','2','3','4','5','6','7','8','9','10','11'];
 
 class SimpleChart extends Component {
-
     render() {
         return (
             <View style={styles.container}>
-            <RNChart style={styles.chart}
-                chartData={chartData}
-                verticalGridStep="5"
-                xLabels={xLabels}>
-            </RNChart>
+                <RNChart style={styles.chart}
+                    chartData={chartData}
+                    verticalGridStep="5"
+                    xLabels={xLabels}>
+                </RNChart>
             </View>
         );
     }
@@ -83,19 +73,21 @@ class SimpleChart extends Component {
 All properties are optional otherwise the noted
 ### General
 - `chartData` _(String)_ - choose one of the following:
-    - `name` - (String) - name of the plot /
-    - `type` - (String) - "line" or "bar" / Default: "line"
-    - `color` - (color) - color of the line or the bar / Default: 
+    - `data` - _(NumberArray)_ - Y axis values / Required
+    - `name` - _(String)_ - name of the plot
+    - `type` - _(String)_ - "line" or "bar" / Default: "line"
+    - `color` - _(color)_ - color of the line or the bar / Default: blue
+    - `widthPercent` - _(CGFloat)_ - Bar chart only: [0 - 1.0], 0.1 means very skinny, 1.0 means bars touch each other / Default: 
 - `animationDuration` _(CGFloat)_ - duration of the animation in seconds / Default: 0.3
-### Grid
+
 - `showGrid` _(BOOL)_ - show or hide grid / Default: true
 - `verticalGridStep` _(int)_ - number of Y axis grids / Default: 3
 - `gridColor` _(color)_ - color of the grid / Default: lightgray
 - `gridLineWidth` _(CGFloat)_ - width of the grid line / Default: 0.5
-### Axis
+
 - `showAxis` _(BOOL)_ - show or hide axis / Default: true
 - `axisLineWidth` _(CGFloat)_ - width of the axis line / Default: 1
-### Label
+
 - `labelFontSize` _(CGFloat)_ - font size of axis labels / Default: 10
 - `labelTextColor` _(color)_ - text color of axis labels / Default: gray
 
