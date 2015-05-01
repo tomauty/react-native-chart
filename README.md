@@ -2,16 +2,18 @@
 react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app.
 
 ## Features
-1. Line chart with options to show data points, fill the line, customize color, customize labels, etc...
-2. Bar chart with options to customize
-3. Add multiple charts in one view
-4. Add animation when populating the chart
+1. Define chart components in Javascript file and see rendered charts using Core Graphics and CALayer
+1. Supports line charts with options to show data points, line fill, customized color, customized labels, etc...
+2. Supports bar charts
+3. Supports multiple charts in one view
+4. Show animation when populating the chart
 
 ## Getting Started
 1. `npm install react-native-chart --save`
 2. In XCode, right click on project's name and choose `Add Files to..`
 3. Go to `node_modules` ➜ `react-native-native` and add files
-4. Add `require('./react-native-chart')` in your JS file and start using the `<RNChart\>` tag
+4. Add `require('./react-native-chart')` in your JS file and start using the `<RNChart\>` tag.
+5. Checkout SimpleChart.js for full usage
 
 ## Usage
 ```javascript
@@ -70,10 +72,10 @@ class SimpleChart extends Component {
 
 ```
 ## Properties
-All properties are optional otherwise the noted
+All properties are optional otherwise noted
 ### General
-- `chartData` _(String)_ - choose one of the following:
-    - `data` - _(NumberArray)_ - Y axis values / Required
+- `chartData` _(Dictionary)_ - : one nested block produces one type of chart
+    - `data` - _(NumberArray)_ - Y axis values / **Required**
     - `name` - _(String)_ - name of the plot
     - `type` - _(String)_ - "line" or "bar" / Default: "line"
     - `fillColor` - _(color)_ - Line chart only: area fill color / If not specified, the line will not be filled
@@ -84,7 +86,7 @@ All properties are optional otherwise the noted
     - `dataPointFillColor` - _(color)_ - fill color of the data point / Default: blue
     - `dataPointRadius` - _(CGFloat)_ - the circel radius of the data point / Default: 1.0
 
-- `xLabels` _(StringArray)_ - array of all X axis label strings.  This determines the X-axis grid as well.  Need to match the number of input data in `chartData` / Required
+- `xLabels` _(StringArray)_ - array of all X axis label strings.  This determines the X-axis grid as well.  Need to match the number of input data in `chartData` / **Required**
 - `animationDuration` _(CGFloat)_ - duration of the animation in seconds / Default: 0.3
 
 - `showGrid` _(BOOL)_ - show or hide grid / Default: true
@@ -99,8 +101,14 @@ All properties are optional otherwise the noted
 - `labelTextColor` _(color)_ - text color of axis labels / Default: gray
 
 ## Known Issues / TODO
-
-## FAQ
+- Installation readme verification
+- Sample code cleanup
+- Needs touch support
+- Needs legend
+- Needs chart title
+- Needs axis title
+- Scatter/Bubble chart
+- Pie chart
 
 ## Support
 Email hyun@onefold.io
