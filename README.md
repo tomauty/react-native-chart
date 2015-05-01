@@ -76,8 +76,15 @@ All properties are optional otherwise the noted
     - `data` - _(NumberArray)_ - Y axis values / Required
     - `name` - _(String)_ - name of the plot
     - `type` - _(String)_ - "line" or "bar" / Default: "line"
-    - `color` - _(color)_ - color of the line or the bar / Default: blue
-    - `widthPercent` - _(CGFloat)_ - Bar chart only: [0 - 1.0], 0.1 means very skinny, 1.0 means bars touch each other / Default: 
+    - `fillColor` - _(color)_ - Line chart only: area fill color / If not specified, the line will not be filled
+    - `lineWidth` - _(CGFloat)_ - Line chart only: line width / Default: 1.0
+    - `widthPercent` - _(CGFloat)_ - Bar chart only: [0 - 1.0], 0.1 means very skinny, 1.0 means bars touch each other / Default: 0.5
+    - `showDataPoint` - _(BOOL)_ - show or hide the data points / Default: false
+    - `dataPointColor` - _(color)_ - outline color of the data point / Default: blue
+    - `dataPointFillColor` - _(color)_ - fill color of the data point / Default: blue
+    - `dataPointRadius` - _(CGFloat)_ - the circel radius of the data point / Default: 1.0
+
+- `xLabels` _(StringArray)_ - array of all X axis label strings.  This determines the X-axis grid as well.  Need to match the number of input data in `chartData` / Required
 - `animationDuration` _(CGFloat)_ - duration of the animation in seconds / Default: 0.3
 
 - `showGrid` _(BOOL)_ - show or hide grid / Default: true
@@ -91,7 +98,7 @@ All properties are optional otherwise the noted
 - `labelFontSize` _(CGFloat)_ - font size of axis labels / Default: 10
 - `labelTextColor` _(color)_ - text color of axis labels / Default: gray
 
-## Known Issues
+## Known Issues / TODO
 
 ## FAQ
 
