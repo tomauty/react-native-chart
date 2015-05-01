@@ -19,9 +19,9 @@ var styles = StyleSheet.create({
     chart: {
         position: 'absolute',
         top: 74,
-        left: 30,
-        bottom: 10,
-        right: 30
+        left: 4,
+        bottom: 4,
+        right: 16
     }
 });
 
@@ -54,6 +54,10 @@ class SimpleChart extends Component {
     constructor(props) {
         super(props);
     }
+    
+    _onTouchEnd(event: Event) {
+        console.log("hello");
+    }
 
     render() {
         return (
@@ -61,7 +65,12 @@ class SimpleChart extends Component {
             <RNChart style={styles.chart}
                 chartData={chartData}
                 verticalGridStep="5"
-                xLabels={xLabels}>
+                xLabels={xLabels}
+                chartTitle="My Simple Chart"
+                chartFontSize="22"
+                xAxisTitle="X Axis"
+                yAxisTitle="Y Axis"            
+                onTouchEnd={this._onTouchEnd}>
             </RNChart>
             </View>
         );

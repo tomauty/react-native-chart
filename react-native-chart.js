@@ -12,8 +12,29 @@ var { View } = React;
 
 var RNChartView = createReactIOSNativeComponentClass({
     validAttributes: merge(ReactIOSViewAttributes.UIView, {
-        chartData:true, verticalGridStep:true, xLabels:true, showGrid:true, gridColor:true, gridLineWidth:true, 
-        animationDuration:true, margin:true, showAxis:true, axisLineWidth:true, labelFontSize:true, labelTextColor:true
+        chartData:true, 
+        verticalGridStep:true, 
+        animationDuration:true, 
+        
+        showGrid:true, 
+        gridColor:true, 
+        gridLineWidth:true, 
+
+        showAxis:true, 
+        xLabels:true, 
+        xAxisTitle:true,
+        yAxisTitle:true,
+        axisTitleColor:true,
+        axisTitleFontSize:true,
+        axisColor:true,        
+        axisLineWidth:true,
+        
+        labelFontSize:true, 
+        labelTextColor:true,
+        
+        chartTitle:true,
+        chartTitleColor:true,
+        chartFontSize:true
     }),
     uiViewClassName: 'RNChartView'
 });

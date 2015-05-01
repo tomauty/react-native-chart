@@ -24,6 +24,8 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		7F4AC30D1AE6CCBB00A370B7 /* RNChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AC30A1AE6CCBB00A370B7 /* RNChartView.m */; };
 		7F4AC30E1AE6CCBB00A370B7 /* RNChartViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AC30C1AE6CCBB00A370B7 /* RNChartViewManager.m */; };
+		7F95B51D1AF2B1C800282097 /* RNChartPlotAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F95B51C1AF2B1C800282097 /* RNChartPlotAreaView.m */; };
+		7F95B52A1AF2B41B00282097 /* RNChartAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F95B5291AF2B41B00282097 /* RNChartAxisView.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +134,10 @@
 		7F4AC30A1AE6CCBB00A370B7 /* RNChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNChartView.m; path = iOS/RNChartView.m; sourceTree = "<group>"; };
 		7F4AC30B1AE6CCBB00A370B7 /* RNChartViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNChartViewManager.h; path = iOS/RNChartViewManager.h; sourceTree = "<group>"; };
 		7F4AC30C1AE6CCBB00A370B7 /* RNChartViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNChartViewManager.m; path = iOS/RNChartViewManager.m; sourceTree = "<group>"; };
+		7F95B51B1AF2B1C800282097 /* RNChartPlotAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNChartPlotAreaView.h; path = iOS/RNChartPlotAreaView.h; sourceTree = "<group>"; };
+		7F95B51C1AF2B1C800282097 /* RNChartPlotAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNChartPlotAreaView.m; path = iOS/RNChartPlotAreaView.m; sourceTree = "<group>"; };
+		7F95B5281AF2B41B00282097 /* RNChartAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNChartAxisView.h; path = iOS/RNChartAxisView.h; sourceTree = "<group>"; };
+		7F95B5291AF2B41B00282097 /* RNChartAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNChartAxisView.m; path = iOS/RNChartAxisView.m; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,6 +245,10 @@
 		13B07FAE1A68108700A75B9A /* RNChart */ = {
 			isa = PBXGroup;
 			children = (
+				7F95B5281AF2B41B00282097 /* RNChartAxisView.h */,
+				7F95B5291AF2B41B00282097 /* RNChartAxisView.m */,
+				7F95B51B1AF2B1C800282097 /* RNChartPlotAreaView.h */,
+				7F95B51C1AF2B1C800282097 /* RNChartPlotAreaView.m */,
 				7F4AC3091AE6CCBB00A370B7 /* RNChartView.h */,
 				7F4AC30A1AE6CCBB00A370B7 /* RNChartView.m */,
 				7F4AC30B1AE6CCBB00A370B7 /* RNChartViewManager.h */,
@@ -538,8 +548,10 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				7F4AC30D1AE6CCBB00A370B7 /* RNChartView.m in Sources */,
+				7F95B51D1AF2B1C800282097 /* RNChartPlotAreaView.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				7F4AC30E1AE6CCBB00A370B7 /* RNChartViewManager.m in Sources */,
+				7F95B52A1AF2B41B00282097 /* RNChartAxisView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

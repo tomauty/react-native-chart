@@ -20,18 +20,24 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher NS_DESIGNATED_INITIALIZER;
 
+- (CGFloat)horizontalScale;
+- (CGFloat)minVerticalBound;
+- (CGFloat)maxVerticalBound;
+
 @property (nonatomic, copy) NSArray* chartData;
 @property (nonatomic, strong) NSArray* xLabels;
 
 @property (nonatomic, assign) CGFloat labelFontSize;
 @property (nonatomic, strong) UIColor* labelTextColor;
 
-@property (nonatomic, assign) CGFloat margin;
-
 // axis
 @property (nonatomic, assign) BOOL showAxis;
 @property (nonatomic, strong) UIColor* axisColor;
 @property (nonatomic, assign) CGFloat axisLineWidth;
+@property (nonatomic, copy) NSString* xAxisTitle;
+@property (nonatomic, copy) NSString* yAxisTitle;
+@property (nonatomic, strong) UIColor* axisTitleColor;
+@property (nonatomic, assign) CGFloat axisTitleFontSize;
 
 // grid
 @property (nonatomic, assign) BOOL showGrid;
@@ -41,5 +47,18 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 
 // animation
 @property (nonatomic, assign) CGFloat animationDuration;
+
+// touch
+@property (nonatomic, assign) CGFloat touchRadius;
+
+// title
+@property (nonatomic, copy) NSString* chartTitle;
+@property (nonatomic, strong) UIColor* chartTitleColor;
+@property (nonatomic, assign) CGFloat chartFontSize;
+
+@property (nonatomic, strong) UIColor* defaultColor;
+@property (nonatomic) BOOL bezierSmoothing;
+@property (nonatomic) CGFloat bezierSmoothingTension;
+
 
 @end
