@@ -107,6 +107,8 @@ All properties are optional otherwise noted
 - Needs legend
 - Needs chart title
 - Needs axis title
+- Stack Bar Chart
+- Multi Line Chart
 - Scatter/Bubble chart
 - Pie chart
 
