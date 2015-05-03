@@ -1,11 +1,19 @@
 {
-  "name": "RNChart",
+  "name": "react-native-chart",
   "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/onefold/react-native-chart.git"
   },
-  "dependencies": {
+  "main": "Chart.ios.js",
+  "peerDependencies": {
     "react-native": "^0.4.0"
-  }
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "chart",
+    "graph"
+  ]
 }
