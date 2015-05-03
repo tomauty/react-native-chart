@@ -91,7 +91,7 @@
   for ( NSDictionary* plotDict in self.chartData ) {
     BOOL showDataPoint = [RCTConvert BOOL:plotDict[@"showDataPoint"]];
     NSString* chartType = [RCTConvert NSString:plotDict[@"type"]];
-
+    
     if ( [chartType isEqualToString:@"bar"] ) {
       [self drawBarChart:plotDict];
     } else {
@@ -110,7 +110,7 @@
       [self addSubview:label];
     }
   }
-
+  
   NSUInteger horizontalGridStep = self.xLabels.count;
   for( int i=0; i< horizontalGridStep; i++ ) {
     UILabel* label = [self createLabelForIndex:i];
@@ -303,16 +303,22 @@
     lineWidth = @1;
   }
   
+  CGFloat smoothingTension = dataDict[@"smoothingTension"] != nil ? [dataDict[@"smoothingTension"] floatValue] : _bezierSmoothingTension;
+  
+  if (dataDict[@"smoothing"] != nil && [dataDict[@"smoothing"] boolValue] == NO) {
+    smoothingTension = 0;
+  }
+  
   CGFloat minBound = [self minVerticalBound];
   CGFloat maxBound = [self maxVerticalBound];
   
   CGFloat scale = self.axisHeight / (maxBound - minBound);
   
-  UIBezierPath *noPath = [self getLinePath:dataPlots scale:0 withSmoothing:_bezierSmoothing close:NO];
-  UIBezierPath *path = [self getLinePath:dataPlots scale:scale withSmoothing:_bezierSmoothing close:NO];
+  UIBezierPath *noPath = [self getLinePath:dataPlots scale:0 withSmoothing:smoothingTension close:NO];
+  UIBezierPath *path = [self getLinePath:dataPlots scale:scale withSmoothing:smoothingTension close:NO];
   
-  UIBezierPath *noFill = [self getLinePath:dataPlots scale:0 withSmoothing:_bezierSmoothing close:YES];
-  UIBezierPath *fill = [self getLinePath:dataPlots scale:scale withSmoothing:_bezierSmoothing close:YES];
+  UIBezierPath *noFill = [self getLinePath:dataPlots scale:0 withSmoothing:smoothingTension close:YES];
+  UIBezierPath *fill = [self getLinePath:dataPlots scale:scale withSmoothing:smoothingTension close:YES];
   
   if( fillColor ) {
     CAShapeLayer* fillLayer = [CAShapeLayer layer];
@@ -379,7 +385,7 @@
   CGFloat barWidth = (self.axisWidth / self.xLabels.count * [self horizontalScale] * 0.5) * widthPercent; // 60% of the full width
   
   for ( NSUInteger i = 0; i < dataPlots.count; ++i ) {
- 
+    
     CGFloat s = self.axisHeight / (maxBound - minBound);
     CGPoint point = [self getPointForIndex:i data:dataPlots withScale:s];
     point.y +=  minBound * s;
@@ -412,7 +418,7 @@
   if ( radius == nil ) {
     radius = @1;
   }
-
+  
   CGFloat minBound = [self minVerticalBound];
   CGFloat maxBound = [self maxVerticalBound];
   CGFloat scale = self.axisHeight / (maxBound - minBound);
@@ -561,7 +567,7 @@
 - (void)setGridStep:(int)gridStep
 {
   self.verticalGridStep = gridStep;
-//  self.horizontalGridStep = gridStep;
+  //  self.horizontalGridStep = gridStep;
 }
 
 - (CGPoint)getPointForIndex:(NSUInteger)idx data:(NSArray*)data withScale:(CGFloat)scale
@@ -579,9 +585,11 @@
   }
 }
 
-- (UIBezierPath*)getLinePath:(NSArray*)dataPlots scale:(float)scale withSmoothing:(BOOL)smoothed close:(BOOL)closed
+- (UIBezierPath*)getLinePath:(NSArray*)dataPlots scale:(float)scale withSmoothing:(CGFloat)smoothing close:(BOOL)closed
 {
   UIBezierPath* path = [UIBezierPath bezierPath];
+  
+  BOOL smoothed = smoothing != 0;
   
   if ( smoothed ) {
     for( int i = 0 ; i < dataPlots.count - 1; i++) {
@@ -607,8 +615,8 @@
         m.y = (nextPoint.y - p.y) / 2;
       }
       
-      controlPoint[0].x = p.x + m.x * _bezierSmoothingTension;
-      controlPoint[0].y = p.y + m.y * _bezierSmoothingTension;
+      controlPoint[0].x = p.x + m.x * smoothing;
+      controlPoint[0].y = p.y + m.y * smoothing;
       
       // Second control point
       nextPoint = [self getPointForIndex:i + 2 data:dataPlots withScale:scale];
@@ -624,8 +632,8 @@
         m.y = (p.y - previousPoint.y) / 2;
       }
       
-      controlPoint[1].x = p.x - m.x * _bezierSmoothingTension;
-      controlPoint[1].y = p.y - m.y * _bezierSmoothingTension;
+      controlPoint[1].x = p.x - m.x * smoothing;
+      controlPoint[1].y = p.y - m.y * smoothing;
       
       [path addCurveToPoint:p controlPoint1:controlPoint[0] controlPoint2:controlPoint[1]];
     }
@@ -655,7 +663,7 @@
 //- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 //  UITouch *aTouch = [touches anyObject];
 //  CGPoint point = [aTouch locationInView:self];
-//  
+//
 //  NSLog(@"%f %f", point.x, point.y);
 //}
 
