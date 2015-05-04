@@ -102,12 +102,9 @@ All properties are optional otherwise noted
 - `labelTextColor` _(color)_ - text color of axis labels / Default: gray
 
 ## Known Issues / TODO
-- Installation readme verification
 - Sample code cleanup
 - Needs touch support
 - Needs legend
-- Needs chart title
-- Needs axis title
 - Stack Bar Chart
 - Multi Line Chart
 - Scatter/Bubble chart
