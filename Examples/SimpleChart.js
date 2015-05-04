@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var RNChart = require('./react-native-chart');
+var RNChart = require('react-native-chart');
 
 var {
     StyleSheet,
