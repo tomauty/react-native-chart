@@ -57,8 +57,6 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, assign) CGFloat chartFontSize;
 
 @property (nonatomic, strong) UIColor* defaultColor;
-@property (nonatomic) BOOL bezierSmoothing;
-@property (nonatomic) CGFloat bezierSmoothingTension;
 
 
 @end

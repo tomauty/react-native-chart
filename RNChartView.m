@@ -165,8 +165,6 @@
   _axisColor = [UIColor colorWithWhite:0.7 alpha:1.0];
   _gridColor = [UIColor colorWithWhite:0.9 alpha:1.0];
   _showGrid = YES;
-  _bezierSmoothing = YES;
-  _bezierSmoothingTension = 0.2;
   _gridLineWidth = 0.5;
   _axisLineWidth = 1;
   _animationDuration = 0.5;

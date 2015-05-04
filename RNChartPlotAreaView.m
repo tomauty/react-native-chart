@@ -66,9 +66,11 @@
   UIColor* lineColor = ( dataDict[@"color"] != nil ) ? [RCTConvert UIColor:dataDict[@"color"]] : self.parentChartView.defaultColor;
   UIColor* fillColor = ( dataDict[@"fillColor"] != nil ) ? [RCTConvert UIColor:dataDict[@"fillColor"]] : nil;
   NSNumber* lineWidth = [RCTConvert NSNumber:dataDict[@"lineWidth"]];
-  if ( lineWidth == nil ) {
+    if ( lineWidth == nil ) {
     lineWidth = @1;
   }
+  
+  CGFloat smoothingTension = dataDict[@"smoothingTension"] != nil ? [dataDict[@"smoothingTension"] floatValue] : 0.0;
   
   CGFloat axisHeight = self.frame.size.height;
 
@@ -77,11 +79,11 @@
   
   CGFloat scale = axisHeight / (maxBound - minBound);
   
-  UIBezierPath *noPath = [self getLinePath:dataPlots scale:0 withSmoothing:self.parentChartView.bezierSmoothing close:NO];
-  UIBezierPath *path = [self getLinePath:dataPlots scale:scale withSmoothing:self.parentChartView.bezierSmoothing close:NO];
+  UIBezierPath *noPath = [self getLinePath:dataPlots scale:0 withSmoothing:smoothingTension close:NO];
+  UIBezierPath *path = [self getLinePath:dataPlots scale:scale withSmoothing:smoothingTension close:NO];
   
-  UIBezierPath *noFill = [self getLinePath:dataPlots scale:0 withSmoothing:self.parentChartView.bezierSmoothing close:YES];
-  UIBezierPath *fill = [self getLinePath:dataPlots scale:scale withSmoothing:self.parentChartView.bezierSmoothing close:YES];
+  UIBezierPath *noFill = [self getLinePath:dataPlots scale:0 withSmoothing:smoothingTension close:YES];
+  UIBezierPath *fill = [self getLinePath:dataPlots scale:scale withSmoothing:smoothingTension close:YES];
   
   if( fillColor ) {
     CAShapeLayer* fillLayer = [CAShapeLayer layer];
@@ -231,7 +233,7 @@
 }
 
 
-- (UIBezierPath*)getLinePath:(NSArray*)dataPlots scale:(float)scale withSmoothing:(BOOL)smoothed close:(BOOL)closed
+- (UIBezierPath*)getLinePath:(NSArray*)dataPlots scale:(float)scale withSmoothing:(CGFloat)smoothing close:(BOOL)closed
 {
   UIBezierPath* path = [UIBezierPath bezierPath];
   
@@ -259,8 +261,8 @@
         m.y = (nextPoint.y - p.y) / 2;
       }
       
-      controlPoint[0].x = p.x + m.x * self.parentChartView.bezierSmoothingTension;
-      controlPoint[0].y = p.y + m.y * self.parentChartView.bezierSmoothingTension;
+      controlPoint[0].x = p.x + m.x * smoothing;
+      controlPoint[0].y = p.y + m.y * smoothing;
       
       // Second control point
       nextPoint = [self getPointForIndex:i + 2 data:dataPlots withScale:scale];
@@ -276,8 +278,8 @@
         m.y = (p.y - previousPoint.y) / 2;
       }
       
-      controlPoint[1].x = p.x - m.x * self.parentChartView.bezierSmoothingTension;
-      controlPoint[1].y = p.y - m.y * self.parentChartView.bezierSmoothingTension;
+      controlPoint[1].x = p.x - m.x * smoothing;
+      controlPoint[1].y = p.y - m.y * smoothing;
       
       [path addCurveToPoint:p controlPoint1:controlPoint[0] controlPoint2:controlPoint[1]];
     }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		41FDC50E1AF5D11C00DBBA9C /* RNChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FDC50B1AF5D11C00DBBA9C /* RNChartView.m */; };
 		41FDC50F1AF5D11C00DBBA9C /* RNChartViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FDC50D1AF5D11C00DBBA9C /* RNChartViewManager.m */; };
+		7FD1BAF31AF7EA6200987259 /* RNChartAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD1BAF01AF7EA6200987259 /* RNChartAxisView.m */; };
+		7FD1BAF41AF7EA6200987259 /* RNChartPlotAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD1BAF21AF7EA6200987259 /* RNChartPlotAreaView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,10 @@
 		41FDC50B1AF5D11C00DBBA9C /* RNChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNChartView.m; sourceTree = "<group>"; };
 		41FDC50C1AF5D11C00DBBA9C /* RNChartViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNChartViewManager.h; sourceTree = "<group>"; };
 		41FDC50D1AF5D11C00DBBA9C /* RNChartViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNChartViewManager.m; sourceTree = "<group>"; };
+		7FD1BAEF1AF7EA6200987259 /* RNChartAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNChartAxisView.h; sourceTree = "<group>"; };
+		7FD1BAF01AF7EA6200987259 /* RNChartAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNChartAxisView.m; sourceTree = "<group>"; };
+		7FD1BAF11AF7EA6200987259 /* RNChartPlotAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNChartPlotAreaView.h; sourceTree = "<group>"; };
+		7FD1BAF21AF7EA6200987259 /* RNChartPlotAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNChartPlotAreaView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,10 @@
 		41FDC4E71AF5D0CF00DBBA9C = {
 			isa = PBXGroup;
 			children = (
+				7FD1BAEF1AF7EA6200987259 /* RNChartAxisView.h */,
+				7FD1BAF01AF7EA6200987259 /* RNChartAxisView.m */,
+				7FD1BAF11AF7EA6200987259 /* RNChartPlotAreaView.h */,
+				7FD1BAF21AF7EA6200987259 /* RNChartPlotAreaView.m */,
 				41FDC50A1AF5D11C00DBBA9C /* RNChartView.h */,
 				41FDC50B1AF5D11C00DBBA9C /* RNChartView.m */,
 				41FDC50C1AF5D11C00DBBA9C /* RNChartViewManager.h */,
@@ -117,6 +127,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD1BAF31AF7EA6200987259 /* RNChartAxisView.m in Sources */,
+				7FD1BAF41AF7EA6200987259 /* RNChartPlotAreaView.m in Sources */,
 				41FDC50E1AF5D11C00DBBA9C /* RNChartView.m in Sources */,
 				41FDC50F1AF5D11C00DBBA9C /* RNChartViewManager.m in Sources */,
 			);
