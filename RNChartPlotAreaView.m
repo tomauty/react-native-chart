@@ -384,4 +384,34 @@
 }
 
 
+- (CGFloat)distanceSquare:(CGPoint)point1 point2:(CGPoint)point2 {
+  CGFloat d1 = point1.x - point2.x;
+  CGFloat d2 = point1.y - point2.y;
+  return d1 * d1 + d2 * d2;
+}
+
+
+- (void)nearestDataPointToPoint:(CGPoint)point radius:(CGFloat)radius selectedChartIndex:(NSInteger*)selectedChartIndex selectedPointIndex:(NSInteger*)selectedPointIndex {
+  CGFloat minBound = [self.parentChartView minVerticalBound];
+  CGFloat maxBound = [self.parentChartView maxVerticalBound];
+  CGFloat radiusSq = radius * radius;
+
+  [self.parentChartView.chartData enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx1, BOOL *stop1) {
+    NSArray* dataPlots = obj[@"data"];
+    [dataPlots enumerateObjectsUsingBlock:^(id obj, NSUInteger idx2, BOOL *stop2) {
+      CGFloat s = self.frame.size.height / (maxBound - minBound);
+      CGPoint tempPoint = [self getPointForIndex:idx2 data:dataPlots withScale:s];
+
+      if ( [self distanceSquare:point point2:tempPoint] < radiusSq ) {
+        *stop1 = YES;
+        *stop2 = YES;
+        *selectedChartIndex = idx1;
+        *selectedPointIndex = idx2;
+      }
+    }];
+  }];
+}
+
+
+
 @end

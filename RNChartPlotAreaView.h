@@ -14,6 +14,7 @@
 
 - (id)initWithParentView:(RNChartView*)parentChartView;
 - (void)drawCharts;
+- (void)nearestDataPointToPoint:(CGPoint)point radius:(CGFloat)radius selectedChartIndex:(NSInteger*)selectedChartIndex selectedPointIndex:(NSInteger*)selectedPointIndex;
 
 @property (nonatomic, weak) RNChartView* parentChartView;
 

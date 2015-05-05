@@ -343,70 +343,44 @@
 }
 
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//  UITouch *aTouch = [touches anyObject];
-//  CGPoint point = [aTouch locationInView:self];
-//  
-//  NSInteger selectedChartIndex = -1;
-//  NSInteger selectedPointIndex = -1;
-//  
-//  [self nearestDataPointToPoint:point selectedChartIndex:&selectedChartIndex selectedPointIndex:&selectedPointIndex];
-//  if ( selectedChartIndex >= 0 && selectedPointIndex >= 0 ) {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  UITouch *aTouch = [touches anyObject];
+  CGPoint point = [aTouch locationInView:self.plotArea];
+  
+  NSInteger selectedChartIndex = -1;
+  NSInteger selectedPointIndex = -1;
+  
+  [self.plotArea nearestDataPointToPoint:point radius:self.touchRadius selectedChartIndex:&selectedChartIndex selectedPointIndex:&selectedPointIndex];
+  if ( selectedChartIndex >= 0 && selectedPointIndex >= 0 ) {
 //    NSDictionary *event =
 //    @{@"target":[self reactTag],
 //      @"selectedChartIndex":@(selectedChartIndex),
 //      @"selectedPointIndex":@(selectedPointIndex)};
-//    [_eventDispatcher sendInputEventWithName:@"topTouchStart" body:event];
-//  }
-//}
-//
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//  UITouch *aTouch = [touches anyObject];
-//  CGPoint point = [aTouch locationInView:self];
-//
-//  NSInteger selectedChartIndex = -1;
-//  NSInteger selectedPointIndex = -1;
-//  
-//  [self nearestDataPointToPoint:point selectedChartIndex:&selectedChartIndex selectedPointIndex:&selectedPointIndex];
-//  if ( selectedChartIndex >= 0 && selectedPointIndex >= 0 ) {
+//      [_eventDispatcher sendInputEventWithName:@"dataPointTouchStart" body:event];
+//      [_eventDispatcher sendDeviceEventWithName:@"dataPointTouchStart" body:event];
+  }
+  
+  [super touchesBegan:touches withEvent:event];
+}
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+  UITouch *aTouch = [touches anyObject];
+  CGPoint point = [aTouch locationInView:self.plotArea];
+
+  NSInteger selectedChartIndex = -1;
+  NSInteger selectedPointIndex = -1;
+  
+  [self.plotArea nearestDataPointToPoint:point radius:self.touchRadius selectedChartIndex:&selectedChartIndex selectedPointIndex:&selectedPointIndex];
+  if ( selectedChartIndex >= 0 && selectedPointIndex >= 0 ) {
 //    NSDictionary *event =
 //      @{@"target":[self reactTag],
 //        @"selectedChartIndex":@(selectedChartIndex),
 //        @"selectedPointIndex":@(selectedPointIndex)};
 //    [_eventDispatcher sendInputEventWithName:@"topTouchEnd" body:event];
-//  }
-//}
-
-
-
-- (CGFloat)distanceSquare:(CGPoint)point1 point2:(CGPoint)point2 {
-  CGFloat d1 = point1.x - point2.x;
-  CGFloat d2 = point1.y - point2.y;
-  return d1 * d1 + d2 * d2;
-}
-
-
-- (void)nearestDataPointToPoint:(CGPoint)point selectedChartIndex:(NSInteger*)selectedChartIndex selectedPointIndex:(NSInteger*)selectedPointIndex {
-//  CGFloat minBound = [self minVerticalBound];
-//  CGFloat maxBound = [self maxVerticalBound];
-//  CGFloat radiusSq = self.touchRadius * self.touchRadius;
-//  
-//  [self.chartData enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx1, BOOL *stop1) {
-//    NSArray* dataPlots = obj[@"data"];
-//    [dataPlots enumerateObjectsUsingBlock:^(id obj, NSUInteger idx2, BOOL *stop2) {
-//      CGFloat s = self.axisHeight / (maxBound - minBound);
-//      CGPoint tempPoint = [self getPointForIndex:idx2 data:dataPlots withScale:s];
-////      NSLog(@"%.2f, %.2f", point.x, point.y);
-//      
-//      if ( [self distanceSquare:point point2:tempPoint] < radiusSq ) {
-//        *stop1 = YES;
-//        *stop2 = YES;
-//        *selectedChartIndex = idx1;
-//        *selectedPointIndex = idx2;
-//      }
-//    }];
-//  }];
+  }
+  
+  [super touchesEnded:touches withEvent:event];
 }
 
 
