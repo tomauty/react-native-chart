@@ -219,16 +219,21 @@
   if ( idx >= data.count )
     return CGPointZero;
   
+  NSUInteger horizontalGridStep = self.parentChartView.xLabels.count;
+  
   CGFloat axisWidth = self.frame.size.width;
   CGFloat axisHeight = self.frame.size.height;
   
+  CGFloat horizScale = [self.parentChartView horizontalScale];
+  CGFloat xOffset = (axisWidth / (horizontalGridStep)) * horizScale * 0.5;
+
   // Compute the point position in the view from the data with a set scale value
   NSNumber* number = data[idx];
   
   if ( data.count < 2 ) {
     return CGPointMake(0, axisHeight - [number floatValue] * scale);
   } else {
-    return CGPointMake(idx * (axisWidth / (data.count - 1)), axisHeight - [number floatValue] * scale);
+    return CGPointMake(idx * (axisWidth / (data.count)) + xOffset, axisHeight - [number floatValue] * scale);
   }
 }
 
@@ -237,7 +242,7 @@
 {
   UIBezierPath* path = [UIBezierPath bezierPath];
   
-  if ( smoothed ) {
+  if ( smoothing > 0.0 ) {
     for( int i = 0 ; i < dataPlots.count - 1; i++) {
       CGPoint controlPoint[2];
       CGPoint p = [self getPointForIndex:i data:dataPlots withScale:scale];
@@ -341,6 +346,8 @@
   // draw grid
   if ( self.parentChartView.showGrid ) {
     NSUInteger horizontalGridStep = self.parentChartView.xLabels.count;
+    
+    // vertical lines
     for(int i=0; i< horizontalGridStep; i++) {
       CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.gridColor CGColor]);
       CGContextSetLineWidth(ctx, self.parentChartView.gridLineWidth);
@@ -352,6 +359,7 @@
       CGContextStrokePath(ctx);
     }
     
+    // horizontal lines
     for ( int i = 0; i < self.parentChartView.verticalGridStep + 1; i++) {
       // If the value is zero then we display the horizontal axis
       CGFloat v = maxBound - (maxBound - minBound) / self.parentChartView.verticalGridStep * i;

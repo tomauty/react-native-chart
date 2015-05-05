@@ -225,17 +225,17 @@
 
 - (CGFloat)horizontalScale
 {
-  NSUInteger horizontalGridStep = self.xLabels.count;
+  NSUInteger horizontalGridStep = self.xLabels.count + 1;
   CGFloat scale = 1.0f;
-  for ( NSDictionary* plotDict in self.chartData ) {
-    NSArray* plotArray = plotDict[@"data"];
-    NSInteger q = (int)plotArray.count / horizontalGridStep;
-    
-    if(plotArray.count > 1) {
-      CGFloat thisScale = (CGFloat)(q * horizontalGridStep) / (CGFloat)(plotArray.count - 1);
-      scale = MAX(scale, thisScale);
-    }
-  }
+//  for ( NSDictionary* plotDict in self.chartData ) {
+//    NSArray* plotArray = plotDict[@"data"];
+//    NSInteger q = (int)plotArray.count / horizontalGridStep;
+//    
+//    if(plotArray.count > 1) {
+//      CGFloat thisScale = (CGFloat)(q * horizontalGridStep) / (CGFloat)(plotArray.count);
+//      scale = MAX(scale, thisScale);
+//    }
+//  }
   
   return scale;
 }

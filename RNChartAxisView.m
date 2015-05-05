@@ -139,7 +139,8 @@
   CGFloat axisWidth = self.frame.size.width;
   
   NSUInteger horizontalGridStep = self.parentChartView.xLabels.count;
-  CGPoint p = CGPointMake(index * (axisWidth / horizontalGridStep) * scale, 0);
+  CGFloat xOffset = (axisWidth / horizontalGridStep) * scale * 0.5;
+  CGPoint p = CGPointMake((index * (axisWidth / horizontalGridStep) * scale) + xOffset, 0);
   
   CGRect rect = CGRectMake(0, 0, self.frame.size.width, 100);
   CGRect boundRect = [text boundingRectWithSize:rect.size

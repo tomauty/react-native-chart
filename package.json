@@ -6,6 +6,7 @@
     "url" : "https://github.com/onefold/react-native-chart.git"
   },
   "main": "Chart.ios.js",
+  "author": "Hyun Cho <hyun@onefold.io> (http://onefold.io)",
   "peerDependencies": {
     "react-native": "^0.4.0"
   },
