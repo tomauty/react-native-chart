@@ -195,6 +195,9 @@
   
   for ( int i=0; i < dataPlots.count; i++) {
     CGPoint p = [self getPointForIndex:i data:dataPlots withScale:scale];
+    
+    if (CGPointEqualToPoint(p, CGPointZero)) continue;
+    
     p.y +=  minBound * scale;
     
     UIBezierPath* circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(p.x - radius.floatValue, p.y - radius.floatValue, radius.floatValue * 2, radius.floatValue * 2)];
@@ -216,7 +219,7 @@
 
 - (CGPoint)getPointForIndex:(NSUInteger)idx data:(NSArray*)data withScale:(CGFloat)scale
 {
-  if ( idx >= data.count )
+  if ( idx >= data.count || data[idx] == [NSNull null] )
     return CGPointZero;
   
   NSUInteger horizontalGridStep = self.parentChartView.xLabels.count;
@@ -242,61 +245,57 @@
 {
   UIBezierPath* path = [UIBezierPath bezierPath];
   
-  if ( smoothing > 0.0 ) {
-    for( int i = 0 ; i < dataPlots.count - 1; i++) {
-      CGPoint controlPoint[2];
-      CGPoint p = [self getPointForIndex:i data:dataPlots withScale:scale];
-      
-      // Start the path drawing
-      if(i == 0)
-        [path moveToPoint:p];
-      
-      CGPoint nextPoint, previousPoint, m;
-      
-      // First control point
-      nextPoint = [self getPointForIndex:i + 1 data:dataPlots withScale:scale];
-      previousPoint = [self getPointForIndex:i - 1 data:dataPlots withScale:scale];
-      m = CGPointZero;
-      
-      if(i > 0) {
-        m.x = (nextPoint.x - previousPoint.x) / 2;
-        m.y = (nextPoint.y - previousPoint.y) / 2;
-      } else {
-        m.x = (nextPoint.x - p.x) / 2;
-        m.y = (nextPoint.y - p.y) / 2;
-      }
-      
-      controlPoint[0].x = p.x + m.x * smoothing;
-      controlPoint[0].y = p.y + m.y * smoothing;
-      
-      // Second control point
-      nextPoint = [self getPointForIndex:i + 2 data:dataPlots withScale:scale];
-      previousPoint = [self getPointForIndex:i data:dataPlots withScale:scale];
-      p = [self getPointForIndex:i + 1 data:dataPlots withScale:scale];
-      m = CGPointZero;
-      
-      if(i < dataPlots.count - 2) {
-        m.x = (nextPoint.x - previousPoint.x) / 2;
-        m.y = (nextPoint.y - previousPoint.y) / 2;
-      } else {
-        m.x = (p.x - previousPoint.x) / 2;
-        m.y = (p.y - previousPoint.y) / 2;
-      }
-      
-      controlPoint[1].x = p.x - m.x * smoothing;
-      controlPoint[1].y = p.y - m.y * smoothing;
-      
-      [path addCurveToPoint:p controlPoint1:controlPoint[0] controlPoint2:controlPoint[1]];
+  for( int i = 0 ; i < dataPlots.count - 1; i++) {
+    CGPoint controlPoint[2];
+    CGPoint p = [self getPointForIndex:i data:dataPlots withScale:scale];
+    
+    // Start the path drawing
+    if(i == 0)
+      [path moveToPoint:p];
+    
+    CGPoint nextPoint, previousPoint, m;
+    
+    // First control point
+    nextPoint = [self getPointForIndex:i + 1 data:dataPlots withScale:scale];
+    previousPoint = [self getPointForIndex:i - 1 data:dataPlots withScale:scale];
+    m = CGPointZero;
+    
+    if(i > 0) {
+      m.x = (nextPoint.x - previousPoint.x) / 2;
+      m.y = (nextPoint.y - previousPoint.y) / 2;
+    } else {
+      m.x = (nextPoint.x - p.x) / 2;
+      m.y = (nextPoint.y - p.y) / 2;
     }
     
-  } else {
-    for ( int i = 0; i < dataPlots.count; i++) {
-      if(i > 0) {
-        [path addLineToPoint:[self getPointForIndex:i data:dataPlots withScale:scale]];
-      } else {
-        [path moveToPoint:[self getPointForIndex:i data:dataPlots withScale:scale]];
-      }
+    if (CGPointEqualToPoint(p, CGPointZero)) {
+      [path moveToPoint:nextPoint];
+      continue;
     }
+    
+    controlPoint[0].x = p.x + m.x * smoothing;
+    controlPoint[0].y = p.y + m.y * smoothing;
+    
+    if (CGPointEqualToPoint(nextPoint, CGPointZero)) continue;
+    
+    // Second control point
+    nextPoint = [self getPointForIndex:i + 2 data:dataPlots withScale:scale];
+    previousPoint = [self getPointForIndex:i data:dataPlots withScale:scale];
+    p = [self getPointForIndex:i + 1 data:dataPlots withScale:scale];
+    m = CGPointZero;
+    
+    if(i < dataPlots.count - 2) {
+      m.x = (nextPoint.x - previousPoint.x) / 2;
+      m.y = (nextPoint.y - previousPoint.y) / 2;
+    } else {
+      m.x = (p.x - previousPoint.x) / 2;
+      m.y = (p.y - previousPoint.y) / 2;
+    }
+    
+    controlPoint[1].x = p.x - m.x * smoothing;
+    controlPoint[1].y = p.y - m.y * smoothing;
+    
+    [path addCurveToPoint:p controlPoint1:controlPoint[0] controlPoint2:controlPoint[1]];
   }
   
   if(closed) {

@@ -260,6 +260,7 @@
   for ( NSDictionary* plotDict in self.chartData ) {
     NSArray* data = plotDict[@"data"];
     for(int i=0; i < data.count; i++) {
+      if (data[i] == [NSNull null]) continue;
       NSNumber* number = data[i];
       if([number floatValue] < self.min)
         self.min = [number floatValue];
