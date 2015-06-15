@@ -89,6 +89,9 @@
   }
   
   self.xAxisHeight = 16.0;
+  if ( !self.showXAxisLabels ) {
+    self.xAxisHeight -= 16.0;
+  }
   if ( self.xAxisTitle.length > 0 ) {
     UIFont* font = [UIFont systemFontOfSize:self.axisTitleFontSize];
     CGRect titleBound = [self.xAxisTitle boundingRectWithSize:CGSizeMake(10000, 10000)
@@ -99,6 +102,9 @@
     self.xAxisHeight += titleBound.size.height + 2;
   }
   self.yAxisWidth = 24.0;
+  if ( !self.showYAxisLabels ) {
+    self.yAxisWidth -= 24.0;
+  }
   if ( self.yAxisTitle.length > 0 ) {
     UIFont* font = [UIFont systemFontOfSize:self.axisTitleFontSize];
     CGRect titleBound = [self.yAxisTitle boundingRectWithSize:CGSizeMake(10000, 10000)
@@ -162,6 +168,8 @@
   _defaultColor = [UIColor blueColor];
   _verticalGridStep = 3;
   _showAxis = YES;
+  _showXAxisLabels = YES;
+  _showYAxisLabels = YES;
   _axisColor = [UIColor colorWithWhite:0.7 alpha:1.0];
   _gridColor = [UIColor colorWithWhite:0.9 alpha:1.0];
   _showGrid = YES;

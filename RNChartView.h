@@ -32,6 +32,8 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 
 // axis
 @property (nonatomic, assign) BOOL showAxis;
+@property (nonatomic, assign) BOOL showXAxisLabels;
+@property (nonatomic, assign) BOOL showYAxisLabels;
 @property (nonatomic, strong) UIColor* axisColor;
 @property (nonatomic, assign) CGFloat axisLineWidth;
 @property (nonatomic, copy) NSString* xAxisTitle;

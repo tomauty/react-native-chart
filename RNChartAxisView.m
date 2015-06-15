@@ -19,19 +19,19 @@
   self = [self initWithFrame:CGRectZero];
   _parentChartView = parent;
   _axis = axis;
-
+  
   _labelTextColor = [UIColor darkGrayColor];
   _labelFont = [UIFont systemFontOfSize:14];
   
   self.backgroundColor = [UIColor clearColor];
-
+  
   return self;
 }
 
 
 - (void)addLabels {
   if ( self.axis == AxisTypeY ) {
-
+    
     CGFloat xOffset = 0.0;
     if ( self.parentChartView.yAxisTitle.length > 0 ) {
       UIFont* font = [UIFont systemFontOfSize:self.parentChartView.axisTitleFontSize];
@@ -49,33 +49,38 @@
       
       CGAffineTransform rotation = CGAffineTransformMakeRotation(-M_PI * 0.5);
       CGAffineTransform translation = CGAffineTransformMakeTranslation((axisTitleLabel.bounds.size.height * 0.5)-(axisTitleLabel.bounds.size.width / 2),
-                                       (axisTitleLabel.bounds.size.width * 0.5) - (axisTitleLabel.bounds.size.height * 0.5));
+                                                                       (axisTitleLabel.bounds.size.width * 0.5) - (axisTitleLabel.bounds.size.height * 0.5));
       axisTitleLabel.transform = CGAffineTransformConcat(rotation, translation);
-
+      
       [self addSubview:axisTitleLabel];
     }
     
-    for ( int i = 0; i < self.parentChartView.verticalGridStep; i++ ) {
-      UILabel* label = [self createLabelForYAxis:i xOffset:xOffset];
-      
-      if ( label != nil ) {
-        [self addSubview:label];
+    if (_parentChartView.showYAxisLabels) {
+      for ( int i = 0; i < self.parentChartView.verticalGridStep; i++ ) {
+        UILabel* label = [self createLabelForYAxis:i xOffset:xOffset];
+        
+        if ( label != nil ) {
+          [self addSubview:label];
+        }
       }
     }
     
   } else if ( self.axis == AxisTypeX ) {
     
     CGFloat y = 0.0;
-    for ( int i = 0; i < self.parentChartView.xLabels.count; i++ ) {
-      UILabel* label = [self createLabelForXAxis:i];
-      
-      if ( label != nil ) {
-        [self addSubview:label];
-        y = MAX(y, label.frame.origin.y + label.frame.size.height);
-      }
-    }
     
-    y += 2.0;
+    if (_parentChartView.showXAxisLabels) {
+      for ( int i = 0; i < self.parentChartView.xLabels.count; i++ ) {
+        UILabel* label = [self createLabelForXAxis:i];
+        
+        if ( label != nil ) {
+          [self addSubview:label];
+          y = MAX(y, label.frame.origin.y + label.frame.size.height);
+        }
+      }
+      
+      y += 2.0;
+    }
     if ( self.parentChartView.xAxisTitle.length > 0 ) {
       UILabel* axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, self.frame.size.height - y)];
       axisTitleLabel.text = self.parentChartView.xAxisTitle;
@@ -103,9 +108,9 @@
   if ( text == nil ) {
     return nil;
   }
-
+  
   CGFloat labelHeight = 20;
-
+  
   CGRect rect = CGRectMake(xOffset, p.y, self.frame.size.width - xOffset, 20);
   
   float width = [text boundingRectWithSize:rect.size
@@ -113,8 +118,8 @@
                                 attributes:@{ NSFontAttributeName:self.labelFont }
                                    context:nil].size.width;
   
-//  CGFloat xPadding = 10;
-//  CGFloat xOffset = width + xPadding;
+  //  CGFloat xPadding = 10;
+  //  CGFloat xOffset = width + xPadding;
   
   UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(p.x, p.y - (labelHeight * 0.5), width + 2, labelHeight)];
   label.text = text;
