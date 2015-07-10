@@ -21,6 +21,8 @@ var RNChartView = createReactNativeComponentClass({
         gridLineWidth:true,
 
         showAxis:true,
+        showXAxisLabels:true,
+        showYAxisLabels:true,
         xLabels:true,
         xAxisTitle:true,
         yAxisTitle:true,

@@ -96,6 +96,8 @@ All properties are optional otherwise noted
 - `gridLineWidth` _(CGFloat)_ - width of the grid line / Default: 0.5
 
 - `showAxis` _(BOOL)_ - show or hide axis / Default: true
+- `showXAxisLabels` _(BOOL)_ - show or hide axis labels for the X axis / Default: true
+- `showYAxisLabels` _(BOOL)_ - show or hide axis labels for the Y axis / Default: true
 - `axisLineWidth` _(CGFloat)_ - width of the axis line / Default: 1
 
 - `labelFontSize` _(CGFloat)_ - font size of axis labels / Default: 10
