@@ -172,6 +172,16 @@
     
     [self.layer addSublayer:fillLayer];
     [self.layers addObject:fillLayer];
+    
+    CABasicAnimation *barGraphFillAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
+    [barGraphFillAnimation setDuration:self.parentChartView.animationDuration];
+    
+    barGraphFillAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    barGraphFillAnimation.fromValue = [NSNumber numberWithFloat:.0f];
+    barGraphFillAnimation.removedOnCompletion = NO;
+    barGraphFillAnimation.fillMode = kCAFillModeForwards;
+    fillLayer.anchorPoint = CGPointMake(0.0f, 0.5f);
+    [fillLayer addAnimation:barGraphFillAnimation forKey:@"grow"];
   }
   
 }
