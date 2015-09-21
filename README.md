@@ -63,7 +63,7 @@ class SimpleChart extends Component {
             <View style={styles.container}>
                 <RNChart style={styles.chart}
                     chartData={chartData}
-                    verticalGridStep="5"
+                    verticalGridStep={5}
                     xLabels={xLabels}>
                 </RNChart>
             </View>
