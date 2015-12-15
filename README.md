@@ -99,6 +99,7 @@ All properties are optional otherwise noted
 - `showXAxisLabels` _(BOOL)_ - show or hide axis labels for the X axis / Default: true
 - `showYAxisLabels` _(BOOL)_ - show or hide axis labels for the Y axis / Default: true
 - `axisLineWidth` _(CGFloat)_ - width of the axis line / Default: 1
+- `tightBounds` _(BOOL)_ - constrict Y axis to min/max of values instead of max/minning with 0 / Default: false
 
 - `labelFontSize` _(CGFloat)_ - font size of axis labels / Default: 10
 - `labelTextColor` _(color)_ - text color of axis labels / Default: gray
