@@ -2,21 +2,21 @@
   "name": "react-native-chart",
   "version": "0.0.4",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/onefold/react-native-chart.git"
+    "type": "git",
+    "url": "https://github.com/onefold/react-native-chart.git"
   },
   "main": "Chart.ios.js",
   "author": "Hyun Cho <hyun@onefold.io> (http://onefold.io)",
-  "peerDependencies": {
-    "react-native": "^0.4.0"
-  },
   "keywords": [
-    "react-native",
-    "react",
-    "react-component",
+    "chart",
+    "graph",
     "ios",
     "native",
-    "chart",
-    "graph"
-  ]
+    "react",
+    "react-component",
+    "react-native"
+  ],
+  "dependencies": {
+    "merge": "^1.2.0"
+  }
 }
