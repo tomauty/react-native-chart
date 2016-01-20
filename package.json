@@ -8,13 +8,15 @@
   "main": "Chart.ios.js",
   "author": "Hyun Cho <hyun@onefold.io> (http://onefold.io)",
   "keywords": [
-    "react-native",
-    "react",
-    "react-component",
+    "chart",
+    "graph",
     "ios",
     "native",
     "chart",
-    "graph"
+    "graph",
+    "react",
+    "react-component",
+    "react-native"
   ],
   "dependencies": {
     "merge": "^1.2.0"
