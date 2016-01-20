@@ -8,7 +8,8 @@
   "main": "lib/index.js",
   "author": "Hyun Cho <hyun@onefold.io> (http://onefold.io)",
   "scripts": {
-    "compile": "rm -r lib ; babel --presets es2015,react -d lib/ index.js"
+    "compile": "rm -r lib ; babel --presets es2015,react -d lib/ index.js",
+		"prepublish": "npm run compile"
   },
   "keywords": [
     "chart",
