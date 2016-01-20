@@ -5,20 +5,28 @@
     "type": "git",
     "url": "https://github.com/onefold/react-native-chart.git"
   },
-  "main": "Chart.ios.js",
+  "main": "lib/index.js",
   "author": "Hyun Cho <hyun@onefold.io> (http://onefold.io)",
+  "scripts": {
+    "compile": "rm -r lib ; babel --presets es2015,react -d lib/ index.js"
+  },
   "keywords": [
     "chart",
+    "chart",
+    "graph",
     "graph",
     "ios",
     "native",
-    "chart",
-    "graph",
     "react",
     "react-component",
     "react-native"
   ],
   "dependencies": {
     "merge": "^1.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13"
   }
 }
