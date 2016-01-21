@@ -22,6 +22,9 @@
     "react-component",
     "react-native"
   ],
+	"peerDependencies": {
+    "react-native": "^0.18.1"
+	},
   "dependencies": {
     "merge": "^1.2.0"
   },
