@@ -102,8 +102,17 @@
   
   CGPoint p = CGPointMake(xOffset, axisHeight - (index + 1) * axisHeight / self.parentChartView.verticalGridStep);
   
-  NSUInteger valueIndex = minBound + (maxBound - minBound) / self.parentChartView.verticalGridStep * (index + 1);
-  NSString* text = [NSString stringWithFormat:@"%ld", valueIndex];
+  // NSUInteger valueIndex = minBound + (maxBound - minBound) / self.parentChartView.verticalGridStep * (index + 1);
+  // NSString* text = [NSString stringWithFormat:@"%ld", valueIndex];
+
+  NSNumber *valueIndex = nil;
+  valueIndex = [NSNumber numberWithFloat:minBound + (maxBound - minBound) / self.parentChartView.verticalGridStep * (index + 1)];
+  
+  NSNumberFormatter *nFormat = [[NSNumberFormatter alloc] init];
+  [nFormat setNumberStyle:NSNumberFormatterDecimalStyle];
+  [nFormat setMaximumFractionDigits:1];
+
+  NSString* text = [NSString stringWithFormat:@"%@", [nFormat stringFromNumber:valueIndex]];
   
   if ( text == nil ) {
     return nil;

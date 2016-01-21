@@ -85,9 +85,10 @@
   UIBezierPath *noFill = [self getLinePath:dataPlots scale:0 withSmoothing:smoothingTension close:YES];
   UIBezierPath *fill = [self getLinePath:dataPlots scale:scale withSmoothing:smoothingTension close:YES];
   
+  float boundsY = ((maxBound - minBound) == 0) ? 0 : (minBound * scale);
   if( fillColor ) {
     CAShapeLayer* fillLayer = [CAShapeLayer layer];
-    fillLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y + minBound * scale, self.bounds.size.width, self.bounds.size.height);
+    fillLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y + boundsY, self.bounds.size.width, self.bounds.size.height);
     fillLayer.bounds = self.bounds;
     fillLayer.path = fill.CGPath;
     fillLayer.strokeColor = nil;
@@ -108,7 +109,7 @@
   }
   
   CAShapeLayer *pathLayer = [CAShapeLayer layer];
-  pathLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y + minBound * scale, self.bounds.size.width, self.bounds.size.height);
+  pathLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y + boundsY, self.bounds.size.width, self.bounds.size.height);
   pathLayer.bounds = self.bounds;
   pathLayer.path = path.CGPath;
   pathLayer.strokeColor = [lineColor CGColor];
