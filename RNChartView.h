@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, copy) NSString* yAxisTitle;
 @property (nonatomic, strong) UIColor* axisTitleColor;
 @property (nonatomic, assign) CGFloat axisTitleFontSize;
+@property (nonatomic, assign) BOOL tightBounds;
 
 // grid
 @property (nonatomic, assign) BOOL showGrid;

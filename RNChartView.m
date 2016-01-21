@@ -49,10 +49,10 @@
 {
   if (self = [super initWithFrame:CGRectZero]) {
     [self setDefaultParameters];
-    
+
     _eventDispatcher = eventDispatcher;
     _layers = [NSMutableArray array];
-    
+
     self.backgroundColor = [UIColor whiteColor];
   }
   return self;
@@ -65,20 +65,20 @@
   [self clearChartData];
 
   [self buildChart];
-  
+
 }
 
 
 - (void)setChartData:(NSArray *)chartData {
   _chartData = chartData;
-  
+
   [self setNeedsLayout];
 }
 
 
 - (void)setLabelFontSize:(CGFloat)labelFontSize {
   _labelFontSize = labelFontSize;
-  
+
   _labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:_labelFontSize];
 }
 
@@ -87,7 +87,7 @@
   if ( self.chartData.count == 0 ) {
     return;
   }
-  
+
   self.xAxisHeight = 16.0;
   if ( !self.showXAxisLabels ) {
     self.xAxisHeight -= 16.0;
@@ -114,25 +114,25 @@
 
     self.yAxisWidth += titleBound.size.height + 2;
   }
-  
+
   if ( self.yAxisTitle.length > 0 ) {
   }
   self.plotArea = [[RNChartPlotAreaView alloc] initWithParentView:self];
   [self addSubview:self.plotArea];
-  
+
   self.xAxisView = [[RNChartAxisView alloc] initWithParent:self axis:AxisTypeX];
   [self addSubview:self.xAxisView];
 
   self.yAxisView = [[RNChartAxisView alloc] initWithParent:self axis:AxisTypeY];
   [self addSubview:self.yAxisView];
-  
+
   [self computeBounds];
   [self createChartTitleLabel];
 
   // title label
   self.titleLabel.frame = CGRectMake(0, 0, self.frame.size.width, self.titleLabel.frame.size.height);
   CGFloat y = (self.titleLabel.frame.size.height + self.spacing);
-  
+
   // y axis
   self.yAxisView.frame = CGRectMake(0, y, self.yAxisWidth, self.frame.size.height - self.titleLabel.frame.size.height - self.spacing - self.xAxisHeight - self.spacing );
 
@@ -148,14 +148,14 @@
 
   self.axisWidth = self.plotArea.frame.size.width;
   self.axisHeight = self.plotArea.frame.size.height;
-  
+
   // No data
   if ( isnan(self.max) )  {
     self.max = 1;
   }
 
   [self.plotArea drawCharts];
-  
+
   [self.yAxisView addLabels];
   [self.xAxisView addLabels];
 
@@ -164,7 +164,7 @@
 
 
 - (void)setDefaultParameters {
-  
+
   _defaultColor = [UIColor blueColor];
   _verticalGridStep = 3;
   _showAxis = YES;
@@ -177,27 +177,28 @@
   _axisLineWidth = 1;
   _animationDuration = 0.5;
   _touchRadius = 5.0;
-  
+
   // Labels attributes
   _labelFontSize = 10;
   _labelTextColor = [UIColor grayColor];
   _labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:_labelFontSize];
-  
+
   _chartFontSize = 14.0;
-  
+
   _axisWidth = self.frame.size.width;
   _axisHeight = self.frame.size.height;
-  
+
 //  _chartTitle = @"Sample Chart";
   _spacing = 4.0;
-  
+
   _xAxisHeight = 16.0;
   _yAxisWidth = 24.0;
-  
+
 //  _xAxisTitle = @"X Axis";
 //  _yAxisTitle = @"Y Axis";
   _axisTitleColor = [UIColor grayColor];
   _axisTitleFontSize = 16;
+  _tightBounds = NO;
 }
 
 
@@ -211,7 +212,7 @@
     CGSize size = [chartTitle sizeThatFits:CGSizeMake(self.frame.size.width, 9999)];
     chartTitle.frame = CGRectMake(0, 0, size.width, size.height);
     [self addSubview:chartTitle];
-    
+
     self.titleLabel = chartTitle;
   }
 }
@@ -224,7 +225,7 @@
     [layer removeFromSuperlayer];
   }
   [self.layers removeAllObjects];
-  
+
   [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
@@ -238,33 +239,46 @@
 //  for ( NSDictionary* plotDict in self.chartData ) {
 //    NSArray* plotArray = plotDict[@"data"];
 //    NSInteger q = (int)plotArray.count / horizontalGridStep;
-//    
+//
 //    if(plotArray.count > 1) {
 //      CGFloat thisScale = (CGFloat)(q * horizontalGridStep) / (CGFloat)(plotArray.count);
 //      scale = MAX(scale, thisScale);
 //    }
 //  }
-  
+
   return scale;
 }
 
 
 - (CGFloat)minVerticalBound
 {
-  return MIN(self.min, 0);
+  // if we want the bounds to be tight, return the actual bound
+  if (self.tightBounds) {
+    return self.min;
+  // otherwise min with 0
+  } else {
+    return MIN(self.min, 0);
+  }
 }
 
 
 - (CGFloat)maxVerticalBound
 {
-  return MAX(self.max, 0);
+  // if we want the bounds to be tight, return the actual bound
+  if (self.tightBounds) {
+    return self.max;
+  // otherwise max with 0
+  } else {
+    return MAX(self.max, 0);
+  }
 }
 
 - (void)computeBounds
 {
   self.min = MAXFLOAT;
   self.max = -MAXFLOAT;
-  
+
+  // git the minimumest and maximumest from our data arrays
   for ( NSDictionary* plotDict in self.chartData ) {
     NSArray* data = plotDict[@"data"];
     for(int i=0; i < data.count; i++) {
@@ -272,62 +286,67 @@
       NSNumber* number = data[i];
       if([number floatValue] < self.min)
         self.min = [number floatValue];
-      
+
       if([number floatValue] > self.max)
         self.max = [number floatValue];
     }
   }
-  
+
+  // if we want the bounds to be tight, exit here
+  if (self.tightBounds) {
+    return;
+  }
+
   // The idea is to adjust the minimun and the maximum value to display the whole chart in the view, and if possible with nice "round" steps.
   self.max = [self getUpperRoundNumber:self.max forGridStep:self.verticalGridStep];
-  
+
   if(self.min < 0) {
     // If the minimum is negative then we want to have one of the step to be zero so that the chart is displayed nicely and more comprehensively
     float step;
-    
+
     if(self.verticalGridStep > 3) {
       step = fabs(self.max - self.min) / (float)(self.verticalGridStep - 1);
     } else {
       step = MAX(fabs(self.max - self.min) / 2, MAX(fabs(self.min), fabs(self.max)));
     }
-    
+
     step = [self getUpperRoundNumber:step forGridStep:self.verticalGridStep];
-    
+
     float newMin,newMax;
-    
+
     if(fabs(self.min) > fabs(self.max)) {
       int m = ceilf(fabs(self.min) / step);
-      
+
       newMin = step * m * (self.min > 0 ? 1 : -1);
       newMax = step * (self.verticalGridStep - m) * (self.max > 0 ? 1 : -1);
-      
+
     } else {
       int m = ceilf(fabs(self.max) / step);
-      
+
       newMax = step * m * (self.max > 0 ? 1 : -1);
       newMin = step * (self.verticalGridStep - m) * (self.min > 0 ? 1 : -1);
     }
-    
+
     if(self.min < newMin) {
       newMin -= step;
       newMax -=  step;
     }
-    
+
     if(self.max > newMax + step) {
       newMin += step;
       newMax +=  step;
     }
-    
+
     self.min = newMin;
     self.max = newMax;
-    
+
     if(self.max < self.min) {
       float tmp = self.max;
       self.max = self.min;
       self.min = tmp;
     }
   }
-  
+
 }
 
 #pragma mark - Chart utils
@@ -336,18 +355,18 @@
 {
   if(value <= 0)
     return 0;
-  
+
   // We consider a round number the following by 0.5 step instead of true round number (with step of 1)
   CGFloat logValue = log10f(value);
   CGFloat scale = powf(10, floorf(logValue));
   CGFloat n = ceilf(value / scale * 4);
-  
+
   int tmp = (int)(n) % gridStep;
-  
+
   if(tmp != 0) {
     n += gridStep - tmp;
   }
-  
+
   return n * scale / 4.0f;
 }
 
@@ -355,10 +374,10 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   UITouch *aTouch = [touches anyObject];
   CGPoint point = [aTouch locationInView:self.plotArea];
-  
+
   NSInteger selectedChartIndex = -1;
   NSInteger selectedPointIndex = -1;
-  
+
   [self.plotArea nearestDataPointToPoint:point radius:self.touchRadius selectedChartIndex:&selectedChartIndex selectedPointIndex:&selectedPointIndex];
   if ( selectedChartIndex >= 0 && selectedPointIndex >= 0 ) {
 //    NSDictionary *event =
@@ -368,7 +387,7 @@
 //      [_eventDispatcher sendInputEventWithName:@"dataPointTouchStart" body:event];
 //      [_eventDispatcher sendDeviceEventWithName:@"dataPointTouchStart" body:event];
   }
-  
+
   [super touchesBegan:touches withEvent:event];
 }
 
@@ -379,7 +398,7 @@
 
   NSInteger selectedChartIndex = -1;
   NSInteger selectedPointIndex = -1;
-  
+
   [self.plotArea nearestDataPointToPoint:point radius:self.touchRadius selectedChartIndex:&selectedChartIndex selectedPointIndex:&selectedPointIndex];
   if ( selectedChartIndex >= 0 && selectedPointIndex >= 0 ) {
 //    NSDictionary *event =
@@ -388,7 +407,7 @@
 //        @"selectedPointIndex":@(selectedPointIndex)};
 //    [_eventDispatcher sendInputEventWithName:@"topTouchEnd" body:event];
   }
-  
+
   [super touchesEnded:touches withEvent:event];
 }
 
