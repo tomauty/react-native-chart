@@ -35,6 +35,7 @@ export default class RNChart extends React.Component {
     labelFontSize: PropTypes.number,
       // TODO: allow strings and use processColor to convert
     labelTextColor: PropTypes.number,
+		tightBounds: PropTypes.bool,
     style: PropTypes.any,
   };
 
