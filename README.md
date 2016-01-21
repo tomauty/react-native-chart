@@ -114,4 +114,4 @@ All properties are optional otherwise noted
 - Pie chart
 
 ## Support
-Email hyun@onefold.io
+Email tom.auty@gmail.com or hyun@onefold.io
