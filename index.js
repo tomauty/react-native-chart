@@ -36,6 +36,14 @@ export default class RNChart extends React.Component {
       // TODO: allow strings and use processColor to convert
     labelTextColor: PropTypes.number,
 		tightBounds: PropTypes.bool,
+		xAxisTitle: PropTypes.string,
+		chartFontSize: PropTypes.number,
+		axisColor: PropTypes.number,
+		axisTitleColor: PropTypes.number,
+		axisTitleFontSize: PropTypes.number,
+		chartTitle: PropTypes.string,
+		chartTitleColor: PropTypes.number,
+		yAxisTitle: PropTypes.string,
     style: PropTypes.any,
   };
 
