@@ -1,6 +1,6 @@
 {
   "name": "react-native-chart",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/onefold/react-native-chart.git"
@@ -22,9 +22,9 @@
     "react-component",
     "react-native"
   ],
-	"peerDependencies": {
+  "peerDependencies": {
     "react-native": ">0.15.0"
-	},
+  },
   "dependencies": {
     "merge": "^1.2.0"
   },
