@@ -1,9 +1,11 @@
 'use strict';
 import React, {
-  PropTypes,
-  StyleSheet,
-  requireNativeComponent,
+	PropTypes,
+	StyleSheet,
+	requireNativeComponent,
 } from 'react-native';
+
+const { processColor } = React;
 
 import merge from 'merge';
 
@@ -12,56 +14,54 @@ const CHART_REF = 'chart';
 
 /** A base styles object that the user can override by passing in their own styles */
 const styles = StyleSheet.create({
-  base: {},
+	base: {},
 });
 
 /** Our bridge component */
 
 export default class RNChart extends React.Component {
-  static propTypes = {
-      // TODO: define what these objects look like
-    chartData: PropTypes.array.isRequired,
-    xLabels: PropTypes.array.isRequired,
-    animationDuration: PropTypes.number,
-    showGrid: PropTypes.bool,
-    verticalGridStep: PropTypes.number,
-      // TODO: allow strings and use processColor to convert
-    gridColor: PropTypes.number,
-    gridLineWidth: PropTypes.number,
-    showAxis: PropTypes.bool,
-    showXAxisLabels: PropTypes.bool,
-    showYAxisLabels: PropTypes.bool,
-    axisLineWidth: PropTypes.number,
-    labelFontSize: PropTypes.number,
-      // TODO: allow strings and use processColor to convert
-    labelTextColor: PropTypes.number,
-		tightBounds: PropTypes.bool,
-		xAxisTitle: PropTypes.string,
-		chartFontSize: PropTypes.number,
+	static propTypes = {
+			// TODO: define what these objects look like
+		animationDuration: PropTypes.number,
 		axisColor: PropTypes.number,
+		axisLineWidth: PropTypes.number,
 		axisTitleColor: PropTypes.number,
 		axisTitleFontSize: PropTypes.number,
+		chartData: PropTypes.array.isRequired,
+		chartFontSize: PropTypes.number,
 		chartTitle: PropTypes.string,
 		chartTitleColor: PropTypes.number,
+		gridColor: PropTypes.number,
+		gridLineWidth: PropTypes.number,
+		labelFontSize: PropTypes.number,
+		labelTextColor: PropTypes.number,
+		showAxis: PropTypes.bool,
+		showGrid: PropTypes.bool,
+		showXAxisLabels: PropTypes.bool,
+		showYAxisLabels: PropTypes.bool,
+		style: PropTypes.any,
+		tightBounds: PropTypes.bool,
+		verticalGridStep: PropTypes.number,
+		xAxisTitle: PropTypes.string,
+		xLabels: PropTypes.array.isRequired,
 		yAxisTitle: PropTypes.string,
-    style: PropTypes.any,
-  };
+	};
 
-  /** Pass the props to the native component */
-  setNativeProps(props) {
-    this.refs[CHART_REF].setNativeProps(props);
-  }
-
-  /** Render the native component with the correct props */
-  render() {
-    const style = [styles.base, this.props.style];
-    const nativeProps = merge(this.props, {
-      style,
-      chartData: this.props.chartData,
-    });
-
-    return <RNChartView ref={CHART_REF} {... nativeProps} />;
-  }
+	/** Render the native component with the correct props */
+	render() {
+		const convertedProps = {
+			...this.props,
+			axisColor: processColor(this.props.axisColor),
+			axisTitleColor: processColor(this.props.axisTitleColor),
+			chartTitleColor: processColor(this.props.chartTitleColor),
+			gridColor: processColor(this.props.gridColor),
+			labelTextColor: processColor(this.props.labelTextColor),
+			chartData: (this.props.chartData)
+				? this.props.chartData.map(d => { return { ...d, color: processColor(d.color) }; })
+				: undefined,
+		};
+		return <RNChartView ref={CHART_REF} {...convertedProps} />;
+	}
 }
 
 /** The native chart view */

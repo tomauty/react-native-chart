@@ -1,17 +1,17 @@
 //
-//  RNChartPlotAxisView.h
-//  RNChart
+//	RNChartPlotAxisView.h
+//	RNChart
 //
-//  Created by Hyun Cho on 4/30/15.
-//  Copyright (c) 2015 Facebook. All rights reserved.
+//	Created by Hyun Cho on 4/30/15.
+//	Copyright (c) 2015 Facebook. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, AxisType) {
-  AxisTypeNone,
-  AxisTypeX,
-  AxisTypeY,
+	AxisTypeNone,
+	AxisTypeX,
+	AxisTypeY,
 };
 
 @class RNChartView;

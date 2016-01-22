@@ -1,31 +1,32 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "settings": {
-        "ecmascript": 6,
-        "jsx": true
-    },
-    "plugins": [
-        "react",
-        "react-native"
-    ],
-    "extends": "airbnb",
-    "rules": {
-        "quote-props": 0,
-        "max-len": [2, 150, 4, {"ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("}],
-        "strict": 0,
-        "no-console": 0,
-        "quotes": 0,
-        "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "^_"}],
-        "no-param-reassign": [2, {"props": false}],
-        "react/jsx-no-bind": [1, { "allowArrowFunctions": true }],
-        "camelcase": 0,
-        "no-alert": 0,
-        "no-underscore-dangle": 0,
-        "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
-        "react-native/no-unused-styles": 2
-    }
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "ecmascript": 6,
+    "jsx": true
+  },
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "extends": "airbnb",
+  "rules": {
+    "indent": [2, "tab"],
+    "quote-props": 0,
+    "max-len": [2, 150, 4, {"ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("}],
+    "strict": 0,
+    "no-console": 0,
+    "quotes": 0,
+    "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "^_"}],
+    "no-param-reassign": [2, {"props": false}],
+    "react/jsx-no-bind": [1, { "allowArrowFunctions": true }],
+    "camelcase": 0,
+    "no-alert": 0,
+    "no-underscore-dangle": 0,
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+    "react-native/no-unused-styles": 2
+  }
 }
