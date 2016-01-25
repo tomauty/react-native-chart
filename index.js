@@ -17,6 +17,18 @@ const styles = StyleSheet.create({
 	base: {},
 });
 
+const processData = (chartData) => {
+	return chartData.map(d => {
+		return {
+			...chartData,
+			color: processColor(d.color),
+			fillColor: processColor(d.fillColor),
+			dataPointColor: processColor(d.dataPointColor),
+			dataPointFillColor: processColor(d.dataPointFillColor),
+		};
+	});
+};
+
 /** Our bridge component */
 
 export default class RNChart extends React.Component {
@@ -56,9 +68,7 @@ export default class RNChart extends React.Component {
 			chartTitleColor: processColor(this.props.chartTitleColor),
 			gridColor: processColor(this.props.gridColor),
 			labelTextColor: processColor(this.props.labelTextColor),
-			chartData: (this.props.chartData)
-				? this.props.chartData.map(d => { return { ...d, color: processColor(d.color) }; })
-				: undefined,
+			chartData: (this.props.chartData) ? processData(this.props.chartData) : undefined,
 		};
 		return <RNChartView ref={CHART_REF} {...convertedProps} />;
 	}
