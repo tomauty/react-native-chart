@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 const processData = (chartData) => {
 	return chartData.map(d => {
 		return {
-			...chartData,
+			...d,
 			color: processColor(d.color),
 			fillColor: processColor(d.fillColor),
 			dataPointColor: processColor(d.dataPointColor),
