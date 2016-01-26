@@ -377,8 +377,9 @@
 		for ( int i = 0; i < self.parentChartView.verticalGridStep + 1; i++) {
 			// If the value is zero then we display the horizontal axis
 			CGFloat v = maxBound - (maxBound - minBound) / self.parentChartView.verticalGridStep * i;
+			CGFloat lowestPoint = maxBound - (maxBound - minBound);
 
-			if ( v == 0 && self.parentChartView.showAxis ) {
+			if ( v == lowestPoint && self.parentChartView.showAxis ) {
 				CGContextSetLineWidth(ctx, self.parentChartView.axisLineWidth);
 				CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.axisColor CGColor]);
 			} else {

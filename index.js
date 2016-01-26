@@ -40,9 +40,9 @@ export default class RNChart extends React.Component {
 		).isRequired,
 
 		animationDuration: PropTypes.number,
-		axisColor: PropTypes.number,
+		axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		axisLineWidth: PropTypes.number,
-		axisTitleColor: PropTypes.number,
+		axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		axisTitleFontSize: PropTypes.number,
 		chartFontSize: PropTypes.number,
 		chartTitle: PropTypes.string,
