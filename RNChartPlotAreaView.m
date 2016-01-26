@@ -143,6 +143,7 @@
 	NSArray* dataPlots = dataDict[@"data"];
 	UIColor* barColor = ( dataDict[@"color"] != nil ) ? [RCTConvert UIColor:dataDict[@"color"]] : self.parentChartView.defaultColor;
 	CGFloat widthPercent = ( dataDict[@"widthPercent"] != nil ) ? [RCTConvert CGFloat:dataDict[@"widthPercent"]] : 0.5;
+	CGFloat cornerRadius = ( dataDict[@"cornerRadius"] != nil ) ? [RCTConvert CGFloat:dataDict[@"cornerRadius"]] : 1.0;
 	widthPercent = MIN(widthPercent, 1.0);
 	widthPercent = MAX(widthPercent, 0.0);
 
@@ -158,10 +159,15 @@
 
 		CGFloat s = axisHeight / (maxBound - minBound);
 		CGPoint point = [self getPointForIndex:i data:dataPlots withScale:s];
-		point.y +=	minBound * s;
+		point.y += minBound * s;
 
 		CGFloat height = axisHeight - point.y;
-		UIBezierPath* circle = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(point.x - barWidth, point.y, barWidth * 2, height) cornerRadius:1.0];
+		UIBezierPath* circle;
+		if (cornerRadius != 0.0) {
+			circle = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(point.x - barWidth, point.y, barWidth * 2, height) cornerRadius:cornerRadius];
+		} else {
+			circle = [UIBezierPath bezierPathWithRect:CGRectMake(point.x - barWidth, point.y, barWidth * 2, height)];
+		}
 
 		CAShapeLayer *fillLayer = [CAShapeLayer layer];
 		fillLayer.frame = CGRectMake(point.x, point.y, barWidth, height);

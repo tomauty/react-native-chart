@@ -30,6 +30,7 @@ export default class RNChart extends React.Component {
 				name: PropTypes.string,
 				type: PropTypes.oneOf(['line', 'bar']),
 				fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+				cornerRadius: PropTypes.number,
 				lineWidth: PropTypes.number,
 				widthPercent: PropTypes.number,
 				showDataPoint: PropTypes.bool,
