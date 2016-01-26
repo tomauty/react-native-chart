@@ -12,11 +12,13 @@ react-native-chart is a simple module for adding line charts, area charts, or ba
 
 ## Getting Started
 1. `npm install react-native-chart --save`
-2. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-3. Go to `node_modules` ➜ `react-native-chart` and add `RNChart.xcodeproj`
-4. In XCode, in the project navigator, select your project. Add `libRNChart.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-5. Click `RNChart.xcodeproj` in the project navigator and go the `Build Settings` tab. Make sure 'All' is toggled on (instead of 'Basic'). Look for `Header Search Paths` and make sure it contains both `$(SRCROOT)/../react-native/React` and `$(SRCROOT)/../../React` - mark both as `recursive`.
-5. Run your project (`Cmd+R`)
+2. I recommend using [rnpm](https://github.com/rnpm/rnpm) for linking. 
+
+  2a. `npm install -g rnpm`
+
+  2b. `rnpm link`
+  
+If you'd rather not use `rnpm`, you can link the library as described [here](https://facebook.github.io/react-native/docs/linking-libraries-ios.html).
 
 ## Usage
 ```javascript
