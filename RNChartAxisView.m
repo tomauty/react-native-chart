@@ -20,12 +20,8 @@
   _parentChartView = parent;
   _axis = axis;
 
-  _labelTextColor = [UIColor darkGrayColor];
-	if (parent.labelFontSize) {
-		_labelFont = [UIFont systemFontOfSize:self.parentChartView.labelFontSize];
-	} else {
-		_labelFont = [UIFont systemFontOfSize:14];
-	}
+	_labelTextColor = parent.labelTextColor ? self.parentChartView.labelTextColor : [UIColor darkGrayColor];
+	_labelFont = parent.labelFontSize ? [UIFont systemFontOfSize:self.parentChartView.labelFontSize] : [UIFont systemFontOfSize:14];
 
   self.backgroundColor = [UIColor clearColor];
 
