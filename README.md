@@ -79,34 +79,39 @@ class SimpleChart extends Component {
 ## Properties
 All properties are optional otherwise noted
 ### General
-- `chartData` _(Dictionary)_ - : one nested block produces one type of chart
-    - `data` - _(NumberArray)_ - Y axis values / **Required**
-    - `name` - _(String)_ - name of the plot
-    - `type` - _(String)_ - "line" or "bar" / Default: "line"
-    - `fillColor` - _(color)_ - Line chart only: area fill color / If not specified, the line will not be filled
-    - `lineWidth` - _(CGFloat)_ - Line chart only: line width / Default: 1.0
-    - `widthPercent` - _(CGFloat)_ - Bar chart only: [0 - 1.0], 0.1 means very skinny, 1.0 means bars touch each other / Default: 0.5
-    - `showDataPoint` - _(BOOL)_ - show or hide the data points / Default: false
-    - `dataPointColor` - _(color)_ - outline color of the data point / Default: blue
-    - `dataPointFillColor` - _(color)_ - fill color of the data point / Default: blue
-    - `dataPointRadius` - _(CGFloat)_ - the circel radius of the data point / Default: 1.0
+- **`chartData`** _(ObjectArray)_ - : one nested block produces one type of chart
+    - **`data`** - _(NumberArray)_ - Y axis values / **Required**
+    - **`name`** - _(String)_ - name of the plot
+    - **`type`** - _(String)_ - "line" or "bar" / Default: "line"
+    - **`fillColor`** - _(String/Color)_ - Line chart only: area fill color / If not specified, the line will not be filled
+    - **`lineWidth`** - _(Float)_ - Line chart only: line width / Default: 1.0
+    - **`widthPercent`** - _(Float)_ - Bar chart only: [0 - 1.0], 0.1 means very skinny, 1.0 means bars touch each other / Default: 0.5
+    - **`showDataPoint`** - _(Boolean)_ - show or hide the data points / Default: false
+    - **`dataPointColor`** - _(String/Color)_ - outline color of the data point / Default: blue
+    - **`dataPointFillColor`** - _(String/Color)_ - fill color of the data point / Default: blue
+    - **`dataPointRadius`** - _(Float)_ - the circel radius of the data point / Default: 1.0
 
-- `xLabels` _(StringArray)_ - array of all X axis label strings.  This determines the X-axis grid as well.  Need to match the number of input data in `chartData` / **Required**
-- `animationDuration` _(CGFloat)_ - duration of the animation in seconds / Default: 0.3
+- **`animationDuration`** _(Float)_ - duration of the animation in seconds / Default: 0.3
+- **`axisColor`** _(String/Color)_ - color of the X and Y axes / Default: lightgray
+- **`axisLineWidth`** _(Float)_ - width of the axis line / Default: 1
+- **`axisTitleColor`** _(String/Color)_ - color of the title of the axes / Default: gray
+- **`axisTitleFontSize`** _(Integer)_ - font size of axis titles / Default: 10
+- **`chartTitle`** _(String)_ - title of the chart
+- **`chartTitleColor`** _(String/Color)_ - color of the chart title / Default: gray
+- **`gridColor`** _(String/Color)_ - color of the grid / Default: lightgray
+- **`gridLineWidth`** _(Float)_ - width of the grid line / Default: 0.5
+- **`labelFontSize`** _(Integer)_ - font size of axis labels / Default: 10
+- **`labelTextColor`** _(String/Color)_ - text color of axis labels / Default: gray
+- **`showAxis`** _(Boolean)_ - show or hide axis / Default: true
+- **`showGrid`** _(Boolean)_ - show or hide grid / Default: true
+- **`showXAxisLabels`** _(Boolean)_ - show or hide axis labels for the X axis / Default: true
+- **`showYAxisLabels`** _(Boolean)_ - show or hide axis labels for the Y axis / Default: true
+- **`tightBounds`** _(Boolean)_ - constrict Y axis to min/max of values instead of max/minning with 0 / Default: false
+- **`verticalGridStep`** _(Integer)_ - number of Y axis grids / Default: 3
+- **`xAxisTitle`** _(String)_ - Title for the x-axis
+- **`xLabels`** _(StringArray)_ - array of all X axis label strings.  This determines the X-axis grid as well.  Need to match the number of input data in `chartData` / **Required**
+- **`yAxisTitle`** _(String)_ - Title for the y-axis
 
-- `showGrid` _(BOOL)_ - show or hide grid / Default: true
-- `verticalGridStep` _(int)_ - number of Y axis grids / Default: 3
-- `gridColor` _(color)_ - color of the grid / Default: lightgray
-- `gridLineWidth` _(CGFloat)_ - width of the grid line / Default: 0.5
-
-- `showAxis` _(BOOL)_ - show or hide axis / Default: true
-- `showXAxisLabels` _(BOOL)_ - show or hide axis labels for the X axis / Default: true
-- `showYAxisLabels` _(BOOL)_ - show or hide axis labels for the Y axis / Default: true
-- `axisLineWidth` _(CGFloat)_ - width of the axis line / Default: 1
-- `tightBounds` _(BOOL)_ - constrict Y axis to min/max of values instead of max/minning with 0 / Default: false
-
-- `labelFontSize` _(CGFloat)_ - font size of axis labels / Default: 10
-- `labelTextColor` _(color)_ - text color of axis labels / Default: gray
 
 ## Known Issues / TODO
 - Sample code cleanup
