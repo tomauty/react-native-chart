@@ -89,7 +89,8 @@ All properties are optional otherwise noted
     - **`showDataPoint`** - _(Boolean)_ - show or hide the data points / Default: false
     - **`dataPointColor`** - _(String/Color)_ - outline color of the data point / Default: blue
     - **`dataPointFillColor`** - _(String/Color)_ - fill color of the data point / Default: blue
-    - **`dataPointRadius`** - _(Float)_ - the circel radius of the data point / Default: 1.0
+    - **`dataPointRadius`** - _(Float)_ - the radius of the data point / Default: 1.0
+    - **`cornerRadius`** - _(Float)_ corner radius of the bars in a bar chart / Default: 1.0 / If 0, it will be completely rectangular.
 
 - **`animationDuration`** _(Float)_ - duration of the animation in seconds / Default: 0.3
 - **`axisColor`** _(String/Color)_ - color of the X and Y axes / Default: lightgray
