@@ -46,7 +46,7 @@ export default class RNChart extends React.Component {
 		gridColor: PropTypes.number,
 		gridLineWidth: PropTypes.number,
 		labelFontSize: PropTypes.number,
-		labelTextColor: PropTypes.number,
+		labelTextColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		showAxis: PropTypes.bool,
 		showGrid: PropTypes.bool,
 		showXAxisLabels: PropTypes.bool,
