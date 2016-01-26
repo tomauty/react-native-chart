@@ -89,7 +89,7 @@
 	float boundsY = ((maxBound - minBound) == 0) ? 0 : (minBound * scale);
 	if( fillColor ) {
 		CAShapeLayer* fillLayer = [CAShapeLayer layer];
-		fillLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y + boundsY, self.bounds.size.width, self.bounds.size.height);
+		fillLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
 		fillLayer.bounds = self.bounds;
 		fillLayer.path = fill.CGPath;
 		fillLayer.strokeColor = nil;
