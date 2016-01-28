@@ -38,23 +38,23 @@ const styles = StyleSheet.create({
     left: 4, 
     bottom: 4,
     right: 16,
-  ,}
+  }
 });
 
 const chartData = [
   {
     name: 'BarChart',
     type: 'bar',
-    color: 'purple',
-    widthPercent:0.6,
+    color:'purple',
+    widthPercent: 0.6,
     data: [30, 1, 1, 2, 3, 5, 21, 13, 21, 34, 55, 30],
   },
   {
-    name:'LineChart',
-    color:'gray',
-    lineWidth:2,
-    showDataPoint:false,
-    data:[10, 12, 14, 25, 31, 52, 41, 31, 52, 66, 22, 11],
+    name: 'LineChart',
+    color: 'gray',
+    lineWidth: 2,
+    showDataPoint: false,
+    data: [10, 12, 14, 25, 31, 52, 41, 31, 52, 66, 22, 11],
   }
 ];
 
