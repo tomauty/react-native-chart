@@ -122,6 +122,7 @@ All properties are optional otherwise noted
 - Multi Line Chart
 - Scatter/Bubble chart
 - Pie chart
+- Testing w/ Travis CI
 
 ## Support
 Email tom.auty@gmail.com or hyun@onefold.io
