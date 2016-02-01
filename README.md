@@ -13,6 +13,8 @@ react-native-chart is a simple module for adding line charts, area charts, or ba
 4. Show animation when populating the chart
 
 ## Getting Started
+[![NPM](https://nodei.co/npm/react-native-chart.png?downloads=true)](https://nodei.co/npm/react-native-chart/)
+
 1. `npm install react-native-chart --save`
 2. I recommend using [rnpm](https://github.com/rnpm/rnpm) for linking. 
 
