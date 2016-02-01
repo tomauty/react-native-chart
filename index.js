@@ -16,14 +16,10 @@ const processData = (chartData) => {
 			fillColor: processColor(d.fillColor),
 			dataPointColor: processColor(d.dataPointColor),
 			dataPointFillColor: processColor(d.dataPointFillColor),
+			highlightColor: processColor(d.highlightColor),
 			fillGradient: Array.isArray(d.fillGradient)
-				?
-				[
-					processColor(d.fillGradient[0]),
-					processColor(d.fillGradient[1]),
-				]
-				:
-				null,
+				? [processColor(d.fillGradient[0]), processColor(d.fillGradient[1])]
+				: null,
 		};
 	});
 };
@@ -38,9 +34,11 @@ export default class RNChart extends React.Component {
 				name: PropTypes.string,
 				type: PropTypes.oneOf(['line', 'bar']),
 				fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-				fillGradient: PropTypes.arrayOf([PropTypes.string]),
+				fillGradient: PropTypes.arrayOf([PropTypes.number, PropTypes.string]),
 				cornerRadius: PropTypes.number,
 				lineWidth: PropTypes.number,
+				highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+				highlightIndices: PropTypes.arrayOf(PropTypes.number),
 				widthPercent: PropTypes.number,
 				showDataPoint: PropTypes.bool,
 				dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
