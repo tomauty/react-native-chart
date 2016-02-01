@@ -1,7 +1,7 @@
 # react-native-chart
 [![npm version](https://badge.fury.io/js/react-native-chart.svg)](https://badge.fury.io/js/react-native-chart)
 
-react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app.
+react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app. 
 
 ## Features
 1. Define chart components in Javascript file and see rendered charts using Core Graphics and CALayer
@@ -123,5 +123,8 @@ All properties are optional otherwise noted
 - Pie chart
 - Testing w/ Travis CI
 
-## Support
-Email tom.auty@gmail.com or hyun@onefold.io
+## Info/Support
+
+Work prior to repo transfer on Feb 1, 2015 was the work of Hyun Cho @ OneFold.
+
+Email tom.auty@gmail.com for support.
