@@ -49,6 +49,8 @@
 		
 		if ( [chartType isEqualToString:@"bar"] ) {
 			[self drawBarChart:plotDict];
+		} else if ( [chartType isEqualToString:@"pie"] ) {
+			[self drawPieChart:plotDict];
 		} else {
 			[self drawLineChart:plotDict];
 			
@@ -60,6 +62,10 @@
 	
 }
 
+- (void)drawPieChart:(NSDictionary*)dataDict
+{
+	
+}
 
 - (void)drawLineChart:(NSDictionary*)dataDict
 {

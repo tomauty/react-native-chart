@@ -115,8 +115,6 @@
 		self.yAxisWidth += titleBound.size.height + 2;
 	}
 
-	if ( self.yAxisTitle.length > 0 ) {
-	}
 	self.plotArea = [[RNChartPlotAreaView alloc] initWithParentView:self];
 	[self addSubview:self.plotArea];
 
@@ -155,9 +153,22 @@
 	}
 
 	[self.plotArea drawCharts];
+	
+	// We don't want to draw axis if there's a pie chart. Why would you make a pie chart and a line at the same time?
+	BOOL handleAsPieChart = NO;
+	for ( NSDictionary* plotDict in self.chartData ) {
+		NSString* type = plotDict[@"type"];
+		if( [type isEqualToString:@"pie"] ) {
+			handleAsPieChart = YES;
+			self.showGrid = NO;
+			self.showAxis = NO;
+		}
+	}
 
-	[self.yAxisView addLabels];
-	[self.xAxisView addLabels];
+	if( !handleAsPieChart ) {
+		[self.yAxisView addLabels];
+		[self.xAxisView addLabels];
+	}
 
 	[self setNeedsDisplay];
 }
