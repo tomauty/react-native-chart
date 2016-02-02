@@ -57,7 +57,9 @@ const chartData = [
     name: 'LineChart',
     color: 'gray',
     lineWidth: 2,
-    showDataPoint: false,
+    highlightIndices: [1, 2],  // The data points at indexes 1 and 2 will be orange
+    highlightColor: 'orange',
+    showDataPoint: true,
     data: [10, 12, 14, 25, 31, 52, 41, 31, 52, 66, 22, 11],
   }
 ];
@@ -71,7 +73,6 @@ class SimpleChart extends Component {
         <RNChart style={styles.chart}
           chartData={chartData}
           verticalGridStep={5}
-          highlightIndices={[1, 2, 4]}
           xLabels={xLabels}
          />
       </View>
