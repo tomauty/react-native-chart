@@ -3,25 +3,26 @@
 [![Join the chat at https://gitter.im/tomauty/react-native-chart](https://badges.gitter.im/tomauty/react-native-chart.svg)](https://gitter.im/tomauty/react-native-chart)
 [![npm version](https://badge.fury.io/js/react-native-chart.svg)](https://badge.fury.io/js/react-native-chart)
 
-react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app. 
+react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app.
 
 ## Features
 1. Define chart components in Javascript file and see rendered charts using Core Graphics and CALayer
 1. Supports line charts with options to show data points, line fill, customized color, customized labels, etc...
 2. Supports bar charts
 3. Supports multiple charts in one view
-4. Show animation when populating the chart
+4. Supports pie chart
+5. Show animation when populating the chart
 
 ## Getting Started
 [![NPM](https://nodei.co/npm/react-native-chart.png?downloads=true)](https://nodei.co/npm/react-native-chart/)
 
 1. `npm install react-native-chart --save`
-2. I recommend using [rnpm](https://github.com/rnpm/rnpm) for linking. 
+2. I recommend using [rnpm](https://github.com/rnpm/rnpm) for linking.
 
   2a. `npm install -g rnpm`
 
   2b. `rnpm link`
-  
+
 If you'd rather not use `rnpm`, you can link the library as described [here](https://facebook.github.io/react-native/docs/linking-libraries-ios.html).
 
 ## Usage
@@ -37,9 +38,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   chart: {
-    position: 'absolute', 
-    top: 16, 
-    left: 4, 
+    position: 'absolute',
+    top: 16,
+    left: 4,
     bottom: 4,
     right: 16,
   }
@@ -106,6 +107,10 @@ All properties are optional otherwise noted
 - **`gridLineWidth`** _(Float)_ - width of the grid line / Default: 0.5
 - **`labelFontSize`** _(Integer)_ - font size of axis labels / Default: 10
 - **`labelTextColor`** _(String/Color)_ - text color of axis labels / Default: gray
+- **`pieAngle`** _(Float)_ - The angle where the chart drawing begins. Clockwise.  / Default: 0/360
+- **`pieCenterRatio`** _(Float)_ - [0 - 1.0], 0 means pie chart completely filled, 1.0 means the actual data is a very tiny line. / Default: 0
+- **`pieCenterView`** _(Renderable)_ - The view that will be placed in the center of the pie chart. Will skip rendering if `pieCenterRatio` is set to `0`.
+- **`sliceColors`** _(Array)_ - array of colors for the pie chart slices. matched by index with the `chartData.data` array. if fewer specified, it will start from 0 again.
 - **`showAxis`** _(Boolean)_ - show or hide axis / Default: true
 - **`showGrid`** _(Boolean)_ - show or hide grid / Default: true
 - **`showXAxisLabels`** _(Boolean)_ - show or hide axis labels for the X axis / Default: true
@@ -124,7 +129,6 @@ All properties are optional otherwise noted
 - Stack Bar Chart
 - Multi Line Chart
 - Scatter/Bubble chart
-- Pie chart
 - Testing w/ Travis CI
 
 ## Info/Support
