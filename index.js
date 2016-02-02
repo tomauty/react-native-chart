@@ -32,7 +32,7 @@ export default class RNChart extends React.Component {
 			PropTypes.shape({
 				data: PropTypes.arrayOf(PropTypes.number).isRequired,
 				name: PropTypes.string,
-				type: PropTypes.oneOf(['line', 'bar']),
+				type: PropTypes.oneOf(['line', 'bar', 'pie']),
 				fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 				fillGradient: PropTypes.arrayOf([PropTypes.number, PropTypes.string]),
 				cornerRadius: PropTypes.number,
