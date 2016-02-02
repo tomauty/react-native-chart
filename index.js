@@ -39,6 +39,7 @@ export default class RNChart extends React.Component {
 				lineWidth: PropTypes.number,
 				highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 				highlightIndices: PropTypes.arrayOf(PropTypes.number),
+				highlightRadius: PropTypes.number,
 				widthPercent: PropTypes.number,
 				showDataPoint: PropTypes.bool,
 				dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

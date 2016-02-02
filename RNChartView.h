@@ -32,6 +32,11 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, assign) CGFloat labelFontSize;
 @property (nonatomic, strong) UIColor* labelTextColor;
 
+// highlighting
+@property (nonatomic, assign) NSNumber* highlightRadius;
+@property (nonatomic, copy) NSArray* highlightIndices;
+@property (nonatomic, assign) UIColor* highlightColor;
+
 // axis
 @property (nonatomic, assign) BOOL showAxis;
 @property (nonatomic, assign) BOOL showXAxisLabels;
