@@ -58,7 +58,9 @@ const chartData = [
     name: 'LineChart',
     color: 'gray',
     lineWidth: 2,
-    showDataPoint: false,
+    highlightIndices: [1, 2],  // The data points at indexes 1 and 2 will be orange
+    highlightColor: 'orange',
+    showDataPoint: true,
     data: [10, 12, 14, 25, 31, 52, 41, 31, 52, 66, 22, 11],
   }
 ];
@@ -95,6 +97,10 @@ All properties are optional otherwise noted
     - **`dataPointFillColor`** - _(String/Color)_ - fill color of the data point / Default: blue
     - **`dataPointRadius`** - _(Float)_ - the radius of the data point / Default: 1.0
     - **`cornerRadius`** - _(Float)_ corner radius of the bars in a bar chart / Default: 1.0 / If 0, it will be completely rectangular.
+    - **`highlightColor`** - _(String/Color)_ - the color of the highlighted data points at the highlight indices. this will override `dataPointColor` and `dataPointFillColor`.	
+    - **`highlightIndices`** - _(NumberArray)_ - the indices to apply the `highlightColor`
+    - **`highlightRadius`** - _(Float)_ - the radius of a highlighted data point / Default: 1.0
+
 
 - **`animationDuration`** _(Float)_ - duration of the animation in seconds / Default: 0.3
 - **`axisColor`** _(String/Color)_ - color of the X and Y axes / Default: lightgray
