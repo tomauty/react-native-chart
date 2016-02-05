@@ -96,6 +96,7 @@ static CGPathRef createArc(CGPoint center, CGFloat radius, CGFloat start, CGFloa
 	NSArray* dataPlots = dataDict[@"data"];
 	UIColor* lineColor = ( dataDict[@"color"] != nil ) ? [RCTConvert UIColor:dataDict[@"color"]] : self.parentChartView.defaultColor;
 	UIColor* fillColor = ( dataDict[@"fillColor"] != nil ) ? [RCTConvert UIColor:dataDict[@"fillColor"]] : nil;
+	NSArray* fillGradient = dataDict[@"fillGradient"];
 	NSNumber* lineWidth = [RCTConvert NSNumber:dataDict[@"lineWidth"]];
 	if ( lineWidth == nil ) {
 		lineWidth = @1;
@@ -117,7 +118,37 @@ static CGPathRef createArc(CGPoint center, CGFloat radius, CGFloat start, CGFloa
 	UIBezierPath *fill = [self getLinePath:dataPlots scale:scale withSmoothing:smoothingTension close:YES];
 
 	float boundsY = ((maxBound - minBound) == 0) ? 0 : (minBound * scale);
-	if( fillColor ) {
+	if( fillGradient != nil) {
+		UIColor* topColor = [RCTConvert UIColor:fillGradient[0]];
+		UIColor* bottomColor = [RCTConvert UIColor:fillGradient[1]];
+
+		CAShapeLayer* gradientMask = [CAShapeLayer layer];
+		gradientMask.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
+		gradientMask.bounds = self.bounds;
+		gradientMask.path = fill.CGPath;
+		gradientMask.strokeColor = nil;
+		gradientMask.fillColor = topColor.CGColor;
+		gradientMask.lineWidth = 0;
+		gradientMask.lineJoin = kCALineJoinRound;
+
+		CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+		gradientLayer.frame = gradientMask.frame;
+		gradientLayer.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+
+		[gradientLayer setMask:gradientMask];
+		[self.layer addSublayer:gradientLayer];
+		[self.layers addObject:gradientLayer];
+		[self.layers addObject:gradientMask];
+
+		CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+		fillAnimation.duration = self.parentChartView.animationDuration;
+		fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+		fillAnimation.fromValue = (id)noFill.CGPath;
+		fillAnimation.toValue = (id)fill.CGPath;
+		[gradientMask addAnimation:fillAnimation forKey:@"path"];
+
+	}
+	else if( fillColor ) {
 		CAShapeLayer* fillLayer = [CAShapeLayer layer];
 		fillLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
 		fillLayer.bounds = self.bounds;

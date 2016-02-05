@@ -19,7 +19,7 @@ const processData = (chartData) => {
 			highlightColor: processColor(d.highlightColor),
 			fillGradient: Array.isArray(d.fillGradient)
 				? [processColor(d.fillGradient[0]), processColor(d.fillGradient[1])]
-				: null,
+				: undefined,
 		};
 	});
 };
