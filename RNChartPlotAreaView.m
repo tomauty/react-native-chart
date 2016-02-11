@@ -64,71 +64,7 @@
 
 - (void)drawPieChart:(NSDictionary*)dataDict
 {
-	NSArray* dataPlots = dataDict[@"data"];
-	double total = 0;
-
-	for (NSNumber* item in dataPlots) {
-		total += [item floatValue];
-	}
-
-	NSLog(@"%f", total);
-//	CAShapeLayer* container = [CAShapeLayer layer];
-//	container.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
-//
-//	CGContextRef ctx = UIGraphicsGetCurrentContext();
-//
-//	CGFloat theHalf = self.frame.size.width/2;
-//	CGFloat lineWidth = theHalf;
-//
-//	CGFloat radius = theHalf-lineWidth/2;
-//
-//	CGFloat centerX = theHalf;
-//	CGFloat centerY = self.frame.size.height/2;
-//
-//	//drawing
-//
-//	double sum = 0.0f;
-//	int slicesCount = 3;//[self.datasource numberOfSlicesInPieChartView:self];
-//
-//	for (int i = 0; i < slicesCount; i++)
-//	{
-//		sum += 33.3;//[self.datasource pieChartView:self valueForSliceAtIndex:i];
-//	}
-//
-//	float startAngle = - M_PI_2;
-//	float endAngle = 0.0f;
-//
-//	for (int i = 0; i < slicesCount; i++)
-//	{
-//		double value = 33.3;//[self.datasource pieChartView:self valueForSliceAtIndex:i];
-//
-//		endAngle = startAngle + M_PI*2*value/sum;
-//		CGContextAddArc(ctx, centerX, centerY, radius, startAngle, endAngle, false);
-//
-//		UIColor *drawColor = [UIColor colorWithRed:(0.33 * i) green:0.0 blue:0.0 alpha:1.0]; //[self.datasource pieChartView:self colorForSliceAtIndex:i];
-//
-//		CGContextSetStrokeColorWithColor(ctx, drawColor.CGColor);
-//		CGContextSetLineWidth(ctx, lineWidth);
-//		CGContextStrokePath(ctx);
-//		startAngle += M_PI*2*value/sum;
-//	}
-
-//	CAShapeLayer *fillLayer = [CAShapeLayer layer];
-//
-//	[self.layer addSublayer:fillLayer];
-//	[self.layers addObject:fillLayer];
-//
 }
-
-//static CGPathRef createArc(CGPoint center, CGFloat radius, CGFloat start, CGFloat end)
-//{
-//	CGMutablePathRef path = CGPathCreateMutable();
-//	CGPathMoveToPoint(path, NULL, center.x, center.y);
-//	CGPathAddArc(path, NULL, center.x, center.y, radius, start, end, 0);
-//	CGPathCloseSubpath(path);
-//	return path;
-//}
-
 
 - (void)drawLineChart:(NSDictionary*)dataDict
 {
@@ -530,7 +466,6 @@
 
 - (void)drawGrid
 {
-	NSLog(@"CALLING");
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	UIGraphicsPushContext(ctx);
 
