@@ -439,7 +439,11 @@
 
 	for (int i = 0; i < slicesCount; i++)
 	{
-		sum += [[pieData objectAtIndex:i] floatValue];
+		float val = [[pieData objectAtIndex:i] floatValue];
+		if (val == 0.0) {
+			val = 0.1;
+		}
+		sum += val;
 	}
 
 	float startAngle = - M_PI_2;
@@ -448,10 +452,14 @@
 	for (int i = 0; i < slicesCount; i++)
 	{
 		double value = [[pieData objectAtIndex:i] floatValue];
+		if (value == 0.0) {
+			value = 0.1;
+		}
 
 		endAngle = startAngle + M_PI * 2 * (value / sum);
 		CGContextAddArc(ctx, centerX, centerY, radius, startAngle, endAngle, false);
 
+		// TODO: colors
 		UIColor *drawColor = [UIColor colorWithRed:(0.05 * i) green:0.0 blue:0.0 alpha:1.0]; //[self.datasource pieChartView:self colorForSliceAtIndex:i];
 
 		CGContextSetStrokeColorWithColor(ctx, drawColor.CGColor);
