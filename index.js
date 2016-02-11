@@ -20,6 +20,9 @@ const processData = (chartData) => {
 			fillGradient: Array.isArray(d.fillGradient)
 				? [processColor(d.fillGradient[0]), processColor(d.fillGradient[1])]
 				: undefined,
+			sliceColors: Array.isArray(d.sliceColors)
+				? d.sliceColors.map(processColor)
+				: undefined,
 		};
 	});
 };
