@@ -45,6 +45,9 @@ export default class RNChart extends React.Component {
 				dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 				dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 				dataPointRadius: PropTypes.number,
+				pieAngle: PropTypes.number,
+				pieCenterRatio: PropTypes.number,
+				sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
 			})
 		).isRequired,
 
