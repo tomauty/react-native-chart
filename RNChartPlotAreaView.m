@@ -460,7 +460,16 @@
 		CGContextAddArc(ctx, centerX, centerY, radius, startAngle, endAngle, false);
 
 		// TODO: colors
-		UIColor *drawColor = [UIColor colorWithRed:(0.05 * i) green:0.0 blue:0.0 alpha:1.0]; //[self.datasource pieChartView:self colorForSliceAtIndex:i];
+		UIColor *drawColor = nil;
+		[UIColor colorWithRed:(0.05 * i) green:0.0 blue:0.0 alpha:1.0]; //[self.datasource pieChartView:self colorForSliceAtIndex:i];
+
+		NSArray* sliceColors = [dataDict objectForKey:@"sliceColors"];
+
+		if (sliceColors == nil || sliceColors[i] == nil || [sliceColors objectAtIndex:i] == nil) {
+			drawColor = [UIColor colorWithRed:(0.2 * i) green:0.0 blue:0.0 alpha:1.0];
+		} else {
+			drawColor = [RCTConvert UIColor:sliceColors[i]];
+		}
 
 		CGContextSetStrokeColorWithColor(ctx, drawColor.CGColor);
 		CGContextSetLineWidth(ctx, lineWidth);
