@@ -153,7 +153,7 @@
 	}
 
 	[self.plotArea drawCharts];
-	
+
 	// We don't want to draw axis if there's a pie chart. Why would you make a pie chart and a line at the same time?
 	BOOL handleAsPieChart = NO;
 	for ( NSDictionary* plotDict in self.chartData ) {
@@ -200,7 +200,7 @@
 	_axisHeight = self.frame.size.height;
 
 //	_chartTitle = @"Sample Chart";
-	_spacing = 4.0;
+	_spacing = 1.0;
 
 	_xAxisHeight = 16.0;
 	_yAxisWidth = 24.0;

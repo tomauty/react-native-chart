@@ -67,6 +67,7 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, assign) CGFloat chartFontSize;
 
 @property (nonatomic, strong) UIColor* defaultColor;
+@property (nonatomic, assign) BOOL handleAsPieChart;
 
 
 @end
