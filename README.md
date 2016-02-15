@@ -100,10 +100,7 @@ All properties are optional otherwise noted
 	- **`highlightColor`** - _(String/Color)_ - the color of the highlighted data points at the highlight indices. this will override `dataPointColor` and `dataPointFillColor`.
 	- **`highlightIndices`** - _(NumberArray)_ - the indices to apply the `highlightColor`
 	- **`highlightRadius`** - _(Float)_ - the radius of a highlighted data point / Default: 1.0
-	- **`pieAngle`** _(Float)_ - The angle where the chart drawing begins. Clockwise.	/ Default: 0/360
-	- **`pieCenterRatio`** _(Float)_ - [0 - 1.0], 0 means pie chart completely filled, 1.0 means the actual data is a very tiny line. / Default: 0
-	- **`pieCenterView`** _(Renderable)_ - The view that will be placed in the center of the pie chart. Will skip rendering if `pieCenterRatio` is set to `0`.
-	- **`sliceColors`** _(Array)_ - array of colors for the pie chart slices. matched by index with the `chartData.data` array. if fewer specified, it will start from 0 again.
+	- **`sliceColors`** _(Array)_ - array of colors for the pie chart slices. matched by index with the `chartData.data` array. if fewer specified, remaining slices will be blue for now. **Required for pie chart**
 
 
 - **`animationDuration`** _(Float)_ - duration of the animation in seconds / Default: 0.3
