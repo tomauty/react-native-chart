@@ -5,13 +5,7 @@
 
 react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app.
 
-## Features
-1. Define chart components in Javascript file and see rendered charts using Core Graphics and CALayer
-1. Supports line charts with options to show data points, line fill, customized color, customized labels, etc...
-2. Supports bar charts
-3. Supports multiple charts in one view
-4. Supports pie chart
-5. Show animation when populating the chart
+![Screenshot](https://raw.githubusercontent.com/tomauty/react-native-chart/master/screenshots/README.png)
 
 ## Getting Started
 [![NPM](https://nodei.co/npm/react-native-chart.png?downloads=true)](https://nodei.co/npm/react-native-chart/)
