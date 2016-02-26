@@ -106,6 +106,8 @@ All properties are optional otherwise noted
 - **`chartTitleColor`** _(String/Color)_ - color of the chart title / Default: gray
 - **`gridColor`** _(String/Color)_ - color of the grid / Default: lightgray
 - **`gridLineWidth`** _(Float)_ - width of the grid line / Default: 0.5
+- **`hideHorizontalGridLines`** _(Boolean)_ - hides the horizontal grid lines when showGrid is true / Default: false
+- **`hideVerticalGridLines`** _(Boolean)_ - hides the vertical grid lines when showGrid is true / Default: false
 - **`labelFontSize`** _(Integer)_ - font size of axis labels / Default: 10
 - **`labelTextColor`** _(String/Color)_ - text color of axis labels / Default: gray
 - **`showAxis`** _(Boolean)_ - show or hide axis / Default: true
