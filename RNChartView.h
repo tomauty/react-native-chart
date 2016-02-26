@@ -53,6 +53,8 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, assign) BOOL showGrid;
 @property (nonatomic, strong) UIColor* gridColor;
 @property (nonatomic, assign) CGFloat gridLineWidth;
+@property (nonatomic, assign) BOOL hideHorizontalGridLines;
+@property (nonatomic, assign) BOOL hideVerticalGridLines;
 @property (nonatomic, assign) int verticalGridStep;
 
 // animation

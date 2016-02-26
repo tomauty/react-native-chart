@@ -64,6 +64,8 @@ export default class RNChart extends React.Component {
 		chartTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		gridLineWidth: PropTypes.number,
+		hideHorizontalGridLines: _reactNative.PropTypes.bool,
+		hideVerticalGridLines: _reactNative.PropTypes.bool,
 		labelFontSize: PropTypes.number,
 		labelTextColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		showAxis: PropTypes.bool,

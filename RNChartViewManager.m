@@ -34,6 +34,8 @@ RCT_EXPORT_VIEW_PROPERTY(animationDuration, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(showGrid, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(gridColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(gridLineWidth, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(hideHorizontalGridLines, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(hideVerticalGridLines, BOOL)
 
 // Axis and labels
 RCT_EXPORT_VIEW_PROPERTY(showAxis, BOOL)
