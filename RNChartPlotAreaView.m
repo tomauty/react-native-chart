@@ -509,36 +509,40 @@
 		NSUInteger horizontalGridStep = self.parentChartView.xLabels.count;
 
 		// vertical lines
-		for(int i=0; i< horizontalGridStep; i++) {
-			CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.gridColor CGColor]);
-			CGContextSetLineWidth(ctx, self.parentChartView.gridLineWidth);
+		if( !self.parentChartView.hideVerticalGridLines){
+			for(int i=0; i< horizontalGridStep; i++) {
+				CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.gridColor CGColor]);
+				CGContextSetLineWidth(ctx, self.parentChartView.gridLineWidth);
 
-			CGPoint point = CGPointMake((1 + i) * axisWidth / horizontalGridStep * scale, 0);
+				CGPoint point = CGPointMake((1 + i) * axisWidth / horizontalGridStep * scale, 0);
 
-			CGContextMoveToPoint(ctx, point.x, point.y);
-			CGContextAddLineToPoint(ctx, point.x, axisHeight);
-			CGContextStrokePath(ctx);
+				CGContextMoveToPoint(ctx, point.x, point.y);
+				CGContextAddLineToPoint(ctx, point.x, axisHeight);
+				CGContextStrokePath(ctx);
+			}
 		}
 
 		// horizontal lines
-		for ( int i = 0; i < self.parentChartView.verticalGridStep + 1; i++) {
-			// If the value is zero then we display the horizontal axis
-			CGFloat v = maxBound - (maxBound - minBound) / self.parentChartView.verticalGridStep * i;
-			CGFloat lowestPoint = maxBound - (maxBound - minBound);
+		if( !self.parentChartView.hideHorizontalGridLines){
+			for ( int i = 0; i < self.parentChartView.verticalGridStep + 1; i++) {
+				// If the value is zero then we display the horizontal axis
+				CGFloat v = maxBound - (maxBound - minBound) / self.parentChartView.verticalGridStep * i;
+				CGFloat lowestPoint = maxBound - (maxBound - minBound);
 
-			if ( v == lowestPoint && self.parentChartView.showAxis ) {
-				CGContextSetLineWidth(ctx, self.parentChartView.axisLineWidth);
-				CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.axisColor CGColor]);
-			} else {
-				CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.gridColor CGColor]);
-				CGContextSetLineWidth(ctx, self.parentChartView.gridLineWidth);
+				if ( v == lowestPoint && self.parentChartView.showAxis ) {
+					CGContextSetLineWidth(ctx, self.parentChartView.axisLineWidth);
+					CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.axisColor CGColor]);
+				} else {
+					CGContextSetStrokeColorWithColor(ctx, [self.parentChartView.gridColor CGColor]);
+					CGContextSetLineWidth(ctx, self.parentChartView.gridLineWidth);
+				}
+
+				CGPoint point = CGPointMake(0, (i) * axisHeight / self.parentChartView.verticalGridStep);
+
+				CGContextMoveToPoint(ctx, point.x, point.y);
+				CGContextAddLineToPoint(ctx, axisWidth, point.y);
+				CGContextStrokePath(ctx);
 			}
-
-			CGPoint point = CGPointMake(0, (i) * axisHeight / self.parentChartView.verticalGridStep);
-
-			CGContextMoveToPoint(ctx, point.x, point.y);
-			CGContextAddLineToPoint(ctx, axisWidth, point.y);
-			CGContextStrokePath(ctx);
 		}
 	}
 
