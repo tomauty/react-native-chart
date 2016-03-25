@@ -4,15 +4,30 @@
  */
 'use strict';
 import React, {
-  AppRegistry,
-  Component,
+	AppRegistry,
+	Component,
 	Dimensions,
 	ScrollView,
-  StyleSheet,
-  Text,
-  View
+	StyleSheet,
+	View,
 } from 'react-native';
 import Chart from 'react-native-chart';
+
+const { width } = Dimensions.get('window');
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#f5f5f5',
+	},
+	chart: {
+		marginVertical: 20,
+		width: width - 40,
+		height: 200,
+		alignSelf: 'center',
+	},
+});
 
 const colors = {
 	primary: '#374e5c',
@@ -36,12 +51,12 @@ const colors = {
 	opaqueHeading: 'rgba(180, 180, 180, 1)',
 };
 
-const chartRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const chartRange = [1];
 const chartColors = {
 	bar: colors.primary,
 	line: colors.tertiary,
 	pie: colors.primary,
-}
+};
 const sliceColors = [
 	colors.tertiary,
 	colors.positive,
@@ -55,7 +70,6 @@ const sliceColors = [
 	colors.primaryLight,
 ];
 
-const { height, width } = Dimensions.get('window');
 
 const generateXLabels = () => {
 	return chartRange.map(_ => (Math.floor(Math.random() * 100) + 1).toString());
@@ -67,8 +81,7 @@ const generateChartData = (type) => {
 			type,
 			color: chartColors[type],
 			widthPercent: 0.5,
-			data: chartRange.map(_ => 0),
-			// data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
+			data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
 			sliceColors,
 		},
 	];
@@ -83,58 +96,19 @@ class RNChartExample extends Component {
 			barChart: generateChartData('bar'),
 			pieChart: generateChartData('pie'),
 			xLabels: generateXLabels(),
-		}
-		console.log(this.state);
+		};
 	}
-  render() {
-    return (
-      <View style={styles.container}>
+	render() {
+		return (
+			<View style={styles.container}>
 				<ScrollView style={{ width, marginTop: 50, flex: 1 }}>
-					<Chart
-						style={styles.chart}
-						chartData={this.state.lineChart}
-						xLabels={this.state.xLabels}
-					/>
-					<Chart
-						style={styles.chart}
-						chartData={this.state.barChart}
-						xLabels={this.state.xLabels}
-					/>
-					<Chart
-						style={styles.chart}
-						chartData={this.state.pieChart}
-						xLabels={this.state.xLabels}
-					/>
+					<Chart style={styles.chart} chartData={this.state.lineChart} xLabels={this.state.xLabels} />
+					<Chart style={styles.chart} chartData={this.state.barChart} xLabels={this.state.xLabels} />
+					<Chart style={styles.chart} chartData={this.state.pieChart} xLabels={this.state.xLabels} />
 				</ScrollView>
-      </View>
-    );
-  }
+			</View>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-
-	chart: {
-		marginVertical: 20,
-		width: width - 40,
-		height: 200,
-		alignSelf: 'center',
-	},
-});
 
 AppRegistry.registerComponent('RNChartExample', () => RNChartExample);
