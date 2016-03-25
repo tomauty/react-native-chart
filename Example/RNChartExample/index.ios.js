@@ -93,7 +93,6 @@ class RNChartExample extends Component {
 					<Chart
 						style={styles.chart}
 						chartData={this.state.lineChart}
-						showDataPoint={true}
 						xLabels={this.state.xLabels}
 					/>
 					<Chart
