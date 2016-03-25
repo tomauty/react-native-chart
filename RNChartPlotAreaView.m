@@ -193,7 +193,7 @@
 
 	for ( NSUInteger i = 0; i < dataPlots.count; ++i ) {
 
-		CGFloat s = axisHeight / (maxBound - minBound);
+		CGFloat s = axisHeight / ((maxBound - minBound) || 0.000001);
 		CGPoint point = [self getPointForIndex:i data:dataPlots withScale:s];
 		point.y += minBound * s;
 
