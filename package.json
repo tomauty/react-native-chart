@@ -6,7 +6,7 @@
     "url": "https://github.com/onefold/react-native-chart.git"
   },
   "main": "lib/index.js",
-  "author": "Hyun Cho <hyun@onefold.io> (http://onefold.io)",
+  "author": "Tom Auty <tom.auty@gmail.com> (http://tomauty.cc)",
   "scripts": {
     "compile": "./node_modules/.bin/babel --presets es2015,stage-0,react -d lib/ index.js",
     "prepublish": "npm run compile"
