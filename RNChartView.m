@@ -88,6 +88,18 @@
 		return;
 	}
 
+	// We don't want to draw axis if there's a pie chart. Why would you make a pie chart and a line at the same time?
+	self.handleAsPieChart = NO;
+	for ( NSDictionary* plotDict in self.chartData ) {
+		NSString* type = plotDict[@"type"];
+		if( [type isEqualToString:@"pie"] ) {
+			self.handleAsPieChart = YES;
+			self.showGrid = NO;
+			self.showAxis = NO;
+		}
+	}
+
+
 	self.xAxisHeight = 16.0;
 	if ( !self.showXAxisLabels ) {
 		self.xAxisHeight -= 16.0;
@@ -104,6 +116,9 @@
 	self.yAxisWidth = 24.0;
 	if ( !self.showYAxisLabels ) {
 		self.yAxisWidth -= 24.0;
+	}
+	if (self.handleAsPieChart) {
+		self.yAxisWidth = 0.0;
 	}
 	if ( self.yAxisTitle.length > 0 ) {
 		UIFont* font = [UIFont systemFontOfSize:self.axisTitleFontSize];
@@ -153,17 +168,6 @@
 	}
 
 	[self.plotArea drawCharts];
-
-	// We don't want to draw axis if there's a pie chart. Why would you make a pie chart and a line at the same time?
-	self.handleAsPieChart = NO;
-	for ( NSDictionary* plotDict in self.chartData ) {
-		NSString* type = plotDict[@"type"];
-		if( [type isEqualToString:@"pie"] ) {
-			self.handleAsPieChart = YES;
-			self.showGrid = NO;
-			self.showAxis = NO;
-		}
-	}
 
 	if( !self.handleAsPieChart ) {
 		[self.yAxisView addLabels];
