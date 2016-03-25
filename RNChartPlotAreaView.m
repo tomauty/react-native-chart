@@ -316,13 +316,13 @@
 	CGFloat axisHeight = self.frame.size.height;
 
 	CGFloat horizScale = [self.parentChartView horizontalScale];
-	CGFloat xOffset = (axisWidth / (horizontalGridStep)) * horizScale * 0.5;
+	CGFloat xOffset = (axisWidth / (horizontalGridStep)) * horizScale * 0.4;
 
 	// Compute the point position in the view from the data with a set scale value
 	NSNumber* number = data[idx];
 
 	if ( data.count < 2 ) {
-		return CGPointMake(0, axisHeight - [number floatValue] * scale);
+		return CGPointMake(xOffset, axisHeight - [number floatValue] * scale);
 	} else {
 		return CGPointMake(idx * (axisWidth / (data.count)) + xOffset, axisHeight - [number floatValue] * scale);
 	}
