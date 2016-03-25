@@ -122,7 +122,6 @@ All properties are optional otherwise noted
 
 
 ## Known Issues / TODO
-- Sample code cleanup
 - Needs touch support
 - Needs legend
 - Stack Bar Chart
