@@ -22,9 +22,6 @@
     "react-component",
     "react-native"
   ],
-  "peerDependencies": {
-    "react-native": ">0.15.0"
-  },
   "devDependencies": {
     "babel-cli": "^6.4.5",
     "babel-eslint": "^4.1.6",
