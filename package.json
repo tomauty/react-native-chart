@@ -11,7 +11,8 @@
   },
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-eslint": "^5.0.0",
-    "babel-preset-react-native": "^1.5.3"
+    "babel-eslint": "^6.0.0",
+    "babel-preset-react-native": "^1.5.3",
+    "eslint-config-airbnb": "^7.0.0"
   }
 }
