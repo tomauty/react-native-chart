@@ -30,6 +30,17 @@ const processData = (d) => {
 	};
 };
 
+const getRoundNumber = (value, gridStep) => {
+	if (value <= 0) return 0;
+	const logValue = Math.log10(value);
+	const scale = Math.pow(10, Math.floor(logValue));
+	const n = Math.ceil(value / scale * 4);
+
+	let tmp = n % gridStep;
+	if (tmp !== 0) tmp += (gridStep - tmp);
+	return n * scale / 4.0;
+}
+
 export default class RNChart extends React.Component {
 	static propTypes = {
 
