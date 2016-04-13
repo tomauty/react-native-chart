@@ -20,10 +20,13 @@ export default class YAxis extends Component {
 		placement: PropTypes.oneOf(['left', 'right']),
 		axisColor: PropTypes.any,
 		data: PropTypes.arrayOf(PropTypes.number).isRequired,
+		height: PropTypes.number.isRequired,
+		axisLineWidth: PropTypes.number,
 	}
 
 	static defaultProps = {
 		placement: 'left',
+		axisLineWidth: 1,
 		axisColor: '#999',
 	};
 
@@ -32,8 +35,8 @@ export default class YAxis extends Component {
 			<View style={[
 					styles.yAxisContainer,
 					this.props.style || {},
-					this.props.placement === 'left' && { borderRightColor: this.props.axisColor, borderRightWidth: 1 },
-					this.props.placement === 'right' && { borderLeftColor: this.props.axisColor, borderLeftWidth: 1 },
+					this.props.placement === 'left' && { borderRightColor: this.props.axisColor, borderRightWidth: this.props.axisLineWidth },
+					this.props.placement === 'right' && { borderLeftColor: this.props.axisColor, borderLeftWidth: this.props.axisLineWidth },
 			]}>
 			{(() => {
 				return this.props.data.map((d, i) => <Text key={i} style={styles.axisText}>{d}</Text>);

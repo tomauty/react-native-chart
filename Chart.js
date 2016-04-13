@@ -35,26 +35,25 @@ export default class RNChart extends React.Component {
 
 		chartData: PropTypes.shape({
 			data: PropTypes.arrayOf(PropTypes.number).isRequired,
-			name: PropTypes.string,
 			type: PropTypes.oneOf(['line', 'bar', 'pie']),
-			fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-			fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-			cornerRadius: PropTypes.number,
-			lineWidth: PropTypes.number,
-			highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-			highlightIndices: PropTypes.arrayOf(PropTypes.number),
-			highlightRadius: PropTypes.number,
-			widthPercent: PropTypes.number,
-			showDataPoint: PropTypes.bool,
-			dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-			dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-			dataPointRadius: PropTypes.number,
-			pieAngle: PropTypes.number,
-			pieCenterRatio: PropTypes.number,
-			sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+			fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+			fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
+			cornerRadius: PropTypes.number, // TODO
+			lineWidth: PropTypes.number, // TODO
+			highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+			highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
+			highlightRadius: PropTypes.number, // TODO
+			widthPercent: PropTypes.number, // TODO
+			showDataPoint: PropTypes.bool, // TODO
+			dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+			dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+			dataPointRadius: PropTypes.number, // TODO
+			pieAngle: PropTypes.number, // TODO
+			pieCenterRatio: PropTypes.number, // TODO
+			sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
 		}).isRequired,
 
-		animationDuration: PropTypes.number,
+		animationDuration: PropTypes.number, // TODO
 		axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		axisLineWidth: PropTypes.number,
 		axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -111,9 +110,9 @@ export default class RNChart extends React.Component {
 				this.setState({ xHeight: height });
 			}
 		});
-		this.refs.container.measure((_ox, _oy, _width, height) => {
+		this.refs.container.measure((_ox, _oy, width, height) => {
 			if (height !== this.state.containerHeight) {
-				this.setState({ containerHeight: height });
+				this.setState({ containerHeight: height, containerWidth: width });
 			}
 		});
 	}
@@ -135,7 +134,6 @@ export default class RNChart extends React.Component {
 			'pie': BarChart,
 		};
 
-
 		const PieChart = {}; // TODO: remove
 		const data = convertedProps.chartData;
 		return (
@@ -146,12 +144,30 @@ export default class RNChart extends React.Component {
 						return (
 							<View ref="container" style={[ this.props.style || {}, { flex: 1, flexDirection: 'column' }]}>
 								<View style={[styles.default, { flexDirection: 'row'}]}>
-									<View ref="yAxis"><YAxis data={data.data} /></View>
+									<View ref="yAxis">
+										<YAxis
+											data={data.data}
+											height={this.state.containerHeight - this.state.xHeight}
+											axisColor={this.props.axisColor}
+											axisLineWidth={this.props.axisLineWidth}
+										/>
+									</View>
 									<Chart {...convertedProps} data={data} />
 								</View>
 								{(() => {
 									if (!this.state.yWidth) return null;
-									return <View ref="xAxis"><XAxis data={data.data} xAxisLabels={this.props.xAxisLabels} style={{ marginLeft: this.state.yWidth - 1 }} /></View>;
+									return (
+										<View ref="xAxis">
+											<XAxis
+												width={this.state.containerWidth - this.state.yWidth}
+												data={data.data}
+												xAxisLabels={this.props.xAxisLabels}
+												style={{ marginLeft: this.state.yWidth - 1 }}
+												axisColor={this.props.axisColor}
+												axisLineWidth={this.props.axisLineWidth}
+											/>
+										</View>
+									);
 								})()}
 							</View>
 						);

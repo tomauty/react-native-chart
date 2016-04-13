@@ -15,10 +15,13 @@ export default class XAxis extends Component {
 		axisColor: PropTypes.any,
 		xAxisLabels: PropTypes.arrayOf(PropTypes.any),
 		data: PropTypes.arrayOf(PropTypes.number),
+		width: PropTypes.number.isRequired,
+		axisLineWidth: PropTypes.number,
 	}
 
 	static defaultProps = {
 		axisColor: '#999',
+		axisLineWidth: 1,
 	};
 
 	constructor(props) {
@@ -31,7 +34,10 @@ export default class XAxis extends Component {
 			<View style={[
 					styles.xAxisContainer,
 					this.props.style || {},
-					{ borderTopColor: this.props.axisColor, borderTopWidth: 1 },
+					{
+						borderTopColor: this.props.axisColor,
+						borderTopWidth: this.props.axisLineWidth
+					},
 			]}>
 			{(() => {
 				return labels.map((d, i) => <Text key={i} style={styles.axisText}>{d}</Text>);

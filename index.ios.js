@@ -79,7 +79,7 @@ const generateXLabels = () => {
 };
 
 const generateChartData = (type) => {
-	return{
+	return {
 		type,
 		color: chartColors[type],
 		widthPercent: 0.5,
@@ -108,6 +108,7 @@ class rnchart20 extends Component {
 					xLabels={this.state.xLabels}
 					showXAxisLabels
 					showYAxisLabels
+					axisColor="red"
 				/>
       </View>
     );
