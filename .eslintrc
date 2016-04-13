@@ -1,0 +1,50 @@
+{
+    "parser": "babel-eslint",
+    "globals": {
+      "__DEV__": true,
+      "__TEST__": true,
+      "jest": true,
+      "describe": true,
+      "it": true,
+      "expect": true,
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "settings": {
+        "ecmascript": 6,
+        "jsx": true
+    },
+    "plugins": [
+        "react",
+        "react-native",
+        "flowtype",
+        "flow-vars"
+    ],
+    "extends": "airbnb",
+    "rules": {
+      	"flow-vars/define-flow-type": 1,
+      	"flow-vars/use-flow-type": 1,
+        "no-use-before-define": 0,
+        "space-infix-ops": 0,
+        "indent": [2, "tab"],
+        "quote-props": 0,
+        "max-len": [2, 150, 4, {"ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("}],
+        "strict": 0,
+        "no-console": 1,
+        "quotes": 0,
+        "no-labels": 0,
+        "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "^_"}],
+        "no-param-reassign": [2, {"props": false}],
+        "react/jsx-no-bind": [1, { "allowArrowFunctions": true }],
+        "camelcase": 0,
+        "no-alert": 0,
+        "no-underscore-dangle": 0,
+        "react-native/no-unused-styles": 1,
+        "react/jsx-indent-props": [2, "tab"],
+        "react/no-multi-comp": 0,
+        "arrow-body-style": [0, "as-needed"],
+        "react/prefer-stateless-function": 0
+    }
+}

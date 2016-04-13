@@ -1,0 +1,17 @@
+{
+  "name": "rnchart20",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react": "^0.14.7",
+    "react-native": "^0.22.2"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-eslint": "^5.0.0",
+    "babel-preset-react-native": "^1.5.3"
+  }
+}
