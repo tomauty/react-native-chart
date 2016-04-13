@@ -86,35 +86,49 @@ export default class RNChart extends React.Component {
 	}
 
 	componentDidMount() {
-		this.refs.yAxis.measure((ox, oy, width, height, px, py) => {
-			this.setState({ yWidth: width });
-		});
+		this._updateAxisLayout();
 	}
 
 	componentDidUpdate() {
-		this.refs.yAxis.measure((ox, oy, width, height, px, py) => {
-			if (width !== this.state.yWidth) {
-				this.setState({ yWidth: width });
-			}
+		this._updateAxisLayout();
+	}
+
+	_computeBounds(chartData) {
+		let min = Infinity;
+		let max = -Infinity;
+
+		chartData.forEach(number => {
+			if (number < min) min = number;
+			if (number > max) max = number;
 		});
+
+		if (this.props.tightBounds) {
+			return this.setState({ bounds: { min, max } });
+		}
 	}
 
 	_updateAxisLayout() {
-		this.refs.yAxis.measure((_ox, _oy, width, _height) => {
-			if (width !== this.state.yWidth) {
-				this.setState({ yWidth: width });
-			}
-		});
-		this.refs.xAxis.measure((_ox, _oy, _width, height) => {
-			if (height !== this.state.xHeight) {
-				this.setState({ xHeight: height });
-			}
-		});
-		this.refs.container.measure((_ox, _oy, width, height) => {
-			if (height !== this.state.containerHeight) {
-				this.setState({ containerHeight: height, containerWidth: width });
-			}
-		});
+		if (this.refs.yAxis) {
+			this.refs.yAxis.measure((_ox, _oy, width, _height) => {
+				if (width !== this.state.yWidth) {
+					this.setState({ yWidth: width });
+				}
+			});
+		}
+		if (this.refs.xAxis) {
+			this.refs.xAxis.measure((_ox, _oy, _width, height) => {
+				if (height !== this.state.xHeight) {
+					this.setState({ xHeight: height });
+				}
+			});
+		}
+		if (this.refs.container) {
+			this.refs.container.measure((_ox, _oy, width, height) => {
+				if (height !== this.state.containerHeight) {
+					this.setState({ containerHeight: height, containerWidth: width });
+				}
+			});
+		}
 	}
 
 	render() {
