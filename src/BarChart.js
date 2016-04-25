@@ -1,5 +1,12 @@
 /* @flow */
-import React, { Animated, Component, LayoutAnimation, View, StyleSheet, Text } from 'react-native';
+import React, {
+	Animated,
+	Component,
+	LayoutAnimation,
+	View,
+	StyleSheet,
+	Text,
+} from 'react-native';
 import * as C from './constants';
 
 const styles = StyleSheet.create({

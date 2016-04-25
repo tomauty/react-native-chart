@@ -78,7 +78,6 @@ const generateChartData = (type) => {
 		type,
 		color: chartColors[type],
 		widthPercent: 0.7,
-		// data: [5,5,5,5,5],
 		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
 		sliceColors,
 	};
