@@ -13,7 +13,6 @@ import React, {
 } from 'react-native';
 
 import Chart from './Chart';
-import BarChart from './src/bar';
 
 const data = [1, 10, 20];
 const { width } = Dimensions.get('window');
@@ -108,7 +107,6 @@ class rnchart20 extends Component {
 					xLabels={this.state.xLabels}
 					showXAxisLabels
 					showYAxisLabels
-					axisColor="red"
 				/>
       </View>
     );

@@ -1,11 +1,10 @@
 /* @flow */
 'use strict';
-import React, { PropTypes, StyleSheet, View } from 'react-native';
-const { processColor } = React;
-
-import BarChart from './src/bar';
-import YAxis from './src/y-axis';
-import XAxis from './src/x-axis';
+import React, { Component, PropTypes, StyleSheet, View } from 'react-native';
+import BarChart from './src/BarChart';
+import YAxis from './src/yAxis';
+import XAxis from './src/xAxis';
+import * as C from './src/constants';
 
 const styles = StyleSheet.create({
 	default: {
@@ -13,35 +12,8 @@ const styles = StyleSheet.create({
 	},
 })
 
-const processData = (d) => {
-	return {
-		...d,
-		color: processColor(d.color),
-		fillColor: processColor(d.fillColor),
-		dataPointColor: processColor(d.dataPointColor),
-		dataPointFillColor: processColor(d.dataPointFillColor),
-		highlightColor: processColor(d.highlightColor),
-		fillGradient: Array.isArray(d.fillGradient)
-			? [processColor(d.fillGradient[0]), processColor(d.fillGradient[1])]
-			: undefined,
-		sliceColors: Array.isArray(d.sliceColors)
-			? d.sliceColors.map(c => (c) ? processColor(c) : processColor('blue'))
-			: undefined,
-	};
-};
 
-const getRoundNumber = (value, gridStep) => {
-	if (value <= 0) return 0;
-	const logValue = Math.log10(value);
-	const scale = Math.pow(10, Math.floor(logValue));
-	const n = Math.ceil(value / scale * 4);
-
-	let tmp = n % gridStep;
-	if (tmp !== 0) tmp += (gridStep - tmp);
-	return n * scale / 4.0;
-}
-
-export default class RNChart extends React.Component {
+export default class RNChart extends Component<void, any, any> {
 	static propTypes = {
 
 		chartData: PropTypes.shape({
@@ -90,33 +62,32 @@ export default class RNChart extends React.Component {
 		yAxisTitle: PropTypes.string,
 	};
 
-	constructor(props) {
+	static defaultProps : any = {
+		animationDuration: 0.5,
+		axisColor: C.BLACK,
+		axisLineWidth: 1,
+		axisTitleColor: C.GREY,
+		axisTitleFontSize: 16,
+		chartFontSize: 14,
+		gridColor: C.BLACK,
+		gridLineWidth: 0.5,
+		labelFontSize: 10,
+		labelTextColor: C.GREY,
+		showAxis: true,
+		showGrid: true,
+		showXAxisLabels: true,
+		showYAxisLabels: true,
+		tightBounds: false,
+		touchRadius: 5,
+		verticalGridStep: 3,
+	};
+
+	constructor(props : any) {
 		super(props);
 		this.state = { yWidth: 0 };
-		this._updateAxisLayout = this._updateAxisLayout.bind(this);
 	}
-
-	componentDidMount() {
-		this._updateAxisLayout();
-	}
-
-	componentDidUpdate() {
-		this._updateAxisLayout();
-	}
-
-	_computeBounds(chartData) {
-		let min = Infinity;
-		let max = -Infinity;
-
-		chartData.forEach(number => {
-			if (number < min) min = number;
-			if (number > max) max = number;
-		});
-
-		if (this.props.tightBounds) {
-			return this.setState({ bounds: { min, max } });
-		}
-	}
+	componentDidMount() { this._updateAxisLayout(); }
+	componentDidUpdate() { this._updateAxisLayout(); }
 
 	_updateAxisLayout() {
 		if (this.refs.yAxis) {
@@ -143,21 +114,8 @@ export default class RNChart extends React.Component {
 	}
 
 	render() {
-		const convertedProps = {
-			...this.props,
-			axisColor: processColor(this.props.axisColor),
-			axisTitleColor: processColor(this.props.axisTitleColor),
-			chartTitleColor: processColor(this.props.chartTitleColor),
-			gridColor: processColor(this.props.gridColor),
-			labelTextColor: processColor(this.props.labelTextColor),
-			chartData: (this.props.chartData) ? processData(this.props.chartData) : [],
-		};
-
-		const components = {
-			'line': BarChart,
-			'bar': BarChart,
-			'pie': BarChart,
-		};
+		const convertedProps = { ...this.props, chartData: this.props.chartData || [] };
+		const components = { 'line': BarChart, 'bar': BarChart, 'pie': BarChart };
 
 		const PieChart = {}; // TODO: remove
 		const data = convertedProps.chartData;
@@ -174,7 +132,9 @@ export default class RNChart extends React.Component {
 											data={data.data}
 											height={this.state.containerHeight - this.state.xHeight}
 											axisColor={this.props.axisColor}
-											axisLineWidth={this.props.axisLineWidth}
+											axisLineWidth={convertedProps.axisLineWidth}
+											tightBounds={convertedProps.tightBounds}
+											verticalGridStep={convertedProps.verticalGridStep}
 										/>
 									</View>
 									<Chart {...convertedProps} data={data} />
@@ -196,12 +156,12 @@ export default class RNChart extends React.Component {
 								})()}
 							</View>
 						);
-						return (
-							<View ref="container" style={[ this.props.style || {}, styles.default ]}>
-								<Chart {...convertedProps} data={data} />
-							</View>
-						);
 					}
+					return (
+						<View ref="container" style={[ this.props.style || {}, styles.default ]}>
+							<Chart {...convertedProps} data={data} />
+						</View>
+					);
 				})()}
 			</View>
 		)

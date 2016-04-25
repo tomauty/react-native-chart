@@ -17,11 +17,8 @@ export default class BarChart extends Component {
 	};
 
 	render() {
-		console.log(this.props);
-
 		const HEIGHT = this.state.height;
 		const WIDTH = this.state.width;
-
 		return (
 			<View ref="container" style={[ styles.default ]}>
 			</View>

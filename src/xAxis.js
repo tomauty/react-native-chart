@@ -1,3 +1,5 @@
+/* @flow */
+'use strict';
 import React, { Component, View, Text, PropTypes, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
