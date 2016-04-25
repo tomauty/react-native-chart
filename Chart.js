@@ -72,6 +72,7 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	_drawGrid(props) {
+		if (!props.drawGrid) return;
 		const range = [];
 		const uniqueValuesInDataSet = props.data.data.filter((v, i, self) => self.indexOf(v) === i);
 		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
@@ -93,12 +94,22 @@ export default class RNChart extends Component<void, any, any> {
 
 		return (
 			<View style={containerStyle}>
-				<View style={{ position: 'absolute', flexDirection: 'column', justifyContent: 'space-around' }}>
-					{range.map((_,i) => <View key={i} style={horizontalGridStyle} />)}
-				</View>
-				<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
-					{props.data.data.map((_,i) => <View key={i} style={verticalGridStyle} />)}
-				</View>
+				{(() => {
+					if (props.hideHorizontalGridLines) return null;
+					return (
+						<View style={{ position: 'absolute', flexDirection: 'column', justifyContent: 'space-around' }}>
+							{range.map((_,i) => <View key={i} style={horizontalGridStyle} />)}
+						</View>
+					);
+				})()}
+				{(() => {
+					if (props.hideVerticalGridLines) return null;
+					return (
+						<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
+							{props.data.data.map((_,i) => <View key={i} style={verticalGridStyle} />)}
+						</View>
+					);
+				})()}
 			</View>
 		)
 	}
