@@ -25,56 +25,6 @@ const getRoundNumber = (value, gridStep) => {
 
 
 export default class RNChart extends Component<void, any, any> {
-	static propTypes = {
-
-		chartData: PropTypes.shape({
-			data: PropTypes.arrayOf(PropTypes.number).isRequired,
-			type: PropTypes.oneOf(['line', 'bar', 'pie']),
-			fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-			fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
-			cornerRadius: PropTypes.number, // TODO
-			lineWidth: PropTypes.number, // TODO
-			highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-			highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
-			highlightRadius: PropTypes.number, // TODO
-			widthPercent: PropTypes.number, // TODO
-			showDataPoint: PropTypes.bool, // TODO
-			dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-			dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-			dataPointRadius: PropTypes.number, // TODO
-			pieAngle: PropTypes.number, // TODO
-			pieCenterRatio: PropTypes.number, // TODO
-			sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
-		}).isRequired,
-
-		animationDuration: PropTypes.number, // TODO
-		axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		axisLineWidth: PropTypes.number,
-		axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		axisTitleFontSize: PropTypes.number,
-		chartFontSize: PropTypes.number,
-		chartTitle: PropTypes.string,
-		chartTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		gridLineWidth: PropTypes.number,
-		hideHorizontalGridLines: PropTypes.bool,
-		hideVerticalGridLines: PropTypes.bool,
-		labelFontSize: PropTypes.number,
-		labelTextColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		showAxis: PropTypes.bool,
-		showGrid: PropTypes.bool,
-		showXAxisLabels: PropTypes.bool,
-		showYAxisLabels: PropTypes.bool,
-		style: PropTypes.any,
-		tightBounds: PropTypes.bool,
-		verticalGridStep: PropTypes.number,
-		xAxisTitle: PropTypes.string,
-		xLabels: PropTypes.array.isRequired,
-		yAxisTitle: PropTypes.string,
-		yAxisTransform: PropTypes.func,
-		yAxisWidth: PropTypes.number,
-	};
-
 	static defaultProps : any = {
 		chartData: [],
 		animationDuration: 0.5,
@@ -95,6 +45,7 @@ export default class RNChart extends Component<void, any, any> {
 		touchRadius: 5,
 		verticalGridStep: 3,
 		yAxisWidth: 30,
+		horizontalScale: 1,
 	};
 
 	constructor(props : any) {
@@ -226,6 +177,8 @@ export default class RNChart extends Component<void, any, any> {
 										data={data}
 										width={this.state.containerWidth - this.props.yAxisWidth}
 										height={this.state.containerHeight - this.state.xHeight}
+										minVerticalBound={this.state.bounds.min}
+										maxVerticalBound={this.state.bounds.max}
 									/>
 								</View>
 								{(() => {
@@ -255,3 +208,52 @@ export default class RNChart extends Component<void, any, any> {
 		)
 	}
 }
+
+RNChart.propTypes = {
+	chartData: PropTypes.shape({
+		data: PropTypes.arrayOf(PropTypes.number).isRequired,
+		type: PropTypes.oneOf(['line', 'bar', 'pie']),
+		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+		fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
+		cornerRadius: PropTypes.number,
+		lineWidth: PropTypes.number, // TODO
+		highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+		highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
+		highlightRadius: PropTypes.number, // TODO
+		widthPercent: PropTypes.number, // TODO
+		showDataPoint: PropTypes.bool, // TODO
+		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+		dataPointRadius: PropTypes.number, // TODO
+		pieAngle: PropTypes.number, // TODO
+		pieCenterRatio: PropTypes.number, // TODO
+		sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
+	}).isRequired,
+
+	animationDuration: PropTypes.number, // TODO
+	axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	axisLineWidth: PropTypes.number,
+	axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	axisTitleFontSize: PropTypes.number,
+	chartFontSize: PropTypes.number,
+	chartTitle: PropTypes.string,
+	chartTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	gridLineWidth: PropTypes.number,
+	hideHorizontalGridLines: PropTypes.bool,
+	hideVerticalGridLines: PropTypes.bool,
+	labelFontSize: PropTypes.number,
+	labelTextColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	showAxis: PropTypes.bool,
+	showGrid: PropTypes.bool,
+	showXAxisLabels: PropTypes.bool,
+	showYAxisLabels: PropTypes.bool,
+	style: PropTypes.any,
+	tightBounds: PropTypes.bool,
+	verticalGridStep: PropTypes.number,
+	xAxisTitle: PropTypes.string,
+	xAxisLabels: PropTypes.array.isRequired,
+	yAxisTitle: PropTypes.string,
+	yAxisTransform: PropTypes.func,
+	yAxisWidth: PropTypes.number,
+};

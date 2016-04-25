@@ -33,7 +33,7 @@ export default class XAxis extends Component {
 	}
 
 	render() {
-		const labels = this.props.xAxisLabels || this.props.data || [];
+		const labels = this.props.xAxisLabels || [];
 		return (
 			<View style={[
 					styles.xAxisContainer,
@@ -44,6 +44,7 @@ export default class XAxis extends Component {
 					},
 			]}>
 			{(() => {
+				if (!this.props.showXAxisLabels) return null;
 				return labels.map((d, i) => <Text key={i} style={styles.axisText}>{d}</Text>);
 			})()}
 			</View>

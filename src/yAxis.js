@@ -38,11 +38,17 @@ export default class YAxis extends Component<void, any, any> {
 	}
 
 	_createLabelForYAxis(index : number) {
-		const minBound = this.props.minVerticalBound;
-		const maxBound = this.props.maxVerticalBound;
+		let minBound = this.props.minVerticalBound;
+		let maxBound = this.props.maxVerticalBound;
 		const height = this.props.height;
 
-		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * (index + 1);
+		// For all same values, create a range anyway
+		if (minBound === maxBound) {
+			minBound -= this.props.verticalGridStep;
+			maxBound += this.props.verticalGridStep;
+		}
+		console.log('minBound:', minBound, 'max bound:', maxBound)
+		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
 		label = Math.round(label);
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
 			label = this.props.yAxisTransform(label);
@@ -54,7 +60,9 @@ export default class YAxis extends Component<void, any, any> {
 
 	render() {
 		const range = [];
-		for (let i = this.props.verticalGridStep; i >= 0; i--) range.push(i);
+		const uniqueValuesInDataSet = this.props.data.filter((v, i, self) => self.indexOf(v) === i);
+		const steps = (uniqueValuesInDataSet.length < this.props.verticalGridStep) ? uniqueValuesInDataSet.length : this.props.verticalGridStep;
+		for (let i = steps; i >= 0; i--) range.push(i);
 		return (
 			<View style={[
 				styles.yAxisContainer,

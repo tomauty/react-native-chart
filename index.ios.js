@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 	chart: {
 		marginVertical: 20,
 		width: width - 40,
-		height: 200,
+		height: 300,
 		alignSelf: 'center',
 	},
 });
@@ -82,7 +82,8 @@ const generateChartData = (type) => {
 	return {
 		type,
 		color: chartColors[type],
-		widthPercent: 0.5,
+		widthPercent: 0.7,
+		// data: [5,5,5,5,5],
 		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
 		sliceColors,
 	};
@@ -105,9 +106,10 @@ class rnchart20 extends Component {
 					showAxis
 					style={styles.chart}
 					chartData={this.state.barChart}
-					xLabels={this.state.xLabels}
-					showXAxisLabels
+					xAxisLabels={this.state.xLabels}
 					showYAxisLabels
+					showXAxisLabels
+
 				/>
 
 			<TouchableOpacity onPress={() => this.setState({ barChart: generateChartData('bar')})}>
