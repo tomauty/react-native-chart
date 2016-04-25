@@ -72,6 +72,7 @@ export default class RNChart extends Component<void, any, any> {
 		xLabels: PropTypes.array.isRequired,
 		yAxisTitle: PropTypes.string,
 		yAxisTransform: PropTypes.func,
+		yAxisWidth: PropTypes.number,
 	};
 
 	static defaultProps : any = {
@@ -93,11 +94,12 @@ export default class RNChart extends Component<void, any, any> {
 		tightBounds: false,
 		touchRadius: 5,
 		verticalGridStep: 3,
+		yAxisWidth: 30,
 	};
 
 	constructor(props : any) {
 		super(props);
-		this.state = { yWidth: 0, bounds: { min: 0, max: 0 } };
+		this.state = { bounds: { min: 0, max: 0 } };
 	}
 	componentDidMount() {
 		this._updateAxisLayout();
@@ -176,13 +178,6 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	_updateAxisLayout() {
-		if (this.refs.yAxis) {
-			this.refs.yAxis.measure((_ox, _oy, width, _height) => {
-				if (width !== this.state.yWidth) {
-					this.setState({ yWidth: width });
-				}
-			});
-		}
 		if (this.refs.xAxis) {
 			this.refs.xAxis.measure((_ox, _oy, _width, height) => {
 				if (height !== this.state.xHeight) {
@@ -223,24 +218,24 @@ export default class RNChart extends Component<void, any, any> {
 											minVerticalBound={this.state.bounds.min}
 											maxVerticalBound={this.state.bounds.max}
 											yAxisTransform={this.props.yAxisTransform}
+											style={{ width: this.props.yAxisWidth }}
 										/>
 									</View>
 									<Chart
 										{...this.props}
 										data={data}
-										width={this.state.containerWidth - this.state.yWidth}
+										width={this.state.containerWidth - this.props.yAxisWidth}
 										height={this.state.containerHeight - this.state.xHeight}
 									/>
 								</View>
 								{(() => {
-									if (!this.state.yWidth) return null;
 									return (
 										<View ref="xAxis">
 											<XAxis
-												width={this.state.containerWidth - this.state.yWidth}
+												width={this.state.containerWidth - this.props.yAxisWidth}
 												data={data.data}
 												xAxisLabels={this.props.xAxisLabels}
-												style={{ marginLeft: this.state.yWidth - 1 }}
+												style={{ marginLeft: this.props.yAxisWidth - 1 }}
 												axisColor={this.props.axisColor}
 												axisLineWidth={this.props.axisLineWidth}
 											/>

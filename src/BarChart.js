@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Animated, Component, View, StyleSheet, Text } from 'react-native';
+import React, { Animated, Component, LayoutAnimation, View, StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
 	default: {
@@ -14,14 +14,17 @@ export default class BarChart extends Component<void, any, any> {
 
 	constructor(props : any) {
 		super(props);
-		this.state = { };
+		this.state = {
+			containerHeight: new Animated.Value(0),
+		};
 		(this:any)._drawBar = this._drawBar.bind(this);
 	}
 
-	_drawBar(dataPoint : number) {
+	_drawBar(dataPoint : number, index : number) {
+		// LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
 		return (
 			<View
-				key={dataPoint}
+				key={index}
 				style={{ backgroundColor: this.props.data.color, width: 20, height: 40 }}
 			/>
 		)

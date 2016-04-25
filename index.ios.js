@@ -8,6 +8,7 @@ import React, {
 	Dimensions,
   Component,
   StyleSheet,
+	TouchableOpacity,
   Text,
   View
 } from 'react-native';
@@ -108,6 +109,10 @@ class rnchart20 extends Component {
 					showXAxisLabels
 					showYAxisLabels
 				/>
+
+			<TouchableOpacity onPress={() => this.setState({ barChart: generateChartData('bar')})}>
+				<Text>Update Data</Text>
+			</TouchableOpacity>
       </View>
     );
   }
