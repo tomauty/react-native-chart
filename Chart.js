@@ -71,6 +71,38 @@ export default class RNChart extends Component<void, any, any> {
 		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 	}
 
+	_drawGrid(props) {
+		const range = [];
+		const uniqueValuesInDataSet = props.data.data.filter((v, i, self) => self.indexOf(v) === i);
+		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
+		for (let i = steps; i >= 0; i--) range.push(i);
+
+		const containerStyle = { width: props.width, height: props.height, position: 'absolute', left: 0 };
+		const horizontalGridStyle = {
+			height: props.height / props.verticalGridStep,
+			width: props.width,
+			borderTopColor: props.gridColor,
+			borderTopWidth: props.gridLineWidth,
+		};
+		const verticalGridStyle = {
+			height: props.height,
+			width: props.width / props.data.data.length,
+			borderRightColor: props.gridColor,
+			borderRightWidth: props.gridLineWidth,
+		};
+
+		return (
+			<View style={containerStyle}>
+				<View style={{ position: 'absolute', flexDirection: 'column', justifyContent: 'space-around' }}>
+					{range.map((_,i) => <View key={i} style={horizontalGridStyle} />)}
+				</View>
+				<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
+					{props.data.data.map((_,i) => <View key={i} style={verticalGridStyle} />)}
+				</View>
+			</View>
+		)
+	}
+
 	_computeBounds() {
 		let min = Infinity;
 		let max = -Infinity;
@@ -185,6 +217,7 @@ export default class RNChart extends Component<void, any, any> {
 										height={this.state.containerHeight - this.state.xHeight}
 										minVerticalBound={this.state.bounds.min}
 										maxVerticalBound={this.state.bounds.max}
+										drawGrid={this._drawGrid}
 									>
 								</Chart>
 

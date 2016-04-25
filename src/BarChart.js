@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
 });
 
 export default class BarChart extends Component<void, any, any> {
-
 	constructor(props : any) {
 		super(props);
 		this.state = {
@@ -32,10 +31,10 @@ export default class BarChart extends Component<void, any, any> {
 		let maxBound = this.props.maxVerticalBound;
 
 		// For all same values, create a range anyway
-		// if (minBound === maxBound) {
-		// 	minBound -= this.props.verticalGridStep;
-		// 	maxBound += this.props.verticalGridStep;
-		// }
+		if (minBound === maxBound) {
+			minBound -= this.props.verticalGridStep;
+			maxBound += this.props.verticalGridStep;
+		}
 
 		const width = (WIDTH / this.props.data.data.length * this.props.horizontalScale * 0.5) * widthPercent;
 		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
@@ -60,6 +59,7 @@ export default class BarChart extends Component<void, any, any> {
 		const data = this.props.data;
 		return (
 			<View ref="container" style={[ styles.default ]}>
+				{this.props.drawGrid(this.props)}
 				{data.data.map(this._drawBar)}
 			</View>
 		)

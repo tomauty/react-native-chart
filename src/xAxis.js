@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 	},
 	axisText: {
+		flex: 1,
 		textAlign: 'center'
 	}
 });
@@ -22,11 +23,6 @@ export default class XAxis extends Component {
 		width: PropTypes.number.isRequired,
 		axisLineWidth: PropTypes.number,
 	}
-
-	static defaultProps = {
-		axisColor: '#999',
-		axisLineWidth: 1,
-	};
 
 	constructor(props) {
 		super(props);

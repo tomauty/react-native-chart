@@ -6,11 +6,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 		flex: 1,
+		paddingVertical: 0,
 		paddingRight: 5,
 		alignItems: 'flex-end',
 	},
 	axisText: {
 		textAlign: 'right',
+		flex: 1,
 	},
 });
 
@@ -51,21 +53,7 @@ export default class YAxis extends Component<void, any, any> {
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
 			label = this.props.yAxisTransform(label);
 		}
-		if (this.props.hideHorizontalGridLines || !this.props.showGrid) {
-			return <Text style={{ color: this.props.axisLabelColor }} key={index}>{label}</Text>;
-		}
-		return (
-			<View key={index}>
-				<Text style={{ color: this.props.axisLabelColor }}>{label}</Text>
-				<View style={{
-					position: 'absolute',
-					left: this.props.width,
-					width: this.props.containerWidth - this.props.width,
-					height: this.props.gridLineWidth,
-					backgroundColor: this.props.gridColor,
-				}} />
-			</View>
-		);
+		return <Text style={{ color: this.props.axisLabelColor }} key={index}>{label}</Text>;
 	}
 
 	render() {
