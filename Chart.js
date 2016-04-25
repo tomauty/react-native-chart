@@ -196,6 +196,7 @@ export default class RNChart extends Component<void, any, any> {
 												style={{ marginLeft: this.props.yAxisWidth - 1 }}
 												axisColor={this.props.axisColor}
 												axisLineWidth={this.props.axisLineWidth}
+												showXAxisLabels={this.props.showXAxisLabels}
 											/>
 										</View>
 									);

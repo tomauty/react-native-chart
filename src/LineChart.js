@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
 	},
 });
 
+const AnimatedShape = Animated.createAnimatedComponent(Shape);
+
 export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
@@ -50,7 +52,7 @@ export default class LineChart extends Component<void, any, any> {
 		if (path.path.some(isNaN)) return null;
 		return (
 			<Surface width={WIDTH} height={HEIGHT}>
-				<Shape d={path} stroke="black" strokeWidth={this.props.lineWidth} />
+				<AnimatedShape d={path} stroke="black" strokeWidth={this.props.lineWidth} />
 			</Surface>
 		);
 	}
