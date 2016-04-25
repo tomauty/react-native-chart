@@ -1,6 +1,6 @@
 /* @flow */
 'use strict';
-import React, { Component, PropTypes, LayoutAnimation, StyleSheet, View } from 'react-native';
+import React, { Component, PropTypes, Text, LayoutAnimation, StyleSheet, View } from 'react-native';
 import BarChart from './src/BarChart';
 import LineChart from './src/LineChart';
 import YAxis from './src/yAxis';
@@ -30,6 +30,7 @@ export default class RNChart extends Component<void, any, any> {
 		chartData: [],
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
+		axisLabelColor: C.BLACK,
 		axisLineWidth: 1,
 		axisTitleColor: C.GREY,
 		axisTitleFontSize: 16,
@@ -38,6 +39,8 @@ export default class RNChart extends Component<void, any, any> {
 		gridLineWidth: 0.5,
 		labelFontSize: 10,
 		labelTextColor: C.GREY,
+		hideHorizontalGridLines: false,
+		hideVerticalGridLines: false,
 		showAxis: true,
 		showGrid: true,
 		showXAxisLabels: true,
@@ -174,6 +177,7 @@ export default class RNChart extends Component<void, any, any> {
 											minVerticalBound={this.state.bounds.min}
 											maxVerticalBound={this.state.bounds.max}
 											yAxisTransform={this.props.yAxisTransform}
+											axisLabelColor={this.props.axisLabelColor}
 											style={{ width: this.props.yAxisWidth }}
 										/>
 									</View>
@@ -185,6 +189,11 @@ export default class RNChart extends Component<void, any, any> {
 										minVerticalBound={this.state.bounds.min}
 										maxVerticalBound={this.state.bounds.max}
 									/>
+									{/*{(() => {
+										if (this.props.showGrid) {
+											return <Text>hi</Text>;
+										}
+									})()}*/}
 								</View>
 								{(() => {
 									return (
@@ -195,6 +204,7 @@ export default class RNChart extends Component<void, any, any> {
 												xAxisLabels={this.props.xAxisLabels}
 												style={{ marginLeft: this.props.yAxisWidth - 1 }}
 												axisColor={this.props.axisColor}
+												axisLabelColor={this.props.axisLabelColor}
 												axisLineWidth={this.props.axisLineWidth}
 												showXAxisLabels={this.props.showXAxisLabels}
 											/>
@@ -247,6 +257,7 @@ RNChart.propTypes = {
 
 	animationDuration: PropTypes.number, // TODO
 	axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	axisLabelColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisLineWidth: PropTypes.number,
 	axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisTitleFontSize: PropTypes.number,

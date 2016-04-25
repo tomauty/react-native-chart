@@ -45,7 +45,7 @@ export default class XAxis extends Component {
 			]}>
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
-				return labels.map((d, i) => <Text key={i} style={styles.axisText}>{d}</Text>);
+				return labels.map((d, i) => <Text key={i} style={[styles.axisText, { color: this.props.axisLabelColor }]}>{d}</Text>);
 			})()}
 			</View>
 		)

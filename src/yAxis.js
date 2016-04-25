@@ -53,7 +53,7 @@ export default class YAxis extends Component<void, any, any> {
 			label = this.props.yAxisTransform(label);
 		}
 		return (
-			<Text key={index}>{label}</Text>
+			<Text style={{ color: this.props.axisLabelColor }} key={index}>{label}</Text>
 		);
 	}
 

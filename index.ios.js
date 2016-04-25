@@ -100,19 +100,23 @@ class rnchart20 extends Component {
 				<Chart
 					showAxis
 					style={styles.chart}
+					axisColor={colors.grey}
 					chartData={this.state.barChart}
 					xAxisLabels={this.state.xLabels}
+					axisLabelColor={colors.grey}
 					showYAxisLabels
 					showXAxisLabels
 				/>
 				<Chart
-						showAxis
-						style={styles.chart}
-						chartData={this.state.lineChart}
-						xAxisLabels={this.state.xLabels}
-						showYAxisLabels
-						showXAxisLabels
-					/>
+					showAxis
+					style={styles.chart}
+					chartData={this.state.lineChart}
+					xAxisLabels={this.state.xLabels}
+					showYAxisLabels
+					showXAxisLabels
+					axisColor={colors.grey}
+					axisLabelColor={colors.grey}
+				/>
 				<TouchableOpacity onPress={() => {
 						this.setState({ barChart: generateChartData('bar'), lineChart: generateChartData('line')})
 					}}>
