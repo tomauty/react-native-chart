@@ -30,10 +30,10 @@ export default class LineChart extends Component<void, any, any> {
 		const shouldFill = !!this.props.chartData.fillColor;
 
 		// For all same values, create a range anyway
-		if (minBound === maxBound) {
-			minBound -= this.props.verticalGridStep;
-			maxBound += this.props.verticalGridStep;
-		}
+		// if (minBound === maxBound) {
+		// 	minBound -= this.props.verticalGridStep;
+		// 	maxBound += this.props.verticalGridStep;
+		// }
 
 		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
 		const scale = HEIGHT / divisor;
