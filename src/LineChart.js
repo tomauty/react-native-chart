@@ -27,6 +27,7 @@ export default class LineChart extends Component<void, any, any> {
 		const WIDTH = this.props.width;
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
+		const shouldFill = !!this.props.chartData.fillColor;
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {
@@ -57,6 +58,7 @@ export default class LineChart extends Component<void, any, any> {
 			<Surface width={WIDTH} height={HEIGHT}>
 				<AnimatedShape
 					d={path}
+					fill={this.props.data.fillColor}
 					stroke={this.props.data.color || C.BLUE}
 					strokeWidth={this.props.lineWidth}
 				/>
