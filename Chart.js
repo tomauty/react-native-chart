@@ -168,16 +168,13 @@ export default class RNChart extends Component<void, any, any> {
 								<View style={[styles.default, { flexDirection: 'row'}]}>
 									<View ref="yAxis">
 										<YAxis
+											{...this.props}
 											data={data.data}
 											height={this.state.containerHeight - this.state.xHeight}
-											axisColor={this.props.axisColor}
-											axisLineWidth={this.props.axisLineWidth}
-											tightBounds={this.props.tightBounds}
-											verticalGridStep={this.props.verticalGridStep}
+											width={this.props.yAxisWidth}
 											minVerticalBound={this.state.bounds.min}
+											containerWidth={this.state.containerWidth}
 											maxVerticalBound={this.state.bounds.max}
-											yAxisTransform={this.props.yAxisTransform}
-											axisLabelColor={this.props.axisLabelColor}
 											style={{ width: this.props.yAxisWidth }}
 										/>
 									</View>
@@ -188,25 +185,18 @@ export default class RNChart extends Component<void, any, any> {
 										height={this.state.containerHeight - this.state.xHeight}
 										minVerticalBound={this.state.bounds.min}
 										maxVerticalBound={this.state.bounds.max}
-									/>
-									{/*{(() => {
-										if (this.props.showGrid) {
-											return <Text>hi</Text>;
-										}
-									})()}*/}
+									>
+								</Chart>
+
 								</View>
 								{(() => {
 									return (
 										<View ref="xAxis">
 											<XAxis
+												{...this.props}
 												width={this.state.containerWidth - this.props.yAxisWidth}
 												data={data.data}
-												xAxisLabels={this.props.xAxisLabels}
 												style={{ marginLeft: this.props.yAxisWidth - 1 }}
-												axisColor={this.props.axisColor}
-												axisLabelColor={this.props.axisLabelColor}
-												axisLineWidth={this.props.axisLineWidth}
-												showXAxisLabels={this.props.showXAxisLabels}
 											/>
 										</View>
 									);

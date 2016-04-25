@@ -101,6 +101,7 @@ class rnchart20 extends Component {
 					showAxis
 					style={styles.chart}
 					axisColor={colors.grey}
+					gridColor="red"
 					chartData={this.state.barChart}
 					xAxisLabels={this.state.xLabels}
 					axisLabelColor={colors.grey}

@@ -69,7 +69,7 @@ export default class LineChart extends Component<void, any, any> {
 	render() {
 		const data = this.props.data;
 		return (
-			<Animated.View ref="container" style={{ opacity: this.state.opacity }}>
+			<Animated.View ref="container" style={{ opacity: this.state.opacity, backgroundColor: 'transparent' }}>
 				{this._drawLine()}
 			</Animated.View>
 		)
