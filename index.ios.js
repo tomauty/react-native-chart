@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 import React, {
   AppRegistry,
 	Dimensions,
@@ -27,7 +22,7 @@ const styles = StyleSheet.create({
 	chart: {
 		marginVertical: 20,
 		width: width - 40,
-		height: 300,
+		height: 200,
 		alignSelf: 'center',
 	},
 });
@@ -110,7 +105,17 @@ class rnchart20 extends Component {
 					showYAxisLabels
 					showXAxisLabels
 				/>
-				<TouchableOpacity onPress={() => this.setState({ barChart: generateChartData('bar')})}>
+				<Chart
+						showAxis
+						style={styles.chart}
+						chartData={this.state.lineChart}
+						xAxisLabels={this.state.xLabels}
+						showYAxisLabels
+						showXAxisLabels
+					/>
+				<TouchableOpacity onPress={() => {
+						this.setState({ barChart: generateChartData('bar'), lineChart: generateChartData('line')})
+					}}>
 					<Text style={{ borderWidth: 1, padding: 10 }}>Update Data</Text>
 				</TouchableOpacity>
 			</ScrollView>

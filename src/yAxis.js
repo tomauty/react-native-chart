@@ -47,7 +47,6 @@ export default class YAxis extends Component<void, any, any> {
 			minBound -= this.props.verticalGridStep;
 			maxBound += this.props.verticalGridStep;
 		}
-		console.log('minBound:', minBound, 'max bound:', maxBound)
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
 		label = Math.round(label);
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {

@@ -2,6 +2,7 @@
 'use strict';
 import React, { Component, PropTypes, LayoutAnimation, StyleSheet, View } from 'react-native';
 import BarChart from './src/BarChart';
+import LineChart from './src/LineChart';
 import YAxis from './src/yAxis';
 import XAxis from './src/xAxis';
 import * as C from './src/constants';
@@ -150,7 +151,7 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	render() {
-		const components = { 'line': BarChart, 'bar': BarChart, 'pie': BarChart };
+		const components = { 'line': LineChart, 'bar': BarChart, 'pie': BarChart };
 
 		const PieChart = {}; // TODO: remove
 		const data = this.props.chartData;
