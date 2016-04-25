@@ -36,6 +36,7 @@ export default class YAxis extends Component<void, any, any> {
 		height: PropTypes.number.isRequired,
 		placement: PropTypes.oneOf(['left', 'right']),
 		verticalGridStep: PropTypes.number.isRequired,
+		yAxisTransform: PropTypes.func,
 	}
 
 	static defaultProps : any = {
@@ -130,6 +131,9 @@ export default class YAxis extends Component<void, any, any> {
 
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * (index + 1);
 		label = Math.round(label);
+		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
+			label = this.props.yAxisTransform(label);
+		}
 		return (
 			<Text key={index}>{label}</Text>
 		);

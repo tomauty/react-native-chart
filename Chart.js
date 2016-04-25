@@ -60,6 +60,7 @@ export default class RNChart extends Component<void, any, any> {
 		xAxisTitle: PropTypes.string,
 		xLabels: PropTypes.array.isRequired,
 		yAxisTitle: PropTypes.string,
+		yAxisTransform: PropTypes.func,
 	};
 
 	static defaultProps : any = {
@@ -135,6 +136,7 @@ export default class RNChart extends Component<void, any, any> {
 											axisLineWidth={convertedProps.axisLineWidth}
 											tightBounds={convertedProps.tightBounds}
 											verticalGridStep={convertedProps.verticalGridStep}
+											yAxisTransform={convertedProps.yAxisTransform}
 										/>
 									</View>
 									<Chart {...convertedProps} data={data} />
