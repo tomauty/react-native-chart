@@ -64,6 +64,7 @@ export default class RNChart extends Component<void, any, any> {
 	};
 
 	static defaultProps : any = {
+		chartData: [],
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
 		axisLineWidth: 1,
@@ -115,16 +116,15 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	render() {
-		const convertedProps = { ...this.props, chartData: this.props.chartData || [] };
 		const components = { 'line': BarChart, 'bar': BarChart, 'pie': BarChart };
 
 		const PieChart = {}; // TODO: remove
-		const data = convertedProps.chartData;
+		const data = this.props.chartData;
 		return (
 			<View>
 				{(() => {
 					const Chart = components[data.type] || BarChart;
-					if (convertedProps.showAxis && Chart !== PieChart) {
+					if (this.props.showAxis && Chart !== PieChart) {
 						return (
 							<View ref="container" style={[ this.props.style || {}, { flex: 1, flexDirection: 'column' }]}>
 								<View style={[styles.default, { flexDirection: 'row'}]}>
@@ -133,13 +133,13 @@ export default class RNChart extends Component<void, any, any> {
 											data={data.data}
 											height={this.state.containerHeight - this.state.xHeight}
 											axisColor={this.props.axisColor}
-											axisLineWidth={convertedProps.axisLineWidth}
-											tightBounds={convertedProps.tightBounds}
-											verticalGridStep={convertedProps.verticalGridStep}
-											yAxisTransform={convertedProps.yAxisTransform}
+											axisLineWidth={this.props.axisLineWidth}
+											tightBounds={this.props.tightBounds}
+											verticalGridStep={this.props.verticalGridStep}
+											yAxisTransform={this.props.yAxisTransform}
 										/>
 									</View>
-									<Chart {...convertedProps} data={data} />
+									<Chart {...this.props} data={data} />
 								</View>
 								{(() => {
 									if (!this.state.yWidth) return null;
@@ -161,7 +161,7 @@ export default class RNChart extends Component<void, any, any> {
 					}
 					return (
 						<View ref="container" style={[ this.props.style || {}, styles.default ]}>
-							<Chart {...convertedProps} data={data} />
+							<Chart {...this.props} data={data} />
 						</View>
 					);
 				})()}
