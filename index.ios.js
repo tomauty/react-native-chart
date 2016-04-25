@@ -10,12 +10,12 @@ import React, {
   StyleSheet,
 	TouchableOpacity,
   Text,
+	ScrollView,
   View
 } from 'react-native';
 
 import Chart from './Chart';
 
-const data = [1, 10, 20];
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
 	container: {
@@ -101,7 +101,7 @@ class rnchart20 extends Component {
 	}
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
 				<Chart
 					showAxis
 					style={styles.chart}
@@ -109,13 +109,11 @@ class rnchart20 extends Component {
 					xAxisLabels={this.state.xLabels}
 					showYAxisLabels
 					showXAxisLabels
-
 				/>
-
-			<TouchableOpacity onPress={() => this.setState({ barChart: generateChartData('bar')})}>
-				<Text>Update Data</Text>
-			</TouchableOpacity>
-      </View>
+				<TouchableOpacity onPress={() => this.setState({ barChart: generateChartData('bar')})}>
+					<Text style={{ borderWidth: 1, padding: 10 }}>Update Data</Text>
+				</TouchableOpacity>
+			</ScrollView>
     );
   }
 }

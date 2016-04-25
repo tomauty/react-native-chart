@@ -1,6 +1,6 @@
 /* @flow */
 'use strict';
-import React, { Component, PropTypes, StyleSheet, View } from 'react-native';
+import React, { Component, PropTypes, LayoutAnimation, StyleSheet, View } from 'react-native';
 import BarChart from './src/BarChart';
 import YAxis from './src/yAxis';
 import XAxis from './src/xAxis';
@@ -61,6 +61,10 @@ export default class RNChart extends Component<void, any, any> {
 		if (this.props !== props) {
 			this._computeBounds();
 		}
+	}
+
+	componentWillUpdate() {
+		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 	}
 
 	_computeBounds() {
@@ -211,20 +215,29 @@ export default class RNChart extends Component<void, any, any> {
 
 RNChart.propTypes = {
 	chartData: PropTypes.shape({
+
+		// Shared properties between most types
 		data: PropTypes.arrayOf(PropTypes.number).isRequired,
 		type: PropTypes.oneOf(['line', 'bar', 'pie']),
-		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-		fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
-		cornerRadius: PropTypes.number,
-		lineWidth: PropTypes.number, // TODO
 		highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
-		highlightRadius: PropTypes.number, // TODO
+
+		// Bar chart props
+		color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		cornerRadius: PropTypes.number,
+		fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
 		widthPercent: PropTypes.number, // TODO
-		showDataPoint: PropTypes.bool, // TODO
+
+		// Line/multi-line chart props
+		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointRadius: PropTypes.number, // TODO
+		highlightRadius: PropTypes.number, // TODO
+		lineWidth: PropTypes.number, // TODO
+		showDataPoint: PropTypes.bool, // TODO
+
+		// Pie chart props
 		pieAngle: PropTypes.number, // TODO
 		pieCenterRatio: PropTypes.number, // TODO
 		sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO

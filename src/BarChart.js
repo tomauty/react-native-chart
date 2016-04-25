@@ -41,18 +41,13 @@ export default class BarChart extends Component<void, any, any> {
 		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
 		const scale = HEIGHT / divisor;
 		let height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
-		console.log('HEIGHT:', height, 'for', dataPoint);
-		if (height <= 0) {
-			height = 20;
-		}
-		console.log(this.props.data);
+		if (height <= 0) height = 20;
 		return (
 			<View
 				key={index}
 				style={{
 					borderTopLeftRadius: this.props.data.cornerRadius || 0,
 					borderTopRightRadius: this.props.data.cornerRadius || 0,
-					// borderRadius: 5,
 					backgroundColor,
 					width,
 					height
@@ -63,7 +58,6 @@ export default class BarChart extends Component<void, any, any> {
 
 	render() {
 		const data = this.props.data;
-		console.log(data);
 		return (
 			<View ref="container" style={[ styles.default ]}>
 				{data.data.map(this._drawBar)}
