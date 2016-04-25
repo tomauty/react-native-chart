@@ -228,15 +228,15 @@ RNChart.propTypes = {
 		color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		cornerRadius: PropTypes.number,
 		fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
-		widthPercent: PropTypes.number, // TODO
+		widthPercent: PropTypes.number,
 
 		// Line/multi-line chart props
-		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointRadius: PropTypes.number, // TODO
 		highlightRadius: PropTypes.number, // TODO
-		lineWidth: PropTypes.number, // TODO
+		lineWidth: PropTypes.number,
 		showDataPoint: PropTypes.bool, // TODO
 
 		// Pie chart props
