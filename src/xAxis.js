@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
 export default class XAxis extends Component {
 
 	static propTypes = {
-		axisColor: PropTypes.any,
+		axisColor: PropTypes.any.isRequired,
 		axisLabelColor: PropTypes.any.isRequired,
-		axisLineWidth: PropTypes.number,
+		axisLineWidth: PropTypes.number.isRequired,
 		data: PropTypes.arrayOf(PropTypes.number),
-		showXAxisLabels: PropTypes.boolean.isRequired,
+		showXAxisLabels: PropTypes.bool.isRequired,
 		style: PropTypes.any,
 		width: PropTypes.number.isRequired,
 		xAxisLabels: PropTypes.arrayOf(PropTypes.any),
