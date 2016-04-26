@@ -14,7 +14,7 @@ import Chart from './Chart';
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		// flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#f5f5f5',
@@ -119,8 +119,24 @@ class rnchart20 extends Component {
 					axisColor={colors.grey}
 					axisLabelColor={colors.grey}
 				/>
-				<TouchableOpacity onPress={() => {
-						this.setState({ barChart: generateChartData('bar'), lineChart: generateChartData('line')})
+			<Chart
+					showAxis
+					style={styles.chart}
+					axisColor={colors.grey}
+					gridColor={colors.grey}
+					chartData={this.state.pieChart}
+					xAxisLabels={this.state.xLabels}
+					showYAxisLabels
+					showXAxisLabels
+					axisColor={colors.grey}
+					axisLabelColor={colors.grey}
+				/>
+				<TouchableOpacity style={{ marginBottom: 20 }} onPress={() => {
+						this.setState({
+							barChart: generateChartData('bar'),
+							lineChart: generateChartData('line'),
+							pieChart: generateChartData('pie')
+						})
 					}}>
 					<Text style={{ borderWidth: 1, padding: 10 }}>Update Data</Text>
 				</TouchableOpacity>

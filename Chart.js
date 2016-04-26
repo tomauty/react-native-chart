@@ -3,14 +3,13 @@
 import React, { Component, PropTypes, Text, LayoutAnimation, StyleSheet, View } from 'react-native';
 import BarChart from './src/BarChart';
 import LineChart from './src/LineChart';
+import PieChart from './src/PieChart';
 import YAxis from './src/yAxis';
 import XAxis from './src/xAxis';
 import * as C from './src/constants';
 
 const styles = StyleSheet.create({
-	default: {
-		flex: 1,
-	},
+	default: { flex: 1 },
 })
 
 const getRoundNumber = (value, gridStep) => {
@@ -27,7 +26,19 @@ const getRoundNumber = (value, gridStep) => {
 
 export default class RNChart extends Component<void, any, any> {
 	static defaultProps : any = {
-		chartData: [],
+		chartData: {
+			sliceColors: [
+				C.BLUE,
+				C.BLACK,
+				C.GREY,
+				C.RED,
+				C.WHITE,
+				C.YELLOW,
+				C.GREEN,
+				C.DARK_PURPLE,
+				C.LIGHT_PURPLE,
+			]
+		},
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
 		axisLabelColor: C.BLACK,
@@ -196,9 +207,7 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	render() {
-		const components = { 'line': LineChart, 'bar': BarChart, 'pie': BarChart };
-
-		const PieChart = {}; // TODO: remove
+		const components = { 'line': LineChart, 'bar': BarChart, 'pie': PieChart };
 		const data = this.props.chartData;
 		return (
 			<View>
@@ -249,7 +258,12 @@ export default class RNChart extends Component<void, any, any> {
 					}
 					return (
 						<View ref="container" style={[ this.props.style || {}, styles.default ]}>
-							<Chart {...this.props} data={data} />
+							<Chart
+								{...this.props}
+								width={this.state.containerWidth}
+								height={this.state.containerHeight}
+								data={data}
+							/>
 						</View>
 					);
 				})()}
