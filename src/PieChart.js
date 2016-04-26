@@ -1,10 +1,5 @@
 /* @flow */
-import React, {
-	ART,
-	Component,
-	View,
-	TouchableWithoutFeedback,
-} from 'react-native';
+import React, { ART, Component, View, TouchableWithoutFeedback } from 'react-native';
 const { Group, Surface, Shape, Path } = ART;
 
 const circlePath = (cx : number, cy : number, r : number, startDegree : number, endDegree : number) : Path => {
@@ -13,16 +8,13 @@ const circlePath = (cx : number, cy : number, r : number, startDegree : number, 
 	p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
 	return p;
 };
-
 const getColor = (colors : Array<string>, index : number) => colors[index] || colors[colors.length % index];
 
 export default class PieChart extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
 		this.state = { rotation: 0 };
-	}
-
-	componentDidUpdate() {
+		(this:any).boundingAreas = {};
 	}
 
 	_handlePress(_e) {

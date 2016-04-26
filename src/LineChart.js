@@ -3,7 +3,7 @@ import React, { Animated, ART, Component, View } from 'react-native';
 const { Surface, Shape, Path } = ART;
 // import Morph from 'art/morph/path';
 import * as C from './constants';
-
+import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
 
 export default class LineChart extends Component<void, any, any> {
@@ -27,7 +27,6 @@ export default class LineChart extends Component<void, any, any> {
 		const WIDTH = this.props.width;
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
-		// const shouldFill = !!this.props.chartData.fillColor;
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {
@@ -40,29 +39,44 @@ export default class LineChart extends Component<void, any, any> {
 		const horizontalStep = WIDTH / this.props.data.data.length;
 
 		const PATHS = [];
+		const dataPoints = [];
 
 		const firstDataPoint = this.props.data.data[0];
 		const height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
 		const path = new Path().moveTo(0, height);
+		dataPoints.push({ x: 0, y: height, radius: this.props.data.dataPointRadius });
 		PATHS.push(path);
 
 		this.props.data.data.slice(1).forEach((dataPoint, i) => {
 			let _height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
 			if (height <= 0) _height = 20;
-			PATHS.push(path.lineTo(horizontalStep * (i + 1) + horizontalStep, Math.round(_height)));
+			const x = horizontalStep * (i + 1) + horizontalStep;
+			const y = Math.round(_height);
+			PATHS.push(path.lineTo(x, y));
+			dataPoints.push({ x, y, radius: this.props.data.dataPointRadius });
 		});
-
 		if (path.path.some(isNaN)) return null;
-
 		return (
-			<Surface width={WIDTH} height={HEIGHT}>
-				<AnimatedShape
-					d={path}
-					fill={this.props.data.fillColor}
-					stroke={this.props.data.color || C.BLUE}
-					strokeWidth={this.props.lineWidth}
-				/>
-			</Surface>
+			<View>
+				<View style={{ position: 'absolute' }}>
+					<Surface width={WIDTH} height={HEIGHT}>
+						<AnimatedShape
+							d={path}
+							fill={this.props.data.fillColor}
+							stroke={this.props.data.color || C.BLUE}
+							strokeWidth={this.props.lineWidth}
+						/>
+					</Surface>
+				</View>
+				{(() => {
+					if (!this.props.data.showDataPoint) return null;
+					return (
+						<Surface width={WIDTH} height={HEIGHT}>
+							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
+						</Surface>
+					);
+				})()}
+			</View>
 		);
 	}
 
