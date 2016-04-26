@@ -18,7 +18,7 @@ import * as C from './src/constants';
 
 const styles = StyleSheet.create({
 	default: { flex: 1 },
-})
+});
 
 const getRoundNumber = (value, gridStep) => {
 	if (value <= 0) return 0;
@@ -29,7 +29,7 @@ const getRoundNumber = (value, gridStep) => {
 	let tmp = n % gridStep;
 	if (tmp !== 0) tmp += (gridStep - tmp);
 	return n * scale / 4.0;
-}
+};
 
 
 export default class RNChart extends Component<void, any, any> {
@@ -123,7 +123,7 @@ export default class RNChart extends Component<void, any, any> {
 					// Grid lines going top to bottom
 					return (
 						<View style={{ position: 'absolute', flexDirection: 'column', justifyContent: 'space-around' }}>
-							{range.map((_,i) => <View key={i} style={horizontalGridStyle} />)}
+							{range.map((_, i) => <View key={i} style={horizontalGridStyle} />)}
 						</View>
 					);
 				})()}
@@ -132,12 +132,12 @@ export default class RNChart extends Component<void, any, any> {
 					// Grid lines going left to right
 					return (
 						<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
-							{props.data.data.map((_,i) => <View key={i} style={verticalGridStyle} />)}
+							{props.data.data.map((_, i) => <View key={i} style={verticalGridStyle} />)}
 						</View>
 					);
 				})()}
 			</View>
-		)
+		);
 	}
 
 	_computeBounds() {
@@ -192,7 +192,7 @@ export default class RNChart extends Component<void, any, any> {
 				min = tmp;
 			}
 		}
-		this.setState({ bounds: { max, min }});
+		this.setState({ bounds: { max, min } });
 	}
 
 	_minVerticalBound() : number {
@@ -231,8 +231,8 @@ export default class RNChart extends Component<void, any, any> {
 					const Chart = components[data.type] || BarChart;
 					if (this.props.showAxis && Chart !== PieChart) {
 						return (
-							<View ref="container" style={[ this.props.style || {}, { flex: 1, flexDirection: 'column' }]}>
-								<View style={[styles.default, { flexDirection: 'row'}]}>
+							<View ref="container" style={[this.props.style || {}, { flex: 1, flexDirection: 'column' }]}>
+								<View style={[styles.default, { flexDirection: 'row' }]}>
 									<View ref="yAxis">
 										<YAxis
 											{...this.props}
@@ -273,7 +273,7 @@ export default class RNChart extends Component<void, any, any> {
 						);
 					}
 					return (
-						<View ref="container" style={[ this.props.style || {}, styles.default ]}>
+						<View ref="container" style={[this.props.style || {}, styles.default]}>
 							<Chart
 								{...this.props}
 								width={this.state.containerWidth}
@@ -284,7 +284,7 @@ export default class RNChart extends Component<void, any, any> {
 					);
 				})()}
 			</View>
-		)
+		);
 	}
 }
 
@@ -304,7 +304,7 @@ RNChart.propTypes = {
 		widthPercent: PropTypes.number,
 
 		// Line/multi-line chart props
-		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		dataPointRadius: PropTypes.number, // TODO
@@ -313,9 +313,8 @@ RNChart.propTypes = {
 		showDataPoint: PropTypes.bool, // TODO
 
 		// Pie chart props
-		pieAngle: PropTypes.number, // TODO
 		pieCenterRatio: PropTypes.number, // TODO
-		sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
+		sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
 	}).isRequired,
 
 	animationDuration: PropTypes.number, // TODO

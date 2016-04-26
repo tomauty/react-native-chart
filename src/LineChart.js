@@ -75,6 +75,6 @@ export default class LineChart extends Component<void, any, any> {
 					{this._drawLine()}
 				</Animated.View>
 			</View>
-		)
+		);
 	}
 }

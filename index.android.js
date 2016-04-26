@@ -102,8 +102,8 @@ class rnchart20 extends Component {
 		};
 	}
 
-  render() {
-    return (
+  	render() {
+    	return (
       <View style={styles.container}>
 				<Chart
 					showAxis

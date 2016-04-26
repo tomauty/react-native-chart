@@ -67,9 +67,10 @@ export default class YAxis extends Component<void, any, any> {
 				this.props.style || {},
 				this.props.placement === 'left' && { borderRightColor: this.props.axisColor, borderRightWidth: this.props.axisLineWidth },
 				this.props.placement === 'right' && { borderLeftColor: this.props.axisColor, borderLeftWidth: this.props.axisLineWidth },
-			]}>
+			]}
+  >
 				{range.map(this._createLabelForYAxis)}
 			</View>
-		)
+		);
 	}
 }

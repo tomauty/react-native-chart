@@ -19,10 +19,7 @@ const circlePath = (cx : number, cy : number, r : number, startDegree : number, 
 	return p;
 };
 
-const getColor = (colors : Array<string>, index : number) => {
-	if (colors[index]) return colors[index];
-	return colors[colors.length % index];
-}
+const getColor = (colors : Array<string>, index : number) => colors[index] || colors[colors.length % index];
 
 export default class PieChart extends Component<void, any, any> {
 	constructor(props : any) {
@@ -60,9 +57,9 @@ export default class PieChart extends Component<void, any, any> {
 		const arcs = [];
 		const colors = [];
 		sectors.forEach((sectionPiece, i) => {
-			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece + startAngle))
+			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece + startAngle));
 			colors.push(getColor(this.props.data.sliceColors, i));
-			startAngle += sectionPiece
+			startAngle += sectionPiece;
 		});
 
 		return (
@@ -70,7 +67,7 @@ export default class PieChart extends Component<void, any, any> {
 				<View>
 					<Surface width={this.props.width} height={this.props.height}>
 						<Group originX={centerX} originY={centerY} rotation={this.state.rotation}>
-							{arcs.map((arc,i) => {
+							{arcs.map((arc, i) => {
 								return (
 										<Shape
 											key={i}
@@ -85,6 +82,6 @@ export default class PieChart extends Component<void, any, any> {
 					</Surface>
 				</View>
 			</TouchableWithoutFeedback>
-		)
+		);
 	}
 }

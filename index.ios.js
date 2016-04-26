@@ -13,18 +13,8 @@ import Chart from './Chart';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
-	container: {
-		// flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#f5f5f5',
-	},
-	chart: {
-		marginVertical: 20,
-		width: width - 40,
-		height: 200,
-		alignSelf: 'center',
-	},
+	container: { paddingTop: 20, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' },
+	chart: { marginVertical: 20, width: width - 40, height: 200, alignSelf: 'center' },
 });
 
 const colors = {
@@ -77,9 +67,8 @@ const generateChartData = (type) => {
 	return {
 		type,
 		color: chartColors[type],
-		widthPercent: 0.7,
+		widthPercent: 0.5,
 		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
-		// data: [50, 50],
 		sliceColors,
 	};
 };
@@ -94,33 +83,34 @@ class rnchart20 extends Component {
 			xLabels: generateXLabels(),
 		};
 	}
-  render() {
-    return (
-      <ScrollView contentContainerStyle={styles.container}>
+  	render() {
+    	return (
+			<View style={[styles.container, { flex: 1 }]}>
+	      <ScrollView contentContainerStyle={styles.container}>
+					<Chart
+						showAxis
+						style={styles.chart}
+						axisColor={colors.grey}
+						gridColor={colors.grey}
+						chartData={this.state.barChart}
+						xAxisLabels={this.state.xLabels}
+						axisLabelColor={colors.grey}
+						showYAxisLabels
+						showXAxisLabels
+					/>
+					<Chart
+						showAxis
+						style={styles.chart}
+						axisColor={colors.grey}
+						gridColor={colors.grey}
+						chartData={this.state.lineChart}
+						xAxisLabels={this.state.xLabels}
+						showYAxisLabels
+						showXAxisLabels
+						axisColor={colors.grey}
+						axisLabelColor={colors.grey}
+					/>
 				<Chart
-					showAxis
-					style={styles.chart}
-					axisColor={colors.grey}
-					gridColor={colors.grey}
-					chartData={this.state.barChart}
-					xAxisLabels={this.state.xLabels}
-					axisLabelColor={colors.grey}
-					showYAxisLabels
-					showXAxisLabels
-				/>
-				<Chart
-					showAxis
-					style={styles.chart}
-					axisColor={colors.grey}
-					gridColor={colors.grey}
-					chartData={this.state.lineChart}
-					xAxisLabels={this.state.xLabels}
-					showYAxisLabels
-					showXAxisLabels
-					axisColor={colors.grey}
-					axisLabelColor={colors.grey}
-				/>
-			<Chart
 					showAxis
 					style={styles.chart}
 					axisColor={colors.grey}
@@ -131,17 +121,19 @@ class rnchart20 extends Component {
 					showXAxisLabels
 					axisColor={colors.grey}
 					axisLabelColor={colors.grey}
-				/>
-				<TouchableOpacity style={{ marginBottom: 20 }} onPress={() => {
+    />
+					<TouchableOpacity style={{ marginBottom: 20 }} onPress={() => {
 						this.setState({
-							barChart: generateChartData('bar'),
-							lineChart: generateChartData('line'),
-							pieChart: generateChartData('pie')
-						})
-					}}>
-					<Text style={{ borderWidth: 1, padding: 10 }}>Update Data</Text>
-				</TouchableOpacity>
-			</ScrollView>
+								barChart: generateChartData('bar'),
+								lineChart: generateChartData('line'),
+								pieChart: generateChartData('pie')
+							});
+					}}
+    >
+						<Text style={{ borderWidth: 1, padding: 10 }}>Update Data</Text>
+					</TouchableOpacity>
+				</ScrollView>
+			</View>
     );
   }
 }

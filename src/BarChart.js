@@ -59,16 +59,16 @@ export default class BarChart extends Component<void, any, any> {
 					height
 				}}
 			></View>
-		)
+		);
 	}
 
 	render() {
 		const data = this.props.data;
 		return (
-			<View ref="container" style={[ styles.default ]}>
+			<View ref="container" style={[styles.default]}>
 				{this.props.drawGrid(this.props)}
 				{data.data.map(this._drawBar)}
 			</View>
-		)
+		);
 	}
 }

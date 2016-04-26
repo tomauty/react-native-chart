@@ -32,18 +32,19 @@ export default class XAxis extends Component {
 		const labels = this.props.xAxisLabels || [];
 		return (
 			<View style={[
-					styles.xAxisContainer,
-					this.props.style || {},
-					{
-						borderTopColor: this.props.axisColor,
-						borderTopWidth: this.props.axisLineWidth
-					},
-			]}>
+				styles.xAxisContainer,
+				this.props.style || {},
+				{
+					borderTopColor: this.props.axisColor,
+					borderTopWidth: this.props.axisLineWidth
+				},
+			]}
+  >
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
 				return labels.map((d, i) => <Text key={i} style={[styles.axisText, { color: this.props.axisLabelColor }]}>{d}</Text>);
 			})()}
 			</View>
-		)
+		);
 	}
 }

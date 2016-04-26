@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "node_modules/.bin/eslint . || true"
   },
   "dependencies": {
     "react": "^0.14.7",
@@ -13,6 +14,12 @@
     "babel": "^6.5.2",
     "babel-eslint": "^6.0.0",
     "babel-preset-react-native": "^1.5.3",
-    "eslint-config-airbnb": "^7.0.0"
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb": "^7.0.0",
+    "eslint-plugin-flow-vars": "^0.3.0",
+    "eslint-plugin-flowtype": "^2.2.7",
+    "eslint-plugin-jsx-a11y": "^1.0.3",
+    "eslint-plugin-react": "^5.0.1",
+    "eslint-plugin-react-native": "^1.0.0"
   }
 }
