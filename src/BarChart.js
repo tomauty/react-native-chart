@@ -19,9 +19,9 @@ export default class BarChart extends Component<void, any, any> {
 		(this:any)._handlePress = this._handlePress.bind(this);
 	}
 
-	_handlePress(dataPoint : number, index : number) {
+	_handlePress(e : Object, dataPoint : number, index : number) {
 		if (this.props.data.onDataPointPress) {
-			this.props.data.onDataPointPress(dataPoint, index);
+			this.props.data.onDataPointPress(e, dataPoint, index);
 		}
 	}
 
@@ -50,7 +50,7 @@ export default class BarChart extends Component<void, any, any> {
 		return (
 			<TouchableWithoutFeedback
 				key={index}
-				onPress={() => this._handlePress(dataPoint, index)}
+				onPress={(e) => this._handlePress(e, dataPoint, index)}
 			>
 				<View
 					style={{
