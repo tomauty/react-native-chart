@@ -35,10 +35,10 @@ export default class PieChart extends Component<void, any, any> {
 
 	_handlePress(e) {
 		const { locationX, locationY } = e.nativeEvent;
-		console.log(locationX, locationY);
 	}
 
 	render() {
+		if (!this.props.width || !this.props.height) return <View />;
 
 		const half = this.props.height / 2;
 
@@ -52,22 +52,21 @@ export default class PieChart extends Component<void, any, any> {
 		// Gather sum of all data to determine angles
 		let sum = 0;
 		this.props.data.data.forEach(n => sum += (n > 0) ? n : 0.001);
-		const sectors = this.props.data.data.map(n => Math.round(360 * (n/sum)));
+		const sectors = this.props.data.data.map(n => Math.ceil(360 * (n/sum)));
 
 		let startAngle = 0;
 		let endAngle = 0;
 
 		const arcs = [];
 		const colors = [];
-		console.log(sectors);
 		sectors.forEach((sectionPiece, i) => {
-			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece))
+			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece + startAngle))
 			colors.push(getColor(this.props.data.sliceColors, i));
 			startAngle += sectionPiece
 		});
 
 		return (
-				<TouchableWithoutFeedback onPress={this._handlePress}>
+			<TouchableWithoutFeedback onPress={this._handlePress}>
 				<View>
 					<Surface width={this.props.width} height={this.props.height}>
 						<Group originX={centerX} originY={centerY} rotation={this.state.rotation}>
@@ -84,9 +83,8 @@ export default class PieChart extends Component<void, any, any> {
 							})}
 						</Group>
 					</Surface>
-				{/*{sectors.map(s => <Text>{s}</Text>)}*/}
-			</View>
-		</TouchableWithoutFeedback>
+				</View>
+			</TouchableWithoutFeedback>
 		)
 	}
 }
