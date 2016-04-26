@@ -10,10 +10,6 @@ const styles = StyleSheet.create({
 		paddingRight: 5,
 		alignItems: 'flex-end',
 	},
-	axisText: {
-		textAlign: 'right',
-		flex: 1,
-	},
 });
 
 export default class YAxis extends Component<void, any, any> {
@@ -41,7 +37,6 @@ export default class YAxis extends Component<void, any, any> {
 	_createLabelForYAxis(index : number) {
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
-		const height = this.props.height;
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {
@@ -62,13 +57,14 @@ export default class YAxis extends Component<void, any, any> {
 		const steps = (uniqueValuesInDataSet.length < this.props.verticalGridStep) ? uniqueValuesInDataSet.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (
-			<View style={[
-				styles.yAxisContainer,
-				this.props.style || {},
-				this.props.placement === 'left' && { borderRightColor: this.props.axisColor, borderRightWidth: this.props.axisLineWidth },
-				this.props.placement === 'right' && { borderLeftColor: this.props.axisColor, borderLeftWidth: this.props.axisLineWidth },
-			]}
-  >
+			<View
+				style={[
+					styles.yAxisContainer,
+					this.props.style || {},
+					this.props.placement === 'left' && { borderRightColor: this.props.axisColor, borderRightWidth: this.props.axisLineWidth },
+					this.props.placement === 'right' && { borderLeftColor: this.props.axisColor, borderLeftWidth: this.props.axisLineWidth },
+				]}
+			>
 				{range.map(this._createLabelForYAxis)}
 			</View>
 		);

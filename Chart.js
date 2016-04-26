@@ -3,11 +3,9 @@
 import React, {
 	Component,
 	PropTypes,
-	Text,
 	LayoutAnimation,
 	StyleSheet,
 	View,
-	PixelRatio,
 } from 'react-native';
 import BarChart from './src/BarChart';
 import LineChart from './src/LineChart';
@@ -45,7 +43,7 @@ export default class RNChart extends Component<void, any, any> {
 				C.GREEN,
 				C.DARK_PURPLE,
 				C.LIGHT_PURPLE,
-			]
+			],
 		},
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
@@ -78,6 +76,10 @@ export default class RNChart extends Component<void, any, any> {
 		this._updateAxisLayout();
 		this._computeBounds();
 	}
+	componentWillUpdate() {
+		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+	}
+
 	componentDidUpdate(props : any) {
 		this._updateAxisLayout();
 		if (this.props !== props) {
@@ -85,12 +87,8 @@ export default class RNChart extends Component<void, any, any> {
 		}
 	}
 
-	componentWillUpdate() {
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-	}
-
 	_drawGrid(props) {
-		if (!props.showGrid) return;
+		if (!props.showGrid) return null;
 		const range = [];
 		const uniqueValuesInDataSet = props.data.data.filter((v, i, self) => self.indexOf(v) === i);
 		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
@@ -167,7 +165,8 @@ export default class RNChart extends Component<void, any, any> {
 				step = Math.max(Math.abs(max - min) / 2, Math.max(Math.abs(min), Math.abs(max)));
 			}
 			step = getRoundNumber(step, this.props.verticalGridStep);
-			let newMin, newMax;
+			let newMin;
+			let newMax;
 
 			if (Math.abs(min) > Math.abs(max)) {
 				const m = Math.ceil(Math.abs(min) / step);
@@ -193,6 +192,7 @@ export default class RNChart extends Component<void, any, any> {
 			}
 		}
 		this.setState({ bounds: { max, min } });
+		return null;
 	}
 
 	_minVerticalBound() : number {
@@ -253,9 +253,7 @@ export default class RNChart extends Component<void, any, any> {
 										minVerticalBound={this.state.bounds.min}
 										maxVerticalBound={this.state.bounds.max}
 										drawGrid={this._drawGrid}
-									>
-								</Chart>
-
+									/>
 								</View>
 								{(() => {
 									return (

@@ -42,6 +42,7 @@
         "no-alert": 0,
         "no-underscore-dangle": 0,
         "react-native/no-unused-styles": 1,
+        "react/jsx-indent": [2, "tab"],
         "react/jsx-indent-props": [2, "tab"],
         "react/no-multi-comp": 0,
         "arrow-body-style": [0, "as-needed"],

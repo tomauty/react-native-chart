@@ -1,7 +1,7 @@
 /* @flow */
-import React, { Animated, ART, Component, LayoutAnimation, View, StyleSheet, Text } from 'react-native';
+import React, { Animated, ART, Component, View } from 'react-native';
 const { Surface, Shape, Path } = ART;
-import Morph from 'art/morph/path';
+// import Morph from 'art/morph/path';
 import * as C from './constants';
 
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
@@ -27,7 +27,7 @@ export default class LineChart extends Component<void, any, any> {
 		const WIDTH = this.props.width;
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
-		const shouldFill = !!this.props.chartData.fillColor;
+		// const shouldFill = !!this.props.chartData.fillColor;
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {
@@ -42,14 +42,14 @@ export default class LineChart extends Component<void, any, any> {
 		const PATHS = [];
 
 		const firstDataPoint = this.props.data.data[0];
-		let height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
+		const height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
 		const path = new Path().moveTo(0, height);
 		PATHS.push(path);
 
-		this.props.data.data.slice(1).map((dataPoint, i) => {
-			let height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
-			if (height <= 0) height = 20;
-			PATHS.push(path.lineTo(horizontalStep * (i + 1) + horizontalStep, Math.round(height)));
+		this.props.data.data.slice(1).forEach((dataPoint, i) => {
+			let _height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
+			if (height <= 0) _height = 20;
+			PATHS.push(path.lineTo(horizontalStep * (i + 1) + horizontalStep, Math.round(_height)));
 		});
 
 		if (path.path.some(isNaN)) return null;
@@ -67,7 +67,6 @@ export default class LineChart extends Component<void, any, any> {
 	}
 
 	render() : void {
-		const data = this.props.data;
 		return (
 			<View>
 				{this.props.drawGrid(this.props)}

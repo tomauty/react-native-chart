@@ -6,7 +6,7 @@ import React, {
 	TouchableOpacity,
   Text,
 	ScrollView,
-  View
+  View,
 } from 'react-native';
 
 import Chart from './Chart';
@@ -83,10 +83,10 @@ class rnchart20 extends Component {
 			xLabels: generateXLabels(),
 		};
 	}
-  	render() {
-    	return (
+	render() {
+		return (
 			<View style={[styles.container, { flex: 1 }]}>
-	      <ScrollView contentContainerStyle={styles.container}>
+				<ScrollView contentContainerStyle={styles.container}>
 					<Chart
 						showAxis
 						style={styles.chart}
@@ -110,32 +110,34 @@ class rnchart20 extends Component {
 						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
-				<Chart
-					showAxis
-					style={styles.chart}
-					axisColor={colors.grey}
-					gridColor={colors.grey}
-					chartData={this.state.pieChart}
-					xAxisLabels={this.state.xLabels}
-					showYAxisLabels
-					showXAxisLabels
-					axisColor={colors.grey}
-					axisLabelColor={colors.grey}
-    />
-					<TouchableOpacity style={{ marginBottom: 20 }} onPress={() => {
-						this.setState({
+					<Chart
+						showAxis
+						style={styles.chart}
+						axisColor={colors.grey}
+						gridColor={colors.grey}
+						chartData={this.state.pieChart}
+						xAxisLabels={this.state.xLabels}
+						showYAxisLabels
+						showXAxisLabels
+						axisColor={colors.grey}
+						axisLabelColor={colors.grey}
+					/>
+					<TouchableOpacity
+						style={{ marginBottom: 20 }}
+						onPress={() => {
+							this.setState({
 								barChart: generateChartData('bar'),
 								lineChart: generateChartData('line'),
-								pieChart: generateChartData('pie')
+								pieChart: generateChartData('pie'),
 							});
-					}}
-    >
+						}}
+					>
 						<Text style={{ borderWidth: 1, padding: 10 }}>Update Data</Text>
 					</TouchableOpacity>
 				</ScrollView>
 			</View>
-    );
-  }
+		);
+	}
 }
 
 AppRegistry.registerComponent('rnchart20', () => rnchart20);

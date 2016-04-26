@@ -10,36 +10,36 @@ const styles = StyleSheet.create({
 	},
 	axisText: {
 		flex: 1,
-		textAlign: 'center'
-	}
+		textAlign: 'center',
+	},
 });
 
 export default class XAxis extends Component {
 
 	static propTypes = {
 		axisColor: PropTypes.any,
-		xAxisLabels: PropTypes.arrayOf(PropTypes.any),
-		data: PropTypes.arrayOf(PropTypes.number),
-		width: PropTypes.number.isRequired,
+		axisLabelColor: PropTypes.any.isRequired,
 		axisLineWidth: PropTypes.number,
-	}
-
-	constructor(props) {
-		super(props);
+		data: PropTypes.arrayOf(PropTypes.number),
+		showXAxisLabels: PropTypes.boolean.isRequired,
+		style: PropTypes.any,
+		width: PropTypes.number.isRequired,
+		xAxisLabels: PropTypes.arrayOf(PropTypes.any),
 	}
 
 	render() {
 		const labels = this.props.xAxisLabels || [];
 		return (
-			<View style={[
-				styles.xAxisContainer,
-				this.props.style || {},
-				{
-					borderTopColor: this.props.axisColor,
-					borderTopWidth: this.props.axisLineWidth
-				},
-			]}
-  >
+			<View
+				style={[
+					styles.xAxisContainer,
+					this.props.style || {},
+					{
+						borderTopColor: this.props.axisColor,
+						borderTopWidth: this.props.axisLineWidth,
+					},
+				]}
+			>
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
 				return labels.map((d, i) => <Text key={i} style={[styles.axisText, { color: this.props.axisLabelColor }]}>{d}</Text>);

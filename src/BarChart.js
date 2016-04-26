@@ -1,12 +1,5 @@
 /* @flow */
-import React, {
-	Animated,
-	Component,
-	LayoutAnimation,
-	View,
-	StyleSheet,
-	Text,
-} from 'react-native';
+import React, { Component, View, StyleSheet } from 'react-native';
 import * as C from './constants';
 
 const styles = StyleSheet.create({
@@ -56,9 +49,9 @@ export default class BarChart extends Component<void, any, any> {
 					borderTopRightRadius: this.props.data.cornerRadius || 0,
 					backgroundColor,
 					width,
-					height
+					height,
 				}}
-			></View>
+			/>
 		);
 	}
 
