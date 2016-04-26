@@ -303,9 +303,9 @@ RNChart.propTypes = {
 
 		// Line/multi-line chart props
 		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-		dataPointRadius: PropTypes.number, // TODO
+		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		dataPointRadius: PropTypes.number,
 		highlightRadius: PropTypes.number, // TODO
 		lineWidth: PropTypes.number,
 		showDataPoint: PropTypes.bool, // TODO

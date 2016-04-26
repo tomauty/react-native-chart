@@ -6,6 +6,10 @@ import * as C from './constants';
 import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
 
+const makeDataPoint = (x : number, y : number, data : any) => {
+	return { x, y, radius: data.dataPointRadius, fill: data.dataPointFillColor, stroke: data.dataPointColor };
+};
+
 export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
@@ -44,7 +48,7 @@ export default class LineChart extends Component<void, any, any> {
 		const firstDataPoint = this.props.data.data[0];
 		const height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
 		const path = new Path().moveTo(0, height);
-		dataPoints.push({ x: 0, y: height, radius: this.props.data.dataPointRadius });
+		dataPoints.push(makeDataPoint(0, height, this.props.data));
 		PATHS.push(path);
 
 		this.props.data.data.slice(1).forEach((dataPoint, i) => {
@@ -53,7 +57,7 @@ export default class LineChart extends Component<void, any, any> {
 			const x = horizontalStep * (i + 1) + horizontalStep;
 			const y = Math.round(_height);
 			PATHS.push(path.lineTo(x, y));
-			dataPoints.push({ x, y, radius: this.props.data.dataPointRadius });
+			dataPoints.push(makeDataPoint(x, y, this.props.data));
 		});
 		if (path.path.some(isNaN)) return null;
 		return (

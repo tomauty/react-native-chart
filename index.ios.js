@@ -71,7 +71,9 @@ const generateChartData = (type) => {
 		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
 		sliceColors,
 		showDataPoint: true,
-		dataPointRadius: 1,
+		dataPointRadius: 3,
+		// dataPointColor: colors.secondary,
+		// dataPointFillColor: colors.gradientBottom,
 	};
 };
 

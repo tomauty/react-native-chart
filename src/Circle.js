@@ -1,5 +1,6 @@
 import React, { ART, Component, PropTypes } from 'react-native';
 const { Path, Shape } = ART;
+import * as C from './constants';
 
 export default class Circle extends Component {
 	static propTypes = {
@@ -7,16 +8,20 @@ export default class Circle extends Component {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
 		onPress: PropTypes.func,
+		fill: PropTypes.string,
+		stroke: PropTypes.string,
 	};
 	static defaultProps = {
 		onPress: () => {},
 		radius: 2,
+		fill: C.BLACK,
+		stroke: C.BLACK,
 	};
 	render() {
 		const { x, y, radius } = this.props;
 		const path = new Path().moveTo(x, y - radius).arc(0, radius * 2, radius).arc(0, radius * -2, radius).close();
 		return (
-			<Shape d={path} stroke="black" strokeWidth={1} />
+			<Shape d={path} stroke={this.props.stroke} fill={this.props.fill} strokeWidth={1} />
 		);
 	}
 }
