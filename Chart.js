@@ -33,17 +33,7 @@ const getRoundNumber = (value, gridStep) => {
 export default class RNChart extends Component<void, any, any> {
 	static defaultProps : any = {
 		chartData: {
-			sliceColors: [
-				C.BLUE,
-				C.BLACK,
-				C.GREY,
-				C.RED,
-				C.WHITE,
-				C.YELLOW,
-				C.GREEN,
-				C.DARK_PURPLE,
-				C.LIGHT_PURPLE,
-			],
+			data: [],
 		},
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
@@ -89,7 +79,8 @@ export default class RNChart extends Component<void, any, any> {
 	_drawGrid(props) {
 		if (!props.showGrid) return null;
 		const range = [];
-		const uniqueValuesInDataSet = props.data.data.filter((v, i, self) => self.indexOf(v) === i);
+		const data = props.data.data || [];
+		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v) === i);
 		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
 		for (let i = steps; i > 0; i--) range.push(i);
 
@@ -108,7 +99,7 @@ export default class RNChart extends Component<void, any, any> {
 		};
 		const verticalGridStyle = {
 			height: props.height,
-			width: props.width / props.data.data.length,
+			width: props.width / data.length,
 			borderRightColor: props.gridColor,
 			borderRightWidth: intendedLineWidth,
 		};
@@ -129,7 +120,7 @@ export default class RNChart extends Component<void, any, any> {
 					// Grid lines going left to right
 					return (
 						<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
-							{props.data.data.map((_, i) => <View key={i} style={verticalGridStyle} />)}
+							{data.map((_, i) => <View key={i} style={verticalGridStyle} />)}
 						</View>
 					);
 				})()}
@@ -140,8 +131,8 @@ export default class RNChart extends Component<void, any, any> {
 	_computeBounds() {
 		let min = Infinity;
 		let max = -Infinity;
-
-		this.props.chartData.data.forEach(number => {
+		const data = this.props.chartData.data || [];
+		data.forEach(number => {
 			if (number < min) min = number;
 			if (number > max) max = number;
 		});

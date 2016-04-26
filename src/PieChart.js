@@ -1,6 +1,7 @@
 /* @flow */
 import React, { ART, Component, View, TouchableWithoutFeedback } from 'react-native';
 const { Group, Surface, Shape, Path } = ART;
+import * as C from './constants';
 
 const circlePath = (cx : number, cy : number, r : number, startDegree : number, endDegree : number) : Path => {
 	const p = new Path();
@@ -24,6 +25,17 @@ export default class PieChart extends Component<void, any, any> {
 	render() {
 		if (!this.props.width || !this.props.height) return <View />;
 
+		const COLORS = this.props.data.sliceColors || [
+			C.BLUE,
+			C.BLACK,
+			C.GREY,
+			C.RED,
+			C.YELLOW,
+			C.GREEN,
+			C.DARK_PURPLE,
+			C.LIGHT_PURPLE,
+		];
+
 		// TODO: Read stroke width from props?
 		const STROKE_WIDTH = 1;
 		const radius = (this.props.height / 2) - STROKE_WIDTH;
@@ -33,18 +45,18 @@ export default class PieChart extends Component<void, any, any> {
 
 		// Gather sum of all data to determine angles
 		let sum = 0;
-		this.props.data.data.forEach(n => {
+		const data = this.props.data.data || [];
+		data.forEach(n => {
 			sum += (n > 0) ? n : 0.001;
 		});
-		const sectors = this.props.data.data.map(n => Math.ceil(360 * (n/sum)));
-
+		const sectors = data.map(n => Math.ceil(360 * (n/sum)));
 		let startAngle = 0;
 
 		const arcs = [];
 		const colors = [];
 		sectors.forEach((sectionPiece, i) => {
 			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece + startAngle));
-			colors.push(getColor(this.props.data.sliceColors, i));
+			colors.push(getColor(COLORS, i));
 			startAngle += sectionPiece;
 		});
 

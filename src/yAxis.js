@@ -53,7 +53,8 @@ export default class YAxis extends Component<void, any, any> {
 
 	render() {
 		const range = [];
-		const uniqueValuesInDataSet = this.props.data.filter((v, i, self) => self.indexOf(v) === i);
+		const data = this.props.data || [];
+		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v) === i);
 		const steps = (uniqueValuesInDataSet.length < this.props.verticalGridStep) ? uniqueValuesInDataSet.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (

@@ -29,6 +29,7 @@ export default class LineChart extends Component<void, any, any> {
 	_drawLine() {
 		const HEIGHT = this.props.height;
 		const WIDTH = this.props.width;
+		const data = this.props.data.data || [];
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
 
@@ -40,18 +41,18 @@ export default class LineChart extends Component<void, any, any> {
 
 		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
 		const scale = HEIGHT / divisor;
-		const horizontalStep = WIDTH / this.props.data.data.length;
+		const horizontalStep = WIDTH / data.length;
 
 		const PATHS = [];
 		const dataPoints = [];
 
-		const firstDataPoint = this.props.data.data[0];
+		const firstDataPoint = data[0];
 		const height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
 		const path = new Path().moveTo(0, height);
 		dataPoints.push(makeDataPoint(0, height, this.props.data));
 		PATHS.push(path);
 
-		this.props.data.data.slice(1).forEach((dataPoint, i) => {
+		data.slice(1).forEach((dataPoint, i) => {
 			let _height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
 			if (height <= 0) _height = 20;
 			const x = horizontalStep * (i + 1) + horizontalStep;
