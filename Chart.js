@@ -1,6 +1,14 @@
 /* @flow */
 'use strict';
-import React, { Component, PropTypes, Text, LayoutAnimation, StyleSheet, View } from 'react-native';
+import React, {
+	Component,
+	PropTypes,
+	Text,
+	LayoutAnimation,
+	StyleSheet,
+	View,
+	PixelRatio,
+} from 'react-native';
 import BarChart from './src/BarChart';
 import LineChart from './src/LineChart';
 import PieChart from './src/PieChart';
@@ -89,18 +97,23 @@ export default class RNChart extends Component<void, any, any> {
 		for (let i = steps; i > 0; i--) range.push(i);
 
 		const containerStyle = { width: props.width, height: props.height, position: 'absolute', left: 0 };
+
+		let intendedLineWidth = props.gridLineWidth;
+		if (props.gridLineWidth < 1) {
+			intendedLineWidth = StyleSheet.hairlineWidth;
+		}
+
 		const horizontalGridStyle = {
 			height: props.height / props.verticalGridStep,
 			width: props.width,
 			borderTopColor: props.gridColor,
-			borderTopWidth: props.gridLineWidth,
-			// backgroundColor: 'rgba(255,0,0,0.2)',
+			borderTopWidth: intendedLineWidth,
 		};
 		const verticalGridStyle = {
 			height: props.height,
 			width: props.width / props.data.data.length,
 			borderRightColor: props.gridColor,
-			borderRightWidth: props.gridLineWidth,
+			borderRightWidth: intendedLineWidth,
 		};
 
 		return (

@@ -108,7 +108,6 @@ class rnchart20 extends Component {
 					showYAxisLabels
 					showXAxisLabels
 				/>
-			<View style={{ margin: 20 }} />
 				<Chart
 					showAxis
 					style={styles.chart}
