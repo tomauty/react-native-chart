@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, View, StyleSheet } from 'react-native';
+import React, { Component, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import * as C from './constants';
 
 const styles = StyleSheet.create({
@@ -14,9 +14,15 @@ const styles = StyleSheet.create({
 export default class BarChart extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
-		this.state = {
-		};
+		this.state = { };
 		(this:any)._drawBar = this._drawBar.bind(this);
+		(this:any)._handlePress = this._handlePress.bind(this);
+	}
+
+	_handlePress(dataPoint : number, index : number) {
+		if (this.props.data.onDataPointPress) {
+			this.props.data.onDataPointPress(dataPoint, index);
+		}
 	}
 
 	_drawBar(dataPoint : number, index : number) {
@@ -42,16 +48,20 @@ export default class BarChart extends Component<void, any, any> {
 		let height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
 		if (height <= 0) height = 20;
 		return (
-			<View
+			<TouchableWithoutFeedback
 				key={index}
-				style={{
-					borderTopLeftRadius: this.props.data.cornerRadius || 0,
-					borderTopRightRadius: this.props.data.cornerRadius || 0,
-					backgroundColor,
-					width,
-					height,
-				}}
-			/>
+				onPress={() => this._handlePress(dataPoint, index)}
+			>
+				<View
+					style={{
+						borderTopLeftRadius: this.props.data.cornerRadius || 0,
+						borderTopRightRadius: this.props.data.cornerRadius || 0,
+						backgroundColor,
+						width,
+						height,
+					}}
+				/>
+			</TouchableWithoutFeedback>
 		);
 	}
 

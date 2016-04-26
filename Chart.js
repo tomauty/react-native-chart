@@ -62,7 +62,6 @@ export default class RNChart extends Component<void, any, any> {
 		showXAxisLabels: true,
 		showYAxisLabels: true,
 		tightBounds: false,
-		touchRadius: 5,
 		verticalGridStep: 3,
 		yAxisWidth: 30,
 		horizontalScale: 1,
@@ -294,6 +293,7 @@ RNChart.propTypes = {
 		type: PropTypes.oneOf(['line', 'bar', 'pie']),
 		highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 		highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
+		onDataPointPress: PropTypes.func,
 
 		// Bar chart props
 		color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
