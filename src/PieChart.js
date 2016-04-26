@@ -1,6 +1,16 @@
 /* @flow */
-import React, { Animated, ART, Component, Platform, View, StyleSheet, Text } from 'react-native';
-const { Group, Surface, Shape, Path } = ART;
+import React, {
+	Animated,
+	ART,
+	Component,
+	Platform,
+	View,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+} from 'react-native';
+const { Group, Surface, Shape, Path, Transform } = ART;
 
 const circlePath = (cx : number, cy : number, r : number, startDegree : number, endDegree : number) : Path => {
 	const p = new Path();
@@ -17,12 +27,24 @@ const getColor = (colors : Array<string>, index : number) => {
 export default class PieChart extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
-		this.state = {};
+		this.state = { rotation: 0 };
+	}
+
+	componentDidUpdate() {
+	}
+
+	_handlePress(e) {
+		const { locationX, locationY } = e.nativeEvent;
+		console.log(locationX, locationY);
 	}
 
 	render() {
 
 		const half = this.props.height / 2;
+
+		// TODO: Read stroke width from props?
+		const STROKE_WIDTH = 1;
+		const radius = (this.props.height / 2) - STROKE_WIDTH;
 
 		const centerX = this.props.width / 2;
 		const centerY = this.props.height / 2;
@@ -30,26 +52,41 @@ export default class PieChart extends Component<void, any, any> {
 		// Gather sum of all data to determine angles
 		let sum = 0;
 		this.props.data.data.forEach(n => sum += (n > 0) ? n : 0.001);
-		const sectors = this.props.data.data.map(n => Math.ceil(360 * (n/sum)));
+		const sectors = this.props.data.data.map(n => Math.round(360 * (n/sum)));
 
 		let startAngle = 0;
 		let endAngle = 0;
 
 		const arcs = [];
 		const colors = [];
+		console.log(sectors);
 		sectors.forEach((sectionPiece, i) => {
-			arcs.push(circlePath(centerX, centerY, half, startAngle, sectionPiece))
+			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece))
 			colors.push(getColor(this.props.data.sliceColors, i));
 			startAngle += sectionPiece
 		});
 
 		return (
-			<View>
-				<Surface width={this.props.width} height={this.props.height}>
-					{arcs.map((arc,i) => <Shape key={i} d={arc} stroke={colors[i]} strokeWidth={1} fill={colors[i]} />)}
-				</Surface>
+				<TouchableWithoutFeedback onPress={this._handlePress}>
+				<View>
+					<Surface width={this.props.width} height={this.props.height}>
+						<Group originX={centerX} originY={centerY} rotation={this.state.rotation}>
+							{arcs.map((arc,i) => {
+								return (
+										<Shape
+											key={i}
+											d={arc}
+											stroke={colors[i]}
+											strokeWidth={STROKE_WIDTH}
+											fill={colors[i]}
+										/>
+								);
+							})}
+						</Group>
+					</Surface>
 				{/*{sectors.map(s => <Text>{s}</Text>)}*/}
 			</View>
+		</TouchableWithoutFeedback>
 		)
 	}
 }
