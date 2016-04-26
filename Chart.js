@@ -82,11 +82,11 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	_drawGrid(props) {
-		if (!props.drawGrid) return;
+		if (!props.showGrid) return;
 		const range = [];
 		const uniqueValuesInDataSet = props.data.data.filter((v, i, self) => self.indexOf(v) === i);
 		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
-		for (let i = steps; i >= 0; i--) range.push(i);
+		for (let i = steps; i > 0; i--) range.push(i);
 
 		const containerStyle = { width: props.width, height: props.height, position: 'absolute', left: 0 };
 		const horizontalGridStyle = {
@@ -94,6 +94,7 @@ export default class RNChart extends Component<void, any, any> {
 			width: props.width,
 			borderTopColor: props.gridColor,
 			borderTopWidth: props.gridLineWidth,
+			// backgroundColor: 'rgba(255,0,0,0.2)',
 		};
 		const verticalGridStyle = {
 			height: props.height,
@@ -106,6 +107,7 @@ export default class RNChart extends Component<void, any, any> {
 			<View style={containerStyle}>
 				{(() => {
 					if (props.hideHorizontalGridLines) return null;
+					// Grid lines going top to bottom
 					return (
 						<View style={{ position: 'absolute', flexDirection: 'column', justifyContent: 'space-around' }}>
 							{range.map((_,i) => <View key={i} style={horizontalGridStyle} />)}
@@ -114,6 +116,7 @@ export default class RNChart extends Component<void, any, any> {
 				})()}
 				{(() => {
 					if (props.hideVerticalGridLines) return null;
+					// Grid lines going left to right
 					return (
 						<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
 							{props.data.data.map((_,i) => <View key={i} style={verticalGridStyle} />)}
