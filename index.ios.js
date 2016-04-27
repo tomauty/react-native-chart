@@ -95,13 +95,11 @@ class rnchart20 extends Component {
 						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
-						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
 					<Chart
 						showAxis
 						style={styles.chart}
-						axisColor={colors.grey}
 						gridColor={colors.grey}
 						chartData={this.state.pieChart}
 						xAxisLabels={this.state.xLabels}

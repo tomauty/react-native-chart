@@ -45,19 +45,6 @@ const chartColors = {
 	line: colors.tertiary,
 	pie: colors.primary,
 };
-const sliceColors = [
-	colors.tertiary,
-	colors.positive,
-	colors.yellow,
-	colors.secondary,
-	colors.gradientBottom,
-	colors.primaryLight,
-	colors.yellow,
-	colors.secondary,
-	colors.gradientBottom,
-	colors.primaryLight,
-];
-
 
 const generateXLabels = () => {
 	return chartRange.map(_ => (Math.floor(Math.random() * 100) + 1).toString());
@@ -69,7 +56,8 @@ const generateChartData = (type) => {
 		color: chartColors[type],
 		widthPercent: 0.5,
 		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
-		sliceColors,
+		showDataPoint: true,
+		dataPointRadius: 3,
 	};
 };
 
@@ -107,7 +95,6 @@ class rnchart20 extends Component {
 						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
-						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
 					<Chart
@@ -119,7 +106,6 @@ class rnchart20 extends Component {
 						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
-						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
 					<TouchableOpacity

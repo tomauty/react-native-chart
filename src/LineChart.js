@@ -85,7 +85,7 @@ export default class LineChart extends Component<void, any, any> {
 		);
 	}
 
-	render() : void {
+	render() : any {
 		return (
 			<View>
 				{this.props.drawGrid(this.props)}

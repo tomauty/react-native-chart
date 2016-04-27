@@ -18,7 +18,7 @@ export default class PieChart extends Component<void, any, any> {
 		(this:any).boundingAreas = {};
 	}
 
-	_handlePress(_e) {
+	_handlePress(_e : Object) {
 		// const { locationX, locationY } = e.nativeEvent;
 	}
 
@@ -46,9 +46,7 @@ export default class PieChart extends Component<void, any, any> {
 		// Gather sum of all data to determine angles
 		let sum = 0;
 		const data = this.props.data.data || [];
-		data.forEach(n => {
-			sum += (n > 0) ? n : 0.001;
-		});
+		data.forEach(n => { sum += (n > 0) ? n : 0.001; });
 		const sectors = data.map(n => Math.ceil(360 * (n/sum)));
 		let startAngle = 0;
 

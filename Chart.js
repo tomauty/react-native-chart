@@ -54,6 +54,7 @@ export default class RNChart extends Component<void, any, any> {
 		tightBounds: false,
 		verticalGridStep: 3,
 		yAxisWidth: 30,
+		xAxisHeight: 20,
 		horizontalScale: 1,
 	};
 
@@ -62,7 +63,6 @@ export default class RNChart extends Component<void, any, any> {
 		this.state = { bounds: { min: 0, max: 0 } };
 	}
 	componentDidMount() {
-		this._updateAxisLayout();
 		this._computeBounds();
 	}
 	componentWillUpdate() {
@@ -70,13 +70,12 @@ export default class RNChart extends Component<void, any, any> {
 	}
 
 	componentDidUpdate(props : any) {
-		this._updateAxisLayout();
 		if (this.props !== props) {
 			this._computeBounds();
 		}
 	}
 
-	_drawGrid(props) {
+	_drawGrid(props : any) {
 		if (!props.showGrid) return null;
 		const range = [];
 		const data = props.data.data || [];
@@ -128,7 +127,7 @@ export default class RNChart extends Component<void, any, any> {
 		);
 	}
 
-	_computeBounds() {
+	_computeBounds() : any {
 		let min = Infinity;
 		let max = -Infinity;
 		const data = this.props.chartData.data || [];
@@ -195,23 +194,6 @@ export default class RNChart extends Component<void, any, any> {
 		return (this.state.bounds.max > 0) ? this.state.bounds.max : 0;
 	}
 
-	_updateAxisLayout() {
-		if (this.refs.xAxis) {
-			this.refs.xAxis.measure((_ox, _oy, _width, height) => {
-				if (height !== this.state.xHeight) {
-					this.setState({ xHeight: height });
-				}
-			});
-		}
-		if (this.refs.container) {
-			this.refs.container.measure((_ox, _oy, width, height) => {
-				if (height !== this.state.containerHeight) {
-					this.setState({ containerHeight: height, containerWidth: width });
-				}
-			});
-		}
-	}
-
 	render() {
 		const components = { 'line': LineChart, 'bar': BarChart, 'pie': PieChart };
 		const data = this.props.chartData;
@@ -221,13 +203,20 @@ export default class RNChart extends Component<void, any, any> {
 					const Chart = components[data.type] || BarChart;
 					if (this.props.showAxis && Chart !== PieChart) {
 						return (
-							<View ref="container" style={[this.props.style || {}, { flex: 1, flexDirection: 'column' }]}>
+							<View
+								ref="container"
+								style={[this.props.style || {}, { flex: 1, flexDirection: 'column' }]}
+								onLayout={(e) => this.setState({
+									containerHeight: e.nativeEvent.layout.height,
+									containerWidth: e.nativeEvent.layout.width,
+								})}
+							>
 								<View style={[styles.default, { flexDirection: 'row' }]}>
 									<View ref="yAxis">
 										<YAxis
 											{...this.props}
 											data={data.data}
-											height={this.state.containerHeight - this.state.xHeight}
+											height={this.state.containerHeight - this.props.xAxisHeight}
 											width={this.props.yAxisWidth}
 											minVerticalBound={this.state.bounds.min}
 											containerWidth={this.state.containerWidth}
@@ -239,7 +228,7 @@ export default class RNChart extends Component<void, any, any> {
 										{...this.props}
 										data={data}
 										width={this.state.containerWidth - this.props.yAxisWidth}
-										height={this.state.containerHeight - this.state.xHeight}
+										height={this.state.containerHeight - this.props.xAxisHeight}
 										minVerticalBound={this.state.bounds.min}
 										maxVerticalBound={this.state.bounds.max}
 										drawGrid={this._drawGrid}
@@ -252,6 +241,7 @@ export default class RNChart extends Component<void, any, any> {
 												{...this.props}
 												width={this.state.containerWidth - this.props.yAxisWidth}
 												data={data.data}
+												height={this.props.xAxisHeight}
 												style={{ marginLeft: this.props.yAxisWidth - 1 }}
 											/>
 										</View>
@@ -328,6 +318,7 @@ RNChart.propTypes = {
 	tightBounds: PropTypes.bool,
 	verticalGridStep: PropTypes.number,
 	xAxisTitle: PropTypes.string,
+	xAxisHeight: PropTypes.number,
 	xAxisLabels: PropTypes.array.isRequired,
 	yAxisTitle: PropTypes.string,
 	yAxisTransform: PropTypes.func,

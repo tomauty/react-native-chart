@@ -25,7 +25,7 @@ export default class XAxis extends Component {
 		style: PropTypes.any,
 		width: PropTypes.number.isRequired,
 		xAxisLabels: PropTypes.arrayOf(PropTypes.any),
-	}
+	};
 
 	render() {
 		const labels = this.props.xAxisLabels || [];
