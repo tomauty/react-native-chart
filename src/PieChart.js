@@ -1,14 +1,9 @@
 /* @flow */
 import React, { ART, Component, View, TouchableWithoutFeedback } from 'react-native';
-const { Group, Surface, Shape, Path } = ART;
+const { Group, Surface } = ART;
 import * as C from './constants';
+import Wedge from './Wedge';
 
-const circlePath = (cx : number, cy : number, r : number, startDegree : number, endDegree : number) : Path => {
-	const p = new Path();
-	p.path.push(0, cx, cy);
-	p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
-	return p;
-};
 const getColor = (colors : Array<string>, index : number) => colors[index] || colors[colors.length % index];
 
 export default class PieChart extends Component<void, any, any> {
@@ -16,6 +11,10 @@ export default class PieChart extends Component<void, any, any> {
 		super(props);
 		this.state = { rotation: 0 };
 		(this:any).boundingAreas = {};
+	}
+
+	shouldComponentUpdate(props : any) : boolean {
+		return props.data.data !== this.props.data;
 	}
 
 	_handlePress(_e : Object) {
@@ -27,7 +26,6 @@ export default class PieChart extends Component<void, any, any> {
 
 		const COLORS = this.props.data.sliceColors || [
 			C.BLUE,
-			C.BLACK,
 			C.GREY,
 			C.RED,
 			C.YELLOW,
@@ -53,24 +51,34 @@ export default class PieChart extends Component<void, any, any> {
 		const arcs = [];
 		const colors = [];
 		sectors.forEach((sectionPiece, i) => {
-			arcs.push(circlePath(centerX, centerY, radius, startAngle, sectionPiece + startAngle));
+			if (startAngle > 180) {
+				startAngle = 180 - startAngle;
+			}
+			let endAngle = startAngle + sectionPiece;
+			// TODO: fix angle calculation based on coords over 180
+			if (endAngle > 180) {
+				endAngle = 180 - endAngle;
+			}
+			arcs.push({ startAngle, endAngle, outerRadius: radius });
 			colors.push(getColor(COLORS, i));
+			// endAngle += startAngle;
 			startAngle += sectionPiece;
 		});
-
 		return (
 			<TouchableWithoutFeedback onPress={this._handlePress}>
 				<View>
 					<Surface width={this.props.width} height={this.props.height}>
-						<Group originX={centerX} originY={centerY} rotation={this.state.rotation}>
+						<Group originX={centerX} width={this.props.width} height={this.props.height} originY={centerY} rotation={this.state.rotation}>
 							{arcs.map((arc, i) => {
 								return (
-									<Shape
-										key={i}
-										d={arc}
+									<Wedge
 										stroke={colors[i]}
 										strokeWidth={STROKE_WIDTH}
 										fill={colors[i]}
+										key={i}
+										originX={centerX}
+										originY={centerY}
+										{ ...arc}
 									/>
 								);
 							})}

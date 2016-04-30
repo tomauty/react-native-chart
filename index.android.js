@@ -39,7 +39,7 @@ const colors = {
 	opaqueHeading: 'rgba(180, 180, 180, 1)',
 };
 
-const chartRange = [1, 2, 3, 4, 5, 6];
+const chartRange = [1, 2, 3];
 const chartColors = {
 	bar: colors.primary,
 	line: colors.tertiary,
@@ -55,7 +55,8 @@ const generateChartData = (type) => {
 		type,
 		color: chartColors[type],
 		widthPercent: 0.5,
-		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
+		// data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
+		data: [5, 5, 5, 5],
 		showDataPoint: true,
 		dataPointRadius: 3,
 	};

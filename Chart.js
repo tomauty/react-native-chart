@@ -251,7 +251,14 @@ export default class RNChart extends Component<void, any, any> {
 						);
 					}
 					return (
-						<View ref="container" style={[this.props.style || {}, styles.default]}>
+						<View
+							ref="container"
+							onLayout={(e) => this.setState({
+								containerHeight: e.nativeEvent.layout.height,
+								containerWidth: e.nativeEvent.layout.width,
+							})}
+							style={[this.props.style || {}, styles.default]}
+						>
 							<Chart
 								{...this.props}
 								width={this.state.containerWidth}
