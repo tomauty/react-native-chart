@@ -21,7 +21,8 @@
 	_axis = axis;
 
 	_labelTextColor = parent.labelTextColor ? self.parentChartView.labelTextColor : [UIColor darkGrayColor];
-	_labelFont = parent.labelFontSize ? [UIFont systemFontOfSize:self.parentChartView.labelFontSize] : [UIFont systemFontOfSize:14];
+	_labelFont = parent.labelFontSize && parent.labelFontName ? [UIFont fontWithName:self.parentChartView.labelFontName size:self.parentChartView.labelFontSize] : [UIFont systemFontOfSize:14];
+
 
 	self.backgroundColor = [UIColor clearColor];
 
