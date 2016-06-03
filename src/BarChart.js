@@ -2,6 +2,7 @@
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import React, { Component } from 'react';
 import * as C from './constants';
+import Grid from './Grid';
 
 const styles = StyleSheet.create({
 	default: {
@@ -70,7 +71,7 @@ export default class BarChart extends Component<void, any, any> {
 		const data = this.props.data || [];
 		return (
 			<View ref="container" style={[styles.default]}>
-				{this.props.drawGrid(this.props)}
+				<Grid { ...this.props } />
 				{data.map(this._drawBar)}
 			</View>
 		);

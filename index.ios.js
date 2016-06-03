@@ -64,7 +64,6 @@ class rnchart20 extends Component {
 						axisColor={colors.grey}
 						gridColor={colors.grey}
 						{...this.state.barChart}
-						xAxisLabels={this.state.xLabels}
 						axisLabelColor={colors.grey}
 						showYAxisLabels
 						showXAxisLabels
@@ -76,24 +75,22 @@ class rnchart20 extends Component {
 						axisColor={colors.grey}
 						gridColor={colors.grey}
 						{...this.state.lineChart}
-						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
 						axisLabelColor={colors.grey}
 					/>
 				<Text>{JSON.stringify(this.state.lineChart.data)}</Text>
-					{/*<Chart
+					<Chart
 						showAxis
 						style={styles.chart}
 						gridColor={colors.grey}
 						{...this.state.pieChart}
-						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
 						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
-				<Text>{JSON.stringify(this.state.pieChart.data)}</Text>*/}
+				<Text>{JSON.stringify(this.state.pieChart.data)}</Text>
 					<TouchableOpacity
 						style={{ marginBottom: 20 }}
 						onPress={() => {

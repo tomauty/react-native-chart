@@ -159,9 +159,9 @@ export default class Wedge extends Component<void, any, any> {
 		// angles are provided in degrees
 		const startAngle = this.props.startAngle;
 		const endAngle = this.props.endAngle;
-		if (startAngle - endAngle === 0) {
-			return null;
-		}
+		// if (startAngle - endAngle === 0) {
+		// 	return null;
+		// }
 
 		// radii are provided in pixels
 		const innerRadius = this.props.innerRadius || 0;

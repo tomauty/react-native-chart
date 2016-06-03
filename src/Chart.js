@@ -47,7 +47,7 @@ export default class Chart extends Component<void, any, any> {
 		showXAxisLabels: true,
 		showYAxisLabels: true,
 		tightBounds: false,
-		verticalGridStep: 3,
+		verticalGridStep: 4,
 		xAxisHeight: 20,
 		yAxisWidth: 30,
 	};
@@ -67,59 +67,6 @@ export default class Chart extends Component<void, any, any> {
 		if (this.props !== props) {
 			this._computeBounds();
 		}
-	}
-
-	_drawGrid(props : any) {
-		if (!props.showGrid) return null;
-		const range = [];
-		const data = props.data || [];
-		// TODO: This is wrong!
-		const unique = uniqueValuesInDataSet(data);
-		const steps = (unique.length < props.verticalGridStep) ? unique.length : props.verticalGridStep;
-		for (let i = steps; i > 0; i--) range.push(i);
-
-		const containerStyle = { width: props.width, height: props.height, position: 'absolute', left: 0 };
-
-		let intendedLineWidth = props.gridLineWidth;
-		if (props.gridLineWidth < 1) {
-			intendedLineWidth = StyleSheet.hairlineWidth;
-		}
-
-		const horizontalGridStyle = {
-			height: props.height / props.verticalGridStep,
-			width: props.width,
-			borderTopColor: props.gridColor,
-			borderTopWidth: intendedLineWidth,
-		};
-		const verticalGridStyle = {
-			height: props.height,
-			width: props.width / data.length,
-			borderRightColor: props.gridColor,
-			borderRightWidth: intendedLineWidth,
-		};
-
-		return (
-			<View style={containerStyle}>
-				{(() => {
-					if (props.hideHorizontalGridLines) return null;
-					// Grid lines going top to bottom
-					return (
-						<View style={{ position: 'absolute', flexDirection: 'column', justifyContent: 'space-around' }}>
-							{range.map((_, i) => <View key={i} style={horizontalGridStyle} />)}
-						</View>
-					);
-				})()}
-				{(() => {
-					if (props.hideVerticalGridLines) return null;
-					// Grid lines going left to right
-					return (
-						<View style={{ flexDirection: 'row', position: 'absolute', justifyContent: 'space-around' }}>
-							{data.map((_, i) => <View key={i} style={verticalGridStyle} />)}
-						</View>
-					);
-				})()}
-			</View>
-		);
 	}
 
 	_computeBounds() : any {
@@ -176,8 +123,7 @@ export default class Chart extends Component<void, any, any> {
 				min = tmp;
 			}
 		}
-		this.setState({ bounds: { max, min } });
-		return null;
+		return this.setState({ bounds: { max, min } });
 	}
 
 	_minVerticalBound() : number {
@@ -192,6 +138,7 @@ export default class Chart extends Component<void, any, any> {
 
 	render() {
 		const components = { 'line': LineChart, 'bar': BarChart, 'pie': PieChart };
+		const axisAlign = (this.props.type === 'line') ? 'left' : 'center';
 		return (
 			<View>
 				{(() => {
@@ -202,8 +149,8 @@ export default class Chart extends Component<void, any, any> {
 								ref="container"
 								style={[this.props.style || {}, { flex: 1, flexDirection: 'column' }]}
 								onLayout={(e) => this.setState({
-									containerHeight: e.nativeEvent.layout.height,
-									containerWidth: e.nativeEvent.layout.width,
+									containerHeight: Math.ceil(e.nativeEvent.layout.height),
+									containerWidth: Math.ceil(e.nativeEvent.layout.width),
 								})}
 							>
 								<View style={[styles.default, { flexDirection: 'row' }]}>
@@ -226,7 +173,6 @@ export default class Chart extends Component<void, any, any> {
 										height={this.state.containerHeight - this.props.xAxisHeight}
 										minVerticalBound={this.state.bounds.min}
 										maxVerticalBound={this.state.bounds.max}
-										drawGrid={this._drawGrid}
 									/>
 								</View>
 								{(() => {
@@ -237,6 +183,7 @@ export default class Chart extends Component<void, any, any> {
 												width={this.state.containerWidth - this.props.yAxisWidth}
 												data={this.props.data}
 												height={this.props.xAxisHeight}
+												align={axisAlign}
 												style={{ marginLeft: this.props.yAxisWidth - 1 }}
 											/>
 										</View>

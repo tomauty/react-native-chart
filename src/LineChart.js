@@ -6,6 +6,7 @@ const { Surface, Shape, Path } = ART;
 import * as C from './constants';
 import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
+import Grid from './Grid';
 
 const makeDataPoint = (x : number, y : number, data : any) => {
 	return { x, y, radius: data.dataPointRadius, fill: data.dataPointFillColor, stroke: data.dataPointColor };
@@ -47,18 +48,19 @@ export default class LineChart extends Component<void, any, any> {
 		const dataPoints = [];
 
 		const firstDataPoint = data[0][1];
-		const height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
+
+		const height = (minBound * scale) + (HEIGHT - (firstDataPoint * scale));
 		const path = new Path().moveTo(0, height);
-		dataPoints.push(makeDataPoint(0, height, this.props.data));
+		dataPoints.push(makeDataPoint(0, height, this.props));
 		PATHS.push(path);
 
 		data.slice(1).forEach(([_, dataPoint], i) => {
-			let _height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
-			if (height <= 0) _height = 20;
-			const x = horizontalStep * (i + 1) + horizontalStep;
+			let _height = (minBound * scale) + (HEIGHT - (dataPoint * scale));
+			if (height < 0) _height = 20;
+			const x = horizontalStep * (i) + horizontalStep;
 			const y = Math.round(_height);
 			PATHS.push(path.lineTo(x, y));
-			dataPoints.push(makeDataPoint(x, y, this.props.data));
+			dataPoints.push(makeDataPoint(x, y, this.props));
 		});
 		if (path.path.some(isNaN)) return null;
 		return (
@@ -76,7 +78,7 @@ export default class LineChart extends Component<void, any, any> {
 				{(() => {
 					if (!this.props.showDataPoint) return null;
 					return (
-						<Surface width={WIDTH} height={HEIGHT}>
+						<Surface width={WIDTH} height={HEIGHT + 3}>
 							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
 						</Surface>
 					);
@@ -88,7 +90,7 @@ export default class LineChart extends Component<void, any, any> {
 	render() : any {
 		return (
 			<View>
-				{this.props.drawGrid(this.props)}
+				<Grid {...this.props} />
 				<Animated.View style={{ opacity: this.state.opacity, backgroundColor: 'transparent' }}>
 					{this._drawLine()}
 				</Animated.View>

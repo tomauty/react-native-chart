@@ -7,11 +7,12 @@ const styles = StyleSheet.create({
 	xAxisContainer: {
 		flexDirection: 'row',
 		flex: 0,
-		justifyContent: 'space-around',
+		backgroundColor: 'transparent',
+		justifyContent: 'space-between',
 	},
 	axisText: {
 		flex: 1,
-		textAlign: 'center',
+		backgroundColor: 'transparent',
 	},
 });
 
@@ -25,6 +26,10 @@ export default class XAxis extends Component {
 		showXAxisLabels: PropTypes.bool.isRequired,
 		style: PropTypes.any,
 		width: PropTypes.number.isRequired,
+		align: PropTypes.string,
+	};
+	static defaultProps = {
+		align: 'center',
 	};
 
 	render() {
@@ -42,7 +47,19 @@ export default class XAxis extends Component {
 			>
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
-				return data.map((d, i) => <Text key={i} style={[styles.axisText, { color: this.props.axisLabelColor }]}>{d[0]}</Text>);
+				console.log(this.props.align);
+				return data.map((d, i) => {
+					return <Text
+						key={i}
+						style={[
+							styles.axisText,
+							{
+								textAlign: this.props.align,
+								color: this.props.axisLabelColor,
+						 	},
+						]}
+					>{d[0]}</Text>
+				});
 			})()}
 			</View>
 		);
