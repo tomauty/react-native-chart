@@ -126,6 +126,11 @@ export default class Chart extends Component<void, any, any> {
 		return this.setState({ bounds: { max, min } });
 	}
 
+	_onContainerLayout = (e : Object) => this.setState({
+		containerHeight: Math.ceil(e.nativeEvent.layout.height) + 1,
+		containerWidth: Math.ceil(e.nativeEvent.layout.width),
+	});
+
 	_minVerticalBound() : number {
 		if (this.props.tightBounds) return this.state.bounds.min;
 		return (this.state.bounds.min > 0) ? this.state.bounds.min : 0;
@@ -148,10 +153,7 @@ export default class Chart extends Component<void, any, any> {
 							<View
 								ref="container"
 								style={[this.props.style || {}, { flex: 1, flexDirection: 'column' }]}
-								onLayout={(e) => this.setState({
-									containerHeight: Math.ceil(e.nativeEvent.layout.height),
-									containerWidth: Math.ceil(e.nativeEvent.layout.width),
-								})}
+								onLayout={this._onContainerLayout}
 							>
 								<View style={[styles.default, { flexDirection: 'row' }]}>
 									<View ref="yAxis">
@@ -195,10 +197,7 @@ export default class Chart extends Component<void, any, any> {
 					return (
 						<View
 							ref="container"
-							onLayout={(e) => this.setState({
-								containerHeight: e.nativeEvent.layout.height,
-								containerWidth: e.nativeEvent.layout.width,
-							})}
+							onLayout={this._onContainerLayout}
 							style={[this.props.style || {}, styles.default]}
 						>
 							<Chart

@@ -41,7 +41,7 @@ export default class Grid extends Component {
 		};
 
 		const verticalGridStyle = {
-			height: this.props.height ,
+			height: this.props.height + 1,
 			width: this.props.width / data.length,
 			borderRightColor: this.props.gridColor,
 			borderRightWidth: intendedLineWidth,

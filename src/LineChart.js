@@ -45,15 +45,13 @@ export default class LineChart extends Component<void, any, any> {
 		}
 
 		const divisor = calculateDivisor(minBound, maxBound);
-		const scale = containerHeight / divisor;
+		const scale = (containerHeight + 1) / divisor;
 		const horizontalStep = containerWidth / data.length;
 		const dataPoints = [];
 		const firstDataPoint = data[0][1];
 		const height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 
 		const path = new Path().moveTo(0, height);
-
-
 		const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
 
 		dataPoints.push(makeDataPoint(0, height, this.props));
