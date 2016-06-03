@@ -13,11 +13,11 @@ export default class PieChart extends Component<void, any, any> {
 		this.state = { rotation: 0 };
 		(this:any).boundingAreas = {};
 	}
-
-	shouldComponentUpdate(props : any) : boolean {
-		return props.data.data !== this.props.data;
+	shouldComponentUpdate = (props : any, state : any) => {
+		return props !== this.props;
 	}
 
+	// TODO: Handle press on chart by emitting event
 	_handlePress(_e : Object) {
 		// const { locationX, locationY } = e.nativeEvent;
 	}
@@ -44,25 +44,17 @@ export default class PieChart extends Component<void, any, any> {
 
 		// Gather sum of all data to determine angles
 		let sum = 0;
-		const data = this.props.data.data || [];
-		data.forEach(n => { sum += (n > 0) ? n : 0.001; });
-		const sectors = data.map(n => Math.ceil(360 * (n/sum)));
+		const data = this.props.data || [];
+		data.forEach(n => { sum += (n[1] > 0) ? n[1] : 0.001; });
+		const sectors = data.map(n => Math.ceil(360 * (n[1]/sum)));
 		let startAngle = 0;
 
 		const arcs = [];
 		const colors = [];
 		sectors.forEach((sectionPiece, i) => {
-			if (startAngle > 180) {
-				startAngle = 180 - startAngle;
-			}
-			let endAngle = startAngle + sectionPiece;
-			// TODO: fix angle calculation based on coords over 180
-			if (endAngle > 180) {
-				endAngle = 180 - endAngle;
-			}
+			const endAngle = startAngle + sectionPiece;
 			arcs.push({ startAngle, endAngle, outerRadius: radius });
 			colors.push(getColor(COLORS, i));
-			// endAngle += startAngle;
 			startAngle += sectionPiece;
 		});
 		return (

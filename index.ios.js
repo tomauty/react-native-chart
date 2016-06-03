@@ -38,16 +38,12 @@ const chartColors = {
 	pie: colors.primary,
 };
 
-const generateXLabels = () => {
-	return chartRange.map(_ => (Math.floor(Math.random() * 100) + 1).toString());
-};
-
 const generateChartData = (type) => {
 	return {
 		type,
 		color: chartColors[type],
 		widthPercent: 0.5,
-		data: chartRange.map(_ => Math.floor(Math.random() * 100) + 1),
+		data: chartRange.map(n => [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]),
 		showDataPoint: true,
 		dataPointRadius: 3,
 	};
@@ -60,7 +56,6 @@ class rnchart20 extends Component {
 			lineChart: generateChartData('line'),
 			barChart: generateChartData('bar'),
 			pieChart: generateChartData('pie'),
-			xLabels: generateXLabels(),
 		};
 	}
 	render() {
@@ -72,34 +67,37 @@ class rnchart20 extends Component {
 						style={styles.chart}
 						axisColor={colors.grey}
 						gridColor={colors.grey}
-						chartData={this.state.barChart}
+						{...this.state.barChart}
 						xAxisLabels={this.state.xLabels}
 						axisLabelColor={colors.grey}
 						showYAxisLabels
 						showXAxisLabels
 					/>
+					<Text>{JSON.stringify(this.state.barChart.data)}</Text>
 					<Chart
 						showAxis
 						style={styles.chart}
 						axisColor={colors.grey}
 						gridColor={colors.grey}
-						chartData={this.state.lineChart}
+						{...this.state.lineChart}
 						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
 						axisLabelColor={colors.grey}
 					/>
+				<Text>{JSON.stringify(this.state.lineChart.data)}</Text>
 					<Chart
 						showAxis
 						style={styles.chart}
 						gridColor={colors.grey}
-						chartData={this.state.pieChart}
+						{...this.state.pieChart}
 						xAxisLabels={this.state.xLabels}
 						showYAxisLabels
 						showXAxisLabels
 						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
+				<Text>{JSON.stringify(this.state.pieChart.data)}</Text>
 					<TouchableOpacity
 						style={{ marginBottom: 20 }}
 						onPress={() => {

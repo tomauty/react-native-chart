@@ -18,7 +18,7 @@ export default class YAxis extends Component<void, any, any> {
 	static propTypes = {
 		axisColor: PropTypes.any,
 		axisLineWidth: PropTypes.number,
-		data: PropTypes.arrayOf(PropTypes.number).isRequired,
+		data: PropTypes.arrayOf(PropTypes.array).isRequired,
 		height: PropTypes.number.isRequired,
 		placement: PropTypes.oneOf(['left', 'right']),
 		verticalGridStep: PropTypes.number.isRequired,
@@ -32,10 +32,9 @@ export default class YAxis extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
 		this.state = { bounds: { min: 0, max: 0 } };
-		(this:any)._createLabelForYAxis = this._createLabelForYAxis.bind(this);
 	}
 
-	_createLabelForYAxis(index : number) {
+	_createLabelForYAxis = (index : number) => {
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
 
@@ -55,7 +54,7 @@ export default class YAxis extends Component<void, any, any> {
 	render() {
 		const range = [];
 		const data = this.props.data || [];
-		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v) === i);
+		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v[1]) === i);
 		const steps = (uniqueValuesInDataSet.length < this.props.verticalGridStep) ? uniqueValuesInDataSet.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (

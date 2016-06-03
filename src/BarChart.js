@@ -16,18 +16,17 @@ export default class BarChart extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
 		this.state = { };
-		(this:any)._drawBar = this._drawBar.bind(this);
-		(this:any)._handlePress = this._handlePress.bind(this);
 	}
 
-	_handlePress(e : Object, dataPoint : number, index : number) {
+	_handlePress = (e : Object, dataPoint : number, index : number) => {
 		if (this.props.data.onDataPointPress) {
 			this.props.data.onDataPointPress(e, dataPoint, index);
 		}
-	}
+	};
 
-	_drawBar(dataPoint : number, index : number) {
-		const backgroundColor = this.props.data.color || C.BLUE;
+	_drawBar = (_dataPoint : number, index : number) => {
+		const [x, dataPoint] = _dataPoint;
+		const backgroundColor = this.props.color || C.BLUE;
 		const HEIGHT = this.props.height;
 		const WIDTH = this.props.width;
 		let widthPercent = this.props.data.widthPercent || 0.5;
@@ -43,7 +42,7 @@ export default class BarChart extends Component<void, any, any> {
 			maxBound += this.props.verticalGridStep;
 		}
 
-		const data = this.props.data.data || [];
+		const data = this.props.data || [];
 		const width = (WIDTH / data.length * this.props.horizontalScale * 0.5) * widthPercent;
 		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
 		const scale = HEIGHT / divisor;
@@ -56,8 +55,8 @@ export default class BarChart extends Component<void, any, any> {
 			>
 				<View
 					style={{
-						borderTopLeftRadius: this.props.data.cornerRadius || 0,
-						borderTopRightRadius: this.props.data.cornerRadius || 0,
+						borderTopLeftRadius: this.props.cornerRadius || 0,
+						borderTopRightRadius: this.props.cornerRadius || 0,
 						backgroundColor,
 						width,
 						height,
@@ -65,10 +64,10 @@ export default class BarChart extends Component<void, any, any> {
 				/>
 			</TouchableWithoutFeedback>
 		);
-	}
+	};
 
 	render() {
-		const data = this.props.data.data || [];
+		const data = this.props.data || [];
 		return (
 			<View ref="container" style={[styles.default]}>
 				{this.props.drawGrid(this.props)}

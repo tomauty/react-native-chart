@@ -16,7 +16,6 @@ export default class LineChart extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
 		this.state = { opacity: new Animated.Value(0) };
-		(this:any)._drawLine = this._drawLine.bind(this);
 	}
 
 	componentWillUpdate() {
@@ -27,10 +26,10 @@ export default class LineChart extends Component<void, any, any> {
 		Animated.timing(this.state.opacity, { duration: 500, toValue: 1 }).start();
 	}
 
-	_drawLine() {
+	_drawLine = () => {
 		const HEIGHT = this.props.height;
 		const WIDTH = this.props.width;
-		const data = this.props.data.data || [];
+		const data = this.props.data || [];
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
 
@@ -47,13 +46,13 @@ export default class LineChart extends Component<void, any, any> {
 		const PATHS = [];
 		const dataPoints = [];
 
-		const firstDataPoint = data[0];
+		const firstDataPoint = data[0][1];
 		const height = HEIGHT - ((minBound * scale) + (HEIGHT - (firstDataPoint * scale)));
 		const path = new Path().moveTo(0, height);
 		dataPoints.push(makeDataPoint(0, height, this.props.data));
 		PATHS.push(path);
 
-		data.slice(1).forEach((dataPoint, i) => {
+		data.slice(1).forEach(([_, dataPoint], i) => {
 			let _height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
 			if (height <= 0) _height = 20;
 			const x = horizontalStep * (i + 1) + horizontalStep;
@@ -68,14 +67,14 @@ export default class LineChart extends Component<void, any, any> {
 					<Surface width={WIDTH} height={HEIGHT}>
 						<AnimatedShape
 							d={path}
-							fill={this.props.data.fillColor}
-							stroke={this.props.data.color || C.BLUE}
+							fill={this.props.fillColor}
+							stroke={this.props.color || C.BLUE}
 							strokeWidth={this.props.lineWidth}
 						/>
 					</Surface>
 				</View>
 				{(() => {
-					if (!this.props.data.showDataPoint) return null;
+					if (!this.props.showDataPoint) return null;
 					return (
 						<Surface width={WIDTH} height={HEIGHT}>
 							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
@@ -84,7 +83,7 @@ export default class LineChart extends Component<void, any, any> {
 				})()}
 			</View>
 		);
-	}
+	};
 
 	render() : any {
 		return (

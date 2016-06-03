@@ -21,15 +21,14 @@ export default class XAxis extends Component {
 		axisColor: PropTypes.any.isRequired,
 		axisLabelColor: PropTypes.any.isRequired,
 		axisLineWidth: PropTypes.number.isRequired,
-		data: PropTypes.arrayOf(PropTypes.number),
+		data: PropTypes.arrayOf(PropTypes.array),
 		showXAxisLabels: PropTypes.bool.isRequired,
 		style: PropTypes.any,
 		width: PropTypes.number.isRequired,
-		xAxisLabels: PropTypes.arrayOf(PropTypes.any),
 	};
 
 	render() {
-		const labels = this.props.xAxisLabels || [];
+		const data = this.props.data || [];
 		return (
 			<View
 				style={[
@@ -43,7 +42,7 @@ export default class XAxis extends Component {
 			>
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
-				return labels.map((d, i) => <Text key={i} style={[styles.axisText, { color: this.props.axisLabelColor }]}>{d}</Text>);
+				return data.map((d, i) => <Text key={i} style={[styles.axisText, { color: this.props.axisLabelColor }]}>{d[0]}</Text>);
 			})()}
 			</View>
 		);

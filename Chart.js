@@ -25,11 +25,9 @@ const getRoundNumber = (value, gridStep) => {
 };
 
 
-export default class RNChart extends Component<void, any, any> {
+export default class Chart extends Component<void, any, any> {
 	static defaultProps : any = {
-		chartData: {
-			data: [],
-		},
+		data: [],
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
 		axisLabelColor: C.BLACK,
@@ -73,7 +71,8 @@ export default class RNChart extends Component<void, any, any> {
 	_drawGrid(props : any) {
 		if (!props.showGrid) return null;
 		const range = [];
-		const data = props.data.data || [];
+		const data = props.data || [];
+		// TODO: This is wrong!
 		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v) === i);
 		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
 		for (let i = steps; i > 0; i--) range.push(i);
@@ -125,8 +124,9 @@ export default class RNChart extends Component<void, any, any> {
 	_computeBounds() : any {
 		let min = Infinity;
 		let max = -Infinity;
-		const data = this.props.chartData.data || [];
-		data.forEach(number => {
+		const data = this.props.data || [];
+		data.forEach(XYPair => {
+			const number = XYPair[1];
 			if (number < min) min = number;
 			if (number > max) max = number;
 		});
@@ -191,11 +191,10 @@ export default class RNChart extends Component<void, any, any> {
 
 	render() {
 		const components = { 'line': LineChart, 'bar': BarChart, 'pie': PieChart };
-		const data = this.props.chartData;
 		return (
 			<View>
 				{(() => {
-					const Chart = components[data.type] || BarChart;
+					const Chart = components[this.props.type] || BarChart;
 					if (this.props.showAxis && Chart !== PieChart) {
 						return (
 							<View
@@ -210,7 +209,7 @@ export default class RNChart extends Component<void, any, any> {
 									<View ref="yAxis">
 										<YAxis
 											{...this.props}
-											data={data.data}
+											data={this.props.data}
 											height={this.state.containerHeight - this.props.xAxisHeight}
 											width={this.props.yAxisWidth}
 											minVerticalBound={this.state.bounds.min}
@@ -221,7 +220,7 @@ export default class RNChart extends Component<void, any, any> {
 									</View>
 									<Chart
 										{...this.props}
-										data={data}
+										data={this.props.data}
 										width={this.state.containerWidth - this.props.yAxisWidth}
 										height={this.state.containerHeight - this.props.xAxisHeight}
 										minVerticalBound={this.state.bounds.min}
@@ -235,7 +234,7 @@ export default class RNChart extends Component<void, any, any> {
 											<XAxis
 												{...this.props}
 												width={this.state.containerWidth - this.props.yAxisWidth}
-												data={data.data}
+												data={this.props.data}
 												height={this.props.xAxisHeight}
 												style={{ marginLeft: this.props.yAxisWidth - 1 }}
 											/>
@@ -258,7 +257,7 @@ export default class RNChart extends Component<void, any, any> {
 								{...this.props}
 								width={this.state.containerWidth}
 								height={this.state.containerHeight}
-								data={data}
+								data={this.props.data}
 							/>
 						</View>
 					);
@@ -268,36 +267,32 @@ export default class RNChart extends Component<void, any, any> {
 	}
 }
 
-RNChart.propTypes = {
-	chartData: PropTypes.shape({
+Chart.propTypes = {
+	// Shared properties between most types
+	data: PropTypes.arrayOf(PropTypes.array).isRequired,
+	type: PropTypes.oneOf(['line', 'bar', 'pie']).isRequired,
+	highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+	highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
+	onDataPointPress: PropTypes.func,
 
-		// Shared properties between most types
-		data: PropTypes.arrayOf(PropTypes.number).isRequired,
-		type: PropTypes.oneOf(['line', 'bar', 'pie']),
-		highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-		highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
-		onDataPointPress: PropTypes.func,
+	// Bar chart props
+	color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	cornerRadius: PropTypes.number,
+	fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
+	widthPercent: PropTypes.number,
 
-		// Bar chart props
-		color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		cornerRadius: PropTypes.number,
-		fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
-		widthPercent: PropTypes.number,
+	// Line/multi-line chart props
+	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+	dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	dataPointRadius: PropTypes.number,
+	highlightRadius: PropTypes.number, // TODO
+	lineWidth: PropTypes.number,
+	showDataPoint: PropTypes.bool, // TODO
 
-		// Line/multi-line chart props
-		fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
-		dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-		dataPointRadius: PropTypes.number,
-		highlightRadius: PropTypes.number, // TODO
-		lineWidth: PropTypes.number,
-		showDataPoint: PropTypes.bool, // TODO
-
-		// Pie chart props
-		pieCenterRatio: PropTypes.number, // TODO
-		sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-	}).isRequired,
-
+	// Pie chart props
+	pieCenterRatio: PropTypes.number, // TODO
+	sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
 	animationDuration: PropTypes.number, // TODO
 	axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisLabelColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -321,7 +316,6 @@ RNChart.propTypes = {
 	verticalGridStep: PropTypes.number,
 	xAxisTitle: PropTypes.string,
 	xAxisHeight: PropTypes.number,
-	xAxisLabels: PropTypes.array.isRequired,
 	yAxisTitle: PropTypes.string,
 	yAxisTransform: PropTypes.func,
 	yAxisWidth: PropTypes.number,
