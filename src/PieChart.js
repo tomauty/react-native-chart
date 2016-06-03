@@ -1,5 +1,6 @@
 /* @flow */
-import React, { ART, Component, View, TouchableWithoutFeedback } from 'react-native';
+import React, { Component } from 'react';
+import { ART, View, TouchableWithoutFeedback } from 'react-native';
 const { Group, Surface } = ART;
 import * as C from './constants';
 import Wedge from './Wedge';

@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component, View, Text, PropTypes, StyleSheet } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 	yAxisContainer: {

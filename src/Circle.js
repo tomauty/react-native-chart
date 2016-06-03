@@ -1,4 +1,5 @@
-import React, { ART, Component, PropTypes } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { ART } from 'react-native';
 const { Path, Shape } = ART;
 import * as C from './constants';
 

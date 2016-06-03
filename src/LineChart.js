@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Animated, ART, Component, View } from 'react-native';
+import React, { Component } from 'react';
+import { Animated, ART, View } from 'react-native';
 const { Surface, Shape, Path } = ART;
 // import Morph from 'art/morph/path';
 import * as C from './constants';

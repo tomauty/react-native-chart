@@ -1,12 +1,7 @@
 /* @flow */
 'use strict';
-import React, {
-	Component,
-	PropTypes,
-	LayoutAnimation,
-	StyleSheet,
-	View,
-} from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import BarChart from './src/BarChart';
 import LineChart from './src/LineChart';
 import PieChart from './src/PieChart';

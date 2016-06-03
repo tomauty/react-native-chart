@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import React, { Component } from 'react';
 import * as C from './constants';
 
 const styles = StyleSheet.create({
