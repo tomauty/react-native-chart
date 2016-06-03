@@ -60,7 +60,6 @@ export default class YAxis extends Component<void, any, any> {
 		const unique = uniqueValuesInDataSet(data);
 		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
-		console.log(range);
 		return (
 			<View
 				style={[

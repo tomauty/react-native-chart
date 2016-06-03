@@ -12,6 +12,10 @@ const makeDataPoint = (x : number, y : number, data : any) => {
 	return { x, y, radius: data.dataPointRadius, fill: data.dataPointFillColor, stroke: data.dataPointColor };
 };
 
+const calculateDivisor = (minBound : number, maxBound : number) : number => {
+	return (maxBound - minBound <= 0) ? 0.00001 : maxBound - minBound;
+}
+
 export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
@@ -28,8 +32,8 @@ export default class LineChart extends Component<void, any, any> {
 	}
 
 	_drawLine = () => {
-		const HEIGHT = this.props.height;
-		const WIDTH = this.props.width;
+		const containerHeight = this.props.height;
+		const containerWidth = this.props.width;
 		const data = this.props.data || [];
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
@@ -40,45 +44,53 @@ export default class LineChart extends Component<void, any, any> {
 			maxBound += this.props.verticalGridStep;
 		}
 
-		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
-		const scale = HEIGHT / divisor;
-		const horizontalStep = WIDTH / data.length;
-
-		const PATHS = [];
+		const divisor = calculateDivisor(minBound, maxBound);
+		const scale = containerHeight / divisor;
+		const horizontalStep = containerWidth / data.length;
 		const dataPoints = [];
-
 		const firstDataPoint = data[0][1];
+		const height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 
-		const height = (minBound * scale) + (HEIGHT - (firstDataPoint * scale));
 		const path = new Path().moveTo(0, height);
+
+
+		const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
+
 		dataPoints.push(makeDataPoint(0, height, this.props));
-		PATHS.push(path);
 
 		data.slice(1).forEach(([_, dataPoint], i) => {
-			let _height = (minBound * scale) + (HEIGHT - (dataPoint * scale));
+			let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
+
 			if (height < 0) _height = 20;
+
 			const x = horizontalStep * (i) + horizontalStep;
 			const y = Math.round(_height);
-			PATHS.push(path.lineTo(x, y));
+
+			path.lineTo(x, y);
+			fillPath.lineTo(x, y);
 			dataPoints.push(makeDataPoint(x, y, this.props));
 		});
+		fillPath.lineTo(dataPoints[dataPoints.length - 1].x, containerHeight);
+		if (this.props.fillColor) {
+			fillPath.moveTo(0, containerHeight);
+		}
 		if (path.path.some(isNaN)) return null;
 		return (
 			<View>
 				<View style={{ position: 'absolute' }}>
-					<Surface width={WIDTH} height={HEIGHT}>
-						<AnimatedShape
-							d={path}
-							fill={this.props.fillColor}
-							stroke={this.props.color || C.BLUE}
-							strokeWidth={this.props.lineWidth}
-						/>
+					<Surface width={containerWidth} height={containerHeight}>
+						<AnimatedShape d={path} stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
+						<AnimatedShape d={fillPath} fill="#4dc4e611" />
+					</Surface>
+				</View>
+				<View style={{ position: 'absolute' }}>
+					<Surface width={containerWidth} height={containerHeight}>
 					</Surface>
 				</View>
 				{(() => {
 					if (!this.props.showDataPoint) return null;
 					return (
-						<Surface width={WIDTH} height={HEIGHT + 3}>
+						<Surface width={containerWidth} height={containerHeight + 3}>
 							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
 						</Surface>
 					);

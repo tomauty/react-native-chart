@@ -15,6 +15,7 @@ const colors = {
 	primaryLight: '#4a697c',
 	secondary: '#df8165',
 	tertiary: '#4dc4e6',
+	tertiaryLight: '#4dc4e6dd',
 	grey: '#999999',
 	white: '#f5f5f5',
 	yellow: 'rgba(255, 205, 0, 0.9)',
@@ -73,6 +74,7 @@ class rnchart20 extends Component {
 						showAxis
 						style={styles.chart}
 						axisColor={colors.grey}
+						fillColor="#4dc4e611"
 						gridColor={colors.grey}
 						{...this.state.lineChart}
 						showYAxisLabels
