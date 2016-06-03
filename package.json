@@ -7,8 +7,8 @@
     "lint": "node_modules/.bin/eslint . || true"
   },
   "dependencies": {
-    "react": "^0.14.7",
-    "react-native": "^0.22.2"
+    "react": "^15.0.2",
+    "react-native": "^0.26.3"
   },
   "devDependencies": {
     "babel": "^6.5.2",
