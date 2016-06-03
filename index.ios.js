@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Dimensions, StyleSheet, TouchableOpacity, Text, ScrollView, View } from 'react-native';
 
-import Chart from './Chart';
+import Chart from './src/Chart';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -32,11 +32,7 @@ const colors = {
 };
 
 const chartRange = [1, 2, 3, 4, 5, 6];
-const chartColors = {
-	bar: colors.primary,
-	line: colors.tertiary,
-	pie: colors.primary,
-};
+const chartColors = { bar: colors.primary, line: colors.tertiary, pie: colors.primary };
 
 const generateChartData = (type) => {
 	return {
@@ -86,7 +82,7 @@ class rnchart20 extends Component {
 						axisLabelColor={colors.grey}
 					/>
 				<Text>{JSON.stringify(this.state.lineChart.data)}</Text>
-					<Chart
+					{/*<Chart
 						showAxis
 						style={styles.chart}
 						gridColor={colors.grey}
@@ -97,7 +93,7 @@ class rnchart20 extends Component {
 						axisColor={colors.grey}
 						axisLabelColor={colors.grey}
 					/>
-				<Text>{JSON.stringify(this.state.pieChart.data)}</Text>
+				<Text>{JSON.stringify(this.state.pieChart.data)}</Text>*/}
 					<TouchableOpacity
 						style={{ marginBottom: 20 }}
 						onPress={() => {

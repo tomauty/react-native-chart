@@ -13,14 +13,14 @@ export default class PieChart extends Component<void, any, any> {
 		this.state = { rotation: 0 };
 		(this:any).boundingAreas = {};
 	}
-	shouldComponentUpdate = (props : any, state : any) => {
+	shouldComponentUpdate(props : any, state : any) {
 		return props !== this.props;
 	}
 
 	// TODO: Handle press on chart by emitting event
-	_handlePress(_e : Object) {
+	_handlePress = (_e : Object) => {
 		// const { locationX, locationY } = e.nativeEvent;
-	}
+	};
 
 	render() {
 		if (!this.props.width || !this.props.height) return <View />;

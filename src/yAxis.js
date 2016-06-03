@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { uniqueValuesInDataSet } from './util';
 
 const styles = StyleSheet.create({
 	yAxisContainer: {
@@ -37,26 +38,29 @@ export default class YAxis extends Component<void, any, any> {
 	_createLabelForYAxis = (index : number) => {
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
+		console.log(minBound, maxBound);
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {
 			minBound -= this.props.verticalGridStep;
 			maxBound += this.props.verticalGridStep;
 		}
+		minBound = (minBound < 0) ? 0 : minBound;
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
 		label = Math.round(label);
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
 			label = this.props.yAxisTransform(label);
 		}
 		return <Text style={{ color: this.props.axisLabelColor }} key={index}>{label}</Text>;
-	}
+	};
 
 	render() {
 		const range = [];
 		const data = this.props.data || [];
-		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v[1]) === i);
-		const steps = (uniqueValuesInDataSet.length < this.props.verticalGridStep) ? uniqueValuesInDataSet.length : this.props.verticalGridStep;
+		const unique = uniqueValuesInDataSet(data);
+		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
+		console.log(range);
 		return (
 			<View
 				style={[

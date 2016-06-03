@@ -2,12 +2,13 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
-import BarChart from './src/BarChart';
-import LineChart from './src/LineChart';
-import PieChart from './src/PieChart';
-import YAxis from './src/yAxis';
-import XAxis from './src/xAxis';
-import * as C from './src/constants';
+import BarChart from './BarChart';
+import LineChart from './LineChart';
+import PieChart from './PieChart';
+import YAxis from './yAxis';
+import XAxis from './xAxis';
+import * as C from './constants';
+import { uniqueValuesInDataSet } from './util';
 
 const styles = StyleSheet.create({
 	default: { flex: 1 },
@@ -37,18 +38,18 @@ export default class Chart extends Component<void, any, any> {
 		chartFontSize: 14,
 		gridColor: C.BLACK,
 		gridLineWidth: 0.5,
-		labelFontSize: 10,
 		hideHorizontalGridLines: false,
 		hideVerticalGridLines: false,
+		horizontalScale: 1,
+		labelFontSize: 10,
 		showAxis: true,
 		showGrid: true,
 		showXAxisLabels: true,
 		showYAxisLabels: true,
 		tightBounds: false,
 		verticalGridStep: 3,
-		yAxisWidth: 30,
 		xAxisHeight: 20,
-		horizontalScale: 1,
+		yAxisWidth: 30,
 	};
 
 	constructor(props : any) {
@@ -73,8 +74,8 @@ export default class Chart extends Component<void, any, any> {
 		const range = [];
 		const data = props.data || [];
 		// TODO: This is wrong!
-		const uniqueValuesInDataSet = data.filter((v, i, self) => self.indexOf(v) === i);
-		const steps = (uniqueValuesInDataSet.length < props.verticalGridStep) ? uniqueValuesInDataSet.length : props.verticalGridStep;
+		const unique = uniqueValuesInDataSet(data);
+		const steps = (unique.length < props.verticalGridStep) ? unique.length : props.verticalGridStep;
 		for (let i = steps; i > 0; i--) range.push(i);
 
 		const containerStyle = { width: props.width, height: props.height, position: 'absolute', left: 0 };
