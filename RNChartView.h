@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, assign) CGFloat cornerRadius;
 @property (nonatomic, copy) NSString* type;
 
+@property (nonatomic, assign) NSString* labelFontName;
 @property (nonatomic, assign) CGFloat labelFontSize;
 @property (nonatomic, strong) UIColor* labelTextColor;
 

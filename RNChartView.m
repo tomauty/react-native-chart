@@ -76,10 +76,11 @@
 }
 
 
-- (void)setLabelFontSize:(CGFloat)labelFontSize {
+- (void)setLabelFontSize:(CGFloat)labelFontSize :(NSString *)labelFontName{
 	_labelFontSize = labelFontSize;
+	_labelFontName = labelFontName;
 
-	_labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:_labelFontSize];
+	_labelFont = [UIFont fontWithName:_labelFontName size:_labelFontSize];
 }
 
 
