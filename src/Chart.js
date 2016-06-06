@@ -31,18 +31,21 @@ export default class Chart extends Component<void, any, any> {
 		data: [],
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
-		axisLabelColor: C.BLACK,
+		axisLabexlColor: C.BLACK,
 		axisLineWidth: 1,
 		axisTitleColor: C.GREY,
 		axisTitleFontSize: 16,
 		chartFontSize: 14,
+		dataPointRadius: 3,
 		gridColor: C.BLACK,
 		gridLineWidth: 0.5,
 		hideHorizontalGridLines: false,
 		hideVerticalGridLines: false,
 		horizontalScale: 1,
 		labelFontSize: 10,
+		lineWidth: 1,
 		showAxis: true,
+		showDataPoint: false,
 		showGrid: true,
 		showXAxisLabels: true,
 		showYAxisLabels: true,
@@ -225,30 +228,30 @@ Chart.propTypes = {
 	// Bar chart props
 	color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	cornerRadius: PropTypes.number,
-	fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
+	// fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
 	widthPercent: PropTypes.number,
 
 	// Line/multi-line chart props
-	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
+	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointRadius: PropTypes.number,
-	highlightRadius: PropTypes.number, // TODO
+	// highlightRadius: PropTypes.number, // TODO
 	lineWidth: PropTypes.number,
 	showDataPoint: PropTypes.bool, // TODO
 
 	// Pie chart props
-	pieCenterRatio: PropTypes.number, // TODO
+	// pieCenterRatio: PropTypes.number, // TODO
 	sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-	animationDuration: PropTypes.number, // TODO
+	// animationDuration: PropTypes.number, // TODO
 	axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisLabelColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisLineWidth: PropTypes.number,
-	axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	axisTitleFontSize: PropTypes.number,
-	chartFontSize: PropTypes.number,
-	chartTitle: PropTypes.string,
-	chartTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	// axisTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	// axisTitleFontSize: PropTypes.number,
+	// chartFontSize: PropTypes.number,
+	// chartTitle: PropTypes.string,
+	// chartTitleColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	gridLineWidth: PropTypes.number,
 	hideHorizontalGridLines: PropTypes.bool,

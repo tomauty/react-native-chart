@@ -78,7 +78,7 @@ export default class LineChart extends Component<void, any, any> {
 				<View style={{ position: 'absolute' }}>
 					<Surface width={containerWidth} height={containerHeight}>
 						<AnimatedShape d={path} stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
-						<AnimatedShape d={fillPath} fill="#4dc4e611" />
+						<AnimatedShape d={fillPath} fill={this.props.fillColor} />
 					</Surface>
 				</View>
 				<View style={{ position: 'absolute' }}>

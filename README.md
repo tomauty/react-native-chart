@@ -38,35 +38,22 @@ const styles = StyleSheet.create({
 	},
 });
 
-const chartData = [
-	{
-		name: 'BarChart',
-		type: 'bar',
-		color:'purple',
-		widthPercent: 0.6,
-		data: [30, 1, 1, 2, 3, 5, 21, 13, 21, 34, 55, 30],
-	},
-	{
-		name: 'LineChart',
-		color: 'gray',
-		lineWidth: 2,
-		highlightIndices: [1, 2],	// The data points at indexes 1 and 2 will be orange
-		highlightColor: 'orange',
-		showDataPoint: true,
-		data: [10, 12, 14, 25, 31, 52, 41, 31, 52, 66, 22, 11],
-	}
+const data = [
+	[0, 1],
+	[1, 3],
+	[3, 7],
+	[4, 9],
 ];
-
-const xLabels = ['0','1','2','3','4','5','6','7','8','9','10','11'];
 
 class SimpleChart extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<RNChart style={styles.chart}
-					chartData={chartData}
+				<Chart
+					style={styles.chart}
+					data={data}
 					verticalGridStep={5}
-					xLabels={xLabels}
+					type="line"
 				 />
 			</View>
 		);
@@ -76,24 +63,37 @@ class SimpleChart extends Component {
 ```
 ## Properties
 All properties are optional otherwise noted
-### General
-| Property                | Type    | Description                                                   | Required | Default |
-|-------------------------|---------|---------------------------------------------------------------|----------|---------|
-| data                    | Object  | A chartData object                                            | Yes      | N/A     |
-| animationDuration       | Number  | The length of time in which a  chart animation occurs, in ms. |          | 0.5     |
-| axisColor               | String  | The color of the lines of the X and Y axes                    |          | #333333 |
-| axisLabelColor          | String  | Color of the labels on X and Y axes                           |          | #333333 |
-| axisLineWidth           | Number  | Width of the axis lines                                       |          | 0.5     |
-| gridColor               | String  | Color of the grid lines                                       |          | #333333 |
-| gridLineWidth           | Number  | Width of the grid lines                                       |          | 0.5     |
-| hideHorizontalGridLines | Boolean | Hide only the grid lines running LTR                          |          | false   |
-| hideVerticalGridLines   | Boolean | Hide only the grid lines running up/down                      |          | false   |
-| labelFontSize           | Number  | Font size of axis labels                                      |          | 14      |
-| showAxis                | Boolean | Show the X and Y axes                                         |          | true    |
-| showGrid                | Boolean | Show gridlines                                                |          | true    |
-| showXAxisLabels         | Boolean | Show the labels for the x-axis                                |          | true    |
-| showYAxisLabels         | Boolean | Show the labels for the y-axis                                |          | true    |
 
+| Property                | Type                      | Description                                               | Required | Default               |
+| ----------------------- | ------------------------- | --------------------------------------------------------- | -------- | --------------------- |
+| data                    | Array< [number, number] > | An array of [x, y] pairs.                                 | **Yes**  |                       |
+| type                    | string                    | pie/bar/line                                              | **Yes**  | bar                   |
+| color                   | string                    | Color of bars/line in line chart                          | No       | #4DC4E6               |
+| cornerRadius            | number                    | Corner radius of bars in bar chart                        | No       | 0                     |
+| fillColor               | string                    | Fill area color in line chart                             | No       |                       |
+| dataPointColor          | string                    | Stroke color for line chart data point                    | No       |                       |
+| dataPointFillColor      | string                    | Fill color for line chart data point                      | No       |                       |
+| dataPointRadius         | number                    | Radius of the data point                                  | No       | 3                     |
+| lineWidth               | number                    | Width of line chart line                                  | No       | 1                     |
+| showDataPoint           | boolean                   | Show data points on line chart                            | No       | false                 |
+| sliceColors             | Array < string >          | Array of colors for pie chart slices                      | **Yes**  | [ < random colors > ] |
+| axisColor               | string                    | Color of axis lines                                       | No       | #333333               |
+| axisLabelColor          | string                    | Color of axis test                                        | No       | #333333               |
+| axisLineWidth           | number                    | Width of axis lines                                       | No       | 1                     |
+| gridColor               | string                    | Color of grid lines                                       | No       | #333333               |
+| gridLineWidth           | number                    | Width of grid lines                                       | No       | 0.5                   |
+| hideHorizontalGridLines | boolean                   | Hide grid lines going from LTR                            | No       | false                 |
+| hideVerticalGridLines   | boolean                   | Hide grid lines going up -> down                          | No       | false                 |
+| showAxis                | boolean                   | Show the X and Y axes                                     | No       | true                  |
+| showGrid                | boolean                   | Show the grid                                             | No       | true                  |
+| showXAxisLabels         | boolean                   | Show X-Axis labels                                        | No       | true                  |
+| showYAxisLabels         | boolean                   | Show Y-Axis labels                                        | No       | true                  |
+| style                   | object                    | Style on the container                                    | No       | {}                    |
+| tightBounds             | boolean                   | Tighten min and max bounds strictly to min/max in dataset | No       | false                 |
+| verticalGridStep        | number                    | How many vertical grid lines to show                      | No       | 4                     |
+| xAxisHeight             | number                    | Height of X-axis container                                | No       | 20                    |
+| yAxisTransform          | Function                  | Transform data point to y-axis label                      | No       | (_) => _              |
+| yAxisWidth              | number                    | Width of the Y-axis container                             | No       | 30                    |
 ## Info/Support
 
 Work prior to repo transfer on Feb 1, 2015 was the work of Hyun Cho @ OneFold.
