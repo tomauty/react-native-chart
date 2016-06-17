@@ -30,7 +30,7 @@ export default class Chart extends Component<void, any, any> {
 		data: [],
 		animationDuration: 0.5,
 		axisColor: C.BLACK,
-		axisLabexlColor: C.BLACK,
+		axisLabelColor: C.BLACK,
 		axisLineWidth: 1,
 		axisTitleColor: C.GREY,
 		axisTitleFontSize: 16,
