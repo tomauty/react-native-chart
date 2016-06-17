@@ -29,7 +29,7 @@ export default class PieChart extends Component<void, any, any> {
 	render() {
 		if (!this.props.width || !this.props.height) return <View />;
 
-		const COLORS = this.props.data.sliceColors || [
+		const COLORS = this.props.sliceColors || [
 			C.BLUE,
 			C.GREY,
 			C.RED,
