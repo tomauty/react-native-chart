@@ -4,15 +4,18 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "lint": "node_modules/.bin/eslint . || true"
+    "lint": "node_modules/.bin/eslint . || true",
+    "build": "babel src --out-dir dist"
   },
+  "main": "./dist/Chart.js",
   "dependencies": {
     "react": "^15.0.2",
     "react-native": "^0.26.3"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
+    "babel-cli": "^6.10.1",
     "babel-eslint": "^6.0.0",
+    "babel-plugin-transform-flow-strip-types": "^6.8.0",
     "babel-preset-react-native": "^1.5.3",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^8.0.0",
