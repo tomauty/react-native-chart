@@ -15,6 +15,10 @@ Grid=function(_Component){_inherits(Grid,_Component);function Grid(){_classCallC
 
 
 
+
+
+
+
 {var _this2=this;
 if(!this.props.showGrid)return null;
 var horizontalRange=[];
@@ -48,17 +52,17 @@ borderRightWidth:intendedLineWidth};
 
 
 return (
-_react2.default.createElement(_reactNative.View,{style:containerStyle,__source:{fileName:_jsxFileName,lineNumber:51}},
+_react2.default.createElement(_reactNative.View,{style:containerStyle,__source:{fileName:_jsxFileName,lineNumber:55}},
 function(){
 if(_this2.props.hideHorizontalGridLines)return null;
 return (
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute',flexDirection:'column',justifyContent:'space-around'},__source:{fileName:_jsxFileName,lineNumber:55}},
-horizontalRange.map(function(_,i){return _react2.default.createElement(_reactNative.View,{key:i,style:horizontalGridStyle,__source:{fileName:_jsxFileName,lineNumber:56}});})));}(),
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute',flexDirection:'column',justifyContent:'space-around'},__source:{fileName:_jsxFileName,lineNumber:59}},
+horizontalRange.map(function(_,i){return _react2.default.createElement(_reactNative.View,{key:i,style:horizontalGridStyle,__source:{fileName:_jsxFileName,lineNumber:60}});})));}(),
 
 
 
 function(){
 if(_this2.props.hideVerticalGridLines)return null;
 return (
-_react2.default.createElement(_reactNative.View,{style:{flexDirection:'row',position:'absolute',justifyContent:'space-around'},__source:{fileName:_jsxFileName,lineNumber:63}},
-verticalRange.map(function(_,i){return _react2.default.createElement(_reactNative.View,{key:i,style:verticalGridStyle,__source:{fileName:_jsxFileName,lineNumber:64}});})));}()));}}]);return Grid;}(_react.Component);Grid.propTypes={showGrid:_react.PropTypes.bool,data:_react.PropTypes.array.isRequired,verticalGridStep:_react.PropTypes.number.isRequired,height:_react.PropTypes.number.isRequired,width:_react.PropTypes.number.isRequired,type:_react.PropTypes.oneOf(['line','bar','pie']).isRequired};Grid.defaultProps={};exports.default=Grid;
+_react2.default.createElement(_reactNative.View,{style:{flexDirection:'row',position:'absolute',justifyContent:'space-around'},__source:{fileName:_jsxFileName,lineNumber:67}},
+verticalRange.map(function(_,i){return _react2.default.createElement(_reactNative.View,{key:i,style:verticalGridStyle,__source:{fileName:_jsxFileName,lineNumber:68}});})));}()));}}]);return Grid;}(_react.Component);Grid.propTypes={showGrid:_react.PropTypes.bool,data:_react.PropTypes.array.isRequired,verticalGridStep:_react.PropTypes.number.isRequired,gridLineWidth:_react.PropTypes.number,gridColor:_react.PropTypes.oneOfType([_react.PropTypes.number,_react.PropTypes.string]),hideHorizontalGridLines:_react.PropTypes.bool,hideVerticalGridLines:_react.PropTypes.bool,height:_react.PropTypes.number.isRequired,width:_react.PropTypes.number.isRequired,type:_react.PropTypes.oneOf(['line','bar','pie']).isRequired};Grid.defaultProps={};exports.default=Grid;

@@ -38,7 +38,6 @@ export default class YAxis extends Component<void, any, any> {
 	_createLabelForYAxis = (index : number) => {
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
-		console.log(minBound, maxBound);
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {

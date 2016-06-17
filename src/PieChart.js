@@ -13,7 +13,7 @@ export default class PieChart extends Component<void, any, any> {
 		this.state = { rotation: 0 };
 		(this:any).boundingAreas = {};
 	}
-	shouldComponentUpdate(props : any, state : any) {
+	shouldComponentUpdate(props : any) {
 		return (
 			props.data !== this.props.data
 			|| props.height !== this.props.height
@@ -85,7 +85,7 @@ export default class PieChart extends Component<void, any, any> {
 										key={i}
 										originX={centerX}
 										originY={centerY}
-										{ ...arc}
+										{...arc}
 									/>
 								);
 							})}

@@ -38,7 +38,6 @@ props));_this.
 _createLabelForYAxis=function(index){
 var minBound=_this.props.minVerticalBound;
 var maxBound=_this.props.maxVerticalBound;
-console.log(minBound,maxBound);
 
 // For all same values, create a range anyway
 if(minBound===maxBound){
@@ -51,7 +50,7 @@ label=Math.round(label);
 if(_this.props.yAxisTransform&&typeof _this.props.yAxisTransform==='function'){
 label=_this.props.yAxisTransform(label);}
 
-return _react2.default.createElement(_reactNative.Text,{style:{color:_this.props.axisLabelColor},key:index,__source:{fileName:_jsxFileName,lineNumber:54}},label);};_this.state={bounds:{min:0,max:0}};return _this;}_createClass(YAxis,[{key:'render',value:function render()
+return _react2.default.createElement(_reactNative.Text,{style:{color:_this.props.axisLabelColor},key:index,__source:{fileName:_jsxFileName,lineNumber:53}},label);};_this.state={bounds:{min:0,max:0}};return _this;}_createClass(YAxis,[{key:'render',value:function render()
 
 
 {
@@ -66,7 +65,7 @@ style:[
 styles.yAxisContainer,
 this.props.style||{},
 this.props.placement==='left'&&{borderRightColor:this.props.axisColor,borderRightWidth:this.props.axisLineWidth},
-this.props.placement==='right'&&{borderLeftColor:this.props.axisColor,borderLeftWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:64}},
+this.props.placement==='right'&&{borderLeftColor:this.props.axisColor,borderLeftWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:63}},
 
 
 range.map(this._createLabelForYAxis)));}}]);return YAxis;}(_react.Component);YAxis.propTypes={axisColor:_react.PropTypes.any,axisLineWidth:_react.PropTypes.number,data:_react.PropTypes.arrayOf(_react.PropTypes.array).isRequired,height:_react.PropTypes.number.isRequired,placement:_react.PropTypes.oneOf(['left','right']),verticalGridStep:_react.PropTypes.number.isRequired,yAxisTransform:_react.PropTypes.func};YAxis.defaultProps={placement:'left'};exports.default=YAxis;

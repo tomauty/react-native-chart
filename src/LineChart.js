@@ -14,7 +14,7 @@ const makeDataPoint = (x : number, y : number, data : any) => {
 
 const calculateDivisor = (minBound : number, maxBound : number) : number => {
 	return (maxBound - minBound <= 0) ? 0.00001 : maxBound - minBound;
-}
+};
 
 export default class LineChart extends Component<void, any, any> {
 
@@ -82,8 +82,7 @@ export default class LineChart extends Component<void, any, any> {
 					</Surface>
 				</View>
 				<View style={{ position: 'absolute' }}>
-					<Surface width={containerWidth} height={containerHeight}>
-					</Surface>
+					<Surface width={containerWidth} height={containerHeight} />
 				</View>
 				{(() => {
 					if (!this.props.showDataPoint) return null;

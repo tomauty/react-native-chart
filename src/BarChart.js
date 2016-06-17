@@ -26,7 +26,7 @@ export default class BarChart extends Component<void, any, any> {
 	};
 
 	_drawBar = (_dataPoint : [number, number], index : number) => {
-		const [x, dataPoint] = _dataPoint;
+		const [_x, dataPoint] = _dataPoint;
 		const backgroundColor = this.props.color || C.BLUE;
 		const HEIGHT = this.props.height;
 		const WIDTH = this.props.width;
@@ -71,7 +71,7 @@ export default class BarChart extends Component<void, any, any> {
 		const data = this.props.data || [];
 		return (
 			<View ref="container" style={[styles.default]}>
-				<Grid { ...this.props } />
+				<Grid {...this.props} />
 				{data.map(this._drawBar)}
 			</View>
 		);

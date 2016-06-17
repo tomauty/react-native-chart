@@ -47,18 +47,19 @@ export default class XAxis extends Component {
 			>
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
-				console.log(this.props.align);
 				return data.map((d, i) => {
-					return <Text
-						key={i}
-						style={[
-							styles.axisText,
-							{
-								textAlign: this.props.align,
-								color: this.props.axisLabelColor,
-						 	},
-						]}
-					>{d[0]}</Text>
+					return (
+						<Text
+							key={i}
+							style={[
+								styles.axisText,
+								{
+									textAlign: this.props.align,
+									color: this.props.axisLabelColor,
+								},
+							]}
+						>{d[0]}</Text>
+				);
 				});
 			})()}
 			</View>

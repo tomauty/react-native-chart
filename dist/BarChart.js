@@ -26,7 +26,7 @@ _this.props.data.onDataPointPress(e,dataPoint,index);}};_this.
 
 
 _drawBar=function(_dataPoint,index){var _dataPoint2=_slicedToArray(
-_dataPoint,2);var x=_dataPoint2[0];var dataPoint=_dataPoint2[1];
+_dataPoint,2);var _x=_dataPoint2[0];var dataPoint=_dataPoint2[1];
 var backgroundColor=_this.props.color||C.BLUE;
 var HEIGHT=_this.props.height;
 var WIDTH=_this.props.width;

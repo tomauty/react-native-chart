@@ -8,7 +8,6 @@ import PieChart from './PieChart';
 import YAxis from './yAxis';
 import XAxis from './xAxis';
 import * as C from './constants';
-import { uniqueValuesInDataSet } from './util';
 
 const styles = StyleSheet.create({
 	default: { flex: 1 },
@@ -150,7 +149,7 @@ export default class Chart extends Component<void, any, any> {
 		return (
 			<View>
 				{(() => {
-					const Chart = components[this.props.type] || BarChart;
+					const ChartType = components[this.props.type] || BarChart;
 					if (this.props.showAxis && Chart !== PieChart) {
 						return (
 							<View
@@ -171,7 +170,7 @@ export default class Chart extends Component<void, any, any> {
 											style={{ width: this.props.yAxisWidth }}
 										/>
 									</View>
-									<Chart
+									<ChartType
 										{...this.props}
 										data={this.props.data}
 										width={this.state.containerWidth - this.props.yAxisWidth}
@@ -203,7 +202,7 @@ export default class Chart extends Component<void, any, any> {
 							onLayout={this._onContainerLayout}
 							style={[this.props.style || {}, styles.default]}
 						>
-							<Chart
+							<ChartType
 								{...this.props}
 								width={this.state.containerWidth}
 								height={this.state.containerHeight}

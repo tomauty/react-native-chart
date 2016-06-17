@@ -47,9 +47,9 @@ borderTopWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNu
 
 function(){
 if(!_this2.props.showXAxisLabels)return null;
-console.log(_this2.props.align);
 return data.map(function(d,i){
-return _react2.default.createElement(_reactNative.Text,{
+return (
+_react2.default.createElement(_reactNative.Text,{
 key:i,
 style:[
 styles.axisText,
@@ -58,4 +58,4 @@ textAlign:_this2.props.align,
 color:_this2.props.axisLabelColor}],__source:{fileName:_jsxFileName,lineNumber:52}},
 
 
-d[0]);});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string};XAxis.defaultProps={align:'center'};exports.default=XAxis;
+d[0]));});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string};XAxis.defaultProps={align:'center'};exports.default=XAxis;

@@ -3,25 +3,29 @@ import { View, StyleSheet } from 'react-native';
 import { uniqueValuesInDataSet } from './util';
 
 export default class Grid extends Component {
-  static propTypes = {
-    showGrid: PropTypes.bool,
-    data: PropTypes.array.isRequired,
-    verticalGridStep: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-  	type: PropTypes.oneOf(['line', 'bar', 'pie']).isRequired,
-  };
-  static defaultProps = {
+	static propTypes = {
+		showGrid: PropTypes.bool,
+		data: PropTypes.array.isRequired,
+		verticalGridStep: PropTypes.number.isRequired,
+		gridLineWidth: PropTypes.number,
+		gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		hideHorizontalGridLines: PropTypes.bool,
+		hideVerticalGridLines: PropTypes.bool,
+		height: PropTypes.number.isRequired,
+		width: PropTypes.number.isRequired,
+		type: PropTypes.oneOf(['line', 'bar', 'pie']).isRequired,
+	};
+	static defaultProps = {
 
-  };
+	};
 
-  render() {
+	render() {
 		if (!this.props.showGrid) return null;
 		const horizontalRange = [];
-    const verticalRange = [];
+		const verticalRange = [];
 		const data = this.props.data || [];
 		const unique = uniqueValuesInDataSet(data);
-		let horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		const horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 
 		for (let i = horizontalSteps; i > 0; i--) horizontalRange.push(i);
 		for (let i = data.length - 1; i > 0; i--) verticalRange.push(i);
@@ -67,6 +71,5 @@ export default class Grid extends Component {
 				})()}
 			</View>
 		);
-
-  }
+	}
 }

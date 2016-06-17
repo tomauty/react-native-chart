@@ -1,3 +1,4 @@
+/* @flow */
 import React, { Component, PropTypes } from 'react';
 import { ART } from 'react-native';
 const { Path, Shape } = ART;

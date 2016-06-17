@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "lint": "node_modules/.bin/eslint . || true",
-    "build": "babel src --out-dir dist"
+    "lint": "eslint src",
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run lint && npm run build"
   },
   "main": "./dist/Chart.js",
   "dependencies": {

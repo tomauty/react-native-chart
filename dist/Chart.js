@@ -7,8 +7,7 @@ var _LineChart=require('./LineChart');var _LineChart2=_interopRequireDefault(_Li
 var _PieChart=require('./PieChart');var _PieChart2=_interopRequireDefault(_PieChart);
 var _yAxis=require('./yAxis');var _yAxis2=_interopRequireDefault(_yAxis);
 var _xAxis=require('./xAxis');var _xAxis2=_interopRequireDefault(_xAxis);
-var _constants=require('./constants');var C=_interopRequireWildcard(_constants);
-var _util=require('./util');function _interopRequireWildcard(obj){if(obj&&obj.__esModule){return obj;}else {var newObj={};if(obj!=null){for(var key in obj){if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key]=obj[key];}}newObj.default=obj;return newObj;}}function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}
+var _constants=require('./constants');var C=_interopRequireWildcard(_constants);function _interopRequireWildcard(obj){if(obj&&obj.__esModule){return obj;}else {var newObj={};if(obj!=null){for(var key in obj){if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key]=obj[key];}}newObj.default=obj;return newObj;}}function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}
 
 var styles=_reactNative.StyleSheet.create({
 default:{flex:1}});
@@ -148,18 +147,18 @@ return this.state.bounds.max>0?this.state.bounds.max:0;}},{key:'render',value:fu
 var components={'line':_LineChart2.default,'bar':_BarChart2.default,'pie':_PieChart2.default};
 var axisAlign=this.props.type==='line'?'left':'center';
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:151}},
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:150}},
 function(){
-var Chart=components[_this2.props.type]||_BarChart2.default;
+var ChartType=components[_this2.props.type]||_BarChart2.default;
 if(_this2.props.showAxis&&Chart!==_PieChart2.default){
 return (
 _react2.default.createElement(_reactNative.View,{
 ref:'container',
 style:[_this2.props.style||{},{flex:1,flexDirection:'column'}],
-onLayout:_this2._onContainerLayout,__source:{fileName:_jsxFileName,lineNumber:156}},
+onLayout:_this2._onContainerLayout,__source:{fileName:_jsxFileName,lineNumber:155}},
 
-_react2.default.createElement(_reactNative.View,{style:[styles.default,{flexDirection:'row'}],__source:{fileName:_jsxFileName,lineNumber:161}},
-_react2.default.createElement(_reactNative.View,{ref:'yAxis',__source:{fileName:_jsxFileName,lineNumber:162}},
+_react2.default.createElement(_reactNative.View,{style:[styles.default,{flexDirection:'row'}],__source:{fileName:_jsxFileName,lineNumber:160}},
+_react2.default.createElement(_reactNative.View,{ref:'yAxis',__source:{fileName:_jsxFileName,lineNumber:161}},
 _react2.default.createElement(_yAxis2.default,_extends({},
 _this2.props,{
 data:_this2.props.data,
@@ -168,28 +167,28 @@ width:_this2.props.yAxisWidth,
 minVerticalBound:_this2.state.bounds.min,
 containerWidth:_this2.state.containerWidth,
 maxVerticalBound:_this2.state.bounds.max,
-style:{width:_this2.props.yAxisWidth},__source:{fileName:_jsxFileName,lineNumber:163}}))),
+style:{width:_this2.props.yAxisWidth},__source:{fileName:_jsxFileName,lineNumber:162}}))),
 
 
-_react2.default.createElement(Chart,_extends({},
+_react2.default.createElement(ChartType,_extends({},
 _this2.props,{
 data:_this2.props.data,
 width:_this2.state.containerWidth-_this2.props.yAxisWidth,
 height:_this2.state.containerHeight-_this2.props.xAxisHeight,
 minVerticalBound:_this2.state.bounds.min,
-maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:174}}))),
+maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:173}}))),
 
 
 function(){
 return (
-_react2.default.createElement(_reactNative.View,{ref:'xAxis',__source:{fileName:_jsxFileName,lineNumber:185}},
+_react2.default.createElement(_reactNative.View,{ref:'xAxis',__source:{fileName:_jsxFileName,lineNumber:184}},
 _react2.default.createElement(_xAxis2.default,_extends({},
 _this2.props,{
 width:_this2.state.containerWidth-_this2.props.yAxisWidth,
 data:_this2.props.data,
 height:_this2.props.xAxisHeight,
 align:axisAlign,
-style:{marginLeft:_this2.props.yAxisWidth-1},__source:{fileName:_jsxFileName,lineNumber:186}}))));}()));}
+style:{marginLeft:_this2.props.yAxisWidth-1},__source:{fileName:_jsxFileName,lineNumber:185}}))));}()));}
 
 
 
@@ -201,13 +200,13 @@ return (
 _react2.default.createElement(_reactNative.View,{
 ref:'container',
 onLayout:_this2._onContainerLayout,
-style:[_this2.props.style||{},styles.default],__source:{fileName:_jsxFileName,lineNumber:201}},
+style:[_this2.props.style||{},styles.default],__source:{fileName:_jsxFileName,lineNumber:200}},
 
-_react2.default.createElement(Chart,_extends({},
+_react2.default.createElement(ChartType,_extends({},
 _this2.props,{
 width:_this2.state.containerWidth,
 height:_this2.state.containerHeight,
-data:_this2.props.data,__source:{fileName:_jsxFileName,lineNumber:206}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animationDuration:0.5,axisColor:C.BLACK,axisLabexlColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30};exports.default=Chart;
+data:_this2.props.data,__source:{fileName:_jsxFileName,lineNumber:205}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animationDuration:0.5,axisColor:C.BLACK,axisLabexlColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30};exports.default=Chart;
 
 
 

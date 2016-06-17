@@ -24,7 +24,7 @@ props));_this.
 
 _handlePress=function(_e){
 // const { locationX, locationY } = e.nativeEvent;
-};_this.state={rotation:0};_this.boundingAreas={};return _this;}_createClass(PieChart,[{key:'shouldComponentUpdate',value:function shouldComponentUpdate(props,state){return props.data!==this.props.data||props.height!==this.props.height||props.width!==this.props.width;} // TODO: Handle press on chart by emitting event
+};_this.state={rotation:0};_this.boundingAreas={};return _this;}_createClass(PieChart,[{key:'shouldComponentUpdate',value:function shouldComponentUpdate(props){return props.data!==this.props.data||props.height!==this.props.height||props.width!==this.props.width;} // TODO: Handle press on chart by emitting event
 },{key:'render',value:function render()
 {
 if(!this.props.width||!this.props.height)return _react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:30}});
