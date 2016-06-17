@@ -27,12 +27,15 @@ If linking doesn't work for you, follow these steps:
 <img width="435" alt="screen shot 2016-06-17 at 3 39 42 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162506/e4f3f35c-34a1-11e6-8fa6-82b1d9162028.png">
 
 3. Go to Build Phases -> Link Binary With Libraries
+
 <img width="660" alt="screen shot 2016-06-17 at 3 40 00 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162508/e4f8a6cc-34a1-11e6-91d9-2a0fcc1179ab.png">
 
-4. Click the '+', and add libART.a
+4 Click the '+', and add libART.a
+
 <img width="250" alt="screen shot 2016-06-17 at 3 40 03 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162507/e4f50238-34a1-11e6-9b4d-3f883c9f27c4.png">
 
-5. Rebuild
+Then rebuild.
+
 
 
 ## Usage
