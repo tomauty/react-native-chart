@@ -1,7 +1,6 @@
 {
-  "name": "rnchart20",
-  "version": "0.0.1",
-  "private": true,
+  "name": "react-native-chart",
+  "version": "1.0.0-beta",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "eslint src",
