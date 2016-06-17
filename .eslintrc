@@ -1,32 +1,43 @@
 {
-  "parser": "babel-eslint",
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "settings": {
-    "ecmascript": 6,
-    "jsx": true
-  },
-  "plugins": [
-    "react",
-    "react-native"
-  ],
-  "extends": "airbnb",
-  "rules": {
-    "indent": [2, "tab"],
-    "quote-props": 0,
-    "max-len": [2, 150, 4, {"ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("}],
-    "strict": 0,
-    "no-console": 0,
-    "quotes": 0,
-    "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "^_"}],
-    "no-param-reassign": [2, {"props": false}],
-    "react/jsx-no-bind": [1, { "allowArrowFunctions": true }],
-    "camelcase": 0,
-    "no-alert": 0,
-    "no-underscore-dangle": 0,
-    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
-    "react-native/no-unused-styles": 2
-  }
+    "parser": "babel-eslint",
+    "globals": {},
+    "env": {
+        "node": true
+    },
+    "settings": {
+        "ecmascript": 6,
+        "jsx": true
+    },
+    "plugins": [
+        "react",
+        "react-native",
+        "flowtype",
+        "flow-vars"
+    ],
+    "extends": "airbnb",
+    "rules": {
+        "arrow-body-style": [0, "as-needed"],
+        "camelcase": 0,
+        "flow-vars/define-flow-type": 1,
+        "flow-vars/use-flow-type": 1,
+        "indent": [2, "tab"],
+        "max-len": [2, 150, 4, {"ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("}],
+        "no-alert": 0,
+        "no-console": 1,
+        "no-labels": 0,
+        "no-param-reassign": [2, {"props": false}],
+        "no-underscore-dangle": 0,
+        "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "^_"}],
+        "no-use-before-define": 0,
+        "quote-props": 0,
+        "quotes": 0,
+        "react-native/no-unused-styles": 1,
+        "react/jsx-indent": [2, "tab"],
+        "react/jsx-indent-props": [2, "tab"],
+        "react/jsx-no-bind": [1, { "allowArrowFunctions": true }],
+        "react/no-multi-comp": 0,
+        "react/prefer-stateless-function": 0,
+        "space-infix-ops": 0,
+        "strict": 0
+    }
 }
