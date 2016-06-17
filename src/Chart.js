@@ -25,7 +25,7 @@ const getRoundNumber = (value, gridStep) => {
 };
 
 
-export default class Chart extends Component<void, any, any> {
+export default class Chart extends Component<void, Chart, any> {
 	static defaultProps : any = {
 		data: [],
 		animationDuration: 0.5,
