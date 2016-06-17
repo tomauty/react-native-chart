@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Dimensions, StyleSheet, TouchableOpacity, Text, ScrollView, View } from 'react-native';
 
-import Chart from './../dist/Chart';
+import Chart from 'react-native-chart';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
