@@ -29,7 +29,7 @@ _handlePress=function(_e){
 {
 if(!this.props.width||!this.props.height)return _react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:30}});
 
-var COLORS=this.props.data.sliceColors||[
+var COLORS=this.props.sliceColors||[
 C.BLUE,
 C.GREY,
 C.RED,
