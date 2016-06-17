@@ -5,7 +5,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "eslint src",
     "build": "babel src --out-dir dist",
-    "prepublish": "npm run lint && npm run build"
+    "prepublish": "npm run build"
   },
   "main": "./dist/Chart.js",
   "dependencies": {
