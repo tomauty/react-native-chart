@@ -15,6 +15,26 @@ react-native-chart is a simple module for adding line charts, area charts, or ba
 1. `npm i react-native-chart --save`
 2. `rnpm link`
 
+If linking doesn't work for you, follow these steps:
+
+
+1. Right click Libraries and click 'Add Files to {YourProject}'
+
+<img width="366" alt="screen shot 2016-06-17 at 3 39 24 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162504/e4f284f4-34a1-11e6-9819-49f7b3ee4fd3.png">
+
+2. Navigate to your project's node_modules/react-native/Libraries/ART and select 'ART.xcodeproj'
+
+<img width="435" alt="screen shot 2016-06-17 at 3 39 42 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162506/e4f3f35c-34a1-11e6-8fa6-82b1d9162028.png">
+
+3. Go to Build Phases -> Link Binary With Libraries
+<img width="660" alt="screen shot 2016-06-17 at 3 40 00 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162508/e4f8a6cc-34a1-11e6-91d9-2a0fcc1179ab.png">
+
+4. Click the '+', and add libART.a
+<img width="250" alt="screen shot 2016-06-17 at 3 40 03 pm" src="https://cloud.githubusercontent.com/assets/1112872/16162507/e4f50238-34a1-11e6-9b4d-3f883c9f27c4.png">
+
+5. Rebuild
+
+
 ## Usage
 ```javascript
 import React, { StyleSheet, View, Component } from 'react-native';
