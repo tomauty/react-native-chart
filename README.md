@@ -5,6 +5,8 @@
 
 react-native-chart is a simple module for adding line charts, area charts, or bar charts to your React Native app.
 
+**NOTE!** The current major version (1.X.Y) is still being developed. If you are looking for the most recent iOS-only version, please download `^0.1.4`.
+
 ![Screenshot](https://raw.githubusercontent.com/tomauty/react-native-chart/master/screenshots/README.png)
 
 ## Getting Started
