@@ -109,6 +109,13 @@ class SimpleChart extends Component {
 | xAxisHeight             | number                    | Height of X-axis container                                | No       | 20                    |
 | yAxisTransform          | Function                  | Transform data point to y-axis label                      | No       | (_) => _              |
 | yAxisWidth              | number                    | Width of the Y-axis container                             | No       | 30                    |
+
+## TODO
+- [ ] Code cleanup
+- [ ] Multi-line chart
+- [ ] Horizontal line chart
+- [ ] Scatter chart
+
 ## Info/Support
 
 Work prior to repo transfer on Feb 1, 2015 was the work of Hyun Cho @ OneFold.
