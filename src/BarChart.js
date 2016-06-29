@@ -30,7 +30,7 @@ export default class BarChart extends Component<void, any, any> {
 		const backgroundColor = this.props.color || C.BLUE;
 		const HEIGHT = this.props.height;
 		const WIDTH = this.props.width;
-		let widthPercent = this.props.data.widthPercent || 0.5;
+		let widthPercent = this.props.widthPercent || 0.5;
 		if (widthPercent > 1) widthPercent = 1;
 		if (widthPercent < 0) widthPercent = 0;
 

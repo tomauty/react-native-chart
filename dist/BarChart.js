@@ -30,7 +30,7 @@ _dataPoint,2);var _x=_dataPoint2[0];var dataPoint=_dataPoint2[1];
 var backgroundColor=_this.props.color||C.BLUE;
 var HEIGHT=_this.props.height;
 var WIDTH=_this.props.width;
-var widthPercent=_this.props.data.widthPercent||0.5;
+var widthPercent=_this.props.widthPercent||0.5;
 if(widthPercent>1)widthPercent=1;
 if(widthPercent<0)widthPercent=0;
 
