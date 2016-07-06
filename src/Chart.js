@@ -199,12 +199,14 @@ export default class Chart extends Component<void, any, any> {
 							onLayout={this._onContainerLayout}
 							style={[this.props.style || {}, styles.default]}
 						>
-							<ChartType
-								{...this.props}
-								width={this.state.containerWidth}
-								height={this.state.containerHeight}
-								data={this.props.data}
-							/>
+              <ChartType
+                {...this.props}
+                data={this.props.data}
+                width={this.state.containerWidth - this.props.yAxisWidth}
+                height={this.state.containerHeight - this.props.xAxisHeight}
+                minVerticalBound={this.state.bounds.min}
+                maxVerticalBound={this.state.bounds.max}
+              />
 						</View>
 					);
 				})()}
