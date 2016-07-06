@@ -61,9 +61,6 @@ export default class Chart extends Component<void, any, any> {
 	componentDidMount() {
 		this._computeBounds();
 	}
-	componentWillUpdate() {
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-	}
 
 	componentDidUpdate(props : any) {
 		if (this.props !== props) {
