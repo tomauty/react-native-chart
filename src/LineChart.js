@@ -49,7 +49,8 @@ export default class LineChart extends Component<void, any, any> {
 		const horizontalStep = containerWidth / data.length;
 		const dataPoints = [];
 		const firstDataPoint = data[0][1];
-		const height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
+		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
+		if (height < 0) height = 0;
 
 		const path = new Path().moveTo(0, height);
 		const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
@@ -59,7 +60,7 @@ export default class LineChart extends Component<void, any, any> {
 		data.slice(1).forEach(([_, dataPoint], i) => {
 			let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
 
-			if (height < 0) _height = 20;
+			if (_height < 0) _height = 0;
 
 			const x = horizontalStep * (i) + horizontalStep;
 			const y = Math.round(_height);
@@ -87,7 +88,7 @@ export default class LineChart extends Component<void, any, any> {
 				{(() => {
 					if (!this.props.showDataPoint) return null;
 					return (
-						<Surface width={containerWidth} height={containerHeight + 3}>
+						<Surface width={containerWidth} height={containerHeight}>
 							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
 						</Surface>
 					);
