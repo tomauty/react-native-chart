@@ -2,19 +2,18 @@
   "name": "react-native-chart",
   "version": "1.0.1-beta",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "eslint src",
     "build": "babel src --out-dir dist",
     "prepublish": "npm run build"
   },
   "main": "./dist/Chart.js",
   "dependencies": {
-  },
-  "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-eslint": "^6.0.0",
     "babel-plugin-transform-flow-strip-types": "^6.8.0",
     "babel-preset-react-native": "^1.5.3",
+  },
+  "devDependencies": {
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-plugin-flow-vars": "^0.3.0",
