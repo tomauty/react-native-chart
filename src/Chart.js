@@ -200,14 +200,14 @@ export default class Chart extends Component<void, any, any> {
 							onLayout={this._onContainerLayout}
 							style={[this.props.style || {}, styles.default]}
 						>
-              <ChartType
+							<ChartType
 								{...this.props}
 								data={this.props.data}
-								width={this.state.containerWidth - this.props.yAxisWidth}
-								height={this.state.containerHeight - this.props.xAxisHeight}
+								width={this.state.containerWidth}
+								height={this.state.containerHeight}
 								minVerticalBound={this.state.bounds.min}
 								maxVerticalBound={this.state.bounds.max}
-              />
+							/>
 						</View>
 					);
 				})()}
@@ -242,7 +242,7 @@ Chart.propTypes = {
 	// Pie chart props
 	// pieCenterRatio: PropTypes.number, // TODO
 	sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-	// animationDuration: PropTypes.number, // TODO
+	animationDuration: PropTypes.number,
 	axisColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisLabelColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	axisLineWidth: PropTypes.number,
