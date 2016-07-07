@@ -26,14 +26,14 @@ export default class LineChart extends Component<void, any, any> {
 	}
 
 	componentWillUpdate() {
-    if (props.animated) {
+    if (this.props.animated) {
       Animated.timing(this.state.opacity, { duration: 0, toValue: 0 }).start();
       Animated.timing(this.state.height, { duration: 0, toValue: 0 }).start();
     }
 	}
 
 	componentDidUpdate() {
-    if (props.animated) {
+    if (this.props.animated) {
       Animated.timing(this.state.height, { duration: this.props.animationDuration, toValue: 1 }).start();
       Animated.timing(this.state.opacity, { duration: this.props.animationDuration, toValue: 1 }).start();
     }

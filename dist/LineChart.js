@@ -31,6 +31,14 @@ props));_this.
 
 
 
+
+
+
+
+
+
+
+
 _drawLine=function(){
 var containerHeight=_this.props.height;
 var containerWidth=_this.props.width;
@@ -50,6 +58,7 @@ var horizontalStep=containerWidth/data.length;
 var dataPoints=[];
 var firstDataPoint=data[0][1];
 var height=minBound*scale+(containerHeight-firstDataPoint*scale);
+if(height<0)height=0;
 
 var path=new Path().moveTo(0,height);
 var fillPath=new Path().moveTo(0,containerHeight).lineTo(0,height);
@@ -59,7 +68,7 @@ dataPoints.push(makeDataPoint(0,height,_this.props));
 data.slice(1).forEach(function(_ref,i){var _ref2=_slicedToArray(_ref,2);var _=_ref2[0];var dataPoint=_ref2[1];
 var _height=minBound*scale+(containerHeight-dataPoint*scale);
 
-if(height<0)_height=20;
+if(_height<0)_height=0;
 
 var x=horizontalStep*i+horizontalStep;
 var y=Math.round(_height);
@@ -74,21 +83,21 @@ fillPath.moveTo(0,containerHeight);}
 
 if(path.path.some(isNaN))return null;
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:77}},
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:78}},
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:79}},
-_react2.default.createElement(AnimatedShape,{d:path,stroke:_this.props.color||C.BLUE,strokeWidth:_this.props.lineWidth,__source:{fileName:_jsxFileName,lineNumber:80}}),
-_react2.default.createElement(AnimatedShape,{d:fillPath,fill:_this.props.fillColor,__source:{fileName:_jsxFileName,lineNumber:81}}))),
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:86}},
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:87}},
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:88}},
+_react2.default.createElement(AnimatedShape,{d:path,stroke:_this.props.color||C.BLUE,strokeWidth:_this.props.lineWidth,__source:{fileName:_jsxFileName,lineNumber:89}}),
+_react2.default.createElement(AnimatedShape,{d:fillPath,fill:_this.props.fillColor,__source:{fileName:_jsxFileName,lineNumber:90}}))),
 
 
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:84}},
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:85}})),
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:93}},
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:94}})),
 
 function(){
 if(!_this.props.showDataPoint)return null;
 return (
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight+3,__source:{fileName:_jsxFileName,lineNumber:90}},
-dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:91}}));})));}()));};_this.state={opacity:new _reactNative.Animated.Value(0)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();}},{key:'componentDidUpdate',value:function componentDidUpdate(){_reactNative.Animated.timing(this.state.opacity,{duration:500,toValue:1}).start();}},{key:'render',value:function render()
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:99}},
+dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:100}}));})));}()));};var heightValue=props.animated?0:props.containerHeight;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){if(props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:0}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:1}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
 
 
 
@@ -98,7 +107,7 @@ dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.defau
 
 {
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:101}},
-_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:102}})),
-_react2.default.createElement(_reactNative.Animated.View,{style:{opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:103}},
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:110}},
+_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:111}})),
+_react2.default.createElement(_reactNative.Animated.View,{style:{height:this.state.height,opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:112}},
 this._drawLine())));}}]);return LineChart;}(_react.Component);exports.default=LineChart;

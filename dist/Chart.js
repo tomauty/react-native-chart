@@ -54,6 +54,7 @@ Chart=function(_Component){_inherits(Chart,_Component);
 
 
 
+
 function Chart(props){_classCallCheck(this,Chart);var _this=_possibleConstructorReturn(this,Object.getPrototypeOf(Chart).call(this,
 props));_this.
 
@@ -125,12 +126,9 @@ props));_this.
 
 
 
-
-
-
 _onContainerLayout=function(e){return _this.setState({
 containerHeight:Math.ceil(e.nativeEvent.layout.height)+1,
-containerWidth:Math.ceil(e.nativeEvent.layout.width)});};_this.state={bounds:{min:0,max:0}};return _this;}_createClass(Chart,[{key:'componentDidMount',value:function componentDidMount(){this._computeBounds();}},{key:'componentWillUpdate',value:function componentWillUpdate(){_reactNative.LayoutAnimation.configureNext(_reactNative.LayoutAnimation.Presets.easeInEaseOut);}},{key:'componentDidUpdate',value:function componentDidUpdate(props){if(this.props!==props){this._computeBounds();}}},{key:'_computeBounds',value:function _computeBounds(){var min=Infinity;var max=-Infinity;var data=this.props.data||[];data.forEach(function(XYPair){var number=XYPair[1];if(number<min)min=number;if(number>max)max=number;});min=Math.round(min);max=Math.round(max); // Exit if we want tight bounds
+containerWidth:Math.ceil(e.nativeEvent.layout.width)});};_this.state={bounds:{min:0,max:0}};return _this;}_createClass(Chart,[{key:'componentDidMount',value:function componentDidMount(){this._computeBounds();}},{key:'componentDidUpdate',value:function componentDidUpdate(props){if(this.props!==props){this._computeBounds();}}},{key:'_computeBounds',value:function _computeBounds(){var min=Infinity;var max=-Infinity;var data=this.props.data||[];data.forEach(function(XYPair){var number=XYPair[1];if(number<min)min=number;if(number>max)max=number;});min=Math.round(min);max=Math.round(max); // Exit if we want tight bounds
 if(this.props.tightBounds){return this.setState({bounds:{min:min,max:max}});}max=getRoundNumber(max,this.props.verticalGridStep);if(min<0){var step=void 0;if(this.props.verticalGridStep>3){step=Math.abs(max-min)/(this.props.verticalGridStep-1);}else {step=Math.max(Math.abs(max-min)/2,Math.max(Math.abs(min),Math.abs(max)));}step=getRoundNumber(step,this.props.verticalGridStep);var newMin=void 0;var newMax=void 0;if(Math.abs(min)>Math.abs(max)){var m=Math.ceil(Math.abs(min)/step);newMin=step*m*(min>0?1:-1);newMax=step*(this.props.verticalGridStep-m)*(max>0?1:-1);}else {var _m=Math.ceil(Math.abs(max)/step);newMax=step*_m*(max>0?1:-1);newMin=step*(this.props.verticalGridStep-_m)*(min>0?1:-1);}if(min<newMin){newMin-=step;newMax-=step;}if(max>newMax+step){newMin+=step;newMax+=step;}if(max<min){var tmp=max;max=min;min=tmp;}}return this.setState({bounds:{max:max,min:min}});}},{key:'_minVerticalBound',value:function _minVerticalBound()
 
 {
@@ -147,7 +145,7 @@ return this.state.bounds.max>0?this.state.bounds.max:0;}},{key:'render',value:fu
 var components={'line':_LineChart2.default,'bar':_BarChart2.default,'pie':_PieChart2.default};
 var axisAlign=this.props.type==='line'?'left':'center';
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:150}},
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:148}},
 function(){
 var ChartType=components[_this2.props.type]||_BarChart2.default;
 if(_this2.props.showAxis&&Chart!==_PieChart2.default){
@@ -155,10 +153,10 @@ return (
 _react2.default.createElement(_reactNative.View,{
 ref:'container',
 style:[_this2.props.style||{},{flex:1,flexDirection:'column'}],
-onLayout:_this2._onContainerLayout,__source:{fileName:_jsxFileName,lineNumber:155}},
+onLayout:_this2._onContainerLayout,__source:{fileName:_jsxFileName,lineNumber:153}},
 
-_react2.default.createElement(_reactNative.View,{style:[styles.default,{flexDirection:'row'}],__source:{fileName:_jsxFileName,lineNumber:160}},
-_react2.default.createElement(_reactNative.View,{ref:'yAxis',__source:{fileName:_jsxFileName,lineNumber:161}},
+_react2.default.createElement(_reactNative.View,{style:[styles.default,{flexDirection:'row'}],__source:{fileName:_jsxFileName,lineNumber:158}},
+_react2.default.createElement(_reactNative.View,{ref:'yAxis',__source:{fileName:_jsxFileName,lineNumber:159}},
 _react2.default.createElement(_yAxis2.default,_extends({},
 _this2.props,{
 data:_this2.props.data,
@@ -167,7 +165,7 @@ width:_this2.props.yAxisWidth,
 minVerticalBound:_this2.state.bounds.min,
 containerWidth:_this2.state.containerWidth,
 maxVerticalBound:_this2.state.bounds.max,
-style:{width:_this2.props.yAxisWidth},__source:{fileName:_jsxFileName,lineNumber:162}}))),
+style:{width:_this2.props.yAxisWidth},__source:{fileName:_jsxFileName,lineNumber:160}}))),
 
 
 _react2.default.createElement(ChartType,_extends({},
@@ -176,19 +174,19 @@ data:_this2.props.data,
 width:_this2.state.containerWidth-_this2.props.yAxisWidth,
 height:_this2.state.containerHeight-_this2.props.xAxisHeight,
 minVerticalBound:_this2.state.bounds.min,
-maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:173}}))),
+maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:171}}))),
 
 
 function(){
 return (
-_react2.default.createElement(_reactNative.View,{ref:'xAxis',__source:{fileName:_jsxFileName,lineNumber:184}},
+_react2.default.createElement(_reactNative.View,{ref:'xAxis',__source:{fileName:_jsxFileName,lineNumber:182}},
 _react2.default.createElement(_xAxis2.default,_extends({},
 _this2.props,{
 width:_this2.state.containerWidth-_this2.props.yAxisWidth,
 data:_this2.props.data,
 height:_this2.props.xAxisHeight,
 align:axisAlign,
-style:{marginLeft:_this2.props.yAxisWidth-1},__source:{fileName:_jsxFileName,lineNumber:185}}))));}()));}
+style:{marginLeft:_this2.props.yAxisWidth-1},__source:{fileName:_jsxFileName,lineNumber:183}}))));}()));}
 
 
 
@@ -200,13 +198,15 @@ return (
 _react2.default.createElement(_reactNative.View,{
 ref:'container',
 onLayout:_this2._onContainerLayout,
-style:[_this2.props.style||{},styles.default],__source:{fileName:_jsxFileName,lineNumber:200}},
+style:[_this2.props.style||{},styles.default],__source:{fileName:_jsxFileName,lineNumber:198}},
 
 _react2.default.createElement(ChartType,_extends({},
 _this2.props,{
-width:_this2.state.containerWidth,
-height:_this2.state.containerHeight,
-data:_this2.props.data,__source:{fileName:_jsxFileName,lineNumber:205}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animationDuration:0.5,axisColor:C.BLACK,axisLabelColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30};exports.default=Chart;
+data:_this2.props.data,
+width:_this2.state.containerWidth-_this2.props.yAxisWidth,
+height:_this2.state.containerHeight-_this2.props.xAxisHeight,
+minVerticalBound:_this2.state.bounds.min,
+maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:203}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animated:true,animationDuration:300,axisColor:C.BLACK,axisLabelColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30};exports.default=Chart;
 
 
 
