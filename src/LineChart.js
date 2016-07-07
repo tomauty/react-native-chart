@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Animated, ART, View } from 'react-native';
+import { Animated, ART, View, Platform } from 'react-native';
 const { Surface, Shape, Path } = ART;
 import * as C from './constants';
 import Circle from './Circle';
@@ -15,11 +15,13 @@ const calculateDivisor = (minBound : number, maxBound : number) : number => {
 	return (maxBound - minBound <= 0) ? 0.00001 : maxBound - minBound;
 };
 
+const heightZero = (Platform.os === 'ios') ? 0 : 1;
+
 export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
 		super(props);
-		const heightValue = (props.animated) ? 0 : props.height;
+		const heightValue = (props.animated) ? heightZero : props.height;
 		const opacityValue = (props.animated) ? 0 : 1;
 		this.state = { height: new Animated.Value(heightValue), opacity: new Animated.Value(opacityValue) };
 	}
@@ -27,7 +29,7 @@ export default class LineChart extends Component<void, any, any> {
 	componentWillUpdate() {
 		if (this.props.animated) {
 			Animated.timing(this.state.opacity, { duration: 0, toValue: 0 }).start();
-			Animated.timing(this.state.height, { duration: 0, toValue: 0 }).start();
+			Animated.timing(this.state.height, { duration: 0, toValue: heightZero }).start();
 		}
 	}
 
@@ -105,12 +107,22 @@ export default class LineChart extends Component<void, any, any> {
 	};
 
 	render() : any {
+		if (Platform.os === 'ios') {
+			return (
+				<View style={{ overflow: 'hidden' }}>
+					<Grid {...this.props} />
+					<Animated.View style={{ height: this.state.height, opacity: this.state.opacity, backgroundColor: 'transparent' }}>
+						{this._drawLine()}
+					</Animated.View>
+				</View>
+			);
+		}
 		return (
 			<View style={{ overflow: 'hidden' }}>
 				<Grid {...this.props} />
-				<Animated.View style={{ height: this.state.height, opacity: this.state.opacity, backgroundColor: 'transparent' }}>
+				<View style={{ height: this.props.height, backgroundColor: 'transparent' }}>
 					{this._drawLine()}
-				</Animated.View>
+				</View>
 			</View>
 		);
 	}
