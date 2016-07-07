@@ -97,7 +97,7 @@ function(){
 if(!_this.props.showDataPoint)return null;
 return (
 _react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:99}},
-dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:100}}));})));}()));};var heightValue=props.animated?0:props.containerHeight;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:0}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:1}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
+dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:100}}));})));}()));};var heightValue=props.animated?0:props.height;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:0}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:this.props.height}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
 
 
 
@@ -107,7 +107,7 @@ dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.defau
 
 {
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:110}},
+_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:110}},
 _react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:111}})),
 _react2.default.createElement(_reactNative.Animated.View,{style:{height:this.state.height,opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:112}},
 this._drawLine())));}}]);return LineChart;}(_react.Component);exports.default=LineChart;

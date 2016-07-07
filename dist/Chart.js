@@ -203,8 +203,8 @@ style:[_this2.props.style||{},styles.default],__source:{fileName:_jsxFileName,li
 _react2.default.createElement(ChartType,_extends({},
 _this2.props,{
 data:_this2.props.data,
-width:_this2.state.containerWidth-_this2.props.yAxisWidth,
-height:_this2.state.containerHeight-_this2.props.xAxisHeight,
+width:_this2.state.containerWidth,
+height:_this2.state.containerHeight,
 minVerticalBound:_this2.state.bounds.min,
 maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:203}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animated:true,animationDuration:300,axisColor:C.BLACK,axisLabelColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30};exports.default=Chart;
 
@@ -242,7 +242,7 @@ showDataPoint:_react.PropTypes.bool, // TODO
 // Pie chart props
 // pieCenterRatio: PropTypes.number, // TODO
 sliceColors:_react.PropTypes.arrayOf(_react.PropTypes.oneOfType([_react.PropTypes.number,_react.PropTypes.string])),
-// animationDuration: PropTypes.number, // TODO
+animationDuration:_react.PropTypes.number,
 axisColor:_react.PropTypes.oneOfType([_react.PropTypes.number,_react.PropTypes.string]),
 axisLabelColor:_react.PropTypes.oneOfType([_react.PropTypes.number,_react.PropTypes.string]),
 axisLineWidth:_react.PropTypes.number,
