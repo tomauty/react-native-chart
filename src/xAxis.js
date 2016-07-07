@@ -27,6 +27,7 @@ export default class XAxis extends Component {
 		style: PropTypes.any,
 		width: PropTypes.number.isRequired,
 		align: PropTypes.string,
+		labelFontSize: PropTypes.number.isRequired,
 	};
 	static defaultProps = {
 		align: 'center',
@@ -38,7 +39,6 @@ export default class XAxis extends Component {
 			<View
 				style={[
 					styles.xAxisContainer,
-					this.props.style || {},
 					{
 						borderTopColor: this.props.axisColor,
 						borderTopWidth: this.props.axisLineWidth,
@@ -56,6 +56,7 @@ export default class XAxis extends Component {
 								{
 									textAlign: this.props.align,
 									color: this.props.axisLabelColor,
+									fontSize: this.props.labelFontSize,
 								},
 							]}
 						>{d[0]}</Text>

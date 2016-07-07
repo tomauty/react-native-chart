@@ -2,12 +2,11 @@ Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.ass
 var _react=require('react');var _react2=_interopRequireDefault(_react);
 var _reactNative=require('react-native');
 
-
 var _constants=require('./constants');var C=_interopRequireWildcard(_constants);
 var _Circle=require('./Circle');var _Circle2=_interopRequireDefault(_Circle);
 
-var _Grid=require('./Grid');var _Grid2=_interopRequireDefault(_Grid);function _interopRequireWildcard(obj){if(obj&&obj.__esModule){return obj;}else {var newObj={};if(obj!=null){for(var key in obj){if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key]=obj[key];}}newObj.default=obj;return newObj;}}function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var Surface=_reactNative.ART.Surface;var Shape=_reactNative.ART.Shape;var Path=_reactNative.ART.Path; // import Morph from 'art/morph/path';
-var AnimatedShape=_reactNative.Animated.createAnimatedComponent(Shape);
+var _Grid=require('./Grid');var _Grid2=_interopRequireDefault(_Grid);function _interopRequireWildcard(obj){if(obj&&obj.__esModule){return obj;}else {var newObj={};if(obj!=null){for(var key in obj){if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key]=obj[key];}}newObj.default=obj;return newObj;}}function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var Surface=_reactNative.ART.Surface;var Shape=_reactNative.ART.Shape;var Path=_reactNative.ART.Path;var AnimatedShape=_reactNative.Animated.createAnimatedComponent(Shape);
+
 var makeDataPoint=function makeDataPoint(x,y,data){
 return {x:x,y:y,radius:data.dataPointRadius,fill:data.dataPointFillColor,stroke:data.dataPointColor};};
 
@@ -83,21 +82,21 @@ fillPath.moveTo(0,containerHeight);}
 
 if(path.path.some(isNaN))return null;
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:86}},
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:87}},
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:88}},
-_react2.default.createElement(AnimatedShape,{d:path,stroke:_this.props.color||C.BLUE,strokeWidth:_this.props.lineWidth,__source:{fileName:_jsxFileName,lineNumber:89}}),
-_react2.default.createElement(AnimatedShape,{d:fillPath,fill:_this.props.fillColor,__source:{fileName:_jsxFileName,lineNumber:90}}))),
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:85}},
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:86}},
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:87}},
+_react2.default.createElement(AnimatedShape,{d:path,stroke:_this.props.color||C.BLUE,strokeWidth:_this.props.lineWidth,__source:{fileName:_jsxFileName,lineNumber:88}}),
+_react2.default.createElement(AnimatedShape,{d:fillPath,fill:_this.props.fillColor,__source:{fileName:_jsxFileName,lineNumber:89}}))),
 
 
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:93}},
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:94}})),
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:92}},
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:93}})),
 
 function(){
 if(!_this.props.showDataPoint)return null;
 return (
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:99}},
-dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:100}}));})));}()));};var heightValue=props.animated?0:props.height;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:0}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:this.props.height}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:98}},
+dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:99}}));})));}()));};var heightValue=props.animated?0:props.height;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:0}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:this.props.height}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
 
 
 
@@ -107,7 +106,7 @@ dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.defau
 
 {
 return (
-_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:110}},
-_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:111}})),
-_react2.default.createElement(_reactNative.Animated.View,{style:{height:this.state.height,opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:112}},
+_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:109}},
+_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:110}})),
+_react2.default.createElement(_reactNative.Animated.View,{style:{height:this.state.height,opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:111}},
 this._drawLine())));}}]);return LineChart;}(_react.Component);exports.default=LineChart;

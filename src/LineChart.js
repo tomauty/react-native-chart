@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Animated, ART, View } from 'react-native';
 const { Surface, Shape, Path } = ART;
-// import Morph from 'art/morph/path';
 import * as C from './constants';
 import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);

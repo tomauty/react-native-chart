@@ -32,16 +32,16 @@ XAxis=function(_Component){_inherits(XAxis,_Component);function XAxis(){_classCa
 
 
 
+
 {var _this2=this;
 var data=this.props.data||[];
 return (
 _react2.default.createElement(_reactNative.View,{
 style:[
 styles.xAxisContainer,
-this.props.style||{},
 {
 borderTopColor:this.props.axisColor,
-borderTopWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:38}},
+borderTopWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:39}},
 
 
 
@@ -55,7 +55,8 @@ style:[
 styles.axisText,
 {
 textAlign:_this2.props.align,
-color:_this2.props.axisLabelColor}],__source:{fileName:_jsxFileName,lineNumber:52}},
+color:_this2.props.axisLabelColor,
+fontSize:_this2.props.labelFontSize}],__source:{fileName:_jsxFileName,lineNumber:52}},
 
 
-d[0]));});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string};XAxis.defaultProps={align:'center'};exports.default=XAxis;
+d[0]));});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string,labelFontSize:_react.PropTypes.number.isRequired};XAxis.defaultProps={align:'center'};exports.default=XAxis;

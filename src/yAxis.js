@@ -50,7 +50,17 @@ export default class YAxis extends Component<void, any, any> {
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
 			label = this.props.yAxisTransform(label);
 		}
-		return <Text style={{ color: this.props.axisLabelColor }} key={index}>{label}</Text>;
+		return (
+			<Text
+				style={{
+					color: this.props.axisLabelColor,
+					fontSize: this.props.labelFontSize,
+				}}
+				key={index}
+			>
+				{label}
+			</Text>
+		);
 	};
 
 	render() {
