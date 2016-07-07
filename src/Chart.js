@@ -28,7 +28,8 @@ const getRoundNumber = (value, gridStep) => {
 export default class Chart extends Component<void, any, any> {
 	static defaultProps : any = {
 		data: [],
-		animationDuration: 0.5,
+		animated: true,
+		animationDuration: 300,
 		axisColor: C.BLACK,
 		axisLabelColor: C.BLACK,
 		axisLineWidth: 1,
@@ -200,12 +201,12 @@ export default class Chart extends Component<void, any, any> {
 							style={[this.props.style || {}, styles.default]}
 						>
               <ChartType
-                {...this.props}
-                data={this.props.data}
-                width={this.state.containerWidth - this.props.yAxisWidth}
-                height={this.state.containerHeight - this.props.xAxisHeight}
-                minVerticalBound={this.state.bounds.min}
-                maxVerticalBound={this.state.bounds.max}
+								{...this.props}
+								data={this.props.data}
+								width={this.state.containerWidth - this.props.yAxisWidth}
+								height={this.state.containerHeight - this.props.xAxisHeight}
+								minVerticalBound={this.state.bounds.min}
+								maxVerticalBound={this.state.bounds.max}
               />
 						</View>
 					);

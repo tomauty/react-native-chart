@@ -20,15 +20,23 @@ export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
 		super(props);
-		this.state = { opacity: new Animated.Value(0) };
+    const heightValue = (props.animated) ? 0 : props.containerHeight;
+    const opacityValue = (props.animated) ? 0 : 1;
+		this.state = { height: new Animated.Value(heightValue), opacity: new Animated.Value(opacityValue) };
 	}
 
 	componentWillUpdate() {
-		Animated.timing(this.state.opacity, { duration: 0, toValue: 0 }).start();
+    if (props.animated) {
+      Animated.timing(this.state.opacity, { duration: 0, toValue: 0 }).start();
+      Animated.timing(this.state.height, { duration: 0, toValue: 0 }).start();
+    }
 	}
 
 	componentDidUpdate() {
-		Animated.timing(this.state.opacity, { duration: 500, toValue: 1 }).start();
+    if (props.animated) {
+      Animated.timing(this.state.height, { duration: this.props.animationDuration, toValue: 1 }).start();
+      Animated.timing(this.state.opacity, { duration: this.props.animationDuration, toValue: 1 }).start();
+    }
 	}
 
 	_drawLine = () => {
@@ -101,7 +109,7 @@ export default class LineChart extends Component<void, any, any> {
 		return (
 			<View>
 				<Grid {...this.props} />
-				<Animated.View style={{ opacity: this.state.opacity, backgroundColor: 'transparent' }}>
+				<Animated.View style={{ height: this.state.height, opacity: this.state.opacity, backgroundColor: 'transparent' }}>
 					{this._drawLine()}
 				</Animated.View>
 			</View>
