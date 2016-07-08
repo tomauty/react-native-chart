@@ -15,12 +15,13 @@ const calculateDivisor = (minBound : number, maxBound : number) : number => {
 	return (maxBound - minBound <= 0) ? 0.00001 : maxBound - minBound;
 };
 
-const heightZero = (Platform.os === 'ios') ? 0 : 1;
+const heightZero = (Platform.OS === 'ios') ? 0 : 1;
 
 export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
 		super(props);
+    console.log(props);
 		const heightValue = (props.animated) ? heightZero : props.height;
 		const opacityValue = (props.animated) ? 0 : 1;
 		this.state = { height: new Animated.Value(heightValue), opacity: new Animated.Value(opacityValue) };
@@ -107,7 +108,7 @@ export default class LineChart extends Component<void, any, any> {
 	};
 
 	render() : any {
-		if (Platform.os === 'ios') {
+		if (Platform.OS === 'ios') {
 			return (
 				<View style={{ overflow: 'hidden' }}>
 					<Grid {...this.props} />
