@@ -33,21 +33,28 @@ XAxis=function(_Component){_inherits(XAxis,_Component);function XAxis(){_classCa
 
 
 
+
 {var _this2=this;
 var data=this.props.data||[];
+var transform=function transform(d){return d;};
+if(this.props.xAxisTransform&&typeof this.props.xAxisTransform==='function'){
+transform=this.props.xAxisTransform;}
+
 return (
 _react2.default.createElement(_reactNative.View,{
 style:[
 styles.xAxisContainer,
 {
 borderTopColor:this.props.axisColor,
-borderTopWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:39}},
+borderTopWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:44}},
 
 
 
 function(){
 if(!_this2.props.showXAxisLabels)return null;
 return data.map(function(d,i){
+var item=transform(d[0]);
+if(typeof item!=='number'&&!item)return null;
 return (
 _react2.default.createElement(_reactNative.Text,{
 key:i,
@@ -56,7 +63,7 @@ styles.axisText,
 {
 textAlign:_this2.props.align,
 color:_this2.props.axisLabelColor,
-fontSize:_this2.props.labelFontSize}],__source:{fileName:_jsxFileName,lineNumber:52}},
+fontSize:_this2.props.labelFontSize}],__source:{fileName:_jsxFileName,lineNumber:59}},
 
 
-d[0]));});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string,labelFontSize:_react.PropTypes.number.isRequired};XAxis.defaultProps={align:'center'};exports.default=XAxis;
+item));});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string,labelFontSize:_react.PropTypes.number.isRequired,xAxisTransform:_react.PropTypes.func};XAxis.defaultProps={align:'center'};exports.default=XAxis;

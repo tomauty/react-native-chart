@@ -265,6 +265,7 @@ tightBounds:_react.PropTypes.bool,
 verticalGridStep:_react.PropTypes.number,
 // xAxisTitle: PropTypes.string,
 xAxisHeight:_react.PropTypes.number,
+xAxisTransform:_react.PropTypes.func,
 // yAxisTitle: PropTypes.string,
 yAxisTransform:_react.PropTypes.func,
 yAxisWidth:_react.PropTypes.number};

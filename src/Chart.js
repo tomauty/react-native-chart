@@ -265,6 +265,7 @@ Chart.propTypes = {
 	verticalGridStep: PropTypes.number,
 	// xAxisTitle: PropTypes.string,
 	xAxisHeight: PropTypes.number,
+	xAxisTransform: PropTypes.func,
 	// yAxisTitle: PropTypes.string,
 	yAxisTransform: PropTypes.func,
 	yAxisWidth: PropTypes.number,

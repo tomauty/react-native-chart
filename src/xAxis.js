@@ -28,6 +28,7 @@ export default class XAxis extends Component {
 		width: PropTypes.number.isRequired,
 		align: PropTypes.string,
 		labelFontSize: PropTypes.number.isRequired,
+		xAxisTransform: PropTypes.func,
 	};
 	static defaultProps = {
 		align: 'center',
@@ -35,6 +36,10 @@ export default class XAxis extends Component {
 
 	render() {
 		const data = this.props.data || [];
+		let transform = (d) => d;
+		if (this.props.xAxisTransform && typeof this.props.xAxisTransform === 'function') {
+			transform = this.props.xAxisTransform;
+		}
 		return (
 			<View
 				style={[
@@ -48,7 +53,8 @@ export default class XAxis extends Component {
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
 				return data.map((d, i) => {
-					if (typeof d[0] !== 'number' && !d[0]) return null;
+					const item = transform(d[0]);
+					if (typeof item !== 'number' && !item) return null;
 					return (
 						<Text
 							key={i}
@@ -60,7 +66,7 @@ export default class XAxis extends Component {
 									fontSize: this.props.labelFontSize,
 								},
 							]}
-						>{d[0]}</Text>
+						>{item}</Text>
 				);
 				});
 			})()}
