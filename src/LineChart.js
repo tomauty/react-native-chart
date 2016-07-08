@@ -28,7 +28,7 @@ export default class LineChart extends Component<void, any, any> {
 	}
 
   shouldComponentUpdate(props) {
-    return props.data !== this.props.data;
+    return props !== this.props;
   }
 
 	componentWillUpdate() {
