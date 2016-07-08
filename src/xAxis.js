@@ -48,6 +48,7 @@ export default class XAxis extends Component {
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
 				return data.map((d, i) => {
+					if (typeof d[0] !== 'number' && !d[0]) return null;
 					return (
 						<Text
 							key={i}
