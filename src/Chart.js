@@ -63,6 +63,10 @@ export default class Chart extends Component<void, any, any> {
 		this._computeBounds();
 	}
 
+	shouldComponentUpdate(props, state) {
+		return props !== this.props || state !== this.state;
+	}
+
 	componentDidUpdate(props : any) {
 		if (this.props !== props) {
 			this._computeBounds();

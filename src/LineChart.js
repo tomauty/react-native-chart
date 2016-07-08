@@ -27,10 +27,6 @@ export default class LineChart extends Component<void, any, any> {
 		this.state = { height: new Animated.Value(heightValue), opacity: new Animated.Value(opacityValue) };
 	}
 
-  shouldComponentUpdate(props) {
-    return props !== this.props;
-  }
-
 	componentWillUpdate() {
 		if (this.props.animated) {
 			Animated.timing(this.state.opacity, { duration: 0, toValue: 0 }).start();

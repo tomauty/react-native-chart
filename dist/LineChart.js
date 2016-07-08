@@ -41,10 +41,6 @@ props));_this.
 
 
 
-
-
-
-
 _drawLine=function(){
 var containerHeight=_this.props.height;
 var containerWidth=_this.props.width;
@@ -89,21 +85,21 @@ fillPath.moveTo(0,containerHeight);}
 
 if(path.path.some(isNaN))return null;
 return (
-_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:92}},
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:93}},
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:94}},
-_react2.default.createElement(AnimatedShape,{d:path,stroke:_this.props.color||C.BLUE,strokeWidth:_this.props.lineWidth,__source:{fileName:_jsxFileName,lineNumber:95}}),
-_react2.default.createElement(AnimatedShape,{d:fillPath,fill:_this.props.fillColor,__source:{fileName:_jsxFileName,lineNumber:96}}))),
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:88}},
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:89}},
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:90}},
+_react2.default.createElement(AnimatedShape,{d:path,stroke:_this.props.color||C.BLUE,strokeWidth:_this.props.lineWidth,__source:{fileName:_jsxFileName,lineNumber:91}}),
+_react2.default.createElement(AnimatedShape,{d:fillPath,fill:_this.props.fillColor,__source:{fileName:_jsxFileName,lineNumber:92}}))),
 
 
-_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:99}},
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:100}})),
+_react2.default.createElement(_reactNative.View,{style:{position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:95}},
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:96}})),
 
 function(){
 if(!_this.props.showDataPoint)return null;
 return (
-_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:105}},
-dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:106}}));})));}()));};console.log(props);var heightValue=props.animated?heightZero:props.height;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'shouldComponentUpdate',value:function shouldComponentUpdate(props){return props!==this.props;}},{key:'componentWillUpdate',value:function componentWillUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:heightZero}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:this.props.height}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
+_react2.default.createElement(Surface,{width:containerWidth,height:containerHeight,__source:{fileName:_jsxFileName,lineNumber:101}},
+dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.default,_extends({key:i},d,{__source:{fileName:_jsxFileName,lineNumber:102}}));})));}()));};console.log(props);var heightValue=props.animated?heightZero:props.height;var opacityValue=props.animated?0:1;_this.state={height:new _reactNative.Animated.Value(heightValue),opacity:new _reactNative.Animated.Value(opacityValue)};return _this;}_createClass(LineChart,[{key:'componentWillUpdate',value:function componentWillUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.opacity,{duration:0,toValue:0}).start();_reactNative.Animated.timing(this.state.height,{duration:0,toValue:heightZero}).start();}}},{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.animated){_reactNative.Animated.timing(this.state.height,{duration:this.props.animationDuration,toValue:this.props.height}).start();_reactNative.Animated.timing(this.state.opacity,{duration:this.props.animationDuration,toValue:1}).start();}}},{key:'render',value:function render()
 
 
 
@@ -114,16 +110,16 @@ dataPoints.map(function(d,i){return _react2.default.createElement(_Circle2.defau
 {
 if(_reactNative.Platform.OS==='ios'){
 return (
-_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:117}},
-_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:118}})),
-_react2.default.createElement(_reactNative.Animated.View,{style:{height:this.state.height,opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:119}},
+_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:113}},
+_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:114}})),
+_react2.default.createElement(_reactNative.Animated.View,{style:{height:this.state.height,opacity:this.state.opacity,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:115}},
 this._drawLine())));}
 
 
 
 
 return (
-_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:126}},
-_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:127}})),
-_react2.default.createElement(_reactNative.View,{style:{height:this.props.height,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:128}},
+_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:122}},
+_react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:123}})),
+_react2.default.createElement(_reactNative.View,{style:{height:this.props.height,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:124}},
 this._drawLine())));}}]);return LineChart;}(_react.Component);exports.default=LineChart;
