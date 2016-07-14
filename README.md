@@ -108,6 +108,7 @@ class SimpleChart extends Component {
 | verticalGridStep        | number                    | How many vertical grid lines to show                      | No       | 4                     |
 | xAxisHeight             | number                    | Height of X-axis container                                | No       | 20                    |
 | yAxisTransform          | Function                  | Transform data point to y-axis label                      | No       | (_) => _              |
+| xAxisTransform          | Function                  | Transform data point to x-axis label                      | No       | (_) => _              |
 | yAxisWidth              | number                    | Width of the Y-axis container                             | No       | 30                    |
 
 ## TODO
