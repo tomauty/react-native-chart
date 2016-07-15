@@ -119,9 +119,9 @@ export default class LineChart extends Component<void, any, any> {
 			);
 		}
 		return (
-			<View style={{ overflow: 'hidden' }}>
+			<View>
 				<Grid {...this.props} />
-				<View style={{ height: this.props.height, backgroundColor: 'transparent' }}>
+				<View style={{ height: this.props.height }}>
 					{this._drawLine()}
 				</View>
 			</View>
