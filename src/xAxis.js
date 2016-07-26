@@ -48,6 +48,7 @@ export default class XAxis extends Component {
 						borderTopColor: this.props.axisColor,
 						borderTopWidth: this.props.axisLineWidth,
 					},
+					this.props.style,
 				]}
 			>
 			{(() => {
