@@ -1,6 +1,6 @@
 {
   "name": "react-native-chart",
-  "version": "1.0.7-beta",
+  "version": "1.0.8-beta",
   "scripts": {
     "lint": "eslint src",
     "build": "babel src --out-dir dist",
