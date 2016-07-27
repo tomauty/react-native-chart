@@ -119,7 +119,7 @@ this._drawLine())));}
 
 
 return (
-_react2.default.createElement(_reactNative.View,{style:{overflow:'hidden'},__source:{fileName:_jsxFileName,lineNumber:122}},
+_react2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:122}},
 _react2.default.createElement(_Grid2.default,_extends({},this.props,{__source:{fileName:_jsxFileName,lineNumber:123}})),
-_react2.default.createElement(_reactNative.View,{style:{height:this.props.height,backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:124}},
+_react2.default.createElement(_reactNative.View,{style:{height:this.props.height},__source:{fileName:_jsxFileName,lineNumber:124}},
 this._drawLine())));}}]);return LineChart;}(_react.Component);exports.default=LineChart;

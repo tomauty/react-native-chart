@@ -46,8 +46,9 @@ style:[
 styles.xAxisContainer,
 {
 borderTopColor:this.props.axisColor,
-borderTopWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:44}},
+borderTopWidth:this.props.axisLineWidth},
 
+this.props.style],__source:{fileName:_jsxFileName,lineNumber:44}},
 
 
 function(){
@@ -63,7 +64,7 @@ styles.axisText,
 {
 textAlign:_this2.props.align,
 color:_this2.props.axisLabelColor,
-fontSize:_this2.props.labelFontSize}],__source:{fileName:_jsxFileName,lineNumber:59}},
+fontSize:_this2.props.labelFontSize}],__source:{fileName:_jsxFileName,lineNumber:60}},
 
 
 item));});}()));}}]);return XAxis;}(_react.Component);XAxis.propTypes={axisColor:_react.PropTypes.any.isRequired,axisLabelColor:_react.PropTypes.any.isRequired,axisLineWidth:_react.PropTypes.number.isRequired,data:_react.PropTypes.arrayOf(_react.PropTypes.array),showXAxisLabels:_react.PropTypes.bool.isRequired,style:_react.PropTypes.any,width:_react.PropTypes.number.isRequired,align:_react.PropTypes.string,labelFontSize:_react.PropTypes.number.isRequired,xAxisTransform:_react.PropTypes.func};XAxis.defaultProps={align:'center'};exports.default=XAxis;
