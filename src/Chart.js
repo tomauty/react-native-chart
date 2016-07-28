@@ -83,8 +83,8 @@ export default class Chart extends Component<void, any, any> {
 			if (number > max) max = number;
 		});
 
-		min = Math.round(min);
-		max = Math.round(max);
+		min = Math.floor(min);
+		max = Math.ceil(max);
 
 		// Exit if we want tight bounds
 		if (this.props.tightBounds) {
