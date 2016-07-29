@@ -1,18 +1,56 @@
 {
-  "name": "react-native-chart",
-  "version": "1.0.8-beta",
-  "scripts": {
-    "lint": "eslint src",
-    "build": "babel src --out-dir dist",
-    "prepublish": "npm run build"
+  "_args": [
+    [
+      {
+        "name": "react-native-chart",
+        "raw": "react-native-chart@1.0.8-beta",
+        "rawSpec": "1.0.8-beta",
+        "scope": null,
+        "spec": "1.0.8-beta",
+        "type": "version"
+      },
+      "/Users/aw2taman/Desktop/CompassApp"
+    ]
+  ],
+  "_from": "react-native-chart@1.0.8-beta",
+  "_id": "react-native-chart@1.0.8-beta",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/react-native-chart",
+  "_nodeVersion": "6.1.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/react-native-chart-1.0.8-beta.tgz_1469582943137_0.5609592183027416"
   },
-  "main": "./dist/Chart.js",
+  "_npmUser": {
+    "email": "tom.auty@gmail.com",
+    "name": "tomauty"
+  },
+  "_npmVersion": "3.9.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "react-native-chart",
+    "raw": "react-native-chart@1.0.8-beta",
+    "rawSpec": "1.0.8-beta",
+    "scope": null,
+    "spec": "1.0.8-beta",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-chart/-/react-native-chart-1.0.8-beta.tgz",
+  "_shasum": "c34b50ffe7f2acd6f519d614a134a7cd29135766",
+  "_shrinkwrap": null,
+  "_spec": "react-native-chart@1.0.8-beta",
+  "_where": "/Users/aw2taman/Desktop/CompassApp",
   "dependencies": {
     "babel-cli": "^6.10.1",
     "babel-eslint": "^6.0.0",
     "babel-plugin-transform-flow-strip-types": "^6.8.0",
     "babel-preset-react-native": "^1.5.3"
   },
+  "description": "[![Join the chat at https://gitter.im/tomauty/react-native-chart](https://badges.gitter.im/tomauty/react-native-chart.svg)](https://gitter.im/tomauty/react-native-chart) [![npm version](https://badge.fury.io/js/react-native-chart.svg)](https://badge.fury.",
   "devDependencies": {
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^8.0.0",
@@ -22,5 +60,31 @@
     "eslint-plugin-jsx-a11y": "^1.0.3",
     "eslint-plugin-react": "^5.0.1",
     "eslint-plugin-react-native": "^1.0.0"
-  }
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "c34b50ffe7f2acd6f519d614a134a7cd29135766",
+    "tarball": "https://registry.npmjs.org/react-native-chart/-/react-native-chart-1.0.8-beta.tgz"
+  },
+  "gitHead": "0ab98300945474df1224f5a4f78a754c88067de9",
+  "main": "./dist/Chart.js",
+  "maintainers": [
+    {
+      "email": "hyunjincho@gmail.com",
+      "name": "hyuncho"
+    },
+    {
+      "email": "tom.auty@gmail.com",
+      "name": "tomauty"
+    }
+  ],
+  "name": "react-native-chart",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "lint": "eslint src",
+    "prepublish": "npm run build"
+  },
+  "version": "1.0.8-beta"
 }

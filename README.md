@@ -110,6 +110,7 @@ class SimpleChart extends Component {
 | yAxisTransform          | Function                  | Transform data point to y-axis label                      | No       | (_) => _              |
 | xAxisTransform          | Function                  | Transform data point to x-axis label                      | No       | (_) => _              |
 | yAxisWidth              | number                    | Width of the Y-axis container                             | No       | 30                    |
+| yAxisUseDecimal          | boolean                   | Show decimals on Y-axis labels                            | No       | false                   |
 
 ## TODO
 - [ ] Code cleanup
