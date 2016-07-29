@@ -48,7 +48,7 @@ export default class YAxis extends Component<void, any, any> {
 		minBound = (minBound < 0) ? 0 : minBound;
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
 
-		if (this.props.yAxisUseDecimal) {
+		if (!this.props.yAxisUseDecimal) {
 			label = Math.round(label);
 		}
 
