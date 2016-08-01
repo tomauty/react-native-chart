@@ -21,7 +21,7 @@ var n=Math.ceil(value/scale*4);
 
 var tmp=n%gridStep;
 if(tmp!==0)tmp+=gridStep-tmp;
-return n*scale/4.0;};var 
+return n*scale/4.0;};var
 
 
 
@@ -132,7 +132,7 @@ props));_this.
 
 _onContainerLayout=function(e){return _this.setState({
 containerHeight:Math.ceil(e.nativeEvent.layout.height)+1,
-containerWidth:Math.ceil(e.nativeEvent.layout.width)});};_this.state={bounds:{min:0,max:0}};return _this;}_createClass(Chart,[{key:'componentDidMount',value:function componentDidMount(){this._computeBounds();}},{key:'shouldComponentUpdate',value:function shouldComponentUpdate(props,state){return props!==this.props||state!==this.state;}},{key:'componentDidUpdate',value:function componentDidUpdate(props){if(this.props!==props){this._computeBounds();}}},{key:'_computeBounds',value:function _computeBounds(){var min=Infinity;var max=-Infinity;var data=this.props.data||[];data.forEach(function(XYPair){var number=XYPair[1];if(number<min)min=number;if(number>max)max=number;});min=Math.round(min);max=Math.round(max); // Exit if we want tight bounds
+containerWidth:Math.ceil(e.nativeEvent.layout.width)});};_this.state={bounds:{min:0,max:0}};return _this;}_createClass(Chart,[{key:'componentDidMount',value:function componentDidMount(){this._computeBounds();}},{key:'shouldComponentUpdate',value:function shouldComponentUpdate(props,state){return props!==this.props||state!==this.state;}},{key:'componentDidUpdate',value:function componentDidUpdate(props){if(this.props!==props){this._computeBounds();}}},{key:'_computeBounds',value:function _computeBounds(){var min=Infinity;var max=-Infinity;var data=this.props.data||[];data.forEach(function(XYPair){var number=XYPair[1];if(number<min)min=number;if(number>max)max=number;});min=Math.floor(min);max=Math.ceil(max); // Exit if we want tight bounds
 if(this.props.tightBounds){return this.setState({bounds:{min:min,max:max}});}max=getRoundNumber(max,this.props.verticalGridStep);if(min<0){var step=void 0;if(this.props.verticalGridStep>3){step=Math.abs(max-min)/(this.props.verticalGridStep-1);}else {step=Math.max(Math.abs(max-min)/2,Math.max(Math.abs(min),Math.abs(max)));}step=getRoundNumber(step,this.props.verticalGridStep);var newMin=void 0;var newMax=void 0;if(Math.abs(min)>Math.abs(max)){var m=Math.ceil(Math.abs(min)/step);newMin=step*m*(min>0?1:-1);newMax=step*(this.props.verticalGridStep-m)*(max>0?1:-1);}else {var _m=Math.ceil(Math.abs(max)/step);newMax=step*_m*(max>0?1:-1);newMin=step*(this.props.verticalGridStep-_m)*(min>0?1:-1);}if(min<newMin){newMin-=step;newMax-=step;}if(max>newMax+step){newMin+=step;newMax+=step;}if(max<min){var tmp=max;max=min;min=tmp;}}return this.setState({bounds:{max:max,min:min}});}},{key:'_minVerticalBound',value:function _minVerticalBound()
 
 {
@@ -169,6 +169,7 @@ width:_this2.props.yAxisWidth,
 minVerticalBound:_this2.state.bounds.min,
 containerWidth:_this2.state.containerWidth,
 maxVerticalBound:_this2.state.bounds.max,
+yAxisUseDecimal:_this2.props.yAxisUseDecimal,
 style:{width:_this2.props.yAxisWidth},__source:{fileName:_jsxFileName,lineNumber:164}}))),
 
 
@@ -210,7 +211,7 @@ data:_this2.props.data,
 width:_this2.state.containerWidth,
 height:_this2.state.containerHeight,
 minVerticalBound:_this2.state.bounds.min,
-maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:207}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animated:true,animationDuration:300,axisColor:C.BLACK,axisLabelColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30};exports.default=Chart;
+maxVerticalBound:_this2.state.bounds.max,__source:{fileName:_jsxFileName,lineNumber:207}}))));}()));}}]);return Chart;}(_react.Component);Chart.defaultProps={data:[],animated:true,animationDuration:300,axisColor:C.BLACK,axisLabelColor:C.BLACK,axisLineWidth:1,axisTitleColor:C.GREY,axisTitleFontSize:16,chartFontSize:14,dataPointRadius:3,gridColor:C.BLACK,gridLineWidth:0.5,hideHorizontalGridLines:false,hideVerticalGridLines:false,horizontalScale:1,labelFontSize:10,lineWidth:1,showAxis:true,showDataPoint:false,showGrid:true,showXAxisLabels:true,showYAxisLabels:true,tightBounds:false,verticalGridStep:4,xAxisHeight:20,yAxisWidth:30,yAxisUseDecimal:false};exports.default=Chart;
 
 
 
@@ -227,6 +228,7 @@ type:_react.PropTypes.oneOf(['line','bar','pie']).isRequired,
 highlightColor:_react.PropTypes.oneOfType([_react.PropTypes.number,_react.PropTypes.string]), // TODO
 highlightIndices:_react.PropTypes.arrayOf(_react.PropTypes.number), // TODO
 onDataPointPress:_react.PropTypes.func,
+yAxisUseDecimal:_react.PropTypes.bool,
 
 // Bar chart props
 color:_react.PropTypes.oneOfType([_react.PropTypes.number,_react.PropTypes.string]),

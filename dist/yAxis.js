@@ -10,7 +10,7 @@ justifyContent:'space-between',
 flex:1,
 paddingVertical:0,
 paddingRight:5,
-alignItems:'flex-end'}});var 
+alignItems:'flex-end'}});var
 
 
 
@@ -46,7 +46,7 @@ maxBound+=_this.props.verticalGridStep;}
 
 minBound=minBound<0?0:minBound;
 var label=minBound+(maxBound-minBound)/_this.props.verticalGridStep*index;
-label=Math.round(label);
+if(!_this.props.yAxisUseDecimal){label=Math.round(label);}
 if(_this.props.yAxisTransform&&typeof _this.props.yAxisTransform==='function'){
 label=_this.props.yAxisTransform(label);}
 
@@ -78,4 +78,4 @@ this.props.placement==='left'&&{borderRightColor:this.props.axisColor,borderRigh
 this.props.placement==='right'&&{borderLeftColor:this.props.axisColor,borderLeftWidth:this.props.axisLineWidth}],__source:{fileName:_jsxFileName,lineNumber:73}},
 
 
-range.map(this._createLabelForYAxis)));}}]);return YAxis;}(_react.Component);YAxis.propTypes={axisColor:_react.PropTypes.any,axisLineWidth:_react.PropTypes.number,data:_react.PropTypes.arrayOf(_react.PropTypes.array).isRequired,height:_react.PropTypes.number.isRequired,placement:_react.PropTypes.oneOf(['left','right']),verticalGridStep:_react.PropTypes.number.isRequired,yAxisTransform:_react.PropTypes.func};YAxis.defaultProps={placement:'left'};exports.default=YAxis;
+range.map(this._createLabelForYAxis)));}}]);return YAxis;}(_react.Component);YAxis.propTypes={axisColor:_react.PropTypes.any,axisLineWidth:_react.PropTypes.number,data:_react.PropTypes.arrayOf(_react.PropTypes.array).isRequired,height:_react.PropTypes.number.isRequired,placement:_react.PropTypes.oneOf(['left','right']),verticalGridStep:_react.PropTypes.number.isRequired,yAxisTransform:_react.PropTypes.func,yAxisUseDecimal:_react.PropTypes.bool};YAxis.defaultProps={placement:'left'};exports.default=YAxis;
