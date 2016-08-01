@@ -270,6 +270,7 @@ Chart.propTypes = {
 	style: PropTypes.any,
 	tightBounds: PropTypes.bool,
 	verticalGridStep: PropTypes.number,
+	horizontalGridStep: PropTypes.number,
 	// xAxisTitle: PropTypes.string,
 	xAxisHeight: PropTypes.number,
 	xAxisTransform: PropTypes.func,

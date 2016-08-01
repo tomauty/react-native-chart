@@ -29,6 +29,7 @@ export default class XAxis extends Component {
 		align: PropTypes.string,
 		labelFontSize: PropTypes.number.isRequired,
 		xAxisTransform: PropTypes.func,
+		horizontalGridStep: PropTypes.number,
 	};
 	static defaultProps = {
 		align: 'center',
@@ -54,6 +55,9 @@ export default class XAxis extends Component {
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
 				return data.map((d, i) => {
+					let stepsBetweenVerticalLines = this.props.horizontalGridStep ? Math.round((data.length) / this.props.horizontalGridStep + 1) : 1;
+					if (stepsBetweenVerticalLines < 1) stepsBetweenVerticalLines = 1;
+					if (i % stepsBetweenVerticalLines !== 0) return null;
 					const item = transform(d[0]);
 					if (typeof item !== 'number' && !item) return null;
 					return (
