@@ -1,4 +1,4 @@
-Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _jsxFileName='src/Wedge.js';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value" in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();
 
 
 
@@ -24,7 +24,7 @@ Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.ass
 
 
 var _react=require('react');var _react2=_interopRequireDefault(_react);
-var _reactNative=require('react-native');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;} /**
+var _reactNative=require('react-native');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}/**
  * Taken from react-art, changed for RN.
  * Copyright 2013-2014 Facebook, Inc.
  * All rights reserved.
@@ -47,10 +47,10 @@ var _reactNative=require('react-native');function _interopRequireDefault(obj){re
  * Additional optional property:
  *	 (Int) innerRadius
  *
- */var Shape=_reactNative.ART.Shape;var Path=_reactNative.ART.Path; /**
+ */var Shape=_reactNative.ART.Shape;var Path=_reactNative.ART.Path;/**
  * Wedge is a React component for drawing circles, wedges and arcs.	Like other
  * ReactART components, it must be used in a <Surface>.
- */var Wedge=function(_Component){_inherits(Wedge,_Component);function Wedge(props){_classCallCheck(this,Wedge);var _this=_possibleConstructorReturn(this,Object.getPrototypeOf(Wedge).call(this,props));_this.circleRadians=Math.PI*2;_this.radiansPerDegree=Math.PI/180;_this._degreesToRadians=_this._degreesToRadians.bind(_this);return _this;} /**
+ */var Wedge=function(_Component){_inherits(Wedge,_Component);function Wedge(props){_classCallCheck(this,Wedge);var _this=_possibleConstructorReturn(this,Object.getPrototypeOf(Wedge).call(this,props));_this.circleRadians=Math.PI*2;_this.radiansPerDegree=Math.PI/180;_this._degreesToRadians=_this._degreesToRadians.bind(_this);return _this;}/**
 	 * _degreesToRadians(degrees)
 	 *
 	 * Helper function to convert degrees to radians
@@ -59,11 +59,11 @@ var _reactNative=require('react-native');function _interopRequireDefault(obj){re
 	 * @return {number}
 	 */_createClass(Wedge,[{key:'_degreesToRadians',value:function _degreesToRadians(
 degrees){
-if(degrees!==0&&degrees%360===0){ // 360, 720, etc.
-return this.circleRadians;}
-
-return degrees*this.radiansPerDegree%this.circleRadians;}
-
+if(degrees!==0&&degrees%360===0){// 360, 720, etc.
+return this.circleRadians;
+}
+return degrees*this.radiansPerDegree%this.circleRadians;
+}
 
 /**
 	 * _createCirclePath(or, ir)
@@ -84,13 +84,13 @@ arc(-or*2,0,or);
 if(ir){
 path.move(or-ir,0).
 counterArc(ir*2,0,ir).
-counterArc(-ir*2,0,ir);}
-
+counterArc(-ir*2,0,ir);
+}
 
 path.close();
 
-return path;}
-
+return path;
+}
 
 /**
 	 * _createArcPath(sa, ea, ca, or, ir)
@@ -144,16 +144,16 @@ var large=ca>Math.PI;
 // The arguments for path.arc and path.counterArc used below are:
 // (endX, endY, radiusX, radiusY, largeAngle)
 
-path.move(or+or*ss,or-or*sc) // move to starting point
-.arc(or*ds,or*-dc,or,or,large) // outer arc
-.line(dr*es,dr*-ec); // width of arc or wedge
+path.move(or+or*ss,or-or*sc)// move to starting point
+.arc(or*ds,or*-dc,or,or,large)// outer arc
+.line(dr*es,dr*-ec);// width of arc or wedge
 
 if(ir){
-path.counterArc(ir*-ds,ir*dc,ir,ir,large); // inner arc
+path.counterArc(ir*-ds,ir*dc,ir,ir,large);// inner arc
 }
 
-return path;}},{key:'render',value:function render()
-
+return path;
+}},{key:'render',value:function render()
 
 {
 // angles are provided in degrees
@@ -175,9 +175,10 @@ var or=Math.max(innerRadius,outerRadius);
 
 var path=void 0;
 if(endAngle>=startAngle+360){
-path=this._createCirclePath(or,ir);}else 
-{
-path=this._createArcPath(originX,originY,startAngle,endAngle,or,ir);}
+path=this._createCirclePath(or,ir);
+}else{
+path=this._createArcPath(originX,originY,startAngle,endAngle,or,ir);
+}
 
-
-return _react2.default.createElement(Shape,_extends({},this.props,{d:path,__source:{fileName:_jsxFileName,lineNumber:183}}));}}]);return Wedge;}(_react.Component);Wedge.propTypes={outerRadius:_react.PropTypes.number.isRequired,startAngle:_react.PropTypes.number.isRequired,endAngle:_react.PropTypes.number.isRequired,originX:_react.PropTypes.number.isRequired,originY:_react.PropTypes.number.isRequired,innerRadius:_react.PropTypes.number};exports.default=Wedge;
+return _react2.default.createElement(Shape,_extends({},this.props,{d:path}));
+}}]);return Wedge;}(_react.Component);Wedge.propTypes={outerRadius:_react.PropTypes.number.isRequired,startAngle:_react.PropTypes.number.isRequired,endAngle:_react.PropTypes.number.isRequired,originX:_react.PropTypes.number.isRequired,originY:_react.PropTypes.number.isRequired,innerRadius:_react.PropTypes.number};exports.default=Wedge;

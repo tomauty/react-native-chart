@@ -106,6 +106,7 @@ class SimpleChart extends Component {
 | style                   | object                    | Style on the container                                    | No       | {}                    |
 | tightBounds             | boolean                   | Tighten min and max bounds strictly to min/max in dataset | No       | false                 |
 | verticalGridStep        | number                    | How many vertical grid lines to show                      | No       | 4                     |
+| horizontalGridStep      | number                    | How many horizontal grid lines to show                    | No       | all                      |
 | xAxisHeight             | number                    | Height of X-axis container                                | No       | 20                    |
 | yAxisTransform          | Function                  | Transform data point to y-axis label                      | No       | (_) => _              |
 | xAxisTransform          | Function                  | Transform data point to x-axis label                      | No       | (_) => _              |
