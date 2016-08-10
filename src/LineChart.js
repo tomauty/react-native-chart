@@ -7,8 +7,22 @@ import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
 import Grid from './Grid';
 
-const makeDataPoint = (x : number, y : number, data : any) => {
-	return { x, y, radius: data.dataPointRadius, fill: data.dataPointFillColor, stroke: data.dataPointColor };
+const makeDataPoint = (x : number, y : number, data : any, index : number) => {
+
+	let color = (data.color[index]) ? data.color[index] : C.BLUE;
+
+	let fill = ((data.dataPointFillColor) && (data.dataPointFillColor[index])) ?
+		(data.dataPointFillColor[index]) :  color;
+
+	let stroke = ((data.dataPointColor) && (data.dataPointColor[index])) ?
+			(data.dataPointColor[index]) :  color;
+
+	return {
+		x,
+		y,
+		radius: data.dataPointRadius,
+		fill: fill,
+		stroke: stroke  };
 };
 
 const calculateDivisor = (minBound : number, maxBound : number) : number => {
@@ -44,7 +58,7 @@ export default class LineChart extends Component<void, any, any> {
 	_drawLine = () => {
 		const containerHeight = this.props.height;
 		const containerWidth = this.props.width;
-		const data = this.props.data || [];
+		const data = this.props.data || [[]];
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
 
@@ -56,40 +70,66 @@ export default class LineChart extends Component<void, any, any> {
 
 		const divisor = calculateDivisor(minBound, maxBound);
 		const scale = (containerHeight + 1) / divisor;
-		const horizontalStep = containerWidth / data.length;
+		const horizontalStep = containerWidth / data[0].length;
+
 		const dataPoints = [];
-		const firstDataPoint = data[0][1];
-		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
-		if (height < 0) height = 0;
+		const path = [];
+		const fillPath = [];
 
-		const path = new Path().moveTo(0, height);
-		const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
+		for (index = 0; index < data.length; index++) {
+			let currentData = data[index] || [];
+			const firstDataPoint = currentData[0][1];
+			let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
+			if (height < 0) height = 0;
 
-		dataPoints.push(makeDataPoint(0, height, this.props));
+			path.push(new Path().moveTo(0, height));
+			fillPath.push(new Path().moveTo(0, containerHeight).lineTo(0, height));
 
-		data.slice(1).forEach(([_, dataPoint], i) => {
-			let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
+			const dataPointSet = [];
+			dataPointSet.push(makeDataPoint(0, height, this.props, index));
 
-			if (_height < 0) _height = 0;
+			currentData.slice(1).forEach(([_, dataPoint], i) => {
+				let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
 
-			const x = horizontalStep * (i) + horizontalStep;
-			const y = Math.round(_height);
+				if (_height < 0) _height = 0;
 
-			path.lineTo(x, y);
-			fillPath.lineTo(x, y);
-			dataPoints.push(makeDataPoint(x, y, this.props));
-		});
-		fillPath.lineTo(dataPoints[dataPoints.length - 1].x, containerHeight);
-		if (this.props.fillColor) {
-			fillPath.moveTo(0, containerHeight);
+				const x = horizontalStep * (i) + horizontalStep;
+				const y = Math.round(_height);
+
+				path[index].lineTo(x, y);
+				fillPath[index].lineTo(x, y);
+				dataPointSet.push(makeDataPoint(x, y, this.props, index));
+			});
+
+			dataPoints.push(dataPointSet);
+
+			fillPath[index].lineTo(dataPointSet[dataPointSet.length - 1].x, containerHeight);
+			if (this.props.fillColor) {
+				fillPath[index].moveTo(0, containerHeight);
+			}
+
+			if (path[index].path.some(isNaN)) return null;
 		}
-		if (path.path.some(isNaN)) return null;
+
+		var multipleLines = dataPoints.map( (dataPointSet, index) => {
+			let color = (this.props.color[index]) ? this.props.color[index] : C.BLUE;
+			return (
+				<AnimatedShape d={path[index]} stroke={this.props.color[index] || C.BLUE} strokeWidth={this.props.lineWidth} />
+			);
+		});
+
+		var multipleFills = dataPoints.map( (dataPointSet, index) => {
+			return (
+				<AnimatedShape d={fillPath[index]} fill={this.props.fillColor} />
+			);
+		});
+
 		return (
 			<View>
 				<View style={{ position: 'absolute' }}>
 					<Surface width={containerWidth} height={containerHeight}>
-						<AnimatedShape d={path} stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
-						<AnimatedShape d={fillPath} fill={this.props.fillColor} />
+						{ multipleLines }
+						{ multipleFills }
 					</Surface>
 				</View>
 				<View style={{ position: 'absolute' }}>
@@ -97,9 +137,17 @@ export default class LineChart extends Component<void, any, any> {
 				</View>
 				{(() => {
 					if (!this.props.showDataPoint) return null;
+
+					var multipleDataPoints = dataPoints.map( (dataPointSet, index) => {
+						let totalDataSet = dataPointSet.map((d, i) => {
+							return (<Circle key={i} {...d} />);
+						});
+ 						return totalDataSet;
+					});
+
 					return (
 						<Surface width={containerWidth} height={containerHeight}>
-							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
+							{ multipleDataPoints }
 						</Surface>
 					);
 				})()}

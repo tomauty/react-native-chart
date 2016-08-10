@@ -22,7 +22,7 @@ export default class XAxis extends Component {
 		axisColor: PropTypes.any.isRequired,
 		axisLabelColor: PropTypes.any.isRequired,
 		axisLineWidth: PropTypes.number.isRequired,
-		data: PropTypes.arrayOf(PropTypes.array),
+		data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.array)).isRequired,
 		showXAxisLabels: PropTypes.bool.isRequired,
 		style: PropTypes.any,
 		width: PropTypes.number.isRequired,
@@ -35,7 +35,7 @@ export default class XAxis extends Component {
 	};
 
 	render() {
-		const data = this.props.data || [];
+		const data = this.props.data || [[]];
 		let transform = (d) => d;
 		if (this.props.xAxisTransform && typeof this.props.xAxisTransform === 'function') {
 			transform = this.props.xAxisTransform;
@@ -53,7 +53,8 @@ export default class XAxis extends Component {
 			>
 			{(() => {
 				if (!this.props.showXAxisLabels) return null;
-				return data.map((d, i) => {
+
+				return data[0].map((d, i) => {
 					const item = transform(d[0]);
 					if (typeof item !== 'number' && !item) return null;
 					return (
@@ -70,6 +71,7 @@ export default class XAxis extends Component {
 						>{item}</Text>
 				);
 				});
+
 			})()}
 			</View>
 		);

@@ -5,7 +5,7 @@ import { uniqueValuesInDataSet } from './util';
 export default class Grid extends Component {
 	static propTypes = {
 		showGrid: PropTypes.bool,
-		data: PropTypes.array.isRequired,
+		data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.array)).isRequired,
 		verticalGridStep: PropTypes.number.isRequired,
 		gridLineWidth: PropTypes.number,
 		gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -23,12 +23,12 @@ export default class Grid extends Component {
 		if (!this.props.showGrid) return null;
 		const horizontalRange = [];
 		const verticalRange = [];
-		const data = this.props.data || [];
-		const unique = uniqueValuesInDataSet(data);
+		const data = this.props.data || [[]];
+		const unique = uniqueValuesInDataSet(data[0]);
 		const horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 
 		for (let i = horizontalSteps; i > 0; i--) horizontalRange.push(i);
-		for (let i = data.length - 1; i > 0; i--) verticalRange.push(i);
+		for (let i = data[0].length - 1; i > 0; i--) verticalRange.push(i);
 
 		const containerStyle = { width: this.props.width, height: this.props.height, position: 'absolute', left: 0 };
 
@@ -46,7 +46,7 @@ export default class Grid extends Component {
 
 		const verticalGridStyle = {
 			height: this.props.height + 1,
-			width: this.props.width / data.length,
+			width: this.props.width / data[0].length,
 			borderRightColor: this.props.gridColor,
 			borderRightWidth: intendedLineWidth,
 		};
