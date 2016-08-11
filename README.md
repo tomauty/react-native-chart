@@ -81,7 +81,7 @@ class SimpleChart extends Component {
 
 | Property                | Type                      | Description                                               | Required | Default               |
 | ----------------------- | ------------------------- | --------------------------------------------------------- | -------- | --------------------- |
-| data                    | Array< [number, number] > | An array of [x, y] pairs.                                 | **Yes**  |                       |
+| data                    | Array<  Array< [number, number] > > | An array of arrays of [x, y] pairs.                                 | **Yes**  |                       |
 | type                    | string                    | pie/bar/line                                              | **Yes**  | bar                   |
 | color                   | Array < string >          | Color of bars/line in line chart                          | No       | #4DC4E6               |
 | cornerRadius            | number                    | Corner radius of bars in bar chart                        | No       | 0                     |
@@ -111,11 +111,11 @@ class SimpleChart extends Component {
 | xAxisTransform          | Function                  | Transform data point to x-axis label                      | No       | (_) => _              |
 | yAxisWidth              | number                    | Width of the Y-axis container                             | No       | 30                    |
 | yAxisUseDecimal         | boolean                   | Show decimals on Y-axis labels                            | No       | false                 |
-| yAxisShortLabel         | boolean                   | Shorten yAxis labels with K, M, B for thousand<->billion  | No       | false                 |
+| yAxisShortLabel         | boolean                   | Shorten yAxis labels with K, M, B for thousand<->billion, etc  | No       | false                 |
 
 ## TODO
 - [ ] Code cleanup
-- [ ] Multi-line chart
+- [X] Multi-line chart
 - [ ] Horizontal line chart
 - [ ] Scatter chart
 
