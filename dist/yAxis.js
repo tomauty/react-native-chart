@@ -64,6 +64,7 @@ maxBound+=_this.props.verticalGridStep;
 }
 minBound=minBound<0?0:minBound;
 var label=minBound+(maxBound-minBound)/_this.props.verticalGridStep*index;
+label=parseFloat(label.toFixed(3));
 
 if(!_this.props.yAxisUseDecimal){
 label=Math.round(label);
