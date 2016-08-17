@@ -70,7 +70,7 @@ class SimpleChart extends Component {
 					data={data}
 					verticalGridStep={5}
 					type="line"
-					showDataPoint=={true}
+					showDataPoint={true}
 				 />
 			</View>
 		);
