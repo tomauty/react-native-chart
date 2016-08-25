@@ -132,8 +132,8 @@ export default class Chart extends Component<void, any, any> {
 	}
 
 	_onContainerLayout = (e : Object) => this.setState({
-		containerHeight: Math.ceil(e.nativeEvent.layout.height) + 1,
-		containerWidth: Math.ceil(e.nativeEvent.layout.width),
+		containerHeight: e.nativeEvent.layout.height,
+		containerWidth: e.nativeEvent.layout.width,
 	});
 
 	_minVerticalBound() : number {

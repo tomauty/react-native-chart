@@ -55,7 +55,7 @@ export default class LineChart extends Component<void, any, any> {
 
 		const divisor = calculateDivisor(minBound, maxBound);
 		const scale = (containerHeight + 1) / divisor;
-		const horizontalStep = containerWidth / data.length;
+		const horizontalStep = containerWidth / (data.length - 1);
 		const dataPoints = [];
 		const firstDataPoint = data[0][1];
 		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));

@@ -67,7 +67,7 @@
     "tarball": "https://registry.npmjs.org/react-native-chart/-/react-native-chart-1.0.8-beta.tgz"
   },
   "gitHead": "0ab98300945474df1224f5a4f78a754c88067de9",
-  "main": "./dist/Chart.js",
+  "main": "./src/Chart.js",
   "maintainers": [
     {
       "email": "hyunjincho@gmail.com",
