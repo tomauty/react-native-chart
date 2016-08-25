@@ -12,8 +12,8 @@ export default class Grid extends Component {
 		gridColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		hideHorizontalGridLines: PropTypes.bool,
 		hideVerticalGridLines: PropTypes.bool,
-		height: PropTypes.number.isRequired,
-		width: PropTypes.number.isRequired,
+		height: PropTypes.number,
+		width: PropTypes.number,
 		type: PropTypes.oneOf(['line', 'bar', 'pie']).isRequired,
 	};
 	static defaultProps = {
