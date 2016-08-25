@@ -57,7 +57,7 @@ export default class LineChart extends Component<void, any, any> {
 
 		const divisor = calculateDivisor(minBound, maxBound);
 		const scale = (containerHeight + 1) / divisor;
-		const horizontalStep = containerWidth / data.length;
+		const horizontalStep = containerWidth / (data.length - 1);
 		const dataPoints = [];
 		const svgPoints = [];
 		const firstDataPoint = data[0][1];
