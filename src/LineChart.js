@@ -95,10 +95,9 @@ export default class LineChart extends Component<void, any, any> {
 					<Surface width={containerWidth} height={containerHeight} />
 				</View>
 				{(() => {
-					if (!this.props.showDataPoint) return null;
 					return (
 						<Surface width={containerWidth} height={containerHeight}>
-							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
+							{this.props.showDataPoint && dataPoints.map((d, i) => <Circle key={i} {...d} />)}
 						</Surface>
 					);
 				})()}
