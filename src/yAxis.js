@@ -47,6 +47,7 @@ export default class YAxis extends Component<void, any, any> {
 		}
 		minBound = (minBound < 0) ? 0 : minBound;
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
+		console.log(minBound, maxBound);
 
 		if (!this.props.yAxisUseDecimal) {
 			label = Math.round(label);
@@ -73,7 +74,7 @@ export default class YAxis extends Component<void, any, any> {
 		const data = this.props.data || [];
 		const unique = uniqueValuesInDataSet(data);
 		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
-		for (let i = steps; i >= 0; i--) range.push(i);
+		for (let i = steps - 1; i >= 0; i--) range.push(i);
 		return (
 			<View
 				style={[

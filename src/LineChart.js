@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Animated, ART, View, Platform } from 'react-native';
 const { Surface, Shape, Path } = ART;
+import Svg, { Polyline as SVGPath } from 'react-native-svg';
 import * as C from './constants';
 import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
@@ -41,8 +42,9 @@ export default class LineChart extends Component<void, any, any> {
 	}
 
 	_drawLine = () => {
-		const containerHeight = this.props.height;
-		const containerWidth = this.props.width;
+		let containerHeight = this.props.height;
+		let containerWidth = this.props.width;
+
 		const data = this.props.data || [];
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
@@ -57,6 +59,7 @@ export default class LineChart extends Component<void, any, any> {
 		const scale = (containerHeight + 1) / divisor;
 		const horizontalStep = containerWidth / data.length;
 		const dataPoints = [];
+		const svgPoints = [];
 		const firstDataPoint = data[0][1];
 		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 		if (height < 0) height = 0;
@@ -64,6 +67,8 @@ export default class LineChart extends Component<void, any, any> {
 		const path = new Path().moveTo(0, height);
 		const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
 
+		svgPoints.push(0);
+		svgPoints.push(height);
 		dataPoints.push(makeDataPoint(0, height, this.props));
 
 		data.slice(1).forEach(([_, dataPoint], i) => {
@@ -77,33 +82,47 @@ export default class LineChart extends Component<void, any, any> {
 			path.lineTo(x, y);
 			fillPath.lineTo(x, y);
 			dataPoints.push(makeDataPoint(x, y, this.props));
+
+			svgPoints.push(x);
+			svgPoints.push(y);
 		});
 		fillPath.lineTo(dataPoints[dataPoints.length - 1].x, containerHeight);
 		if (this.props.fillColor) {
 			fillPath.moveTo(0, containerHeight);
 		}
 		if (path.path.some(isNaN)) return null;
+		console.log(svgPoints);
+		// console.log(path);
+		// console.log(path.path);
+		// console.log(path.path.toString());
+		// console.log(path.path.slice(0, 4).toString());
 		return (
 			<View>
-				<View style={{ position: 'absolute' }}>
-					<Surface width={containerWidth} height={containerHeight}>
-						<AnimatedShape d={path} stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
-						<AnimatedShape d={fillPath} fill={this.props.fillColor} />
-					</Surface>
-				</View>
-				<View style={{ position: 'absolute' }}>
-					<Surface width={containerWidth} height={containerHeight} />
-				</View>
-				{(() => {
-					if (!this.props.showDataPoint) return null;
-					return (
-						<Surface width={containerWidth} height={containerHeight}>
-							{dataPoints.map((d, i) => <Circle key={i} {...d} />)}
-						</Surface>
-					);
-				})()}
+				<Svg width={containerWidth} height={containerHeight}>
+					<SVGPath points={svgPoints.toString()} fill="transparent" stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
+				</Svg>
 			</View>
 		);
+		// return (
+		// 	<View>
+		// 		<View style={{ position: 'absolute' }}>
+		// 			<Surface width={containerWidth} height={containerHeight}>
+		// 				<AnimatedShape d={path} stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
+		// 				<AnimatedShape d={fillPath} fill={this.props.fillColor} />
+		// 			</Surface>
+		// 		</View>
+		// 		<View style={{ position: 'absolute' }}>
+		// 			<Surface width={containerWidth} height={containerHeight} />
+		// 		</View>
+		// 		{(() => {
+		// 			return (
+		// 				<Surface width={containerWidth} height={containerHeight}>
+		// 					{this.props.showDataPoint && dataPoints.map((d, i) => <Circle key={i} {...d} />)}
+		// 				</Surface>
+		// 			);
+		// 		})()}
+		// 	</View>
+		// );
 	};
 
 	render() : any {

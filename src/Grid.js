@@ -26,7 +26,10 @@ export default class Grid extends Component {
 		const verticalRange = [];
 		const data = this.props.data || [];
 		const unique = uniqueValuesInDataSet(data);
-		const horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		let horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+
+		horizontalSteps -= 1; 	// To accommodate the first value being at the origin
+
 		let stepsBetweenVerticalLines = this.props.horizontalGridStep ? Math.round(data.length / this.props.horizontalGridStep) : 1;
 		if (stepsBetweenVerticalLines < 1) stepsBetweenVerticalLines = 1;
 
@@ -41,7 +44,7 @@ export default class Grid extends Component {
 		}
 
 		const horizontalGridStyle = {
-			height: this.props.height / this.props.verticalGridStep,
+			height: this.props.height / horizontalSteps,
 			width: this.props.width,
 			borderTopColor: this.props.gridColor,
 			borderTopWidth: intendedLineWidth,
