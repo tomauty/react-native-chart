@@ -239,6 +239,7 @@ Chart.propTypes = {
 
 	// Line/multi-line chart props
 	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	fillGradient: PropTypes.arrayOf(PropTypes.object),
 	dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointRadius: PropTypes.number,

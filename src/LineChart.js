@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Animated, ART, View, Platform } from 'react-native';
 const { Surface, Shape, Path } = ART;
-import Svg, { Polyline as SVGPath } from 'react-native-svg';
+import Svg, { Defs, Polyline, LinearGradient, Stop } from 'react-native-svg';
 import * as C from './constants';
 import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
@@ -14,6 +14,11 @@ const makeDataPoint = (x : number, y : number, data : any) => {
 
 const calculateDivisor = (minBound : number, maxBound : number) : number => {
 	return (maxBound - minBound <= 0) ? 0.00001 : maxBound - minBound;
+};
+
+const addPoints = (x : number, y : number, array : Array<number>) => {
+	array.push(x);
+	array.push(y);
 };
 
 const heightZero = (Platform.OS === 'ios') ? 0 : 1;
@@ -58,48 +63,77 @@ export default class LineChart extends Component<void, any, any> {
 		const divisor = calculateDivisor(minBound, maxBound);
 		const scale = (containerHeight + 1) / divisor;
 		const horizontalStep = containerWidth / (data.length - 1);
-		const dataPoints = [];
+		// const dataPoints = [];
 		const svgPoints = [];
+		const svgFill = [];
 		const firstDataPoint = data[0][1];
 		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 		if (height < 0) height = 0;
 
-		const path = new Path().moveTo(0, height);
-		const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
+		// const path = new Path().moveTo(0, height);
+		// const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
 
-		svgPoints.push(0);
-		svgPoints.push(height);
-		dataPoints.push(makeDataPoint(0, height, this.props));
+		addPoints(0, height, svgPoints);
+		addPoints(0, height, svgFill);
+		// dataPoints.push(makeDataPoint(0, height, this.props));
 
+		let x;
+		let y;
+		let gradientTop = height;
 		data.slice(1).forEach(([_, dataPoint], i) => {
 			let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
 
 			if (_height < 0) _height = 0;
 
-			const x = horizontalStep * (i) + horizontalStep;
-			const y = Math.round(_height);
+			x = horizontalStep * (i) + horizontalStep;
+			y = Math.round(_height);
 
-			path.lineTo(x, y);
-			fillPath.lineTo(x, y);
-			dataPoints.push(makeDataPoint(x, y, this.props));
+			if (y < gradientTop) gradientTop = y;
+			// path.lineTo(x, y);
+			// fillPath.lineTo(x, y);
+			// dataPoints.push(makeDataPoint(x, y, this.props));
 
-			svgPoints.push(x);
-			svgPoints.push(y);
+			addPoints(x, y, svgPoints);
+			addPoints(x, y, svgFill);
 		});
-		fillPath.lineTo(dataPoints[dataPoints.length - 1].x, containerHeight);
-		if (this.props.fillColor) {
-			fillPath.moveTo(0, containerHeight);
+		addPoints(x, containerHeight, svgFill);
+		// fillPath.lineTo(dataPoints[dataPoints.length - 1].x, containerHeight);
+		if (this.props.fillColor || this.props.fillGradient) {
+			addPoints(0, containerHeight, svgFill);
+			// fillPath.moveTo(0, containerHeight);
 		}
-		if (path.path.some(isNaN)) return null;
+		if (svgPoints.some(isNaN)) return null;
 		console.log(svgPoints);
-		// console.log(path);
-		// console.log(path.path);
-		// console.log(path.path.toString());
-		// console.log(path.path.slice(0, 4).toString());
+		console.log(this.props.fillGradient);
 		return (
 			<View>
 				<Svg width={containerWidth} height={containerHeight}>
-					<SVGPath points={svgPoints.toString()} fill="transparent" stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
+					<Defs>
+						{!!this.props.fillGradient && (
+							<LinearGradient id="chartGradient" x1="0" x2="0" y1={gradientTop} y2={containerHeight}>
+								{this.props.fillGradient.map((f, i) => (
+									<Stop key={i} offset={i.toString()} stopColor={f.color || f} stopOpacity={f.opacity.toString() || '1'} />
+								))}
+							</LinearGradient>
+						)}
+					</Defs>
+					<Polyline
+						points={svgPoints.toString()}
+						fill="transparent"
+						stroke={this.props.color || C.BLUE}
+						strokeWidth={this.props.lineWidth}
+					/>
+					{this.props.fillColor && (
+						<Polyline
+							points={svgFill.toString()}
+							fill={this.props.fillColor}
+							stroke={this.props.color || C.BLUE}
+							strokeWidth={this.props.lineWidth}
+						/>
+					)}
+					{this.props.fillGradient && (
+						<Polyline points={svgFill.toString()} fill="url(#chartGradient)" />
+					)}
 				</Svg>
 			</View>
 		);
