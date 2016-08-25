@@ -37,6 +37,7 @@ export default class Chart extends Component<void, any, any> {
 		axisTitleFontSize: 16,
 		chartFontSize: 14,
 		dataPointRadius: 3,
+		dataPointStrokeWidth: 1,
 		gridColor: C.BLACK,
 		gridLineWidth: 0.5,
 		hideHorizontalGridLines: false,
@@ -243,6 +244,7 @@ Chart.propTypes = {
 	dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointRadius: PropTypes.number,
+	dataPointStrokeWidth: PropTypes.number,
 	// highlightRadius: PropTypes.number, // TODO
 	lineWidth: PropTypes.number,
 	showDataPoint: PropTypes.bool, // TODO

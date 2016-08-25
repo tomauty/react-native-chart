@@ -1,16 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Animated, ART, View, Platform } from 'react-native';
-const { Surface, Shape, Path } = ART;
-import Svg, { Defs, Polyline, LinearGradient, Stop } from 'react-native-svg';
+import { Animated, View, Platform } from 'react-native';
+import Svg, { Circle, Defs, Polyline, LinearGradient, Stop } from 'react-native-svg';
 import * as C from './constants';
-import Circle from './Circle';
-const AnimatedShape = Animated.createAnimatedComponent(Shape);
 import Grid from './Grid';
-
-const makeDataPoint = (x : number, y : number, data : any) => {
-	return { x, y, radius: data.dataPointRadius, fill: data.dataPointFillColor, stroke: data.dataPointColor };
-};
 
 const calculateDivisor = (minBound : number, maxBound : number) : number => {
 	return (maxBound - minBound <= 0) ? 0.00001 : maxBound - minBound;
@@ -63,19 +56,17 @@ export default class LineChart extends Component<void, any, any> {
 		const divisor = calculateDivisor(minBound, maxBound);
 		const scale = (containerHeight + 1) / divisor;
 		const horizontalStep = containerWidth / (data.length - 1);
-		// const dataPoints = [];
+
 		const svgPoints = [];
 		const svgFill = [];
+		const dataPoints = [];
 		const firstDataPoint = data[0][1];
 		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 		if (height < 0) height = 0;
 
-		// const path = new Path().moveTo(0, height);
-		// const fillPath = new Path().moveTo(0, containerHeight).lineTo(0, height);
-
 		addPoints(0, height, svgPoints);
 		addPoints(0, height, svgFill);
-		// dataPoints.push(makeDataPoint(0, height, this.props));
+		dataPoints.push({ cx: 0, cy: height, r: this.props.dataPointRadius });
 
 		let x;
 		let y;
@@ -89,22 +80,15 @@ export default class LineChart extends Component<void, any, any> {
 			y = Math.round(_height);
 
 			if (y < gradientTop) gradientTop = y;
-			// path.lineTo(x, y);
-			// fillPath.lineTo(x, y);
-			// dataPoints.push(makeDataPoint(x, y, this.props));
-
 			addPoints(x, y, svgPoints);
 			addPoints(x, y, svgFill);
+			dataPoints.push({ cx: x, cy: y, r: this.props.dataPointRadius });
 		});
 		addPoints(x, containerHeight, svgFill);
-		// fillPath.lineTo(dataPoints[dataPoints.length - 1].x, containerHeight);
 		if (this.props.fillColor || this.props.fillGradient) {
 			addPoints(0, containerHeight, svgFill);
-			// fillPath.moveTo(0, containerHeight);
 		}
 		if (svgPoints.some(isNaN)) return null;
-		console.log(svgPoints);
-		console.log(this.props.fillGradient);
 		return (
 			<View>
 				<Svg width={containerWidth} height={containerHeight}>
@@ -134,29 +118,18 @@ export default class LineChart extends Component<void, any, any> {
 					{this.props.fillGradient && (
 						<Polyline points={svgFill.toString()} fill="url(#chartGradient)" />
 					)}
+					{!!this.props.showDataPoint && dataPoints.map((d, i) => (
+						<Circle
+							{...d}
+							key={i}
+							fill={this.props.dataPointFillColor}
+							stroke={this.props.dataPointColor}
+							strokeWidth={this.props.dataPointStrokeWidth}
+						/>
+					))}
 				</Svg>
 			</View>
 		);
-		// return (
-		// 	<View>
-		// 		<View style={{ position: 'absolute' }}>
-		// 			<Surface width={containerWidth} height={containerHeight}>
-		// 				<AnimatedShape d={path} stroke={this.props.color || C.BLUE} strokeWidth={this.props.lineWidth} />
-		// 				<AnimatedShape d={fillPath} fill={this.props.fillColor} />
-		// 			</Surface>
-		// 		</View>
-		// 		<View style={{ position: 'absolute' }}>
-		// 			<Surface width={containerWidth} height={containerHeight} />
-		// 		</View>
-		// 		{(() => {
-		// 			return (
-		// 				<Surface width={containerWidth} height={containerHeight}>
-		// 					{this.props.showDataPoint && dataPoints.map((d, i) => <Circle key={i} {...d} />)}
-		// 				</Surface>
-		// 			);
-		// 		})()}
-		// 	</View>
-		// );
 	};
 
 	render() : any {
