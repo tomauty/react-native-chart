@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Animated, ART, View, Platform } from 'react-native';
+import { Animated, ART, View, Platform, TouchableOpacity } from 'react-native';
 const { Surface, Shape, Path } = ART;
 import * as C from './constants';
 import Circle from './Circle';
@@ -35,7 +35,6 @@ export default class LineChart extends Component<void, any, any> {
 
 	constructor(props : any) {
 		super(props);
-    console.log(props);
 		const heightValue = (props.animated) ? heightZero : props.height;
 		const opacityValue = (props.animated) ? 0 : 1;
 		this.state = { height: new Animated.Value(heightValue), opacity: new Animated.Value(opacityValue) };
@@ -77,51 +76,75 @@ export default class LineChart extends Component<void, any, any> {
 		const fillPath = [];
 
 		for (index = 0; index < data.length; index++) {
+			var pathArray = [], fillPathArray = [], pathSubIndex = -1;
 			let currentData = data[index] || [];
 			const firstDataPoint = currentData[0][1];
 			let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 			if (height < 0) height = 0;
 
-			path.push(new Path().moveTo(0, height));
-			fillPath.push(new Path().moveTo(0, containerHeight).lineTo(0, height));
-
 			const dataPointSet = [];
 			dataPointSet.push(makeDataPoint(0, height, this.props, index));
 
-			currentData.slice(1).forEach(([_, dataPoint], i) => {
-				let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
+			let beginNewPath = true;
+			currentData.forEach(([_, dataPoint], i) => {
 
+				if (dataPoint === '') {
+					// An empty within the graph, begin new Path next non-empty datapoint
+					// beginNewPath = true;
+					return;
+				}
+
+				let _height = (minBound * scale) + (containerHeight - (dataPoint * scale));
 				if (_height < 0) _height = 0;
 
-				const x = horizontalStep * (i) + horizontalStep;
+				const x = horizontalStep * (i);
 				const y = Math.round(_height);
 
-				path[index].lineTo(x, y);
-				fillPath[index].lineTo(x, y);
 				dataPointSet.push(makeDataPoint(x, y, this.props, index));
+
+				if ((beginNewPath) && (dataPoint !== '')) {
+					pathArray.push(new Path().moveTo(x, y));
+					fillPathArray.push(new Path().moveTo(x, containerHeight).lineTo(x, height));
+					pathSubIndex++;
+					beginNewPath = false;
+				} else {
+					pathArray[pathSubIndex].lineTo(x, y);
+					fillPathArray[pathSubIndex].lineTo(x, y);
+				}
 			});
 
 			dataPoints.push(dataPointSet);
 
-			fillPath[index].lineTo(dataPointSet[dataPointSet.length - 1].x, containerHeight);
-			if (this.props.fillColor) {
-				fillPath[index].moveTo(0, containerHeight);
+			for (g = 0; g < pathArray.length; g++) {
+				fillPathArray[g].lineTo(dataPointSet[dataPointSet.length - 1].x, containerHeight);
+				if (this.props.fillColor) {
+					fillPathArray[g].moveTo(0, containerHeight);
+				}
+
+				if (pathArray[g].path.some(isNaN)) return null;
 			}
 
-			if (path[index].path.some(isNaN)) return null;
+			path.push(pathArray);
+			fillPath.push(fillPathArray);
 		}
 
 		var multipleLines = dataPoints.map( (dataPointSet, index) => {
 			let color = (this.props.color[index]) ? this.props.color[index] : C.BLUE;
-			return (
-				<AnimatedShape d={path[index]} stroke={this.props.color[index] || C.BLUE} strokeWidth={this.props.lineWidth} />
-			);
+			let allDisjointPaths = path[index].map( (singlePath) => {
+				return (
+					<AnimatedShape d={singlePath} stroke={this.props.color[index] || C.BLUE} strokeWidth={this.props.lineWidth} />
+				);
+			});
+			return allDisjointPaths;
 		});
 
 		var multipleFills = dataPoints.map( (dataPointSet, index) => {
-			return (
-				<AnimatedShape d={fillPath[index]} fill={this.props.fillColor} />
-			);
+			let allDisjointPaths = fillPath[index].map ( (singlePath, subIndex) => {
+				return (
+					<AnimatedShape d={singlePath} fill={this.props.fillColor} />
+				);
+			});
+			return allDisjointPaths;
 		});
 
 		return (
@@ -140,7 +163,9 @@ export default class LineChart extends Component<void, any, any> {
 
 					var multipleDataPoints = dataPoints.map( (dataPointSet, index) => {
 						let totalDataSet = dataPointSet.map((d, i) => {
-							return (<Circle key={i} {...d} />);
+							return (
+								<Circle key={i} {...d} onPress={()=>alert(i)} />
+							);
 						});
  						return totalDataSet;
 					});

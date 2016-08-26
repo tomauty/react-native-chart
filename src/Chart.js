@@ -83,6 +83,11 @@ export default class Chart extends Component<void, any, any> {
 		data.forEach(Graph => {
 			Graph.forEach(XYPair => {
 				const number = XYPair[1];
+				// Addition for blank spaces in graphs - use '' as y-coord
+				if (number === '') {
+					return;
+				}
+
 				if (number < min) min = number;
 				if (number > max) max = number;
 			});
