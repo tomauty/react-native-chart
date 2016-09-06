@@ -79,6 +79,8 @@ class SimpleChart extends Component {
 ```
 ## Properties
 
+Use '' y-values to signify the 'render but empty' data points.
+
 | Property                | Type                      | Description                                               | Required | Default               |
 | ----------------------- | ------------------------- | --------------------------------------------------------- | -------- | --------------------- |
 | data                    | Array<  Array< [number, number] > > | An array of arrays of [x, y] pairs.                                 | **Yes**  |                       |
