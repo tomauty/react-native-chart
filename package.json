@@ -48,7 +48,8 @@
     "babel-cli": "^6.10.1",
     "babel-eslint": "^6.0.0",
     "babel-plugin-transform-flow-strip-types": "^6.8.0",
-    "babel-preset-react-native": "^1.5.3"
+    "babel-preset-react-native": "^1.5.3",
+    "react-native-svg": "^4.1.5"
   },
   "description": "[![Join the chat at https://gitter.im/tomauty/react-native-chart](https://badges.gitter.im/tomauty/react-native-chart.svg)](https://gitter.im/tomauty/react-native-chart) [![npm version](https://badge.fury.io/js/react-native-chart.svg)](https://badge.fury.",
   "devDependencies": {
@@ -67,7 +68,7 @@
     "tarball": "https://registry.npmjs.org/react-native-chart/-/react-native-chart-1.0.8-beta.tgz"
   },
   "gitHead": "0ab98300945474df1224f5a4f78a754c88067de9",
-  "main": "./dist/Chart.js",
+  "main": "./src/Chart.js",
   "maintainers": [
     {
       "email": "hyunjincho@gmail.com",
