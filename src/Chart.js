@@ -40,6 +40,7 @@ export default class Chart extends Component<void, any, any> {
 		dataPointStrokeWidth: 1,
 		gridColor: C.BLACK,
 		gridLineWidth: 0.5,
+		fontFamily: null,
 		hideHorizontalGridLines: false,
 		hideVerticalGridLines: false,
 		horizontalScale: 1,
@@ -48,6 +49,8 @@ export default class Chart extends Component<void, any, any> {
 		showAxis: true,
 		showDataPoint: false,
 		showGrid: true,
+		showXAxis: true,
+		showYAxis: true,
 		showXAxisLabels: true,
 		showYAxisLabels: true,
 		tightBounds: false,
@@ -158,22 +161,24 @@ export default class Chart extends Component<void, any, any> {
 						return (
 							<View
 								ref="container"
-								style={[this.props.style || {}, { flex: 1, flexDirection: 'column' }]}
+								style={[this.props.style || {}, { flexDirection: 'column' }]}
 								onLayout={this._onContainerLayout}
 							>
 								<View style={[styles.default, { flexDirection: 'row' }]}>
 									<View ref="yAxis">
-										<YAxis
-											{...this.props}
-											data={this.props.data}
-											height={this.state.containerHeight - this.props.xAxisHeight}
-											width={this.props.yAxisWidth}
-											minVerticalBound={this.state.bounds.min}
-											containerWidth={this.state.containerWidth}
-											maxVerticalBound={this.state.bounds.max}
-											yAxisUseDecimal={this.props.yAxisUseDecimal}
-											style={{ width: this.props.yAxisWidth }}
-										/>
+										{this.props.showYAxis && (
+											<YAxis
+												{...this.props}
+												data={this.props.data}
+												height={this.state.containerHeight - this.props.xAxisHeight}
+												width={this.props.yAxisWidth}
+												minVerticalBound={this.state.bounds.min}
+												containerWidth={this.state.containerWidth}
+												maxVerticalBound={this.state.bounds.max}
+												yAxisUseDecimal={this.props.yAxisUseDecimal}
+												style={{ width: this.props.yAxisWidth }}
+											/>
+										)}
 									</View>
 									<ChartType
 										{...this.props}
@@ -184,20 +189,18 @@ export default class Chart extends Component<void, any, any> {
 										maxVerticalBound={this.state.bounds.max}
 									/>
 								</View>
-								{(() => {
-									return (
-										<View ref="xAxis">
-											<XAxis
-												{...this.props}
-												width={this.state.containerWidth - this.props.yAxisWidth}
-												data={this.props.data}
-												height={this.props.xAxisHeight}
-												align={axisAlign}
-												style={{ marginLeft: this.props.yAxisWidth - 1 }}
-											/>
-										</View>
-									);
-								})()}
+								{this.props.showXAxis && (
+									<View ref="xAxis">
+										<XAxis
+											{...this.props}
+											width={this.state.containerWidth - this.props.yAxisWidth}
+											data={this.props.data}
+											height={this.props.xAxisHeight}
+											align={axisAlign}
+											style={{ marginLeft: this.props.yAxisWidth - 1 }}
+										/>
+									</View>
+								)}
 							</View>
 						);
 					}
@@ -249,6 +252,8 @@ Chart.propTypes = {
 	lineWidth: PropTypes.number,
 	showDataPoint: PropTypes.bool, // TODO
 
+	fontFamily: PropTypes.string,
+
 	// Pie chart props
 	// pieCenterRatio: PropTypes.number, // TODO
 	sliceColors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
@@ -270,6 +275,8 @@ Chart.propTypes = {
 	showGrid: PropTypes.bool,
 	showXAxisLabels: PropTypes.bool,
 	showYAxisLabels: PropTypes.bool,
+	showXAxis: PropTypes.bool,
+	showYAxis: PropTypes.bool,
 	style: PropTypes.any,
 	tightBounds: PropTypes.bool,
 	verticalGridStep: PropTypes.number,

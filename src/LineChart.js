@@ -64,9 +64,16 @@ export default class LineChart extends Component<void, any, any> {
 		let height = (minBound * scale) + (containerHeight - (firstDataPoint * scale));
 		if (height < 0) height = 0;
 
+		const dataPointSize = this.props.dataPointRadius + this.props.dataPointStrokeWidth;
+		let minStart = 0;
+		if (this.props.showDataPoint) {
+			minStart = this.props.dataPointRadius + 1;
+			height = height + (2 * dataPointSize);
+		}
+
 		addPoints(0, height, svgPoints);
-		addPoints(0, height, svgFill);
-		dataPoints.push({ cx: 0, cy: height, r: this.props.dataPointRadius });
+		addPoints(0, height, svgFill); // Fill should always be 0
+		dataPoints.push({ cx: minStart, cy: height, r: this.props.dataPointRadius });
 
 		let x;
 		let y;
@@ -79,7 +86,20 @@ export default class LineChart extends Component<void, any, any> {
 			x = horizontalStep * (i) + horizontalStep;
 			y = Math.round(_height);
 
-			if (y < gradientTop) gradientTop = y;
+			if (y < gradientTop) {
+				gradientTop = y;
+			}
+			if (this.props.showDataPoint) {
+				if (y < dataPointSize) {
+					y = dataPointSize;
+				}
+				if (y === containerHeight) {
+					y = containerHeight - dataPointSize;
+				}
+				if (x === containerWidth) {
+					x = containerWidth - dataPointSize;
+				}
+			}
 			addPoints(x, y, svgPoints);
 			addPoints(x, y, svgFill);
 			dataPoints.push({ cx: x, cy: y, r: this.props.dataPointRadius });
@@ -90,45 +110,43 @@ export default class LineChart extends Component<void, any, any> {
 		}
 		if (svgPoints.some(isNaN)) return null;
 		return (
-			<View>
-				<Svg width={containerWidth} height={containerHeight}>
-					<Defs>
-						{!!this.props.fillGradient && (
-							<LinearGradient id="chartGradient" x1="0" x2="0" y1={gradientTop} y2={containerHeight}>
-								{this.props.fillGradient.map((f, i) => (
-									<Stop key={i} offset={i.toString()} stopColor={f.color || f} stopOpacity={f.opacity.toString() || '1'} />
-								))}
-							</LinearGradient>
-						)}
-					</Defs>
+			<Svg width={containerWidth} height={containerHeight}>
+				<Defs>
+					{!!this.props.fillGradient && (
+						<LinearGradient id="chartGradient" x1="0" x2="0" y1={gradientTop} y2={containerHeight}>
+							{this.props.fillGradient.map((f, i) => (
+								<Stop key={i} offset={i.toString()} stopColor={f.color || f} stopOpacity={f.opacity.toString() || '1'} />
+							))}
+						</LinearGradient>
+					)}
+				</Defs>
+				<Polyline
+					points={svgPoints.toString()}
+					fill="transparent"
+					stroke={this.props.color || C.BLUE}
+					strokeWidth={this.props.lineWidth}
+				/>
+				{this.props.fillColor && (
 					<Polyline
-						points={svgPoints.toString()}
-						fill="transparent"
+						points={svgFill.toString()}
+						fill={this.props.fillColor}
 						stroke={this.props.color || C.BLUE}
 						strokeWidth={this.props.lineWidth}
 					/>
-					{this.props.fillColor && (
-						<Polyline
-							points={svgFill.toString()}
-							fill={this.props.fillColor}
-							stroke={this.props.color || C.BLUE}
-							strokeWidth={this.props.lineWidth}
-						/>
-					)}
-					{this.props.fillGradient && (
-						<Polyline points={svgFill.toString()} fill="url(#chartGradient)" />
-					)}
-					{!!this.props.showDataPoint && dataPoints.map((d, i) => (
-						<Circle
-							{...d}
-							key={i}
-							fill={this.props.dataPointFillColor}
-							stroke={this.props.dataPointColor}
-							strokeWidth={this.props.dataPointStrokeWidth}
-						/>
-					))}
-				</Svg>
-			</View>
+				)}
+				{this.props.fillGradient && (
+					<Polyline points={svgFill.toString()} fill="url(#chartGradient)" />
+				)}
+				{!!this.props.showDataPoint && dataPoints.map((d, i) => (
+					<Circle
+						{...d}
+						key={i}
+						fill={this.props.dataPointFillColor}
+						stroke={this.props.dataPointColor}
+						strokeWidth={this.props.dataPointStrokeWidth}
+					/>
+				))}
+			</Svg>
 		);
 	};
 
@@ -137,7 +155,11 @@ export default class LineChart extends Component<void, any, any> {
 			return (
 				<View style={{ overflow: 'hidden' }}>
 					<Grid {...this.props} />
-					<Animated.View style={{ height: this.state.height, opacity: this.state.opacity, backgroundColor: 'transparent' }}>
+					<Animated.View style={{
+						height: this.state.height,
+						opacity: this.state.opacity,
+						backgroundColor: 'transparent',
+					}}>
 						{this._drawLine()}
 					</Animated.View>
 				</View>
