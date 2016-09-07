@@ -24,7 +24,7 @@ export default class YAxis extends Component<void, any, any> {
 		placement: PropTypes.oneOf(['left', 'right']),
 		verticalGridStep: PropTypes.number.isRequired,
 		yAxisTransform: PropTypes.func,
-		yAxisUseDecimal: PropTypes.bool
+		yAxisUseDecimal: PropTypes.bool,
 	};
 
 	static defaultProps : any = {
@@ -36,7 +36,7 @@ export default class YAxis extends Component<void, any, any> {
 		this.state = { bounds: { min: 0, max: 0 } };
 	}
 
-	_createLabelForYAxis = (index : number) => {
+	_createLabelForYAxis = (index : number, steps : number) => {
 		let minBound = this.props.minVerticalBound;
 		let maxBound = this.props.maxVerticalBound;
 
@@ -46,8 +46,7 @@ export default class YAxis extends Component<void, any, any> {
 			maxBound += this.props.verticalGridStep;
 		}
 		minBound = (minBound < 0) ? 0 : minBound;
-		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
-
+		let label = minBound + (maxBound - minBound) / steps * index;
 		if (!this.props.yAxisUseDecimal) {
 			label = Math.round(label);
 		}
@@ -72,7 +71,8 @@ export default class YAxis extends Component<void, any, any> {
 		const range = [];
 		const data = this.props.data || [];
 		const unique = uniqueValuesInDataSet(data);
-		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		let steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		steps -= 1;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (
 			<View
@@ -83,7 +83,7 @@ export default class YAxis extends Component<void, any, any> {
 					this.props.placement === 'right' && { borderLeftColor: this.props.axisColor, borderLeftWidth: this.props.axisLineWidth },
 				]}
 			>
-				{range.map(this._createLabelForYAxis)}
+				{range.map(_ => this._createLabelForYAxis(_, steps))}
 			</View>
 		);
 	}

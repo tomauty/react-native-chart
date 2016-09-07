@@ -37,6 +37,7 @@ export default class Chart extends Component<void, any, any> {
 		axisTitleFontSize: 16,
 		chartFontSize: 14,
 		dataPointRadius: 3,
+		dataPointStrokeWidth: 1,
 		gridColor: C.BLACK,
 		gridLineWidth: 0.5,
 		hideHorizontalGridLines: false,
@@ -132,8 +133,8 @@ export default class Chart extends Component<void, any, any> {
 	}
 
 	_onContainerLayout = (e : Object) => this.setState({
-		containerHeight: Math.ceil(e.nativeEvent.layout.height) + 1,
-		containerWidth: Math.ceil(e.nativeEvent.layout.width),
+		containerHeight: e.nativeEvent.layout.height,
+		containerWidth: e.nativeEvent.layout.width,
 	});
 
 	_minVerticalBound() : number {
@@ -239,9 +240,11 @@ Chart.propTypes = {
 
 	// Line/multi-line chart props
 	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	fillGradient: PropTypes.arrayOf(PropTypes.object),
 	dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	dataPointRadius: PropTypes.number,
+	dataPointStrokeWidth: PropTypes.number,
 	// highlightRadius: PropTypes.number, // TODO
 	lineWidth: PropTypes.number,
 	showDataPoint: PropTypes.bool, // TODO

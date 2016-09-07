@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	axisText: {
-		flex: 1,
+		flex: 0,
 		backgroundColor: 'transparent',
 	},
 });

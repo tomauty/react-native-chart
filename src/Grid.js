@@ -26,12 +26,15 @@ export default class Grid extends Component {
 		const verticalRange = [];
 		const data = this.props.data || [];
 		const unique = uniqueValuesInDataSet(data);
-		const horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		let horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+
+		horizontalSteps -= 1; 	// To accommodate the first value being at the origin
+
 		let stepsBetweenVerticalLines = this.props.horizontalGridStep ? Math.round(data.length / this.props.horizontalGridStep) : 1;
 		if (stepsBetweenVerticalLines < 1) stepsBetweenVerticalLines = 1;
 
 		for (let i = horizontalSteps; i > 0; i--) horizontalRange.push(i);
-		for (let i = data.length - 1; i > 0; i-=stepsBetweenVerticalLines) verticalRange.push(i);
+		for (let i = data.length - 1; i > 0; i -= stepsBetweenVerticalLines) verticalRange.push(i);
 
 		const containerStyle = { width: this.props.width, height: this.props.height, position: 'absolute', left: 0 };
 
@@ -41,7 +44,7 @@ export default class Grid extends Component {
 		}
 
 		const horizontalGridStyle = {
-			height: this.props.height / this.props.verticalGridStep,
+			height: this.props.height / horizontalSteps,
 			width: this.props.width,
 			borderTopColor: this.props.gridColor,
 			borderTopWidth: intendedLineWidth,
@@ -49,7 +52,7 @@ export default class Grid extends Component {
 
 		const verticalGridStyle = {
 			height: this.props.height + 1,
-			width: (this.props.width / data.length) * stepsBetweenVerticalLines,
+			width: (this.props.width / (data.length - 1)) * stepsBetweenVerticalLines,
 			borderRightColor: this.props.gridColor,
 			borderRightWidth: intendedLineWidth,
 		};
