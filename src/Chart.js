@@ -27,7 +27,7 @@ const getRoundNumber = (value, gridStep) => {
 
 export default class Chart extends Component<void, any, any> {
 	static defaultProps : any = {
-		data: [],
+		data: [[]],
 		animated: true,
 		animationDuration: 300,
 		axisColor: C.BLACK,
@@ -54,6 +54,7 @@ export default class Chart extends Component<void, any, any> {
 		xAxisHeight: 20,
 		yAxisWidth: 30,
 		yAxisUseDecimal: false,
+		yAxisShortLabel: false,
 	};
 
 	constructor(props : any) {
@@ -77,15 +78,28 @@ export default class Chart extends Component<void, any, any> {
 	_computeBounds() : any {
 		let min = Infinity;
 		let max = -Infinity;
-		const data = this.props.data || [];
-		data.forEach(XYPair => {
-			const number = XYPair[1];
-			if (number < min) min = number;
-			if (number > max) max = number;
+		const data = this.props.data || [[]];
+
+		data.forEach(Graph => {
+			Graph.forEach(XYPair => {
+				const number = XYPair[1];
+				// Addition for blank spaces in graphs - use '' as y-coord
+				if (number === '') {
+					return;
+				}
+
+				if (number < min) min = number;
+				if (number > max) max = number;
+			});
 		});
 
-		min = Math.floor(min);
-		max = Math.ceil(max);
+		let ceilMax = Math.ceil(max);
+		let floorMin = Math.floor(min);
+
+		if ((ceilMax - floorMin) > this.props.verticalGridStep) {
+			min = floorMin;
+			max = ceilMax;
+		}
 
 		// Exit if we want tight bounds
 		if (this.props.tightBounds) {
@@ -171,6 +185,7 @@ export default class Chart extends Component<void, any, any> {
 											containerWidth={this.state.containerWidth}
 											maxVerticalBound={this.state.bounds.max}
 											yAxisUseDecimal={this.props.yAxisUseDecimal}
+											yAxisShortLabel={this.props.yAxisShortLabel}
 											style={{ width: this.props.yAxisWidth }}
 										/>
 									</View>
@@ -224,23 +239,24 @@ export default class Chart extends Component<void, any, any> {
 
 Chart.propTypes = {
 	// Shared properties between most types
-	data: PropTypes.arrayOf(PropTypes.array).isRequired,
+	// data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.array)).isRequired,
 	type: PropTypes.oneOf(['line', 'bar', 'pie']).isRequired,
 	highlightColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO
 	highlightIndices: PropTypes.arrayOf(PropTypes.number), // TODO
 	onDataPointPress: PropTypes.func,
 	yAxisUseDecimal: PropTypes.bool,
+	yAxisShortLabel: PropTypes.bool,
 
 	// Bar chart props
-	color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	color: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
 	cornerRadius: PropTypes.number,
 	// fillGradient: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), // TODO
 	widthPercent: PropTypes.number,
 
 	// Line/multi-line chart props
-	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	dataPointColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	dataPointFillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	fillColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // need to adjust for multi-line
+	dataPointColor: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+	dataPointFillColor: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
 	dataPointRadius: PropTypes.number,
 	// highlightRadius: PropTypes.number, // TODO
 	lineWidth: PropTypes.number,

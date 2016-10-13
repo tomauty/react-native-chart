@@ -5,7 +5,7 @@ import { uniqueValuesInDataSet } from './util';
 export default class Grid extends Component {
 	static propTypes = {
 		showGrid: PropTypes.bool,
-		data: PropTypes.array.isRequired,
+		data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.array)).isRequired,
 		verticalGridStep: PropTypes.number.isRequired,
 		horizontalGridStep: PropTypes.number,
 		gridLineWidth: PropTypes.number,
@@ -24,8 +24,8 @@ export default class Grid extends Component {
 		if (!this.props.showGrid) return null;
 		const horizontalRange = [];
 		const verticalRange = [];
-		const data = this.props.data || [];
-		const unique = uniqueValuesInDataSet(data);
+		const data = this.props.data || [[]];
+		const unique = uniqueValuesInDataSet(data[0]);
 		const horizontalSteps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 		let stepsBetweenVerticalLines = this.props.horizontalGridStep ? Math.round(data.length / this.props.horizontalGridStep) : 1;
 		if (stepsBetweenVerticalLines < 1) stepsBetweenVerticalLines = 1;

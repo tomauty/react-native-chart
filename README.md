@@ -80,15 +80,17 @@ class SimpleChart extends Component {
 ```
 ## Properties
 
+Use '' y-values to signify the 'render but empty' data points.
+
 | Property                | Type                      | Description                                               | Required | Default               |
 | ----------------------- | ------------------------- | --------------------------------------------------------- | -------- | --------------------- |
-| data                    | Array< [number, number] > | An array of [x, y] pairs.                                 | **Yes**  |                       |
+| data                    | Array<  Array< [number, number] > > | An array of arrays of [x, y] pairs.                                 | **Yes**  |                       |
 | type                    | string                    | pie/bar/line                                              | **Yes**  | bar                   |
-| color                   | string                    | Color of bars/line in line chart                          | No       | #4DC4E6               |
+| color                   | Array < string >          | Color of bars/line in line chart                          | No       | #4DC4E6               |
 | cornerRadius            | number                    | Corner radius of bars in bar chart                        | No       | 0                     |
-| fillColor               | string                    | Fill area color in line chart                             | No       |                       |
-| dataPointColor          | string                    | Stroke color for line chart data point                    | No       |                       |
-| dataPointFillColor      | string                    | Fill color for line chart data point                      | No       |                       |
+| fillColor               | Array < string >          | Fill area colors in line chart                            | No       |                       |
+| dataPointColor          | Array < string >          | Stroke colors for line chart data point                   | No       |                       |
+| dataPointFillColor      | Array < string >          | Fill colors for line chart data point                     | No       |                       |
 | dataPointRadius         | number                    | Radius of the data point                                  | No       | 3                     |
 | lineWidth               | number                    | Width of line chart line                                  | No       | 1                     |
 | showDataPoint           | boolean                   | Show data points on line chart                            | No       | false                 |
@@ -112,11 +114,12 @@ class SimpleChart extends Component {
 | yAxisTransform          | Function                  | Transform data point to y-axis label                      | No       | (_) => _              |
 | xAxisTransform          | Function                  | Transform data point to x-axis label                      | No       | (_) => _              |
 | yAxisWidth              | number                    | Width of the Y-axis container                             | No       | 30                    |
-| yAxisUseDecimal          | boolean                   | Show decimals on Y-axis labels                            | No       | false                   |
+| yAxisUseDecimal         | boolean                   | Show decimals on Y-axis labels                            | No       | false                 |
+| yAxisShortLabel         | boolean                   | Shorten yAxis labels with K, M, B for thousand<->billion, etc  | No       | false                 |
 
 ## TODO
 - [ ] Code cleanup
-- [ ] Multi-line chart
+- [X] Multi-line chart
 - [ ] Horizontal line chart
 - [ ] Scatter chart
 
