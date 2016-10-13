@@ -14,17 +14,19 @@ const styles = StyleSheet.create({
 	},
 });
 
+
 export default class YAxis extends Component<void, any, any> {
 
 	static propTypes = {
 		axisColor: PropTypes.any,
 		axisLineWidth: PropTypes.number,
-		data: PropTypes.arrayOf(PropTypes.array).isRequired,
+		data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.array)).isRequired,
 		height: PropTypes.number.isRequired,
 		placement: PropTypes.oneOf(['left', 'right']),
 		verticalGridStep: PropTypes.number.isRequired,
 		yAxisTransform: PropTypes.func,
 		yAxisUseDecimal: PropTypes.bool,
+		yAxisShortLabel: PropTypes.bool
 	};
 
 	static defaultProps : any = {
@@ -34,6 +36,21 @@ export default class YAxis extends Component<void, any, any> {
 	constructor(props : any) {
 		super(props);
 		this.state = { bounds: { min: 0, max: 0 } };
+	}
+
+	// Credits:  Martin Sznapka, StackOverflow, QuestionID: 9461621
+	shortenLargeNumber(num, useDecimal) {
+		let digits = (useDecimal) ? 2 : 0;
+		var units = ['K', 'M', 'B', 't', 'P', 'E', 'Z', 'Y'],
+				decimal;
+		for (var i=units.length-1; i>=0; i--) {
+				decimal = Math.pow(1000, i+1);
+
+				if(num <= -decimal || num >= decimal) {
+						return +(num / decimal).toFixed(digits) + units[i];
+				}
+		}
+		return num;
 	}
 
 	_createLabelForYAxis = (index : number) => {
@@ -47,10 +64,16 @@ export default class YAxis extends Component<void, any, any> {
 		}
 		minBound = (minBound < 0) ? 0 : minBound;
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
+		label = parseFloat(label.toFixed(3));
 
 		if (!this.props.yAxisUseDecimal) {
 			label = Math.round(label);
 		}
+
+		if (this.props.yAxisShortLabel) {
+			label = this.shortenLargeNumber(label, this.props.yAxisUseDecimal);
+		}
+
 
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
 			label = this.props.yAxisTransform(label);
@@ -70,8 +93,8 @@ export default class YAxis extends Component<void, any, any> {
 
 	render() {
 		const range = [];
-		const data = this.props.data || [];
-		const unique = uniqueValuesInDataSet(data);
+		const data = this.props.data || [[]];
+		const unique = uniqueValuesInDataSet(data[0]);
 		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (
