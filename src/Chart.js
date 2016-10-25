@@ -10,7 +10,7 @@ import XAxis from './xAxis';
 import * as C from './constants';
 
 const styles = StyleSheet.create({
-	default: { flex: 1 },
+	default: {},
 });
 
 const getRoundNumber = (value, gridStep) => {
