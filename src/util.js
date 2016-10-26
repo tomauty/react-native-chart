@@ -7,3 +7,18 @@ export function uniqueValuesInDataSet(data : Pair[]) : Pair[] {
 		return result;
 	}, []);
 }
+
+export function uniqueValuesInDataSets(data : [Pair[]], index : number) : Pair[] {
+	let values = [];
+	data.forEach(Graph => {
+		Graph.forEach(XYPair => {
+			if (values.indexOf(XYPair[index]) === -1) {
+				values.push(XYPair[index])
+			}
+		})
+	});
+	values.sort(function(a, b) {
+	  return a - b;
+	});
+	return values
+}

@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { uniqueValuesInDataSet } from './util';
+import { uniqueValuesInDataSets } from './util';
 
 const styles = StyleSheet.create({
 	yAxisContainer: {
@@ -93,9 +93,8 @@ export default class YAxis extends Component<void, any, any> {
 
 	render() {
 		const range = [];
-		const data = this.props.data || [[]];
-		const unique = uniqueValuesInDataSet(data[0]);
-		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		const data = uniqueValuesInDataSets(this.props.data || [[]], 1);
+		const steps = (data.length < this.props.verticalGridStep) ? data.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (
 			<View
