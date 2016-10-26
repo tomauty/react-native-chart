@@ -36,6 +36,7 @@ export default class Chart extends Component<void, any, any> {
 		axisTitleColor: C.GREY,
 		axisTitleFontSize: 16,
 		chartFontSize: 14,
+		color: [],
 		dataPointRadius: 3,
 		gridColor: C.BLACK,
 		gridLineWidth: 0.5,
