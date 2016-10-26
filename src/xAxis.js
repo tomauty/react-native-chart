@@ -36,7 +36,7 @@ export default class XAxis extends Component {
 	};
 
 	render() {
-		const data = this.props.data || [[]];
+		const data = (this.props.data || [[]])[0];
 		let transform = (d) => d;
 		if (this.props.xAxisTransform && typeof this.props.xAxisTransform === 'function') {
 			transform = this.props.xAxisTransform;
