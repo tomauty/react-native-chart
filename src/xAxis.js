@@ -2,6 +2,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { uniqueValuesInDataSets } from './util';
 
 const styles = StyleSheet.create({
 	xAxisContainer: {
@@ -36,7 +37,7 @@ export default class XAxis extends Component {
 	};
 
 	render() {
-		const data = this.props.data || [[]];
+		const data = uniqueValuesInDataSets(this.props.data || [[]], 0);
 		let transform = (d) => d;
 		if (this.props.xAxisTransform && typeof this.props.xAxisTransform === 'function') {
 			transform = this.props.xAxisTransform;
@@ -58,7 +59,7 @@ export default class XAxis extends Component {
 					let stepsBetweenVerticalLines = this.props.horizontalGridStep ? Math.round((data.length) / this.props.horizontalGridStep + 1) : 1;
 					if (stepsBetweenVerticalLines < 1) stepsBetweenVerticalLines = 1;
 					if (i % stepsBetweenVerticalLines !== 0) return null;
-					const item = transform(d[0]);
+					const item = transform(d);
 					if (typeof item !== 'number' && !item) return null;
 					return (
 						<Text

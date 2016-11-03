@@ -6,6 +6,7 @@ import * as C from './constants';
 import Circle from './Circle';
 const AnimatedShape = Animated.createAnimatedComponent(Shape);
 import Grid from './Grid';
+import { uniqueValuesInDataSets } from './util';
 
 const makeDataPoint = (x : number, y : number, data : any, index : number) => {
 
@@ -69,7 +70,7 @@ export default class LineChart extends Component<void, any, any> {
 
 		const divisor = calculateDivisor(minBound, maxBound);
 		const scale = (containerHeight + 1) / divisor;
-		const horizontalStep = containerWidth / data[0].length;
+		const horizontalStep = containerWidth / uniqueValuesInDataSets(data, 0).length;
 
 		const dataPoints = [];
 		const path = [];
