@@ -1,27 +1,9 @@
 {
   "name": "react-native-chart",
-  "version": "1.1.0-beta",
-  "scripts": {
-    "lint": "eslint src",
-    "build": "babel src --out-dir dist",
-    "prepublish": "npm run build"
-  },
-  "main": "./src/Chart.js",
-  "dependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-eslint": "^6.0.0",
-    "babel-plugin-transform-flow-strip-types": "^6.8.0",
-    "babel-preset-react-native": "^1.5.3",
-		"react-native-svg": "^4.1.5"
-  },
-  "devDependencies": {
-    "eslint": "^2.8.0",
-    "eslint-config-airbnb": "^8.0.0",
-    "eslint-plugin-flow-vars": "^0.3.0",
-    "eslint-plugin-flowtype": "^2.2.7",
-    "eslint-plugin-import": "^1.6.0",
-    "eslint-plugin-jsx-a11y": "^1.0.3",
-    "eslint-plugin-react": "^5.0.1",
-    "eslint-plugin-react-native": "^1.0.0"
-  }
+  "version": "2.0.0",
+  "description": "Add pie, line, etc charts to your RN application",
+  "main": "index.js",
+  "repository": "git@github.com:tomauty/react-native-chart.git",
+  "author": "Tom Auty <tom.auty@gmail.com>",
+  "license": "MIT"
 }
